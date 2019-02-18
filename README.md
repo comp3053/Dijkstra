@@ -1,5 +1,5 @@
-# COMP3053 - [Your Group Name Here]
-This is the code and documentations of **[your group name here]**, COMP3053, Software Development Workshop III, BNU-HKBU United International College.
+# COMP3053 - Dijkstra
+This is the code and documentations of **Dijkstra**, COMP3053, Software Development Workshop III, BNU-HKBU United International College.
 
 ## Message from the Course Team
 **Please absolute keep your work SECRET before the course ends!**
@@ -18,7 +18,7 @@ Welcome to the COMP3053 - Software Development Workshop III course. This course 
 **Clone this repository**
 
 ```shell
-git clone https://github.com/comp3053/[your-group-name]
+git clone https://github.com/comp3053/Dijkstra
 ```
 
 **Fetch new changes**
