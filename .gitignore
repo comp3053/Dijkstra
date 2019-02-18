@@ -10,6 +10,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.classpath
+.project
 
 # External tool builders
 .externalToolBuilders/
@@ -69,6 +71,7 @@ local.properties
 
 # Generated files
 .idea/**/contentModel.xml
+.idea/
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
