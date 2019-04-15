@@ -8,18 +8,18 @@ public class DatabaseHelper {
     private Connection c;
     private Statement statement = null;
 
-    public DatabaseHelper(){
+    public DatabaseHelper() {
         this.connectSQLite();
     }
 
-    public boolean connectSQLite(){
+    public boolean connectSQLite() {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:brewday.db");
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return false;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -28,25 +28,28 @@ public class DatabaseHelper {
     }
 
     public void execSqlNoReturn(String query) throws SQLiteConnectionException {
-        if (c == null){
+        if (c == null) {
             // throw exception if SQLite not successful connect.
             throw new SQLiteConnectionException("SQLite connection error.");
-        }else {
+        } else {
+
             try {
                 statement = c.createStatement();
                 statement.execute(query);
                 statement.close();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
     }
+
     public ResultSet execSqlWithReturn(String query) throws SQLiteConnectionException {
         ResultSet rs = null;
-        if (c == null){
+        if (c == null) {
             // throw exception if SQLite not successful connect.
             throw new SQLiteConnectionException("SQLite connection error.");
-        }else {
+        } else {
             try {
                 statement = c.createStatement();
                 rs = statement.executeQuery(query);
@@ -58,9 +61,9 @@ public class DatabaseHelper {
         }
     }
 
-    public void execSqlUpdate(String updateQuery) throws SQLiteConnectionException{
+    public void execSqlUpdate(String updateQuery) throws SQLiteConnectionException {
         ResultSet rs = null;
-        if (c == null){
+        if (c == null) {
             // throw exception if SQLite not successful connect.
             throw new SQLiteConnectionException("SQLite connection error.");
         } else {
@@ -75,10 +78,11 @@ public class DatabaseHelper {
 
         }
     }
-    public void closeConnection(){
+
+    public void closeConnection() {
         try {
             c.close();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
