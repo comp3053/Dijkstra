@@ -1,7 +1,5 @@
 package utils;
 
-import org.sqlite.SQLiteConnection;
-
 import java.sql.*;
 
 public class DatabaseHelper {
