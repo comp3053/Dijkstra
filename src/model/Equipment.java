@@ -32,6 +32,6 @@ public class Equipment {
             this.volume = volume;
         else
             System.out.println("Invalid Input");
-        // TODO save "name" to the database
+        // TODO save "volume" to the database
     }
 }
