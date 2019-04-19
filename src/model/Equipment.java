@@ -12,7 +12,7 @@ public class Equipment {
 
     public String getName() {
         // TODO: get data from database
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -22,11 +22,16 @@ public class Equipment {
 
     public int getVolume() {
         // TODO: get data from database
-        return volume;
+
+        return this.volume;
+
     }
 
     public void setVolume(int volume) {
-        this.volume = volume;
+        if(volume >= 0)
+            this.volume = volume;
+        else
+            System.out.println("Invalid Input");
         // TODO save "name" to the database
     }
 }
