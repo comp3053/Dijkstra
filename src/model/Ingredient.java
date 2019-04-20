@@ -1,52 +1,50 @@
 package model;
 
+import utils.UnitEnum;
+
 public class Ingredient {
     private int id;
     private String name;
     private double amount;
-    private double unit;
-    //TODO: change the unit of identifier "unit" from "double" to "Unit", need to add a class for "unit" called "Unit"
+    private UnitEnum unit;
 
-    public Ingredient(int id, String name,double amount,double unit) {
-        //TODO: all these attributes should be read from database after insert successfully
-        this.id = id;
-        this.name = name;
+    public Ingredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException{
+        setID(id);
+        setName(name);
         this.amount = amount;
-        this.unit = unit;
+        setUnit(unit);
     }
 
-    public int getID(){
+    public int getID() {
         return this.id;
     }
 
-    public void setID(int id)
-    {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
+    public void setName(String name) throws EmptyIngredientNameException{
+        if (name.isEmpty()){
+            throw new EmptyIngredientNameException("Ingredient name cannot be empty!");
+        }
+        else{
+            this.name = name;
+        }
     }
 
-    public double getAmount()
-    {
+    public double getAmount() {
         return this.amount;
     }
 
-    //TODO: replace "double" to "unit"
-    public double getUnit()
-    {
+    public UnitEnum getUnit() {
         return this.unit;
     }
 
-    public void setUnit(double unit)
-    {
+    public void setUnit(UnitEnum unit) {
         this.unit = unit;
     }
 }
