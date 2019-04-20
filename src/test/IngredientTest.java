@@ -17,7 +17,7 @@ public class IngredientTest {
     @Before
     public void setUp() {
         try {
-            ingredient = new Ingredient(1,"yeast", 100.0, UnitEnum.GRAM);
+            ingredient = new Ingredient(1, "yeast", 100.0, UnitEnum.GRAM);
         } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
             e.printStackTrace();
         }
@@ -61,7 +61,6 @@ public class IngredientTest {
     }
 
     @Ignore("setAmount() is a protected method and cannot test here.")
-
     @Test
     public void setAmount() {
     }

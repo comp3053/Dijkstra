@@ -8,10 +8,10 @@ public class StorageIngredient extends Ingredient {
         super(id, name, amount, unit);
     }
 
-    public void addAmount(double addition_amount) throws InvalidIngredientAmountException{
-        if (addition_amount <= 0){
+    public void addAmount(double addition_amount) throws InvalidIngredientAmountException {
+        if (addition_amount <= 0) {
             throw new InvalidIngredientAmountException("Addition amount should be greater than 0!");
-        }else{
+        } else {
             this.setAmount(this.getAmount() + addition_amount);
         }
     }

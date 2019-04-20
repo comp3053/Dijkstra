@@ -14,9 +14,9 @@ public class Equipment {
     }
 
     public void setName(String name) throws EmptyEquipmentNameException {
-        if (name.isEmpty()){
-           throw new EmptyEquipmentNameException("Equipment name cannot be empty!");
-        }else {
+        if (name.isEmpty()) {
+            throw new EmptyEquipmentNameException("Equipment name cannot be empty!");
+        } else {
             this.name = name;
         }
     }
