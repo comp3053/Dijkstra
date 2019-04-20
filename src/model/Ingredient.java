@@ -8,10 +8,11 @@ public class Ingredient {
     private double amount;
     private UnitEnum unit;
 
-    public Ingredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException{
+    public Ingredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
+            InvalidIngredientAmountException {
         setID(id);
         setName(name);
-        this.amount = amount;
+        setAmount(amount);
         setUnit(unit);
     }
 
@@ -27,17 +28,24 @@ public class Ingredient {
         return this.name;
     }
 
-    public void setName(String name) throws EmptyIngredientNameException{
-        if (name.isEmpty()){
+    public void setName(String name) throws EmptyIngredientNameException {
+        if (name.isEmpty()) {
             throw new EmptyIngredientNameException("Ingredient name cannot be empty!");
-        }
-        else{
+        } else {
             this.name = name;
         }
     }
 
     public double getAmount() {
         return this.amount;
+    }
+
+    protected void setAmount(double amount) throws InvalidIngredientAmountException {
+        if (amount < 0) {
+            throw new InvalidIngredientAmountException("Ingredient amount should be greater than 0!");
+        } else {
+            this.amount = amount;
+        }
     }
 
     public UnitEnum getUnit() {
