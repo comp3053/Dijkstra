@@ -4,7 +4,7 @@ public class Equipment {
     private String name;
     private int volume;
 
-    public Equipment(String name, int volume) throws InvalidEquipmentInputException, EmptyEquipmentNameException {
+    public Equipment(String name, int volume) throws InvalidEquipmentVolumeException, EmptyEquipmentNameException {
         setName(name);
         setVolume(volume);
     }
@@ -25,11 +25,11 @@ public class Equipment {
         return this.volume;
     }
 
-    public void setVolume(int volume) throws InvalidEquipmentInputException {
+    public void setVolume(int volume) throws InvalidEquipmentVolumeException {
         if (volume > 0) {
             this.volume = volume;
         } else {
-            throw new InvalidEquipmentInputException("Volume should be greater than 0!");
+            throw new InvalidEquipmentVolumeException("Volume should be greater than 0!");
         }
     }
 }
