@@ -61,18 +61,6 @@ public class IngredientTest {
 
     @Test
     public void setAmount() {
-        try {
-            ingredient.setAmount(233.3);
-        } catch (InvalidIngredientAmountException e) {
-            e.printStackTrace();
-        }
-        assertEquals(233.3, ingredient.getAmount(), 0.00);
-        try {
-            ingredient.setAmount(-66.6);
-        } catch (InvalidIngredientAmountException e) {
-            e.printStackTrace();
-        }
-        assertEquals(233.3, ingredient.getAmount(), 0.00);
     }
 
     @Test
