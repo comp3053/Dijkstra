@@ -3,6 +3,7 @@ package test;
 import model.EmptyIngredientNameException;
 import model.Ingredient;
 import model.InvalidIngredientAmountException;
+import org.junit.Ignore;
 import utils.UnitEnum;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,8 @@ public class IngredientTest {
     public void getAmount() {
         assertEquals(100.0, ingredient.getAmount(), 0.00);
     }
+
+    @Ignore("setAmount() is a protected method and cannot test here.")
 
     @Test
     public void setAmount() {
