@@ -40,7 +40,7 @@ public class Ingredient {
         return this.amount;
     }
 
-    protected void setAmount(double amount) throws InvalidIngredientAmountException {
+    public void setAmount(double amount) throws InvalidIngredientAmountException {
         if (amount < 0) {
             throw new InvalidIngredientAmountException("Ingredient amount should be greater than 0!");
         } else {
