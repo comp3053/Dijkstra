@@ -2,7 +2,7 @@ package test;
 
 import model.EmptyEquipmentNameException;
 import model.Equipment;
-import model.InvalidEquipmentInputException;
+import model.InvalidEquipmentVolumeException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class EquipmentTest {
     public void setUp() {
         try {
             equipment = new Equipment("myEquipment", 500);
-        } catch (InvalidEquipmentInputException | EmptyEquipmentNameException e) {
+        } catch (InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
             e.printStackTrace();
         }
     }
@@ -51,19 +51,19 @@ public class EquipmentTest {
     public void setVolume() {
         try {
             equipment.setVolume(1000);
-        } catch (InvalidEquipmentInputException e) {
+        } catch (InvalidEquipmentVolumeException e) {
             e.printStackTrace();
         }
         assertEquals(1000, equipment.getVolume());
         try {
             equipment.setVolume(0);
-        } catch (InvalidEquipmentInputException e) {
+        } catch (InvalidEquipmentVolumeException e) {
             e.printStackTrace();
         }
         assertEquals(1000, equipment.getVolume());
         try {
             equipment.setVolume(-100);
-        } catch (InvalidEquipmentInputException e) {
+        } catch (InvalidEquipmentVolumeException e) {
             e.printStackTrace();
         }
         assertEquals(1000, equipment.getVolume());
