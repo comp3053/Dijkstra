@@ -13,7 +13,7 @@ public class HTTPServer {
 
     private String[] getURLInfo(String requestHeader) {
         int begin = requestHeader.indexOf("/");
-        int end = requestHeader.indexOf("?") - 1;
+        int end = requestHeader.indexOf("HTTP/") - 1;
         return requestHeader.substring(begin, end).split("/");
     }
 
@@ -24,7 +24,7 @@ public class HTTPServer {
         return condition.trim().split("&");
     }
 
-    private String getDataHandler(String[] url, String[] params) {
+    private String GETHandler(String[] url, String[] params) {
         switch (url[1]) {
             case "ingredient":
                 IngredientController ic = new IngredientController();
@@ -46,23 +46,23 @@ public class HTTPServer {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String requestHeader;
                 String rsp = "{}";
+                int contentLength = 0;
 
                 while ((requestHeader = reader.readLine()) != null && !requestHeader.isEmpty()) {
+                    System.out.println(requestHeader);
                     if (requestHeader.startsWith("GET") || requestHeader.startsWith("POST")) {
                         String[] url = getURLInfo(requestHeader);
                         String[] param = getURLParam(requestHeader);
                         if (requestHeader.startsWith("GET")) {
-                            rsp = getDataHandler(url, param);
+//                            System.out.println(requestHeader);
+                            rsp = GETHandler(url, param);
+                        }
+                        else if(requestHeader.startsWith("POST")){
+                            System.out.println(requestHeader);
                         }
                     }
                 }
-//                StringBuffer sb = new StringBuffer();
-//                if (contentLength > 0) {
-//                    for (int i = 0; i < contentLength; i++) {
-//                        sb.append((char) reader.read());
-//                    }
-//                    System.out.println("POST参数是：" + sb.toString());
-//                }
+
                 // Response
                 PrintWriter pw = new PrintWriter(socket.getOutputStream());
 
