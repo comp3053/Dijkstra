@@ -1,5 +1,6 @@
 package server;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import model.EmptyEquipmentNameException;
 import model.Equipment;
@@ -14,6 +15,15 @@ public class EquipmentController {
         } catch (InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
             e.printStackTrace();
         }
+        return obj.toString();
+    }
+
+    protected String updateEquipmentInfo(String jsonString) {
+        Equipment equipment = JSON.parseObject(jsonString, Equipment.class);
+        JSONObject obj = new JSONObject();
+        obj.put("name", equipment.getName());
+        obj.put("volume", equipment.getVolume());
+        obj.put("status", true);
         return obj.toString();
     }
 }

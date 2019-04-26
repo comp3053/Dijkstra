@@ -27,4 +27,15 @@ public class IngredientController {
         ingredientObj.put("ingredients", ingredients);
         return ingredientObj.toString();
     }
+
+    protected String addIngredient(String jsonString) {
+        System.out.println(jsonString);
+        Ingredient ingredient = JSON.parseObject(jsonString, Ingredient.class);
+        JSONObject obj = new JSONObject();
+        obj.put("name", ingredient.getName());
+        obj.put("amount", ingredient.getAmount());
+        obj.put("unit", ingredient.getUnit());
+        obj.put("status", true);
+        return obj.toString();
+    }
 }
