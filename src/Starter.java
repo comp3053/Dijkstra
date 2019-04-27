@@ -1,12 +1,14 @@
-import view.HomeFrame;
+import controller.HomeController;
+import view.HomeView;
 
 public class Starter {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
             @Override
             public void run() {
-                HomeFrame hf = new HomeFrame();
-                hf.setVisible(true);
+                HomeController hc = new HomeController();
+                HomeView hv = new HomeView(hc);
+                hv.setVisible(true);
             }
         });
     }
