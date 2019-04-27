@@ -29,12 +29,30 @@ public class IngredientController {
     }
 
     protected String addIngredient(String jsonString) {
-        System.out.println(jsonString);
         Ingredient ingredient = JSON.parseObject(jsonString, Ingredient.class);
         JSONObject obj = new JSONObject();
         obj.put("name", ingredient.getName());
         obj.put("amount", ingredient.getAmount());
         obj.put("unit", ingredient.getUnit());
+        obj.put("status", true);
+        return obj.toString();
+    }
+
+    protected String updateIngredient(String jsonString) {
+        Ingredient ingredient = JSON.parseObject(jsonString, Ingredient.class);
+        JSONObject obj = new JSONObject();
+        obj.put("name", ingredient.getName());
+        obj.put("amount", ingredient.getAmount());
+        obj.put("unit", ingredient.getUnit());
+        obj.put("id", ingredient.getID());
+        obj.put("status", true);
+        return obj.toString();
+    }
+
+    protected String deleteIngredient(String request) {
+        int id = Integer.parseInt(request.split("=")[1]);
+        JSONObject obj = new JSONObject();
+        obj.put("id", id);
         obj.put("status", true);
         return obj.toString();
     }

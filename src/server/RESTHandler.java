@@ -39,9 +39,9 @@ public class RESTHandler implements HttpHandler {
             }
         }
         else if (queryMethod.equals("POST")) {
+            String request = readInputStream(httpExchange.getRequestBody());
             switch (queryURL) {
                 case "/ingredient":
-                    String request = readInputStream(httpExchange.getRequestBody());
                     IngredientController ic = new IngredientController();
                     rsp = ic.addIngredient(request);
                     break;
@@ -50,9 +50,13 @@ public class RESTHandler implements HttpHandler {
             }
         }
         else if (queryMethod.equals("PUT")) {
+            String request = readInputStream(httpExchange.getRequestBody());
             switch (queryURL) {
+                case "/ingredient":
+                    IngredientController ic = new IngredientController();
+                    rsp = ic.updateIngredient(request);
+                    break;
                 case "/equipment":
-                    String request = readInputStream(httpExchange.getRequestBody());
                     EquipmentController ec = new EquipmentController();
                     rsp = ec.updateEquipmentInfo(request);
                     break;
@@ -60,17 +64,18 @@ public class RESTHandler implements HttpHandler {
                         break;
             }
         }
-//        else if (queryMethod.equals("DELETE")) {
-//            switch (queryURL) {
-//                case "/ingredient":
-//                    String request = readInputStream(httpExchange.getRequestBody());
-//                    System.out.println(request);
-//                    rsp = "{msg: \"Success\"}";
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
+        else if (queryMethod.equals("DELETE")) {
+            String path = httpExchange.getRequestURI().getPath();
+            String request = httpExchange.getRequestURI().getQuery();
+            switch (path) {
+                case "/ingredient":
+                    IngredientController ic = new IngredientController();
+                    rsp = ic.deleteIngredient(request);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         Headers responseHeader = httpExchange.getResponseHeaders();
         responseHeader.add("Access-Control-Allow-Origin", "*");
