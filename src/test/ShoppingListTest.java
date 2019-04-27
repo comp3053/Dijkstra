@@ -1,5 +1,9 @@
-package model;
+package test;
 
+import model.EmptyIngredientNameException;
+import model.Ingredient;
+import model.InvalidIngredientAmountException;
+import model.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
 import utils.UnitEnum;
