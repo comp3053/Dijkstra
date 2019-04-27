@@ -1,3 +1,4 @@
+import controller.HomeController;
 import view.HomeView;
 
 public class Starter {
@@ -5,7 +6,8 @@ public class Starter {
         javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
             @Override
             public void run() {
-                HomeView hv = new HomeView();
+                HomeController hc = new HomeController();
+                HomeView hv = new HomeView(hc);
                 hv.setVisible(true);
             }
         });
