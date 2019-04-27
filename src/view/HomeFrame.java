@@ -12,6 +12,7 @@ public class HomeFrame extends JFrame {
         this.setLayout(bl1); // set borderlayout to the frame
 
         JPanel jp1 = new JPanel();
+        jp1.setLayout(new FlowLayout());
         JButton btn1 = new JButton("Manage Recipe");
         JButton btn2 = new JButton("Manage Ingredient");
         JButton btn3 = new JButton("Note List");
