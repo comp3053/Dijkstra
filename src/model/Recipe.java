@@ -8,11 +8,11 @@ public class Recipe {
     private String description;
     private ArrayList<RecipeIngredient> ingredients;
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -37,6 +37,18 @@ public class Recipe {
     }
 
     public void setIngredients(ArrayList<RecipeIngredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void amountConversion() {
+        //TODO
+    }
+
+    public void modifyRecipeIngredient(ArrayList<RecipeIngredient> ingredients) { //TODO: Not the same as document
+        this.ingredients = ingredients;
+    }
+
+    public void addRecipeIngredient(ArrayList<RecipeIngredient> ingredients) { //TODO: Not the same as document
         this.ingredients = ingredients;
     }
 }
