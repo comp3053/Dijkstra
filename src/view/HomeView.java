@@ -1,17 +1,16 @@
 package view;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 
-public class HomeFrame extends JFrame {
-    public HomeFrame() {
+public class HomeView extends View {
+    public HomeView(){
         this.setTitle("Brew Day!"); // set frame title
         this.setSize(800, 600); // set frame size
-        BorderLayout bl1 = new BorderLayout();
-        this.setLayout(bl1); // set borderlayout to the frame
-
+        this.setLayout(new BorderLayout()); // set borderlayout to the frame
         JPanel jp1 = new JPanel();
+        jp1.setLayout(new FlowLayout());
         JButton btn1 = new JButton("Manage Recipe");
         JButton btn2 = new JButton("Manage Ingredient");
         JButton btn3 = new JButton("Note List");
@@ -40,8 +39,10 @@ public class HomeFrame extends JFrame {
         jp2.add(help_word);
         jp2.add(recommend_btn);
         this.add(jp2, BorderLayout.CENTER); // add a panel
+    }
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+    @Override
+    public void update() {
+        //repaint();
     }
 }
