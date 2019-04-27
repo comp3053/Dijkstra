@@ -81,6 +81,10 @@ public class HomeView extends View {
             }
         });
         this.add(jp2, BorderLayout.CENTER); // add a panel
+        JPanel copyright = new JPanel();
+        JLabel copyright_word = new JLabel("(c) Copyright 2019 Dijkstra.");
+        copyright.add(copyright_word);
+        this.add(copyright, BorderLayout.PAGE_END);
     }
 
     @Override
