@@ -9,6 +9,10 @@ public class ShoppingList {
         this.missingIngredients=missingIngredients;
     }
 
+    public ArrayList<Ingredient> getMissingIngredients(){
+        return this.missingIngredients;
+    }
+
     public double calculateMissingIngredientAmount(double restAmount, double requireAmount){
         return (requireAmount-restAmount);
     }
