@@ -24,7 +24,12 @@ public class ShoppingListTest {
 
     @Test
     public void calculateMissingIngredientAmount() {
-        assertEquals(1.0,shoppingList.calculateMissingIngredientAmount(1.0,2.0));
+        assertEquals(2.0,shoppingList.calculateMissingIngredientAmount(3.0,5.0),0.01);
+    }
+
+    @Test
+    public void getMissingIngredients(){
+        assertEquals(missingIngredients,shoppingList.getMissingIngredients());
     }
 
     @Test
