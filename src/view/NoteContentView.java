@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class NoteContentView extends View {
@@ -10,21 +11,23 @@ public class NoteContentView extends View {
         this.setLayout(new BorderLayout());
 
         JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout());
+        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         /* back button*/
         JButton btn_back = new JButton("back");
-        btn_back.setBounds(50,50,100,50);
         jp_header.add(btn_back);
         JLabel msg_header = new JLabel("Brew Note " + "01" + "for brew history " + "01");
+        msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
         jp_header.add(msg_header);
 
-        this.add(jp_header, BorderLayout.PAGE_START);
+        this.add(jp_header, BorderLayout.NORTH);
 
         JPanel jp_main = new JPanel();
-        jp_main.setLayout(new FlowLayout());
+        jp_main.setLayout(new BorderLayout());
         JLabel msg_content = new JLabel("This is a note content");
-        jp_main.add(msg_content);
+        msg_content.setVerticalAlignment(1);
+        jp_main.setBorder(new EmptyBorder(20,20,0,0));
+        jp_main.add(msg_content,BorderLayout.CENTER);
 
         this.add(jp_main, BorderLayout.CENTER);
     }
