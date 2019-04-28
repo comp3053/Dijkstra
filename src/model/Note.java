@@ -7,6 +7,12 @@ public class Note {
     private Date create_date;
     private String content;
 
+    public Note(int id,Date create_date,String content){
+        setID(id);
+        setCreateDate(create_date);
+        setContent(content);
+    }
+
     public int getID(){
         return this.id;
     }
