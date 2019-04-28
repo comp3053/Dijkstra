@@ -10,31 +10,37 @@ public class MissingIngredientsListView extends View{
         this.setLayout(new BorderLayout());
 
         JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout());
+        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JButton btn_back = new JButton("back");
         jp_header.add(btn_back);
 
         JLabel msg_header = new JLabel("Missing Ingredient List For Recipe" + "A");
+        msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
         jp_header.add(msg_header);
 
-        this.add(jp_header, BorderLayout.PAGE_START);
+        this.add(jp_header, BorderLayout.NORTH);
 
         JPanel jp_main = new JPanel();
-        jp_main.setLayout(new FlowLayout());
-        JLabel msg_headName = new JLabel("brew history" + "03");
-        jp_main.add(msg_headName);
-        JLabel msg_headUnit = new JLabel("for brewing record");
-        jp_main.add(msg_headUnit);
-        JLabel msg_headAmount = new JLabel("delete");
-        jp_main.add(msg_headAmount);
+        jp_main.setLayout(new BoxLayout(jp_main,BoxLayout.Y_AXIS));
+        JPanel jp_main_sub = new JPanel();
+        jp_main_sub.setLayout(new FlowLayout());
+        JLabel msg_headName = new JLabel("name");
+        jp_main_sub.add(msg_headName);
+        JLabel msg_headUnit = new JLabel("unit");
+        jp_main_sub.add(msg_headUnit);
+        JLabel msg_headAmount = new JLabel("amount");
+        jp_main_sub.add(msg_headAmount);
+        jp_main.add(jp_main_sub);
         for(int i =0;i<5;i++) {
-            JLabel msg_ingreNamei = new JLabel("brew history" + "03");
-            jp_main.add(msg_ingreNamei);
-            JLabel msg_ingreUniti = new JLabel("for brewing record");
-            jp_main.add(msg_ingreUniti);
-            JLabel msg_ingreAmounti = new JLabel("delete");
-            jp_main.add(msg_ingreAmounti);
+            jp_main_sub = new JPanel();
+            JLabel msg_ingreNamei = new JLabel("yeast");
+            jp_main_sub.add(msg_ingreNamei);
+            JLabel msg_ingreUniti = new JLabel("gram");
+            jp_main_sub.add(msg_ingreUniti);
+            JLabel msg_ingreAmounti = new JLabel("3.2");
+            jp_main_sub.add(msg_ingreAmounti);
+            jp_main.add(jp_main_sub);
         }
         this.add(jp_main, BorderLayout.CENTER);
 
@@ -44,7 +50,7 @@ public class MissingIngredientsListView extends View{
         JButton btn_OK = new JButton("OK");
         jp_foot.add(btn_OK);
 
-        this.add(jp_foot, BorderLayout.LINE_END);
+        this.add(jp_foot, BorderLayout.SOUTH);
     }
 
     @Override

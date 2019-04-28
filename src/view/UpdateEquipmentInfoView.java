@@ -7,7 +7,7 @@ import java.awt.*;
 public class UpdateEquipmentInfoView extends View{
     public UpdateEquipmentInfoView(){
         this.setTitle("Equipment Update"); // set frame title
-        this.setSize(600, 200); // set frame size
+        this.setSize(600, 250); // set frame size
         this.setLayout(new BorderLayout());
 
         JPanel jp_header = new JPanel();

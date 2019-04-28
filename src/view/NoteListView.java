@@ -10,7 +10,7 @@ public class NoteListView extends View {
         this.setLayout(new BorderLayout());
 
         JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout());
+        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         /* back button*/
         JButton btn_back = new JButton("back");
@@ -22,17 +22,20 @@ public class NoteListView extends View {
         JButton btn_addNote = new JButton("Add Note");
         jp_header.add(btn_addNote);
 
-        this.add(jp_header, BorderLayout.PAGE_START);
+        this.add(jp_header, BorderLayout.NORTH);
 
         JPanel jp_main = new JPanel();
-        jp_main.setLayout(new FlowLayout());
+        jp_main.setLayout(new BoxLayout(jp_main,BoxLayout.Y_AXIS));
         for(int i =0;i<5;i++) {
+            JPanel jp_main_i = new JPanel();
+            jp_main_i.setLayout(new FlowLayout());
             JButton btn_notei = new JButton("brew history" + "03");
-            jp_main.add(btn_notei);
+            jp_main_i.add(btn_notei);
             JLabel msg_relative = new JLabel("for brewing record");
-            jp_main.add(msg_relative);
+            jp_main_i.add(msg_relative);
             JButton btn_delete = new JButton("delete");
-            jp_main.add(btn_delete);
+            jp_main_i.add(btn_delete);
+            jp_main.add(jp_main_i);
         }
         this.add(jp_main, BorderLayout.CENTER);
     }
