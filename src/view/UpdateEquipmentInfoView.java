@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class UpdateEquipmentInfoView extends View{
     public UpdateEquipmentInfoView(){
-        this.setTitle("EquipmentUpdate"); // set frame title
+        this.setTitle("Equipment Update"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
@@ -18,10 +18,10 @@ public class UpdateEquipmentInfoView extends View{
         btn_back.setBounds(50,50,100,50);
         jp_header.add(btn_back);
 
-        JLabel header_msg = new JLabel("Update Equipment Information");
-        header_msg.setFont(new Font(header_msg.getFont().getFontName(), header_msg.getFont().getStyle(), 24));
-        header_msg.setBounds(100,50,100,50);
-        jp_header.add(header_msg);
+        JLabel msg_header = new JLabel("Update Equipment Information");
+        msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
+        msg_header.setBounds(100,50,100,50);
+        jp_header.add(msg_header);
         this.add(jp_header, BorderLayout.PAGE_START);
 
 
