@@ -8,30 +8,36 @@ import utils.SQLiteConnectionException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class EquipmentController {
+public class EquipmentController implements DatabaseController<Equipment> {
     public EquipmentController() {
         // Nothing to do
     }
 
-    public Equipment getEquipment() throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException {
+    public ArrayList<Equipment> getAll() throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         dbHelper.connectSQLite();
+        ArrayList<Equipment> equipments = new ArrayList<Equipment>();
         String name;
         int volume;
+
         try {
             ResultSet rs = dbHelper.execSqlWithReturn("SELECT * FROM Equipment");
-            name = rs.getString(2);
-            volume = rs.getInt(3);
+            while (rs.next()) {
+                name = rs.getString(2);
+                volume = rs.getInt(3);
+                equipments.add(new Equipment(name, volume));
+            }
             dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not fetch Equipment information.");
         }
-        return new Equipment(name, volume);
+        return equipments;
     }
 
-    private boolean insertEquipment(Equipment equipment) {
+    public boolean insert(Equipment equipment) { // Do not use this directly
         DatabaseHelper dbHelper = new DatabaseHelper();
         dbHelper.connectSQLite();
         String query = String.format("INSERT INTO Equipment VALUES (1,'%s',%d)",
@@ -46,20 +52,20 @@ public class EquipmentController {
         return true;
     }
 
-    public boolean setEquipment(Equipment equipment) {
+    public boolean update(Equipment equipment) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         EquipmentController ec = new EquipmentController();
         dbHelper.connectSQLite();
         String query = String.format("UPDATE Equipment SET name='%s',volume=%d WHERE Equipment_ID=1",
                 equipment.getName(), equipment.getVolume());
         try {
-            ec.getEquipment();
+            ec.getAll();
             dbHelper.closeConnection();
         } catch (InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
             e.printStackTrace();
             return false;
         } catch (FetchDataException e) {
-            insertEquipment(equipment);
+            insert(equipment);
         }
         dbHelper.connectSQLite();
         try {
@@ -75,9 +81,9 @@ public class EquipmentController {
     public static void main(String[] args) {
         EquipmentController ec = new EquipmentController();
         try {
-            Equipment equipment = new Equipment("MyEquipment", 2000);
-            ec.setEquipment(equipment);
-            System.out.println(ec.getEquipment().getName());
+            Equipment equipment = new Equipment("MyEquipment", 200);
+            ec.update(equipment);
+            System.out.println(ec.getAll().get(0).getName());
         } catch (FetchDataException | InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
             e.printStackTrace();
         }
