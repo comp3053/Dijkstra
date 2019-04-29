@@ -1,5 +1,7 @@
 import controller.HomeController;
+import model.Recipe;
 import view.HomeView;
+import view.RecipeFormView;
 import view.RecipeView;
 import view.RecommendIngredientListView;
 
@@ -13,8 +15,10 @@ public class Starter {
 //                hv.setVisible(true);
 //                RecipeView rv = new RecipeView();
 //                rv.setVisible(true);
-                RecommendIngredientListView hv = new RecommendIngredientListView();
-                hv.setVisible(true);
+//                RecommendIngredientListView hv = new RecommendIngredientListView();
+//                hv.setVisible(true);
+                RecipeFormView rfv = new RecipeFormView();
+                rfv.setVisible(true);
             }
         });
     }
