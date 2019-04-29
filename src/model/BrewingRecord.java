@@ -6,7 +6,13 @@ public class BrewingRecord {
     private int id;
     private Date brewDate;
     private int batchSize;
-    public BrewingRecord(int id,Date brew_date,int batch_size){
+
+    public BrewingRecord(Date brew_date,int batch_size){
+        setBatchSize(batch_size);
+        setBrewDate(brew_date);
+    }
+
+    public BrewingRecord(int id, Date brew_date,int batch_size){
         setID(id);
         setBatchSize(batch_size);
         setBrewDate(brew_date);

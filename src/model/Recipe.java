@@ -8,7 +8,13 @@ public class Recipe {
     private String description;
     private ArrayList<RecipeIngredient> ingredients;
 
-    public Recipe(int id,String name,String description,ArrayList<RecipeIngredient> ingredients){
+    public Recipe(String name, String description, ArrayList<RecipeIngredient> ingredients) {
+        setName(name);
+        setDescription(description);
+        setIngredients(ingredients);
+    }
+
+    public Recipe(int id, String name, String description, ArrayList<RecipeIngredient> ingredients) {
         setID(id);
         setName(name);
         setDescription(description);
@@ -19,7 +25,7 @@ public class Recipe {
         return id;
     }
 
-    public void setID(int id) {
+    private void setID(int id) {
         this.id = id;
     }
 
