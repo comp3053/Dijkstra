@@ -8,6 +8,13 @@ public class Ingredient {
     private double amount;
     private UnitEnum unit;
 
+    public Ingredient(String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
+            InvalidIngredientAmountException {
+        setName(name);
+        setAmount(amount);
+        setUnit(unit);
+    }
+
     public Ingredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
             InvalidIngredientAmountException {
         setID(id);

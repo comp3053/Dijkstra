@@ -42,8 +42,6 @@ public class NoteInputView extends View{
         JButton btn_save = new JButton("save");
         jp_foot.add(btn_save);
         this.add(jp_foot, BorderLayout.SOUTH);
-
-
     }
 
 
