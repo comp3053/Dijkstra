@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Note {
     private int id;
-    private Date create_date;
+    private Date createDate;
     private String content;
 
     public Note(int id,Date create_date,String content){
@@ -21,12 +21,12 @@ public class Note {
         this.id=id;
     }
 
-    public Date getCreateDate(){
-        return this.create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateDate(Date create_date){
-        this.create_date=create_date;
+    private void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getContent(){

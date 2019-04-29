@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class BrewingRecord {
     private int id;
-    private Date brew_date;
-    private int batch_size;
+    private Date brewDate;
+    private int batchSize;
     public BrewingRecord(int id,Date brew_date,int batch_size){
         setID(id);
         setBatchSize(batch_size);
@@ -21,18 +21,18 @@ public class BrewingRecord {
     }
 
     public Date getBrewDate() {
-        return brew_date;
+        return brewDate;
     }
 
-    public void setBrewDate(Date brew_date) {
-        this.brew_date = brew_date;
+    public void setBrewDate(Date brewDate) {
+        this.brewDate = brewDate;
     }
 
     public int getBatchSize() {
-        return batch_size;
+        return batchSize;
     }
 
-    public void setBatchSize(int batch_size) {
-        this.batch_size = batch_size;
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
     }
 }
