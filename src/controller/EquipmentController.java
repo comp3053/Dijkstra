@@ -56,7 +56,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
         DatabaseHelper dbHelper = new DatabaseHelper();
         EquipmentController ec = new EquipmentController();
         dbHelper.connectSQLite();
-        String query = String.format("UPDATE Equipment SET name='%s',volume=%d WHERE Equipment_ID=1",
+        String query = String.format("UPDATE Equipment SET Name='%s',Volume=%d WHERE Equipment_ID=1",
                 equipment.getName(), equipment.getVolume());
         try {
             ec.getAll();

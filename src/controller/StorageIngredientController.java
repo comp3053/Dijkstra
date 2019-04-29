@@ -13,20 +13,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StorageIngredientController implements DatabaseController<StorageIngredient> {
+    public StorageIngredientController() {
+        // Nothing to do
+    }
+
     public ArrayList<StorageIngredient> getAll() throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         dbHelper.connectSQLite();
         ArrayList<StorageIngredient> ingredients = new ArrayList<StorageIngredient>();
         String name, unit;
         double amount;
+        int id;
 
         try {
             ResultSet rs = dbHelper.execSqlWithReturn("SELECT * FROM Ingredient");
             while (rs.next()) {
+                id = rs.getInt(1);
                 name = rs.getString(2);
                 amount = rs.getDouble(3);
                 unit = rs.getString(4);
-                ingredients.add(new StorageIngredient(name, amount, UnitEnum.valueOf(unit)));
+                ingredients.add(new StorageIngredient(id, name, amount, UnitEnum.valueOf(unit)));
             }
             dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
