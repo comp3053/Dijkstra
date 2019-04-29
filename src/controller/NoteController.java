@@ -71,10 +71,7 @@ public class NoteController implements DatabaseController<Note> {
 
     public static void main(String[] args) {
         NoteController nc = new NoteController();
-        try {
-            System.out.println(nc.getAll());
-        } catch (FetchDataException e) {
-            e.printStackTrace();
-        }
+        Note note = new Note(1, new Date(), "Hello World!");
+        nc.insert(note);
     }
 }
