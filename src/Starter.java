@@ -1,7 +1,6 @@
-import controller.HomeController;
-import view.HomeView;
-import view.RecipeView;
-import view.RecommendIngredientListView;
+import controller.*;
+import view.*;
+
 
 public class Starter {
     public static void main(String[] args) {
@@ -11,10 +10,14 @@ public class Starter {
 //                HomeController hc = new HomeController();
 //                HomeView hv = new HomeView(hc);
 //                hv.setVisible(true);
-//                RecipeView rv = new RecipeView();
-//                rv.setVisible(true);
-                RecommendIngredientListView hv = new RecommendIngredientListView();
-                hv.setVisible(true);
+
+/*              UpdateEquipmentInforController c = new UpdateEquipmentInforController();
+                UpdateEquipmentInfoView hv = new UpdateEquipmentInfoView(c);
+                hv.setVisible(true);*/
+
+                EquipmentInfoController c = new EquipmentInfoController();
+                EquipmentInfoView v = new EquipmentInfoView(c);
+                v.setVisible(true);
             }
         });
     }
