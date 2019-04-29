@@ -1,11 +1,15 @@
 package view;
 
+import controller.NoteInputController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class NoteInputView extends View{
-    public NoteInputView(){
+    private NoteInputController c;
+    public NoteInputView(NoteInputController c){
+        this.c = c;
         this.setTitle("Note Input"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());

@@ -21,8 +21,12 @@ public class Starter {
                 UpdateEquipmentInfoView hv = new UpdateEquipmentInfoView(c);
                 hv.setVisible(true);*/
 
-                EquipmentInfoController c = new EquipmentInfoController();
+/*                EquipmentInfoController c = new EquipmentInfoController();
                 EquipmentInfoView v = new EquipmentInfoView(c);
+                v.setVisible(true);*/
+
+                NoteInputController c = new NoteInputController();
+                NoteInputView v = new NoteInputView(c);
                 v.setVisible(true);
             }
         });

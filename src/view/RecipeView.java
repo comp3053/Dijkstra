@@ -65,6 +65,7 @@ public class RecipeView extends View{
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable( model );
         //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
+        // TODO: still need a better solution
         jp2.add(table);
 //        JScrollPane scrollPane = new JScrollPane();
 //        scrollPane.add(table);
