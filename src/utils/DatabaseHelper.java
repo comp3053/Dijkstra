@@ -14,10 +14,7 @@ public class DatabaseHelper {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:brewday.db");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -68,7 +65,7 @@ public class DatabaseHelper {
             try {
                 statement = c.createStatement();
                 statement.executeUpdate(updateQuery);
-                c.commit();
+                c.commit(); // This statement cause SQLException
                 statement.close();
             } catch (SQLException e) {
                 e.printStackTrace();

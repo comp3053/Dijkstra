@@ -4,12 +4,20 @@ import java.util.Date;
 
 public class Note {
     private int id;
-    private Date create_date;
+    private int brewID;
+    private Date createDate;
     private String content;
 
-    public Note(int id,Date create_date,String content){
+    public Note(int brewID, Date createDate,String content){
+        setBrewID(brewID);
+        setCreateDate(createDate);
+        setContent(content);
+    }
+
+    public Note(int id, int brewID, Date createDate,String content){
         setID(id);
-        setCreateDate(create_date);
+        setBrewID(brewID);
+        setCreateDate(createDate);
         setContent(content);
     }
 
@@ -21,12 +29,20 @@ public class Note {
         this.id=id;
     }
 
-    public Date getCreateDate(){
-        return this.create_date;
+    private void setBrewID(int brewID) {
+        this.brewID = brewID;
     }
 
-    public void setCreateDate(Date create_date){
-        this.create_date=create_date;
+    public int getBrewID() {
+        return brewID;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    private void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getContent(){
