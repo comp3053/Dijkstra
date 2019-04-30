@@ -17,7 +17,7 @@ public class RecipeController implements DatabaseController<Recipe> {
     public ArrayList<Recipe> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         dbHelper.connectSQLite();
-        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        ArrayList<Recipe> recipes = new ArrayList<>();
         int id;
         String name, description;
 
@@ -75,11 +75,11 @@ public class RecipeController implements DatabaseController<Recipe> {
         throw new ObjectNotFoundException("Could not find the ingredient.");
     }
 
-    public Recipe getRecipe(Recipe recipe) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
+    public Recipe getRecipeIngredient(Recipe recipe) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         StorageIngredientController sc = new StorageIngredientController();
         dbHelper.connectSQLite();
-        ArrayList<RecipeIngredient> ingredients = new ArrayList<RecipeIngredient>();
+        ArrayList<RecipeIngredient> ingredients = new ArrayList<>();
         ArrayList<StorageIngredient> ingredientCategory = sc.getAll();
         String name, unit;
         double amount;
