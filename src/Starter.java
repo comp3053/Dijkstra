@@ -45,9 +45,13 @@ public class Starter {
 //                MissingIngredientsListView milv = new MissingIngredientsListView(milc);
 //                milv.setVisible(true);
 
-//                RecommendIngredientListController rilc = new RecommendIngredientListController();
-//                RecommendIngredientListView rilv = new RecommendIngredientListView(rilc);
+//                RecommendNotEnoughIngredientRecipeListController rilc = new RecommendNotEnoughIngredientRecipeListController();
+//                RecommendNotEnoughIngredientRecipeListView rilv = new RecommendNotEnoughIngredientRecipeListView(rilc);
 //                rilv.setVisible(true);
+
+//                RecommendRecipeListView rrlv = new RecommendRecipeListView();
+//                rrlv.setVisible(true);
+
 
 //                RecipeDetailView rdv = new RecipeDetailView();
 //                rdv.setVisible(true);
@@ -58,8 +62,8 @@ public class Starter {
 //                IngredientFormView ifv = new IngredientFormView();
 //                ifv.setVisible(true);
 
-                IngredientDetailView idv = new IngredientDetailView();
-                idv.setVisible(true);
+//                IngredientDetailView idv = new IngredientDetailView();
+//                idv.setVisible(true);
             }
         });
     }
