@@ -1,7 +1,7 @@
 package controller;
 
-public class RecommendIngredientListController {
-    public RecommendIngredientListController(){
+public class RecommendNotEnoughIngredientRecipeListController {
+    public RecommendNotEnoughIngredientRecipeListController(){
 
     }
 

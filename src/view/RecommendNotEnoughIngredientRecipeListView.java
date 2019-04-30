@@ -1,15 +1,15 @@
 package view;
 
-import controller.RecommendIngredientListController;
+import controller.RecommendNotEnoughIngredientRecipeListController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RecommendIngredientListView extends View{
-    private RecommendIngredientListController c;
-    public RecommendIngredientListView(RecommendIngredientListController c){
+public class RecommendNotEnoughIngredientRecipeListView extends View{
+    private RecommendNotEnoughIngredientRecipeListController c;
+    public RecommendNotEnoughIngredientRecipeListView(RecommendNotEnoughIngredientRecipeListController c){
         this.c = c;
         this.setTitle("Recommend Recipe List"); // set frame title
         this.setSize(800, 600); // set frame size
