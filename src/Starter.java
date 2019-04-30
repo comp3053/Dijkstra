@@ -55,8 +55,11 @@ public class Starter {
 //                IngredientListView ilv = new IngredientListView();
 //                ilv.setVisible(true);
 
-                IngredientFormView ifv = new IngredientFormView();
-                ifv.setVisible(true);
+//                IngredientFormView ifv = new IngredientFormView();
+//                ifv.setVisible(true);
+
+                IngredientDetailView idv = new IngredientDetailView();
+                idv.setVisible(true);
             }
         });
     }
