@@ -5,6 +5,8 @@ import controller.NoteInputController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NoteInputView extends View{
     private NoteInputController c;
@@ -19,6 +21,12 @@ public class NoteInputView extends View{
 
         /* back button*/
         JButton btn_back = new JButton("back to note list");
+        btn_back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.backToNoteList();
+            }
+        });
         jp_header.add(btn_back);
 
         /* This part change the design */
@@ -40,6 +48,12 @@ public class NoteInputView extends View{
         JPanel jp_foot = new JPanel();
         jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton btn_save = new JButton("save");
+        btn_save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.saveNote();
+            }
+        });
         jp_foot.add(btn_save);
         this.add(jp_foot, BorderLayout.SOUTH);
     }

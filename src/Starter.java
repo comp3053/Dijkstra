@@ -25,8 +25,12 @@ public class Starter {
                 EquipmentInfoView v = new EquipmentInfoView(c);
                 v.setVisible(true);*/
 
-                NoteInputController c = new NoteInputController();
+/*                NoteInputController c = new NoteInputController();
                 NoteInputView v = new NoteInputView(c);
+                v.setVisible(true);*/
+
+                BrewingHistoryListController c = new BrewingHistoryListController();
+                BrewingHistoryListView v = new BrewingHistoryListView(c);
                 v.setVisible(true);
             }
         });
