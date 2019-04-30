@@ -17,7 +17,7 @@ public class NoteController implements DatabaseController<Note> {
     public ArrayList<Note> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         dbHelper.connectSQLite();
-        ArrayList<Note> notes = new ArrayList<Note>();
+        ArrayList<Note> notes = new ArrayList<>();
         int id, brewID;
         Date create_date;
         String content;
@@ -37,6 +37,15 @@ public class NoteController implements DatabaseController<Note> {
             throw new FetchDataException("Could not fetch Note information");
         }
         return notes;
+    }
+
+    public Note getNote(int BrewID) throws FetchDataException, ObjectNotFoundException {
+        ArrayList<Note> notes = new NoteController().getAll();
+        for (Note note : notes) {
+            if (note.getBrewID() == BrewID)
+                return note;
+        }
+        throw new ObjectNotFoundException("Could not find corresponding Note");
     }
 
     public boolean insert(Note note) {
@@ -67,11 +76,5 @@ public class NoteController implements DatabaseController<Note> {
             return false;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        NoteController nc = new NoteController();
-        Note note = new Note(1, new Date(), "Hello World!");
-        nc.insert(note);
     }
 }
