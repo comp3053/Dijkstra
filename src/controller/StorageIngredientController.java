@@ -19,7 +19,6 @@ public class StorageIngredientController implements DatabaseController<StorageIn
 
     public ArrayList<StorageIngredient> getAll() throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         ArrayList<StorageIngredient> ingredients = new ArrayList<>();
         String name, unit;
         double amount;
@@ -53,7 +52,6 @@ public class StorageIngredientController implements DatabaseController<StorageIn
 
     public boolean update(StorageIngredient ingredient) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("UPDATE Ingredient SET Amount=%f,Unit='%s' WHERE Ingredient_ID=%d",
                 ingredient.getAmount(), ingredient.getUnit().toString(), ingredient.getID());
 
@@ -69,7 +67,6 @@ public class StorageIngredientController implements DatabaseController<StorageIn
 
     public boolean insert(StorageIngredient ingredient) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("INSERT INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
                 ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().toString());
 

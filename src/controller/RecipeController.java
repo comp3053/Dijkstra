@@ -16,7 +16,6 @@ public class RecipeController implements DatabaseController<Recipe> {
 
     public ArrayList<Recipe> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         ArrayList<Recipe> recipes = new ArrayList<>();
         int id;
         String name, description;
@@ -38,7 +37,6 @@ public class RecipeController implements DatabaseController<Recipe> {
 
     public boolean update(Recipe recipe) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("UPDATE Recipe set Name='%s',Description='%s' WHERE Recipe_ID=%d",
                 recipe.getName(), recipe.getDescription(), recipe.getID());
         try {
@@ -53,7 +51,6 @@ public class RecipeController implements DatabaseController<Recipe> {
 
     public boolean insert(Recipe recipe) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("INSERT INTO Recipe (Name, Description) VALUES ('%s','%s')",
                 recipe.getName(), recipe.getDescription());
         try {
@@ -78,7 +75,6 @@ public class RecipeController implements DatabaseController<Recipe> {
     public Recipe getRecipeIngredient(Recipe recipe) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         StorageIngredientController sc = new StorageIngredientController();
-        dbHelper.connectSQLite();
         ArrayList<RecipeIngredient> ingredients = new ArrayList<>();
         ArrayList<StorageIngredient> ingredientCategory = sc.getAll();
         String name, unit;

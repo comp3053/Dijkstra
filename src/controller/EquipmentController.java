@@ -17,7 +17,6 @@ public class EquipmentController implements DatabaseController<Equipment> {
 
     public ArrayList<Equipment> getAll() throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         ArrayList<Equipment> equipments = new ArrayList<Equipment>();
         String name;
         int volume;
@@ -39,7 +38,6 @@ public class EquipmentController implements DatabaseController<Equipment> {
 
     public boolean insert(Equipment equipment) { // Do not use this directly
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("INSERT INTO Equipment VALUES (1,'%s',%d)",
                 equipment.getName(), equipment.getVolume());
         try {
@@ -55,7 +53,6 @@ public class EquipmentController implements DatabaseController<Equipment> {
     public boolean update(Equipment equipment) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         EquipmentController ec = new EquipmentController();
-        dbHelper.connectSQLite();
         String query = String.format("UPDATE Equipment SET Name='%s',Volume=%d WHERE Equipment_ID=1",
                 equipment.getName(), equipment.getVolume());
         try {

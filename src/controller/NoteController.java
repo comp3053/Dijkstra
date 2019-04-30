@@ -16,7 +16,6 @@ public class NoteController implements DatabaseController<Note> {
 
     public ArrayList<Note> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         ArrayList<Note> notes = new ArrayList<>();
         int id, brewID;
         Date create_date;
@@ -50,7 +49,6 @@ public class NoteController implements DatabaseController<Note> {
 
     public boolean insert(Note note) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d)",
                 note.getCreateDate().getTime(), note.getContent(), note.getBrewID());
         try {
@@ -65,7 +63,6 @@ public class NoteController implements DatabaseController<Note> {
 
     public boolean update(Note note) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("UPDATE Note SET Content='%s' WHERE Brew_ID=%d",
                 note.getContent(), note.getBrewID());
         try {

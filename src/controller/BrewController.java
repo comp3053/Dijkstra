@@ -27,7 +27,6 @@ public class BrewController implements DatabaseController<BrewingRecord> {
 
     public ArrayList<BrewingRecord> getAll() throws FetchDataException, ObjectNotFoundException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
         int id, batchSize;
         Date brewDate;
@@ -49,7 +48,6 @@ public class BrewController implements DatabaseController<BrewingRecord> {
 
     public boolean insert(BrewingRecord brewingRecord) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.connectSQLite();
         String query = String.format("INSERT INTO Brew (Brew_Date,Batch_Size,Recipe_ID) VALUES (%d,%d,%d)",
                 brewingRecord.getBrewDate().getTime(), brewingRecord.getBatchSize(),
                 brewingRecord.getRecipe().getID());
