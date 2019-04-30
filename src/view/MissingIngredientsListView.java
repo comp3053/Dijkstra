@@ -11,7 +11,7 @@ public class MissingIngredientsListView extends View{
     private MissingIngredientListController c;
     public MissingIngredientsListView(MissingIngredientListController c){
         this.c = c;
-        this.setTitle("Missing Ingredient List"); // set frame title
+        this.setTitle("Brew Day! - Missing Ingredient List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

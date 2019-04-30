@@ -12,7 +12,7 @@ public class NoteInputView extends View{
     private NoteInputController c;
     public NoteInputView(NoteInputController c){
         this.c = c;
-        this.setTitle("Note Input"); // set frame title
+        this.setTitle("Brew Day! - Edit Note"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

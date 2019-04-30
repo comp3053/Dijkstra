@@ -11,7 +11,7 @@ public class EquipmentInfoView extends View{
     private EquipmentInfoController c;
     public EquipmentInfoView(EquipmentInfoController c){
         this.c = c;
-        this.setTitle("Equipment Information"); // set frame title
+        this.setTitle("Brew Day! - Equipment Information"); // set frame title
         this.setSize(600, 200); // set frame size
         this.setLayout(new BorderLayout());
 

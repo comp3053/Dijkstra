@@ -11,7 +11,7 @@ public class RecommendNotEnoughIngredientRecipeListView extends View{
     private RecommendNotEnoughIngredientRecipeListController c;
     public RecommendNotEnoughIngredientRecipeListView(RecommendNotEnoughIngredientRecipeListController c){
         this.c = c;
-        this.setTitle("Recommend Recipe List"); // set frame title
+        this.setTitle("Brew Day! - Recommend Recipe List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

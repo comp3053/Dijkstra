@@ -11,7 +11,7 @@ public class NoteListView extends View {
     private NoteListController c;
     public NoteListView(NoteListController c){
         this.c = c;
-        this.setTitle("Note List"); // set frame title
+        this.setTitle("Brew Day! - Note List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

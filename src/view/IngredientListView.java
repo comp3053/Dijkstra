@@ -6,7 +6,7 @@ import java.awt.*;
 public class IngredientListView extends View {
 
     public IngredientListView(){
-        this.setTitle("Equipment Information"); // set frame title
+        this.setTitle("Brew Day! - Ingredients List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

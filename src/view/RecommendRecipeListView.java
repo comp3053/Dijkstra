@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class RecommendRecipeListView extends View{
     public RecommendRecipeListView(){
-        this.setTitle("Recommend Recipe List"); // set frame title
+        this.setTitle("Brew Day! - Recommend Recipe List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

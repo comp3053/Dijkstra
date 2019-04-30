@@ -13,7 +13,7 @@ public class UpdateEquipmentInfoView extends View{
 
     public UpdateEquipmentInfoView(UpdateEquipmentInforController c){
         this.c = c;
-        this.setTitle("Equipment Update"); // set frame title
+        this.setTitle("Brew Day! - Equipment Update"); // set frame title
         this.setSize(600, 250); // set frame size
         this.setLayout(new BorderLayout());
 

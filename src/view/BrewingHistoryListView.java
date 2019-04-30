@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class BrewingHistoryListView extends View {
     private BrewingHistoryListController c;
     public BrewingHistoryListView(BrewingHistoryListController c){
-        this.setTitle("BrewingHistoryListView"); // set frame title
+        this.setTitle("Brew Day! - Brewing History"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

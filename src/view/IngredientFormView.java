@@ -8,7 +8,7 @@ import java.awt.*;
 public class IngredientFormView extends View {
 
     public IngredientFormView(){
-        this.setTitle("Equipment Information"); // set frame title
+        this.setTitle("Brew Day! - Ingredient Form"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

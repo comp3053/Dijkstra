@@ -12,7 +12,7 @@ public class NoteContentView extends View {
     private NoteContentController c;
     public NoteContentView(NoteContentController c){
         this.c = c;
-        this.setTitle("Note Content"); // set frame title
+        this.setTitle("Brew Day! - Note Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 

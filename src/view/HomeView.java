@@ -13,7 +13,7 @@ public class HomeView extends View {
 
     public HomeView(HomeController hc){
         this.hc = hc;
-        this.setTitle("Brew Day!"); // set frame title
+        this.setTitle("Brew Day! - Home"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
         JPanel jp1 = new JPanel();
