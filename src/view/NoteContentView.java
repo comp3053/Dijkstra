@@ -1,11 +1,17 @@
 package view;
 
+import controller.NoteContentController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NoteContentView extends View {
-    public NoteContentView(){
+    private NoteContentController c;
+    public NoteContentView(NoteContentController c){
+        this.c = c;
         this.setTitle("Note Content"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -15,6 +21,12 @@ public class NoteContentView extends View {
 
         /* back button*/
         JButton btn_back = new JButton("back");
+        btn_back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.goBack();
+            }
+        });
         jp_header.add(btn_back);
         JLabel msg_header = new JLabel("Brew Note " + "01" + "for brew history " + "01");
         msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
@@ -31,8 +43,6 @@ public class NoteContentView extends View {
 
         this.add(jp_main, BorderLayout.CENTER);
     }
-
-
 
     @Override
     public void update() {
