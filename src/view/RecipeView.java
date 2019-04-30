@@ -17,25 +17,31 @@ public class RecipeView extends View{
         this.setTitle("Brew Day! - Manage Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        JPanel jp1 = new JPanel();
-        jp1.setLayout(new FlowLayout());
-        JButton btn1 = new JButton("< Back");
-        JButton btn2 = new JButton("New");
-        jp1.add(btn1);
-        btn1.addActionListener(new ActionListener() {
+        JPanel topButtonsAround = new JPanel();
+        topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
+
+        JButton leftButton = new JButton("< Back");
+        JButton rightButton = new JButton("New");
+
+        topButtonsAround.add(leftButton);
+        topButtonsAround.add(Box.createHorizontalGlue());
+        topButtonsAround.add(rightButton);
+
+        leftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // set visible to false
+                System.out.println("back clicked");
             }
         });
-        jp1.add(btn2);
-        btn2.addActionListener(new ActionListener() {
+
+        rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Not implemented");
+                System.out.println("new clicked");
             }
         });
-        this.add(jp1, BorderLayout.PAGE_START);
+        this.add(topButtonsAround, BorderLayout.PAGE_START);
+
         JPanel jp2 = new JPanel();
         jp2.setLayout(new BorderLayout());
         JPanel word = new JPanel();

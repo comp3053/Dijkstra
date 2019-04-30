@@ -14,24 +14,23 @@ public class BrewingHistoryListView extends View {
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel topLeftButtonBar = new JPanel();
+        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton button = new JButton("< Back");
+        topLeftButtonBar.add(button);
+        JLabel headerTitle = new JLabel("Add note - select brew history");
+        headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
+        topLeftButtonBar.add(headerTitle);
+        topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        /* back button */
-        JButton btn_back = new JButton("back");
-        btn_back.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
             }
         });
-        jp_header.add(btn_back);
 
-        JLabel msg_header = new JLabel("Add note - select brew history");
-        msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
-        jp_header.add(msg_header);
-
-        this.add(jp_header, BorderLayout.NORTH);
+        this.add(topLeftButtonBar, BorderLayout.NORTH);
 
         c.takeNote();
 

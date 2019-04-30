@@ -3,6 +3,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RecipeDetailView extends View {
 
@@ -10,11 +12,21 @@ public class RecipeDetailView extends View {
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        JPanel jp1 = new JPanel();
-        jp1.setLayout(new FlowLayout());
-        JButton btn1 = new JButton("< Back");
-        jp1.add(btn1);
-        this.add(jp1, BorderLayout.PAGE_START);
+
+        JPanel topLeftButtonBar = new JPanel();
+        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton button = new JButton("< Back");
+        topLeftButtonBar.add(button);
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+            }
+        });
+
+        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
+
         JPanel jp2 = new JPanel();
         jp2.setLayout(new BorderLayout());
         JPanel word = new JPanel();

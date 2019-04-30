@@ -15,32 +15,36 @@ public class NoteListView extends View {
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        /* back button*/
-        JButton btn_back = new JButton("back");
-        btn_back.addActionListener(new ActionListener() {
+        JPanel topButtonsAround = new JPanel();
+        topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
+
+        JButton leftButton = new JButton("< Back");
+        JButton rightButton = new JButton("Add Note");
+        JLabel headerTitle = new JLabel("Note List");
+        headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
+
+        topButtonsAround.add(leftButton);
+        topButtonsAround.add(Box.createHorizontalGlue());
+        topButtonsAround.add(headerTitle);
+        topButtonsAround.add(Box.createHorizontalGlue());
+        topButtonsAround.add(rightButton);
+
+        leftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
             }
         });
-        jp_header.add(btn_back);
 
-        JLabel msg_header = new JLabel("Note List");
-        jp_header.add(msg_header);
-
-        JButton btn_addNote = new JButton("Add Note");
-        btn_addNote.addActionListener(new ActionListener() {
+        rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.addNote();
             }
         });
-        jp_header.add(btn_addNote);
 
-        this.add(jp_header, BorderLayout.NORTH);
+        this.add(topButtonsAround, BorderLayout.NORTH);
 
         JPanel jp_main = new JPanel();
         jp_main.setLayout(new BoxLayout(jp_main,BoxLayout.Y_AXIS));

@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class IngredientListView extends View {
 
@@ -10,13 +12,18 @@ public class IngredientListView extends View {
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel topLeftButtonBar = new JPanel();
+        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton button = new JButton("< Back");
+        topLeftButtonBar.add(button);
 
-//        back button
-        JButton buttonBack = new JButton("< back");
-        jp_header.add(buttonBack);
-        this.add(jp_header, BorderLayout.PAGE_START);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+            }
+        });
+        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
         JPanel mainBody = new JPanel();
         mainBody.setLayout(new BorderLayout());
