@@ -20,7 +20,7 @@ public class StorageIngredientController implements DatabaseController<StorageIn
     public ArrayList<StorageIngredient> getAll() throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         dbHelper.connectSQLite();
-        ArrayList<StorageIngredient> ingredients = new ArrayList<StorageIngredient>();
+        ArrayList<StorageIngredient> ingredients = new ArrayList<>();
         String name, unit;
         double amount;
         int id;
@@ -40,6 +40,15 @@ public class StorageIngredientController implements DatabaseController<StorageIn
             throw new FetchDataException("Could not fetch Storage Ingredients");
         }
         return ingredients;
+    }
+
+    public StorageIngredient getStorageIngredient(int ingredientID) throws FetchDataException, ObjectNotFoundException, InvalidIngredientAmountException, EmptyIngredientNameException {
+        ArrayList<StorageIngredient> ingredients = new StorageIngredientController().getAll();
+        for (StorageIngredient ingredient : ingredients) {
+            if (ingredient.getID() == ingredientID)
+                return ingredient;
+        }
+        throw new ObjectNotFoundException("Could not find corresponding Storage Ingredient");
     }
 
     public boolean update(StorageIngredient ingredient) {
@@ -72,16 +81,5 @@ public class StorageIngredientController implements DatabaseController<StorageIn
             return false;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        try {
-            StorageIngredient ingredient = new StorageIngredient(1, "Water", 2, UnitEnum.LITER);
-            StorageIngredientController sc = new StorageIngredientController();
-            sc.update(ingredient);
-            System.out.println(sc.getAll());
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException | FetchDataException e) {
-            e.printStackTrace();
-        }
     }
 }
