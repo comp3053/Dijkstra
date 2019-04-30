@@ -64,8 +64,12 @@ public class Starter {
 //
 //                IngredientDetailView idv = new IngredientDetailView();
 //                idv.setVisible(true);
-                BrewDetailView bdv = new BrewDetailView();
-                bdv.setVisible(true);
+//
+//                BrewDetailView bdv = new BrewDetailView();
+//                bdv.setVisible(true);
+
+                BrewView bv = new BrewView();
+                bv.setVisible(true);
             }
         });
     }
