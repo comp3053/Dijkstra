@@ -1,10 +1,16 @@
 package view;
 
+import controller.NoteListController;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NoteListView extends View {
-    public NoteListView(){
+    private NoteListController c;
+    public NoteListView(NoteListController c){
+        this.c = c;
         this.setTitle("Note List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -14,12 +20,24 @@ public class NoteListView extends View {
 
         /* back button*/
         JButton btn_back = new JButton("back");
+        btn_back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.goBack();
+            }
+        });
         jp_header.add(btn_back);
 
         JLabel msg_header = new JLabel("Note List");
         jp_header.add(msg_header);
 
         JButton btn_addNote = new JButton("Add Note");
+        btn_addNote.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.addNote();
+            }
+        });
         jp_header.add(btn_addNote);
 
         this.add(jp_header, BorderLayout.NORTH);
@@ -34,6 +52,12 @@ public class NoteListView extends View {
             JLabel msg_relative = new JLabel("for brewing record");
             jp_main_i.add(msg_relative);
             JButton btn_delete = new JButton("delete");
+            btn_delete.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    c.delete();
+                }
+            });
             jp_main_i.add(btn_delete);
             jp_main.add(jp_main_i);
         }

@@ -29,8 +29,24 @@ public class Starter {
                 NoteInputView v = new NoteInputView(c);
                 v.setVisible(true);*/
 
-                BrewingHistoryListController c = new BrewingHistoryListController();
+/*                BrewingHistoryListController c = new BrewingHistoryListController();
                 BrewingHistoryListView v = new BrewingHistoryListView(c);
+                v.setVisible(true);*/
+
+/*                NoteContentController c = new NoteContentController();
+                NoteContentView v = new NoteContentView(c);
+                v.setVisible(true);*/
+
+/*                NoteListController c = new NoteListController();
+                NoteListView v = new NoteListView(c);
+                v.setVisible(true);*/
+
+/*                MissingIngredientListController c = new MissingIngredientListController();
+                MissingIngredientsListView v = new MissingIngredientsListView(c);
+                v.setVisible(true);*/
+
+                RecommendIngredientListController c = new RecommendIngredientListController();
+                RecommendIngredientListView v = new RecommendIngredientListView(c);
                 v.setVisible(true);
             }
         });

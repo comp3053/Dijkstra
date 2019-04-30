@@ -7,7 +7,7 @@ public class NoteInputController {
 
     }
 
-    public void saveNote(){
+    public void saveNote(String content){
         System.out.println("Save note");
     }
 

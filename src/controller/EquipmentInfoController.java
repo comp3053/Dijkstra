@@ -9,8 +9,8 @@ public class EquipmentInfoController {
 
     //should return a list, here I write a void because I don't know how to return, yeah.
     public void ReadEquipmentInfo(){
-        List<String> infor = new ArrayList<String>();
-        infor.add("Nya");
+        List<String> info = new ArrayList<String>();
+        info.add("Nya");
     }
 
     public void goBack() {

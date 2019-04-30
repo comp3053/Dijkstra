@@ -51,7 +51,7 @@ public class NoteInputView extends View{
         btn_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.saveNote();
+                c.saveNote(input_noteContent.getText());
             }
         });
         jp_foot.add(btn_save);

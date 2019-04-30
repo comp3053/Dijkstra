@@ -1,10 +1,16 @@
 package view;
 
+import controller.RecommendIngredientListController;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RecommendIngredientListView extends View{
-    public RecommendIngredientListView(){
+    private RecommendIngredientListController c;
+    public RecommendIngredientListView(RecommendIngredientListController c){
+        this.c = c;
         this.setTitle("Recommend Recipe List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -13,6 +19,12 @@ public class RecommendIngredientListView extends View{
         jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JButton btn_back = new JButton("back");
+        btn_back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.goBack();
+            }
+        });
         jp_header.add(btn_back);
 
         JLabel msg_header = new JLabel("Missing Ingredient List For Recipe" + "A");
@@ -37,6 +49,12 @@ public class RecommendIngredientListView extends View{
         jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         JButton btn_generate = new JButton("Generate Shopping List");
+        btn_generate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.generateShoppingList();
+            }
+        });
         jp_foot.add(btn_generate);
 
         this.add(jp_foot, BorderLayout.SOUTH);
