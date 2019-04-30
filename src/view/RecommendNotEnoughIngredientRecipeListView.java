@@ -27,7 +27,7 @@ public class RecommendNotEnoughIngredientRecipeListView extends View{
         });
         jp_header.add(btn_back);
 
-        JLabel msg_header = new JLabel("Missing Ingredient List For Recipe" + "A");
+        JLabel msg_header = new JLabel("Recommend Recipe List");
         jp_header.add(msg_header);
 
         JLabel msg_header2 = new JLabel("Ingredient Not Enough");
