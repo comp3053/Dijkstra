@@ -10,44 +10,49 @@ public class Starter {
 //                HomeController hc = new HomeController();
 //                HomeView hv = new HomeView(hc);
 //                hv.setVisible(true);
+
 //                RecipeView rv = new RecipeView();
 //                rv.setVisible(true);
-//                RecommendIngredientListView hv = new RecommendIngredientListView();
-//                hv.setVisible(true);
-/*                RecipeFormView rfv = new RecipeFormView();
-                rfv.setVisible(true);*/
 
-/*              UpdateEquipmentInforController c = new UpdateEquipmentInforController();
-                UpdateEquipmentInfoView hv = new UpdateEquipmentInfoView(c);
-                hv.setVisible(true);*/
+//                RecipeFormView rfv = new RecipeFormView();
+//                rfv.setVisible(true);
 
-/*                EquipmentInfoController c = new EquipmentInfoController();
-                EquipmentInfoView v = new EquipmentInfoView(c);
-                v.setVisible(true);*/
+//                UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
+//                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
+//                ueiv.setVisible(true);
 
-/*                NoteInputController c = new NoteInputController();
-                NoteInputView v = new NoteInputView(c);
-                v.setVisible(true);*/
+//                EquipmentInfoController eic = new EquipmentInfoController();
+//                EquipmentInfoView ei = new EquipmentInfoView(eic);
+//                ei.setVisible(true);
 
-/*                BrewingHistoryListController c = new BrewingHistoryListController();
-                BrewingHistoryListView v = new BrewingHistoryListView(c);
-                v.setVisible(true);*/
+//                NoteInputController nic = new NoteInputController();
+//                NoteInputView niv = new NoteInputView(nic);
+//                niv.setVisible(true);
 
-/*                NoteContentController c = new NoteContentController();
-                NoteContentView v = new NoteContentView(c);
-                v.setVisible(true);*/
+//                BrewingHistoryListController bhlc = new BrewingHistoryListController();
+//                BrewingHistoryListView bhlv = new BrewingHistoryListView(bhlc);
+//                bhlv.setVisible(true);
 
-/*                NoteListController c = new NoteListController();
-                NoteListView v = new NoteListView(c);
-                v.setVisible(true);*/
+//                NoteContentController ncc = new NoteContentController();
+//                NoteContentView ncv = new NoteContentView(ncc);
+//                ncv.setVisible(true);
 
-/*                MissingIngredientListController c = new MissingIngredientListController();
-                MissingIngredientsListView v = new MissingIngredientsListView(c);
-                v.setVisible(true);*/
+//                NoteListController nlc = new NoteListController();
+//                NoteListView nlv = new NoteListView(nlc);
+//                nlv.setVisible(true);
 
-                RecommendIngredientListController c = new RecommendIngredientListController();
-                RecommendIngredientListView v = new RecommendIngredientListView(c);
-                v.setVisible(true);
+//                MissingIngredientListController milc = new MissingIngredientListController();
+//                MissingIngredientsListView milv = new MissingIngredientsListView(milc);
+//                milv.setVisible(true);
+
+//                RecommendIngredientListController rilc = new RecommendIngredientListController();
+//                RecommendIngredientListView rilv = new RecommendIngredientListView(rilc);
+//                rilv.setVisible(true);
+
+//                RecipeDetailView rdv = new RecipeDetailView();
+//                rdv.setVisible(true);
+                IngredientListView ilv = new IngredientListView();
+                ilv.setVisible(true);
             }
         });
     }

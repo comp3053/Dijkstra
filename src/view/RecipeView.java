@@ -66,6 +66,7 @@ public class RecipeView extends View{
         JTable table = new JTable( model );
         //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
         // TODO: still need a better solution
+        // TODO: Warning pop up when hitting delete
         jp2.add(table);
 //        JScrollPane scrollPane = new JScrollPane();
 //        scrollPane.add(table);
