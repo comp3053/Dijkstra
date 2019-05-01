@@ -8,6 +8,12 @@ public class Recipe {
     private String description;
     private ArrayList<RecipeIngredient> ingredients;
 
+    public Recipe(int id, String name, String description) {
+        setID(id);
+        setName(name);
+        setDescription(description);
+    }
+
     public Recipe(String name, String description, ArrayList<RecipeIngredient> ingredients) {
         setName(name);
         setDescription(description);

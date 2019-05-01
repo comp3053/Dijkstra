@@ -8,6 +8,11 @@ public class Note {
     private Date createDate;
     private String content;
 
+    public Note(int brewID, String content){
+        setBrewID(brewID);
+        setContent(content);
+    }
+
     public Note(int brewID, Date createDate,String content){
         setBrewID(brewID);
         setCreateDate(createDate);

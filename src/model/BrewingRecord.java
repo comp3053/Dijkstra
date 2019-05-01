@@ -6,16 +6,19 @@ public class BrewingRecord {
     private int id;
     private Date brewDate;
     private int batchSize;
+    private Recipe recipe;
 
-    public BrewingRecord(Date brew_date,int batch_size){
+    public BrewingRecord(Date brew_date, int batch_size, Recipe recipe) {
         setBatchSize(batch_size);
         setBrewDate(brew_date);
+        setRecipe(recipe);
     }
 
-    public BrewingRecord(int id, Date brew_date,int batch_size){
+    public BrewingRecord(int id, Date brew_date, int batch_size, Recipe recipe) {
         setID(id);
         setBatchSize(batch_size);
         setBrewDate(brew_date);
+        setRecipe(recipe);
     }
 
     public int getID() {
@@ -40,5 +43,13 @@ public class BrewingRecord {
 
     public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    private void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }
