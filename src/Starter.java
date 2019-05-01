@@ -41,9 +41,9 @@ public class Starter {
                 // FIXME: [v] Changed Button
 
 //
-//                NoteContentController ncc = new NoteContentController();
-//                NoteContentView ncv = new NoteContentView(ncc);
-//                ncv.setVisible(true);
+                NoteContentController ncc = new NoteContentController();
+                NoteContentView ncv = new NoteContentView(ncc, 1);
+                ncv.setVisible(true);
                 // FIXME: [v] Changed Button
 
 //
@@ -101,8 +101,8 @@ public class Starter {
                 // FIXME: [] Changed Button
 
 //
-                LayoutTestView ltv = new LayoutTestView();
-                ltv.setVisible(true);
+//                LayoutTestView ltv = new LayoutTestView();
+//                ltv.setVisible(true);
                 // IGNORE
             }
         });

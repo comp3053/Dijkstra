@@ -13,7 +13,7 @@ public class BrewingRecordTest {
 
     @Before
     public void setUp() throws Exception {
-        brewingRecord = new BrewingRecord(1,date,10);
+//        brewingRecord = new BrewingRecord(1,date,10);
     }
 
     @Test
