@@ -31,7 +31,7 @@ public class Starter {
                 // FIXME: [] Changed Button
 //
 //                NoteInputController nic = new NoteInputController();
-//                NoteInputView niv = new NoteInputView(nic);
+//                NoteInputView niv = new NoteInputView(nic, 3);
 //                niv.setVisible(true);
                 // FIXME: [] Changed Button
 //
@@ -41,9 +41,9 @@ public class Starter {
                 // FIXME: [v] Changed Button
 
 //
-                NoteContentController ncc = new NoteContentController();
-                NoteContentView ncv = new NoteContentView(ncc, 1);
-                ncv.setVisible(true);
+//                NoteContentController ncc = new NoteContentController();
+//                NoteContentView ncv = new NoteContentView(ncc, 1);
+//                ncv.setVisible(true);
                 // FIXME: [v] Changed Button
 
 //

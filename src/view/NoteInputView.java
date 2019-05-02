@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class NoteInputView extends View{
     private NoteInputController c;
-    public NoteInputView(NoteInputController c){
+    public NoteInputView(NoteInputController c, int brewID){
         this.c = c;
         this.setTitle("Brew Day! - Edit Note"); // set frame title
         this.setSize(800, 600); // set frame size
@@ -20,7 +20,7 @@ public class NoteInputView extends View{
         jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         /* back button*/
-        JButton btn_back = new JButton("back to note list");
+        JButton btn_back = new JButton("Back to note list");
         btn_back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,7 +30,7 @@ public class NoteInputView extends View{
         jp_header.add(btn_back);
 
         /* This part change the design */
-        JLabel msg_header = new JLabel("Add note for brewing history" + "01");
+        JLabel msg_header = new JLabel("Add note for brewing history" + brewID);
         msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
         jp_header.add(msg_header);
 
@@ -51,7 +51,8 @@ public class NoteInputView extends View{
         btn_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.saveNote(input_noteContent.getText());
+                c.saveNote(brewID, input_noteContent.getText());
+                //TODO: Add operation to show status of insert
             }
         });
         jp_foot.add(btn_save);
