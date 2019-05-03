@@ -15,28 +15,6 @@ public class RecommendNotEnoughIngredientRecipeListView extends View{
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-//        JPanel jp_header = new JPanel();
-//        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
-//
-//        JButton btn_back = new JButton("back");
-//        btn_back.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                c.goBack();
-//            }
-//        });
-//        jp_header.add(btn_back);
-//
-//        JLabel msg_header = new JLabel("Recommend Recipe List");
-//        jp_header.add(msg_header);
-//
-//
-//        JPanel missingLabel = new JPanel();
-//        missingLabel.setBackground(Color.YELLOW);
-//        JLabel msg_header2 = new JLabel("Ingredient Not Enough");
-//        missingLabel.add(msg_header2);
-//        jp_header.add(missingLabel);
-
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
