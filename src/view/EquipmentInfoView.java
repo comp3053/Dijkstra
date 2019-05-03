@@ -12,55 +12,73 @@ public class EquipmentInfoView extends View{
     public EquipmentInfoView(EquipmentInfoController c){
         this.c = c;
         this.setTitle("Brew Day! - Equipment Information"); // set frame title
-        this.setSize(600, 200); // set frame size
+        this.setSize(600, 400); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel topLeftButtonBar = new JPanel();
+        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton button = new JButton("< Back");
+        topLeftButtonBar.add(button);
+        JLabel headerTitle = new JLabel("Equipment Information");
+        headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
+        topLeftButtonBar.add(headerTitle);
+        topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        /* back button*/
-        JButton btn_back = new JButton("back");
-        btn_back.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
             }
         });
-        jp_header.add(btn_back);
-        JLabel msg_header = new JLabel("Equipment Information");
-        msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
-        jp_header.add(msg_header);
+        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
-        this.add(jp_header, BorderLayout.NORTH);
 
-        JPanel jp_main = new JPanel();
-        jp_main.setLayout(new BoxLayout(jp_main, BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel();
+        GroupLayout groupLayout = new GroupLayout(mainPanel);
+        mainPanel.setLayout(groupLayout);// Vertically display
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
 
-        /* Read Equipment Info from controller */
-        c.ReadEquipmentInfo();
+        JLabel nameLabel = new JLabel("Name:");
+        JLabel volumeLabel = new JLabel("Volume (unit: L)");
 
-        JLabel msg_model = new JLabel("Model" + "HOMEBREW-2018");
-        JLabel msg_material = new JLabel("Model" + "HOMEBREW-2018");
-        JLabel msg_volume = new JLabel("Model" + "HOMEBREW-2018");
-        JLabel msg_purchase_date = new JLabel("Model" + "HOMEBREW-2018");
+        JLabel nameValue = new JLabel("MegaBrewer 2.0");
+        JLabel volumeValue = new JLabel("1.5");
 
-        jp_main.add(msg_model);
-        jp_main.add(msg_material);
-        jp_main.add(msg_volume);
-        jp_main.add(msg_purchase_date);
-        this.add(jp_main, BorderLayout.CENTER);
+        GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
 
-        JPanel jp_foot = new JPanel();
-        jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JButton btn_update = new JButton("update");
-        btn_update.addActionListener(new ActionListener() {
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameLabel)
+                .addComponent(volumeLabel));
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameValue)
+                .addComponent(volumeValue));
+//        mainPanel.setBorder(new EmptyBorder(0,0,350,0));
+        groupLayout.setHorizontalGroup(hGroup);
+
+        GroupLayout.SequentialGroup vGroup = groupLayout.createSequentialGroup();
+
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(nameLabel).addComponent(nameValue));
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(volumeLabel).addComponent(volumeValue));
+
+        groupLayout.setVerticalGroup(vGroup);
+
+        //TODO: can replace these column with last equipment information
+
+        this.add(mainPanel, BorderLayout.CENTER);
+
+
+        JPanel bottomLeftButtonBar = new JPanel();
+        bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JButton saveButton = new JButton("Update");
+        bottomLeftButtonBar.add(saveButton);
+        saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.turnUpdateInfo();
             }
         });
-        jp_foot.add(btn_update);
-        this.add(jp_foot, BorderLayout.SOUTH);
+        this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
 
     @Override
