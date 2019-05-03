@@ -74,19 +74,18 @@ public class UpdateEquipmentInfoView extends View{
 
         this.add(mainPanel, BorderLayout.CENTER);
 
-        JPanel jp_foot = new JPanel();
-        jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        jp_foot.setBorder(new EmptyBorder(0,0,0,0));
-        JButton btn_save = new JButton("save");
-        btn_save.addActionListener(new ActionListener() {
+        JPanel bottomLeftButtonBar = new JPanel();
+        bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JButton saveButton = new JButton("Save");
+        bottomLeftButtonBar.add(saveButton);
+        saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.saveEquipmentInfo(name.getText(),volume.getText());
-                //update();
+                //TODO: Add operation to show status of insert
             }
         });
-        jp_foot.add(btn_save);
-        this.add(jp_foot, BorderLayout.SOUTH);
+        this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
 
     @Override
