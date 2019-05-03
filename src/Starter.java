@@ -33,10 +33,10 @@ public class Starter {
 //                BrewingHistoryListView bhlv = new BrewingHistoryListView(bhlc);
 //                bhlv.setVisible(true);
 
-//
-                NoteContentController ncc = new NoteContentController();
-                NoteContentView ncv = new NoteContentView(ncc, 1);
-                ncv.setVisible(true);
+
+//                NoteContentController ncc = new NoteContentController();
+//                NoteContentView ncv = new NoteContentView(ncc, 1);
+//                ncv.setVisible(true);
 
 //
 //                NoteListController nlc = new NoteListController();
@@ -49,15 +49,15 @@ public class Starter {
 //                milv.setVisible(true);
 
 
-                RecommendNotEnoughIngredientRecipeListController rilc = new RecommendNotEnoughIngredientRecipeListController();
-                RecommendNotEnoughIngredientRecipeListView rilv = new RecommendNotEnoughIngredientRecipeListView(rilc);
-                rilv.setVisible(true);
+//                RecommendNotEnoughIngredientRecipeListController rilc = new RecommendNotEnoughIngredientRecipeListController();
+//                RecommendNotEnoughIngredientRecipeListView rilv = new RecommendNotEnoughIngredientRecipeListView(rilc);
+//                rilv.setVisible(true);
 
-                RecommendRecipeListController rrlc = new RecommendRecipeListController();
-                RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
-                rrlv.setVisible(true);
+//                RecommendRecipeListController rrlc = new RecommendRecipeListController();
+//                RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
+//                rrlv.setVisible(true);
 
-//
+
 //                RecipeDetailView rdv = new RecipeDetailView();
 //                rdv.setVisible(true);
 
@@ -73,9 +73,10 @@ public class Starter {
 //                IngredientDetailView idv = new IngredientDetailView();
 //                idv.setVisible(true);
 
-//
-//                BrewDetailView bdv = new BrewDetailView();
-//                bdv.setVisible(true);
+
+                BrewDetailController bdc = new BrewDetailController();
+                BrewDetailView bdv = new BrewDetailView(bdc);
+                bdv.setVisible(true);
 
 //
 //                BrewView bv = new BrewView();
