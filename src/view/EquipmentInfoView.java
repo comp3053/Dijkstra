@@ -89,7 +89,7 @@ public class EquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.turnUpdateInfo();
-            }// TODO: I think here can be removed because update function can be implemented
+            }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
