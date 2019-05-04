@@ -1,6 +1,11 @@
 package view;
 
+import controller.EquipmentController;
 import controller.EquipmentInfoController;
+import controller.FetchDataException;
+import model.EmptyEquipmentNameException;
+import model.Equipment;
+import model.InvalidEquipmentVolumeException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +14,20 @@ import java.awt.event.ActionListener;
 
 public class EquipmentInfoView extends View{
     private EquipmentInfoController c;
+    private EquipmentController ec;
+    private Equipment equipment;
+
     public EquipmentInfoView(EquipmentInfoController c){
         this.c = c;
+        this.ec = new EquipmentController();
         this.setTitle("Brew Day! - Equipment Information"); // set frame title
         this.setSize(600, 400); // set frame size
         this.setLayout(new BorderLayout());
+        try {
+            this.equipment = ec.getLatestEquipment();//automatically get latest version of equipment
+        } catch (FetchDataException | InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
+            e.printStackTrace();
+        }
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -40,11 +54,11 @@ public class EquipmentInfoView extends View{
         groupLayout.setAutoCreateGaps(true);
         groupLayout.setAutoCreateContainerGaps(true);
 
-        JLabel nameLabel = new JLabel("Name:");
+        JLabel nameLabel = new JLabel();
         JLabel volumeLabel = new JLabel("Volume (unit: L)");
 
-        JLabel nameValue = new JLabel("MegaBrewer 2.0");
-        JLabel volumeValue = new JLabel("1.5");
+        JLabel nameValue = new JLabel(this.equipment.getName());
+        JLabel volumeValue = new JLabel(""+this.equipment.getVolume());
 
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
 
@@ -63,8 +77,6 @@ public class EquipmentInfoView extends View{
                 .addComponent(volumeLabel).addComponent(volumeValue));
 
         groupLayout.setVerticalGroup(vGroup);
-
-        //TODO: can replace these column with last equipment information
 
         this.add(mainPanel, BorderLayout.CENTER);
 
