@@ -18,7 +18,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
 
     public ArrayList<Equipment> getAll() throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        ArrayList<Equipment> equipments = new ArrayList<Equipment>();
+        ArrayList<Equipment> equipments = new ArrayList<>();
         String name;
         int volume;
 
@@ -65,6 +65,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
         } catch (FetchDataException e) {
             insert(equipment);
         }
+        System.out.println("Fuck you!");
         dbHelper.connectSQLite();
         try {
             dbHelper.execSqlNoReturn(query);
@@ -79,28 +80,29 @@ public class EquipmentController implements DatabaseController<Equipment> {
     public Equipment getLatestEquipment()throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException{
         DatabaseHelper dbHelper = new DatabaseHelper();
         Equipment equipment;
-        String query = String.format("SELECT * FROM Equipment WHERE Equipment_ID=(SELECT MAX(Equipment_ID) FROM Equipment)");
+        String query = "SELECT * FROM Equipment WHERE Equipment_ID=(SELECT MAX(Equipment_ID) FROM Equipment)";
 
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
             String name =rs.getString(2);
             int volume = rs.getInt(3);
             equipment = new Equipment(name,volume);
+            dbHelper.closeConnection();
         } catch (SQLiteConnectionException |SQLException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not get Equipment");
         }
         return equipment;
     }
-
-    public static void main(String[] args) {
-        EquipmentController ec = new EquipmentController();
-        try {
-            Equipment equipment = new Equipment("MyEquipment", 200);
-            ec.update(equipment);
-            System.out.println(ec.getAll().get(0).getName());
-        } catch (FetchDataException | InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
-            e.printStackTrace();
-        }
-    }
+//
+//    public static void main(String[] args) {
+//        EquipmentController ec = new EquipmentController();
+//        try {
+//            Equipment equipment = new Equipment("MyEquipment", 200);
+//            ec.update(equipment);
+//            System.out.println(ec.getAll().get(0).getName());
+//        } catch (FetchDataException | InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
