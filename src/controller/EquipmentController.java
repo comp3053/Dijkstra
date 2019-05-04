@@ -65,7 +65,6 @@ public class EquipmentController implements DatabaseController<Equipment> {
         } catch (FetchDataException e) {
             insert(equipment);
         }
-        System.out.println("Fuck you!");
         dbHelper.connectSQLite();
         try {
             dbHelper.execSqlNoReturn(query);
