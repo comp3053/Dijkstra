@@ -74,6 +74,7 @@ public class IngredientFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // TODO: save Ingredient to the DB
                 c.saveIngredient();
             }
         });
@@ -82,6 +83,7 @@ public class IngredientFormView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.cancel();
+                dispose();
             }
         });
         this.add(pageEndButtonGroup, BorderLayout.PAGE_END);

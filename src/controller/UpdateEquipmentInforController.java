@@ -1,5 +1,7 @@
 package controller;
 
+import view.EquipmentInfoView;
+
 import javax.swing.*;
 
 public class UpdateEquipmentInforController {
@@ -19,7 +21,8 @@ public class UpdateEquipmentInforController {
     }
 
     public void goBack() {
-        System.out.println("Go back");
-        //Maybe I don't need to write this method
+        EquipmentInfoController eic = new EquipmentInfoController();
+        EquipmentInfoView ei = new EquipmentInfoView(eic);
+        ei.setVisible(true);
     }
 }

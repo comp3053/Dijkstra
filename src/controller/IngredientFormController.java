@@ -1,5 +1,7 @@
 package controller;
 
+import view.IngredientListView;
+
 public class IngredientFormController {
     public IngredientFormController(){
 
@@ -10,6 +12,9 @@ public class IngredientFormController {
     }
 
     public void cancel(){
-        System.out.println("Cancel");
+        // TODO: Pass in a Ingredient ArrayList
+        IngredientListController ilc = new IngredientListController();
+        IngredientListView ilv = new IngredientListView(ilc);
+        ilv.setVisible(true);
     }
 }

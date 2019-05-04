@@ -55,6 +55,7 @@ public class RecommendRecipeListView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.brewRecipe();
+                dispose();
             }
         });
 

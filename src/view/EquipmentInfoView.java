@@ -77,6 +77,7 @@ public class EquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.turnUpdateInfo();
+                dispose();
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

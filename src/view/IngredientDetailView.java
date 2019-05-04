@@ -17,21 +17,21 @@ public class IngredientDetailView extends View {
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
 
-        JButton leftButton = new JButton("< Back");
-        JButton rightButton = new JButton("Edit");
+        JButton backBtn = new JButton("< Back");
+        JButton editBtn = new JButton("Edit");
 
-        topButtonsAround.add(leftButton);
+        topButtonsAround.add(backBtn);
         topButtonsAround.add(Box.createHorizontalGlue());
-        topButtonsAround.add(rightButton);
+        topButtonsAround.add(editBtn);
 
-        leftButton.addActionListener(new ActionListener() {
+        backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
             }
         });
 
-        rightButton.addActionListener(new ActionListener() {
+        editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO

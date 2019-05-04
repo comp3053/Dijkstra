@@ -31,6 +31,7 @@ public class UpdateEquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
+                dispose();
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
@@ -83,6 +84,7 @@ public class UpdateEquipmentInfoView extends View{
             public void actionPerformed(ActionEvent e) {
                 c.saveEquipmentInfo(name.getText(),volume.getText());
                 //TODO: Add operation to show status of insert
+                //dispose();
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

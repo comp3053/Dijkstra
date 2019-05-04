@@ -1,5 +1,6 @@
 package view;
 
+import controller.NoteContentController;
 import controller.NoteListController;
 
 import javax.swing.*;
@@ -42,31 +43,52 @@ public class NoteListView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.addNote();
+                dispose();
             }
         });
 
         this.add(topButtonsAround, BorderLayout.NORTH);
 
-        JPanel jp_main = new JPanel();
-        jp_main.setLayout(new BoxLayout(jp_main,BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
         for(int i =0;i<5;i++) {
-            JPanel jp_main_i = new JPanel();
-            jp_main_i.setLayout(new FlowLayout());
-            JButton btn_notei = new JButton("brew history" + "03");
-            jp_main_i.add(btn_notei);
-            JLabel msg_relative = new JLabel("for brewing record");
-            jp_main_i.add(msg_relative);
-            JButton btn_delete = new JButton("delete");
-            btn_delete.addActionListener(new ActionListener() {
+            JPanel mainPanelIter = new JPanel();
+            mainPanelIter.setLayout(new FlowLayout());
+            JButton noteBtn = new JButton("brew history" + "03");
+            mainPanelIter.add(noteBtn);
+            JLabel forBrewingRecord = new JLabel("for brewing record");
+            mainPanelIter.add(forBrewingRecord);
+            JButton modifyBtn = new JButton("modify");
+            JButton deleteBtn = new JButton("delete");
+            noteBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    NoteContentController ncc = new NoteContentController();
+                    NoteContentView ncv = new NoteContentView(ncc, 1);
+                    // TODO: Need to change according to click (better pass in a model)
+                    ncv.setVisible(true);
+                    dispose();
+                }
+            });
+            deleteBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     c.delete();
                 }
             });
-            jp_main_i.add(btn_delete);
-            jp_main.add(jp_main_i);
+            modifyBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+//                    TODO: Modify Note
+//                    c.modify();
+//                    dispose();
+                }
+            });
+            mainPanelIter.add(modifyBtn);
+            mainPanelIter.add(deleteBtn);
+            mainPanel.add(mainPanelIter);
         }
-        this.add(jp_main, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
     }
 
     @Override

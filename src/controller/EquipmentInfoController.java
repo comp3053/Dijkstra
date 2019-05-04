@@ -1,6 +1,7 @@
 package controller;
 
 import view.HomeView;
+import view.UpdateEquipmentInfoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ public class EquipmentInfoController {
     public EquipmentInfoController(){
     }
 
-    //should return a list, here I write a void because I don't know how to return, yeah.
+    // TODO: should return a list, here I write a void because I don't know how to return, yeah.
     public void ReadEquipmentInfo(){
         List<String> info = new ArrayList<String>();
         info.add("Nya");
@@ -22,6 +23,9 @@ public class EquipmentInfoController {
     }
 
     public void turnUpdateInfo() {
-        System.out.println("turn to update info");
+        // TODO: Fill the exists Info to the field
+        UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
+        UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
+        ueiv.setVisible(true);
     }
 }

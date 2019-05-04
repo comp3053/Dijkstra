@@ -28,7 +28,9 @@ public class NoteInputView extends View{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.backToNoteList();
+                if (c.backToNoteList() == 1){
+                    dispose();
+                }
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
