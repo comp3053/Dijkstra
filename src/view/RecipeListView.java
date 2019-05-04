@@ -1,5 +1,6 @@
 package view;
 
+import controller.RecipeListController;
 import org.omg.CORBA.BAD_INV_ORDER;
 import utils.ButtonColumn;
 
@@ -11,9 +12,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RecipeView extends View{
-
-    public RecipeView(){
+public class RecipeListView extends View{
+    private RecipeListController c;
+    public RecipeListView(RecipeListController c){
+        this.c = c;
         this.setTitle("Brew Day! - Manage Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame

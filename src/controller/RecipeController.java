@@ -5,6 +5,7 @@ import utils.DatabaseHelper;
 import utils.SQLiteConnectionException;
 import utils.UnitEnum;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -72,14 +73,34 @@ public class RecipeController implements DatabaseController<Recipe> {
         throw new ObjectNotFoundException("Could not find the ingredient.");
     }
 
-    public Recipe getRecipeIngredient(Recipe recipe) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
+    public Recipe getRecipe(int recipeID) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        Recipe recipe;
+        RecipeController rc = new RecipeController();
+        String query = String.format("SELECT * FROM Recipe WHERE Recipe_ID=%d", recipeID);
+
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            String name = rs.getString(2);
+            String description = rs.getString(3);
+            ArrayList<RecipeIngredient> ingredients = rc.getRecipeIngredient(recipeID);
+            recipe = new Recipe(name, description, ingredients);
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            throw new FetchDataException("Could not get recipe");
+        }
+        return recipe;
+    }
+
+    public ArrayList<RecipeIngredient> getRecipeIngredient(int recipeID) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         StorageIngredientController sc = new StorageIngredientController();
         ArrayList<RecipeIngredient> ingredients = new ArrayList<>();
         ArrayList<StorageIngredient> ingredientCategory = sc.getAll();
         String name, unit;
         double amount;
-        String query = String.format("SELECT * FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipe.getID());
+        String query = String.format("SELECT * FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipeID);
 
 
         try {
@@ -94,7 +115,6 @@ public class RecipeController implements DatabaseController<Recipe> {
             e.printStackTrace();
             throw new FetchDataException("Could not get the recipe's ingredient.");
         }
-        recipe.setIngredients(ingredients);
-        return recipe;
+        return ingredients;
     }
 }

@@ -1,10 +1,14 @@
 package view;
 
+import controller.BrewReciptController;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class BrewView extends View {
-    public BrewView(){
+public class BrewReciptView extends View {
+    private BrewReciptController c;
+    public BrewReciptView(BrewReciptController c){
+        this.c = c;
         this.setTitle("Brew Day! - Brew Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
