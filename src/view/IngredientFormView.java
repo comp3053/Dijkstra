@@ -1,54 +1,88 @@
 package view;
 
+import controller.IngredientFormController;
 import utils.UnitEnum;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class IngredientFormView extends View {
-
-    public IngredientFormView(){
+    private IngredientFormController c;
+    public IngredientFormView(IngredientFormController c){
+        this.c = c;
         this.setTitle("Brew Day! - Ingredient Form"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel mainBody = new JPanel();
-        mainBody.setLayout(new BoxLayout(mainBody, BoxLayout.Y_AXIS));
+        JPanel pageTitle = new JPanel();
+        pageTitle.setLayout(new BoxLayout(pageTitle, BoxLayout.Y_AXIS));
+        JLabel title = new JLabel("Create New Ingredient");
+        title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
+        pageTitle.add(title);
+        this.add(pageTitle, BorderLayout.PAGE_START);
 
-        JPanel nameField = new JPanel();
-        nameField.setLayout(new BoxLayout(nameField, BoxLayout.Y_AXIS));
-        nameField.add(new JLabel("Name"));
+        JPanel mainPanel = new JPanel();
+        GroupLayout groupLayout = new GroupLayout(mainPanel);
+        mainPanel.setLayout(groupLayout);// Vertically display
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
+
+        JLabel nameLabel = new JLabel("Name:");
+        JLabel amountLabel = new JLabel("Amount:");
+        JLabel unitLabel = new JLabel("Unit:");
+
         JTextField nameTextField = new JTextField();
-//        nameTextField.setColumns(20);
-        nameField.add(nameTextField);
-
-        JPanel amountField = new JPanel();
-        amountField.setLayout(new BoxLayout(amountField, BoxLayout.Y_AXIS));
-        amountField.add(new JLabel("Amount"));
         JTextField amountTextField = new JTextField();
-//        amountTextField.setColumns(20);
-        amountField.add(amountTextField);
-
-        JPanel unitField = new JPanel();
-        unitField.setLayout(new BoxLayout(unitField, BoxLayout.Y_AXIS));
-        unitField.add(new JLabel("Unit"));
         JComboBox<UnitEnum> unitSelect = new JComboBox<>();
         for(UnitEnum unit : UnitEnum.values()){
             unitSelect.addItem(unit);
         }
-        unitField.add(unitSelect);
 
-        mainBody.add(nameField);
-        mainBody.add(amountField);
-        mainBody.add(unitField);
-        this.add(mainBody, BorderLayout.CENTER);
+
+        GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
+
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameLabel)
+                .addComponent(amountLabel)).addComponent(unitLabel);
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameTextField)
+                .addComponent(amountTextField).addComponent(unitSelect));
+        groupLayout.setHorizontalGroup(hGroup);
+
+        GroupLayout.SequentialGroup vGroup = groupLayout.createSequentialGroup();
+
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(nameLabel).addComponent(nameTextField));
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(amountLabel).addComponent(amountTextField));
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(unitLabel).addComponent(unitSelect));
+
+        groupLayout.setVerticalGroup(vGroup);
+
+        //TODO: can replace these column with last equipment information
+
+        this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel pageEndButtonGroup = new JPanel();
         pageEndButtonGroup.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JButton btn1 = new JButton("Save");
-        JButton btn2 = new JButton("Canel");
-        pageEndButtonGroup.add(btn1);
-        pageEndButtonGroup.add(btn2);
+        JButton saveBtn = new JButton("Save");
+        JButton cancelBtn = new JButton("Cancel");
+        pageEndButtonGroup.add(saveBtn);
+        pageEndButtonGroup.add(cancelBtn);
+        saveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.goBack();
+            }
+        });
+
+        cancelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.cancel();
+            }
+        });
         this.add(pageEndButtonGroup, BorderLayout.PAGE_END);
     }
     @Override
