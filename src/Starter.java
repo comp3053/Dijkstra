@@ -8,9 +8,9 @@ public class Starter {
         javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
             @Override
             public void run() {
-//                HomeController hc = new HomeController();
-//                HomeView hv = new HomeView(hc);
-//                hv.setVisible(true);
+                HomeController hc = new HomeController();
+                HomeView hv = new HomeView(hc);
+                hv.setVisible(true);
 //
 //                RecipeListController rlc = new RecipeListController();
 //                RecipeListView rv = new RecipeListView(rlc);

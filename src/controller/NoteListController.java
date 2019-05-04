@@ -1,6 +1,8 @@
 package controller;
 
+import view.BrewingHistoryListView;
 import view.HomeView;
+import view.NoteInputView;
 
 public class NoteListController {
     public NoteListController(){
@@ -17,11 +19,19 @@ public class NoteListController {
 
     }
 
+    public void modify(){
+        System.out.println("modify");
+        // TODO, Fetch the id and modify the note
+    }
+
     public void delete(){
         System.out.println("delete");
+        // TODO, Fetch the id and do the deletion
     }
 
     public void addNote(){
-
+        BrewingHistoryListController bhlc = new BrewingHistoryListController();
+        BrewingHistoryListView bhlv = new BrewingHistoryListView(bhlc);
+        bhlv.setVisible(true);
     }
 }

@@ -39,13 +39,14 @@ public class RecipeListView extends View{
         rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("new clicked");
+                c.newRecipe();
+                dispose();
             }
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);
 
-        JPanel jp2 = new JPanel();
-        jp2.setLayout(new BorderLayout());
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
         JPanel word = new JPanel();
         word.setLayout(new BoxLayout(word, BoxLayout.Y_AXIS));
         JLabel title = new JLabel("Recipes List");
@@ -60,7 +61,7 @@ public class RecipeListView extends View{
         word.add(title);
         word.add(subtitle);
 //        word.setBorder(new EmptyBorder(0,0,0,0));
-        jp2.add(word, BorderLayout.PAGE_START);
+        mainPanel.add(word, BorderLayout.PAGE_START);
         String[] columnNames = {"First Name", "Last Name", ""};
         Object[][] data =
                 {
@@ -75,11 +76,11 @@ public class RecipeListView extends View{
         //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
         // TODO: still need a better solution
         // TODO: Warning pop up when hitting delete
-        jp2.add(table);
+        mainPanel.add(table);
 //        JScrollPane scrollPane = new JScrollPane();
 //        scrollPane.add(table);
 //        jp2.add(scrollPane);
-        this.add(jp2, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
     }
 
     @Override

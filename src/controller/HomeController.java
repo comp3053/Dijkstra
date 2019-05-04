@@ -6,16 +6,16 @@ public class HomeController {
     public HomeController(){
         // Nothing to do
     }
+    public void startManageRecipe(){
+        RecipeListController rlc = new RecipeListController();
+        RecipeListView rlv = new RecipeListView(rlc);
+        rlv.setVisible(true);
+    }
     public void startManageIngredient(){
         // TODO: Pass in a Ingredient ArrayList
         IngredientListController ilc = new IngredientListController();
         IngredientListView ilv = new IngredientListView(ilc);
         ilv.setVisible(true);
-    }
-    public void startManageRecipe(){
-        RecipeListController rlc = new RecipeListController();
-        RecipeListView rlv = new RecipeListView(rlc);
-        rlv.setVisible(true);
     }
     public void startNoteList(){
         NoteListController nlc = new NoteListController();

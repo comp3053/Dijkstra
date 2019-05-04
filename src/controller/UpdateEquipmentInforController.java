@@ -26,7 +26,6 @@ public class UpdateEquipmentInforController {
     }
 
     public void goBack() {
-        System.out.println("Go back");
         EquipmentInfoController eic = new EquipmentInfoController();
         EquipmentInfoView ei = new EquipmentInfoView(eic);
         ei.setVisible(true);

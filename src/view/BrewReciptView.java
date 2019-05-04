@@ -4,6 +4,8 @@ import controller.BrewReciptController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BrewReciptView extends View {
     private BrewReciptController c;
@@ -36,11 +38,18 @@ public class BrewReciptView extends View {
 
         JTable table = new JTable(data, columnNames);
         this.add(table, BorderLayout.CENTER);
-        JPanel jp_foot = new JPanel();
-        jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JButton btn_save = new JButton("Finish");
-        jp_foot.add(btn_save);
-        this.add(jp_foot, BorderLayout.PAGE_END);
+        JPanel footerPanel = new JPanel();
+        footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JButton saveBtn = new JButton("Finish");
+        footerPanel.add(saveBtn);
+        saveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.finish();
+                dispose();
+            }
+        });
+        this.add(footerPanel, BorderLayout.PAGE_END);
     }
     @Override
     public void update() {

@@ -41,6 +41,20 @@ public class IngredientListView extends View {
         JButton buttonAdd = new JButton("Add");
         JPanelSearchBar.add(buttonSearch);
         JPanelSearchBar.add(buttonAdd);
+        buttonSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Search Clicked");
+            }
+        });
+
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.addIngredient();
+                dispose();
+            }
+        });
         mainBody.add(JPanelSearchBar, BorderLayout.PAGE_START);
 
         String[] columnNames = {"Ingredient", "Storage Amount", "Operation"};

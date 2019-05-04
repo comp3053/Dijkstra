@@ -27,7 +27,7 @@ public class HomeView extends View {
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hc.startManageIngredient();
+                hc.startManageRecipe();
                 dispose();
             }
         });

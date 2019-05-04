@@ -23,6 +23,7 @@ public class BrewDetailView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
+                dispose();
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
@@ -46,6 +47,7 @@ public class BrewDetailView extends View {
         batchSize.setText("1000");
         batchSize.setToolTipText("Batch Size");
         textfieldWithLabel.add(batchSize);
+//  TODO: Listen to the change of batch size and update
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
@@ -69,6 +71,7 @@ public class BrewDetailView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.brewRecipe();
+                dispose();
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

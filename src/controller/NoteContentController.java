@@ -1,5 +1,7 @@
 package controller;
 
+import view.NoteListView;
+
 public class NoteContentController {
     public NoteContentController(){
 
@@ -10,6 +12,8 @@ public class NoteContentController {
     }
 
     public void goBack(){
-        System.out.println("Goback");
+        NoteListController nlc = new NoteListController();
+        NoteListView nlv = new NoteListView(nlc);
+        nlv.setVisible(true);
     }
 }

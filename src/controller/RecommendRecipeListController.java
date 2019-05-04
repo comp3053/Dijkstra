@@ -1,5 +1,6 @@
 package controller;
 
+import view.BrewDetailView;
 import view.HomeView;
 
 public class RecommendRecipeListController {
@@ -14,6 +15,8 @@ public class RecommendRecipeListController {
     }
 
     public void brewRecipe(){
-        System.out.println("Brew This Recipe");
+        BrewDetailController bdc = new BrewDetailController();
+        BrewDetailView bdv = new BrewDetailView(bdc);
+        bdv.setVisible(true);
     }
 }

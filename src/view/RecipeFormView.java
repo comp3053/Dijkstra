@@ -65,6 +65,7 @@ public class RecipeFormView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.cancel();
+                dispose();
             }
         });
         this.add(pageEndButtonGroup, BorderLayout.PAGE_END);
