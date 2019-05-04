@@ -1,6 +1,7 @@
 package view;
 
 import controller.HomeController;
+import controller.IngredientListController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,32 +27,32 @@ public class HomeView extends View {
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Not implemented");
-                // hc.startManageRecipe();
+                hc.startManageIngredient();
+                dispose();
             }
         });
         jp1.add(btn2);
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Not implemented");
-                //hc.startManageIngredient();
+                hc.startManageIngredient();
+                dispose();
             }
         });
         jp1.add(btn3);
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Not implemented");
-                //hc.startNoteList();
+                hc.startNoteList();
+                dispose();
             }
         });
         jp1.add(btn4);
         btn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Not implemented");
-                //hc.startEquipmentInformation();
+                hc.startEquipmentInformation();
+                dispose();
             }
         });
         this.add(jp1, BorderLayout.PAGE_START); // add two button
@@ -76,8 +77,8 @@ public class HomeView extends View {
         recommend_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Not implemented");
-//                hc.startRecommend();
+                hc.startRecommend();
+                dispose();
             }
         });
         this.add(jp2, BorderLayout.CENTER); // add a panel

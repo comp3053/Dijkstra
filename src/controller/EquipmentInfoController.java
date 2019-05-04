@@ -1,5 +1,7 @@
 package controller;
 
+import view.HomeView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,9 @@ public class EquipmentInfoController {
     }
 
     public void goBack() {
-        System.out.println("go back");
+        HomeController hc = new HomeController();
+        HomeView hv = new HomeView(hc);
+        hv.setVisible(true);
     }
 
     public void turnUpdateInfo() {

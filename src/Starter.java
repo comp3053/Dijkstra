@@ -7,9 +7,9 @@ public class Starter {
         javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
             @Override
             public void run() {
-//                HomeController hc = new HomeController();
-//                HomeView hv = new HomeView(hc);
-//                hv.setVisible(true);
+                HomeController hc = new HomeController();
+                HomeView hv = new HomeView(hc);
+                hv.setVisible(true);
 //
 //                RecipeListController rlc = new RecipeListController();
 //                RecipeListView rv = new RecipeListView(rlc);
@@ -60,9 +60,9 @@ public class Starter {
 //                rrlv.setVisible(true);
 //
 //
-                RecipeDetailController rdc = new RecipeDetailController();
-                RecipeDetailView rdv = new RecipeDetailView(rdc,1);
-                rdv.setVisible(true);
+//                RecipeDetailController rdc = new RecipeDetailController();
+//                RecipeDetailView rdv = new RecipeDetailView(rdc);
+//                rdv.setVisible(true);
 //
 //
 //                IngredientListController ilc = new IngredientListController();
@@ -88,7 +88,7 @@ public class Starter {
 //                BrewReciptController brc = new BrewReciptController();
 //                BrewReciptView brv = new BrewReciptView(brc);
 //                brv.setVisible(true);
-
+//
 
 //                LayoutTestView ltv = new LayoutTestView();
 //                ltv.setVisible(true);
