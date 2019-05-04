@@ -1,7 +1,12 @@
 package view;
 
 
+import controller.FetchDataException;
+import controller.RecipeController;
 import controller.RecipeDetailController;
+import model.EmptyIngredientNameException;
+import model.InvalidIngredientAmountException;
+import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,23 +15,26 @@ import java.awt.event.ActionListener;
 
 public class RecipeDetailView extends View {
     private RecipeDetailController c;
-    public RecipeDetailView(RecipeDetailController c){
+    private RecipeController rc;
+    private Recipe recipe;
+    public RecipeDetailView(RecipeDetailController c,int recipeID){
         this.c = c;
+        this.rc = new RecipeController();
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        try {
+            this.recipe = rc.getRecipe(recipeID);
+        } catch (FetchDataException | InvalidIngredientAmountException | EmptyIngredientNameException e) {
+            e.printStackTrace();
+        }
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO
-            }
-        });
+        button.addActionListener(e -> c.goBack());
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
@@ -38,14 +46,15 @@ public class RecipeDetailView extends View {
         //greeting.setHorizontalAlignment(JLabel.CENTER); // Vertical central the label in BorderLayout
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
-        JLabel subtitle = new JLabel("Brew Recipe 1"); // TODO: Name of the recipe will shown here
+        JLabel subtitle = new JLabel(this.recipe.getName());
         subtitle.setFont(new Font(subtitle.getFont().getFontName(), subtitle.getFont().getStyle(), 16));
         word.add(title);
         word.add(subtitle);
         jp2.add(word, BorderLayout.PAGE_START);
         JPanel jp3 = new JPanel();
         jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
-        JLabel ingredient1 = new JLabel("A Malts 1.0 gram");
+        //TODO: here should be dynamic list
+        JLabel ingredient1 = new JLabel(this.recipe.getIngredients().get(0).getName()+":"+this.recipe.getIngredients().get(0).getAmount()+this.recipe.getIngredients().get(0).getUnit().name());
         JLabel ingredient2 = new JLabel("B Yeasts 2.0 grams");
         JLabel ingredient3 = new JLabel("Water 1000.0 Milliliters");
         jp3.add(ingredient1);
