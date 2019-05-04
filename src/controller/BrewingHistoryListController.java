@@ -2,6 +2,7 @@ package controller;
 
 import view.BrewingHistoryListView;
 import view.NoteInputView;
+import view.NoteListView;
 
 public class BrewingHistoryListController {
     public BrewingHistoryListController(){
@@ -12,9 +13,9 @@ public class BrewingHistoryListController {
     }
 
     public void goBack(){
-        BrewingHistoryListController bhlc = new BrewingHistoryListController();
-        BrewingHistoryListView bhlv = new BrewingHistoryListView(bhlc);
-        bhlv.setVisible(true);
+        NoteListController nlc = new NoteListController();
+        NoteListView nlv = new NoteListView(nlc);
+        nlv.setVisible(true);
     }
 
     public void takeNote(){
