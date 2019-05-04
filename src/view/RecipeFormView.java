@@ -1,11 +1,18 @@
 package view;
 
 import controller.RecipeFormController;
+import model.EmptyIngredientNameException;
+import model.InvalidIngredientAmountException;
+import model.RecipeIngredient;
+import model.StorageIngredient;
+import utils.UnitEnum;
 
 import javax.swing.*;
+import javax.xml.ws.EndpointReference;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class RecipeFormView extends View {
@@ -24,7 +31,7 @@ public class RecipeFormView extends View {
         this.add(pageTitle, BorderLayout.PAGE_START);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new BorderLayout());
 
         JPanel recipeNameField = new JPanel();
         recipeNameField.setLayout(new FlowLayout());
@@ -33,19 +40,36 @@ public class RecipeFormView extends View {
         JTextField recipeNameTextfield = new JTextField();
         recipeNameTextfield.setColumns(20);
         recipeNameField.add(recipeNameTextfield);
-        mainPanel.add(recipeNameField);
+        mainPanel.add(recipeNameField, BorderLayout.PAGE_START);
         this.add(mainPanel);
 
-        // TODO: Ingredients Field
+
+        ArrayList<StorageIngredient> testIngredient = new ArrayList<StorageIngredient>();
+        try{
+            testIngredient.add(new StorageIngredient(1,"A1", 2.0, UnitEnum.GRAM));
+            testIngredient.add(new StorageIngredient(2,"A2", 3.0, UnitEnum.LITER));
+            testIngredient.add(new StorageIngredient(3,"A3", 2.0, UnitEnum.KILOGRAM));
+            testIngredient.add(new StorageIngredient(4,"A4", 20.0, UnitEnum.MILLILITER));
+            testIngredient.add(new StorageIngredient(5,"A5", 0.2, UnitEnum.KILOGRAM));
+            testIngredient.add(new StorageIngredient(6,"A6", 2.0, UnitEnum.GRAM));
+        }catch (EmptyIngredientNameException | InvalidIngredientAmountException e){
+            e.printStackTrace();
+        }
+
+        RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(testIngredient);
+        JScrollPane scrollPane = new JScrollPane(recipeIngredientEntryList);
+        scrollPane.setAutoscrolls(true);
+        scrollPane.setViewportView(recipeIngredientEntryList);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel recipeBatchSize = new JPanel();
         recipeBatchSize.setLayout(new FlowLayout());
-        JLabel recipeBatchSizeTitle = new JLabel("Batch Size:");
+        JLabel recipeBatchSizeTitle = new JLabel("Batch Size (Unit - mL):");
         recipeBatchSize.add(recipeBatchSizeTitle);
         JTextField recipeBatchSizeTextfield = new JTextField();
         recipeBatchSizeTextfield.setColumns(20);
         recipeBatchSize.add(recipeBatchSizeTextfield);
-        mainPanel.add(recipeBatchSize);
+        mainPanel.add(recipeBatchSize, BorderLayout.PAGE_END);
         this.add(mainPanel);
 
         JPanel pageEndButtonGroup = new JPanel();
@@ -57,6 +81,11 @@ public class RecipeFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ArrayList<RecipeIngredient> recipeIngredients = recipeIngredientEntryList.getIngredientList();
+//                GET the Ingredient List from GUI
+//                Check if there is a duplicate ingredient
+//                Check if there are invalid value
+//                Check if the fields are valid.
                 c.saveRecipe();
             }
         });
