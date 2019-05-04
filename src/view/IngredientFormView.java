@@ -75,7 +75,9 @@ public class IngredientFormView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: save Ingredient to the DB
-                c.saveIngredient();
+                c.saveIngredient(nameTextField.getText(),amountTextField.getText(),unitSelect.getSelectedIndex());
+                c.cancel();
+                dispose();
             }
         });
 
