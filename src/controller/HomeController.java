@@ -1,42 +1,36 @@
 package controller;
 
+import view.*;
+
 public class HomeController {
     public HomeController(){
         // Nothing to do
     }
     public void startManageIngredient(){
-        javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
-            @Override
-            public void run() {
-            }
-        });
+        // TODO: Pass in a Ingredient ArrayList
+        IngredientListController ilc = new IngredientListController();
+        IngredientListView ilv = new IngredientListView(ilc);
+        ilv.setVisible(true);
     }
     public void startManageRecipe(){
-        javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
-            @Override
-            public void run() {
-            }
-        });
+        RecipeListController rlc = new RecipeListController();
+        RecipeListView rlv = new RecipeListView(rlc);
+        rlv.setVisible(true);
     }
     public void startNoteList(){
-        javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
-            @Override
-            public void run() {
-            }
-        });
+        NoteListController nlc = new NoteListController();
+        NoteListView nlv = new NoteListView(nlc);
+        nlv.setVisible(true);
     }
     public void startEquipmentInformation(){
-        javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
-            @Override
-            public void run() {
-            }
-        });
+        EquipmentInfoController eic = new EquipmentInfoController();
+        EquipmentInfoView ei = new EquipmentInfoView(eic);
+        ei.setVisible(true);
     }
     public void startRecommend(){
-        javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
-            @Override
-            public void run() {
-            }
-        });
+// TODO: Check if there are enough ingredient
+        RecommendRecipeListController rrlc = new RecommendRecipeListController();
+        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
+        rrlv.setVisible(true);
     }
 }

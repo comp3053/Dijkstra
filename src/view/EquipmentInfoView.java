@@ -42,7 +42,8 @@ public class EquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
-            }//TODO: have not finish yet
+                dispose();
+            }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 

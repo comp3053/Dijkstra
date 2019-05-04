@@ -31,6 +31,7 @@ public class RecommendRecipeListView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
+                dispose();
             }
         });
 

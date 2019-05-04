@@ -23,7 +23,8 @@ public class IngredientListView extends View {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                c.goBack();
+                dispose();
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
