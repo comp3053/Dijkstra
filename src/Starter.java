@@ -73,9 +73,9 @@ public class Starter {
 //                ilv.setVisible(true);
 //
 //
-                IngredientFormController ifc = new IngredientFormController();
-                IngredientFormView ifv = new IngredientFormView(ifc);
-                ifv.setVisible(true);
+//                IngredientFormController ifc = new IngredientFormController();
+//                IngredientFormView ifv = new IngredientFormView(ifc);
+//                ifv.setVisible(true);
 //
 //
 //                IngredientDetailController idc = new IngredientDetailController();
