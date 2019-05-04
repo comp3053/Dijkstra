@@ -1,6 +1,9 @@
 package view;
 
 import controller.UpdateEquipmentInforController;
+import model.EmptyEquipmentNameException;
+import model.Equipment;
+import model.InvalidEquipmentVolumeException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -81,8 +84,20 @@ public class UpdateEquipmentInfoView extends View{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.saveEquipmentInfo(name.getText(),volume.getText());
-                //TODO: Add operation to show status of insert
+                try {
+                    boolean saveComplete = c.saveEquipmentInfo(name.getText(),volume.getText());
+                    if(saveComplete) {
+                        JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Equipment Information was not saved");
+                    }
+                    c.goBack();
+                    dispose();
+                } catch (EmptyEquipmentNameException ex) {
+                    ex.printStackTrace();
+                } catch (InvalidEquipmentVolumeException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

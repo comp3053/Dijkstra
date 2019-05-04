@@ -1,5 +1,6 @@
 import controller.*;
 import view.*;
+import model.*;
 
 
 public class Starter {
@@ -7,9 +8,9 @@ public class Starter {
         javax.swing.SwingUtilities.invokeLater(new Runnable() { // run that code on the event dispatch thread
             @Override
             public void run() {
-                HomeController hc = new HomeController();
-                HomeView hv = new HomeView(hc);
-                hv.setVisible(true);
+//                HomeController hc = new HomeController();
+//                HomeView hv = new HomeView(hc);
+//                hv.setVisible(true);
 //
 //                RecipeListController rlc = new RecipeListController();
 //                RecipeListView rv = new RecipeListView(rlc);
@@ -19,9 +20,9 @@ public class Starter {
 //                RecipeFormView rfv = new RecipeFormView(rfc);
 //                rfv.setVisible(true);
 //
-//                UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
-//                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
-//                ueiv.setVisible(true);
+                UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
+                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
+                ueiv.setVisible(true);
 //
 //                EquipmentInfoController eic = new EquipmentInfoController();
 //                EquipmentInfoView ei = new EquipmentInfoView(eic);

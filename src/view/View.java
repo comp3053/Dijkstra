@@ -1,6 +1,8 @@
 package view;
 
 import controller.ModelListener;
+import model.Equipment;
+
 import javax.swing.*;
 
 public abstract class View extends JFrame implements ModelListener {
