@@ -23,9 +23,9 @@ public class Starter {
 //                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
 //                ueiv.setVisible(true);
 //
-//                EquipmentInfoController eic = new EquipmentInfoController();
-//                EquipmentInfoView ei = new EquipmentInfoView(eic);
-//                ei.setVisible(true);
+                EquipmentInfoController eic = new EquipmentInfoController();
+                EquipmentInfoView ei = new EquipmentInfoView(eic);
+                ei.setVisible(true);
 //
 //                NoteInputController nic = new NoteInputController();
 //                NoteInputView niv = new NoteInputView(nic, 3);
@@ -60,9 +60,9 @@ public class Starter {
 //                rrlv.setVisible(true);
 //
 //
-                RecipeDetailController rdc = new RecipeDetailController();
-                RecipeDetailView rdv = new RecipeDetailView(rdc,1);
-                rdv.setVisible(true);
+//                RecipeDetailController rdc = new RecipeDetailController();
+//                RecipeDetailView rdv = new RecipeDetailView(rdc,1);
+//                rdv.setVisible(true);
 //
 //
 //                IngredientListController ilc = new IngredientListController();
