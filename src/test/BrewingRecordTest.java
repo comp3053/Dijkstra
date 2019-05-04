@@ -1,8 +1,13 @@
 package test;
 
 import model.BrewingRecord;
+import model.Recipe;
+import model.RecipeIngredient;
 import org.junit.Before;
 import org.junit.Test;
+import utils.UnitEnum;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -10,10 +15,12 @@ public class BrewingRecordTest {
 
     private static BrewingRecord brewingRecord;
     java.util.Date date = new java.util.Date();
+    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+    Recipe recipe = new Recipe(1,"beer","good",recipeIngredients);
 
     @Before
     public void setUp() throws Exception {
-//        brewingRecord = new BrewingRecord(1,date,10);
+        brewingRecord = new BrewingRecord(1,date,10,recipe);
     }
 
     @Test

@@ -48,14 +48,14 @@ public class NoteContentView extends View {
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
-        JPanel jp_main = new JPanel();
-        jp_main.setLayout(new BorderLayout());
-        JLabel msg_content = new JLabel(this.note.getContent());
-        msg_content.setVerticalAlignment(1);
-        jp_main.setBorder(new EmptyBorder(20,20,0,0));
-        jp_main.add(msg_content,BorderLayout.CENTER);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        JLabel noteContent = new JLabel(this.note.getContent());
+        noteContent.setVerticalAlignment(1);
+        mainPanel.setBorder(new EmptyBorder(20,20,0,0));
+        mainPanel.add(noteContent,BorderLayout.CENTER);
 
-        this.add(jp_main, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
     }
 
     @Override

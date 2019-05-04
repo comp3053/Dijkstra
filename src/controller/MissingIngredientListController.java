@@ -10,7 +10,7 @@ public class MissingIngredientListController {
     }
 
     public void goBack(){
-        System.out.println("goBack");
+        System.out.println("go back");
     }
 
     public void OK(){

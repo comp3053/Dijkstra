@@ -1,14 +1,19 @@
 package controller;
 
+import model.Note;
+
 import javax.swing.*;
+import java.util.Date;
 
 public class NoteInputController {
     public NoteInputController(){
 
     }
 
-    public void saveNote(String content){
-        System.out.println("Save note");
+    public boolean saveNote(int brewID, String content){
+        Note note = new Note(brewID, new Date(), content);
+        NoteController nc = new NoteController();
+        return nc.insert(note);
     }
 
     public void backToNoteList(){

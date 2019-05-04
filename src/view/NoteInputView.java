@@ -10,52 +10,51 @@ import java.awt.event.ActionListener;
 
 public class NoteInputView extends View{
     private NoteInputController c;
-    public NoteInputView(NoteInputController c){
+    public NoteInputView(NoteInputController c, int brewID){
         this.c = c;
         this.setTitle("Brew Day! - Edit Note"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel topLeftButtonBar = new JPanel();
+        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton button = new JButton("< Back");
+        topLeftButtonBar.add(button);
+        JLabel headerTitle = new JLabel("Writing note for brewing history " + brewID);
+        headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
+        topLeftButtonBar.add(headerTitle);
+        topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        /* back button*/
-        JButton btn_back = new JButton("back to note list");
-        btn_back.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.backToNoteList();
             }
         });
-        jp_header.add(btn_back);
+        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
-        /* This part change the design */
-        JLabel msg_header = new JLabel("Add note for brewing history" + "01");
-        msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
-        jp_header.add(msg_header);
 
-        this.add(jp_header, BorderLayout.NORTH);
-
-        JPanel jp_main = new JPanel();
-        jp_main.setLayout(new BorderLayout());
-        jp_main.setBorder(new EmptyBorder(0,20,10,20)); // top and left padding for recommend entry
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(0,20,10,20)); // top and left padding for recommend entry
 
         JTextArea input_noteContent = new JTextArea("Please write down your note here");
-        jp_main.add(input_noteContent,BorderLayout.CENTER);
+        mainPanel.add(input_noteContent,BorderLayout.CENTER);
 
-        this.add(jp_main, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
 
-        JPanel jp_foot = new JPanel();
-        jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        JButton btn_save = new JButton("save");
-        btn_save.addActionListener(new ActionListener() {
+        JPanel bottomLeftButtonBar = new JPanel();
+        bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JButton saveButton = new JButton("Save");
+        bottomLeftButtonBar.add(saveButton);
+        saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.saveNote(input_noteContent.getText());
+                c.saveNote(brewID, input_noteContent.getText());
+                //TODO: Add operation to show status of insert
             }
         });
-        jp_foot.add(btn_save);
-        this.add(jp_foot, BorderLayout.SOUTH);
+        this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
 
 

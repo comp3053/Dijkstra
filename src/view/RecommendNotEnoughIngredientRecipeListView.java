@@ -15,25 +15,31 @@ public class RecommendNotEnoughIngredientRecipeListView extends View{
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
 
-        JPanel jp_header = new JPanel();
-        jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel topLeftButtonBar = new JPanel();
+        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton button = new JButton("< Back");
+        topLeftButtonBar.add(button);
+        JLabel headerTitle = new JLabel("Recommend Recipes");
+        headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
+        topLeftButtonBar.add(headerTitle);
+        topLeftButtonBar.add(Box.createHorizontalGlue());
+        JPanel missingLabel = new JPanel();
+        missingLabel.setBackground(Color.YELLOW);
+        JLabel missingAlert = new JLabel("Ingredient Not Enough");
+        missingLabel.add(missingAlert);
+        topLeftButtonBar.add(missingLabel);
 
-        JButton btn_back = new JButton("back");
-        btn_back.addActionListener(new ActionListener() {
+
+        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
+
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
             }
         });
-        jp_header.add(btn_back);
 
-        JLabel msg_header = new JLabel("Recommend Recipe List");
-        jp_header.add(msg_header);
-
-        JLabel msg_header2 = new JLabel("Ingredient Not Enough");
-        jp_header.add(msg_header2);
-
-        this.add(jp_header, BorderLayout.NORTH);
+        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
         JPanel jp_main = new JPanel();
         jp_main.setLayout(new BoxLayout(jp_main,BoxLayout.Y_AXIS));
@@ -45,19 +51,33 @@ public class RecommendNotEnoughIngredientRecipeListView extends View{
         }
         this.add(jp_main, BorderLayout.CENTER);
 
-        JPanel jp_foot = new JPanel();
-        jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
+//        JPanel jp_foot = new JPanel();
+//        jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
+//
+//        JButton btn_generate = new JButton("Generate Shopping List");
+//        btn_generate.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                c.generateShoppingList();
+//            }
+//        });
+//        jp_foot.add(btn_generate);
+//
+//        this.add(jp_foot, BorderLayout.SOUTH);
 
-        JButton btn_generate = new JButton("Generate Shopping List");
-        btn_generate.addActionListener(new ActionListener() {
+        JPanel bottomLeftButtonBar = new JPanel();
+        bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JButton generateListBtn = new JButton("Generate Shopping List");
+        bottomLeftButtonBar.add(generateListBtn);
+
+        generateListBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.generateShoppingList();
             }
         });
-        jp_foot.add(btn_generate);
 
-        this.add(jp_foot, BorderLayout.SOUTH);
+        this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
     @Override
     public void update() {

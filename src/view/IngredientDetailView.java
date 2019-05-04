@@ -1,13 +1,16 @@
 package view;
 
+import controller.IngredientDetailController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class IngredientDetailView extends View {
-
-    public IngredientDetailView(){
+    private IngredientDetailController c;
+    public IngredientDetailView(IngredientDetailController c){
+        this.c = c;
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
