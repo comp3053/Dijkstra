@@ -11,6 +11,8 @@ public class Starter {
                 HomeController hc = new HomeController();
                 HomeView hv = new HomeView(hc);
                 hv.setVisible(true);
+
+                // TODO: Add a Extra path to test Recipe List when there is not enough ingredient
 //
 //                RecipeListController rlc = new RecipeListController();
 //                RecipeListView rv = new RecipeListView(rlc);
@@ -90,9 +92,6 @@ public class Starter {
 //                BrewReciptView brv = new BrewReciptView(brc);
 //                brv.setVisible(true);
 //
-
-//                LayoutTestView ltv = new LayoutTestView();
-//                ltv.setVisible(true);
             }
         });
     }
