@@ -20,9 +20,9 @@ public class Starter {
 //                RecipeFormView rfv = new RecipeFormView(rfc);
 //                rfv.setVisible(true);
 //
-                UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
-                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
-                ueiv.setVisible(true);
+//                UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
+//                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
+//                ueiv.setVisible(true);
 //
 //                EquipmentInfoController eic = new EquipmentInfoController();
 //                EquipmentInfoView ei = new EquipmentInfoView(eic);
@@ -71,9 +71,9 @@ public class Starter {
 //                ilv.setVisible(true);
 //
 //
-//                IngredientFormController ifc = new IngredientFormController();
-//                IngredientFormView ifv = new IngredientFormView(ifc);
-//                ifv.setVisible(true);
+                IngredientFormController ifc = new IngredientFormController();
+                IngredientFormView ifv = new IngredientFormView(ifc);
+                ifv.setVisible(true);
 //
 //
 //                IngredientDetailController idc = new IngredientDetailController();
