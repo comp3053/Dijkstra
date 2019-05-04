@@ -11,8 +11,9 @@ public class Starter {
 //                HomeView hv = new HomeView(hc);
 //                hv.setVisible(true);
 //
-//                RecipeView rv = new RecipeView();
-//                rv.setVisible(true);
+                RecipeListController rlc = new RecipeListController();
+                RecipeListView rv = new RecipeListView(rlc);
+                rv.setVisible(true);
 //
 //                RecipeFormController rfc = new RecipeFormController();
 //                RecipeFormView rfv = new RecipeFormView(rfc);
@@ -45,9 +46,9 @@ public class Starter {
 //                nlv.setVisible(true);
 //
 //
-//                MissingIngredientListController milc = new MissingIngredientListController();
-//                MissingIngredientsListView milv = new MissingIngredientsListView(milc);
-//                milv.setVisible(true);
+                MissingIngredientListController milc = new MissingIngredientListController();
+                MissingIngredientsListView milv = new MissingIngredientsListView(milc);
+                milv.setVisible(true);
 //
 //
 //                RecommendNotEnoughIngredientRecipeListController rilc = new RecommendNotEnoughIngredientRecipeListController();
@@ -59,12 +60,14 @@ public class Starter {
 //                rrlv.setVisible(true);
 //
 //
-//                RecipeDetailView rdv = new RecipeDetailView();
-//                rdv.setVisible(true);
+                RecipeDetailController rdc = new RecipeDetailController();
+                RecipeDetailView rdv = new RecipeDetailView(rdc);
+                rdv.setVisible(true);
 //
 //
-//                IngredientListView ilv = new IngredientListView();
-//                ilv.setVisible(true);
+                IngredientListController ilc = new IngredientListController();
+                IngredientListView ilv = new IngredientListView(ilc);
+                ilv.setVisible(true);
 //
 //
 //                IngredientFormController ifc = new IngredientFormController();
@@ -72,8 +75,9 @@ public class Starter {
 //                ifv.setVisible(true);
 //
 //
-//                IngredientDetailView idv = new IngredientDetailView();
-//                idv.setVisible(true);
+                IngredientDetailController idc = new IngredientDetailController();
+                IngredientDetailView idv = new IngredientDetailView(idc);
+                idv.setVisible(true);
 //
 //
 //                BrewDetailController bdc = new BrewDetailController();
@@ -81,8 +85,9 @@ public class Starter {
 //                bdv.setVisible(true);
 //
 //
-//                BrewView bv = new BrewView();
-//                bv.setVisible(true);
+                BrewReciptController brc = new BrewReciptController();
+                BrewReciptView brv = new BrewReciptView(brc);
+                brv.setVisible(true);
 
 
 //                LayoutTestView ltv = new LayoutTestView();
