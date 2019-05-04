@@ -1,7 +1,6 @@
 package view;
 
 import controller.RecipeListController;
-import org.omg.CORBA.BAD_INV_ORDER;
 import utils.ButtonColumn;
 
 import javax.swing.*;
