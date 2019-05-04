@@ -3,6 +3,7 @@ package controller;
 import model.EmptyEquipmentNameException;
 import model.Equipment;
 import model.InvalidEquipmentVolumeException;
+import model.Recipe;
 import utils.DatabaseHelper;
 import utils.SQLiteConnectionException;
 
@@ -73,6 +74,23 @@ public class EquipmentController implements DatabaseController<Equipment> {
             return false;
         }
         return true;
+    }
+
+    public Equipment getLatestEquipment()throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException{
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        Equipment equipment;
+        String query = String.format("SELECT * FROM Equipment WHERE Equipment_ID=(SELECT MAX(Equipment_ID) FROM Equipment)");
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            String name =rs.getString(2);
+            int volume = rs.getInt(3);
+            equipment = new Equipment(name,volume);
+        } catch (SQLiteConnectionException |SQLException e) {
+            e.printStackTrace();
+            throw new FetchDataException("Could not get Equipment");
+        }
+        return equipment;
     }
 
     public static void main(String[] args) {
