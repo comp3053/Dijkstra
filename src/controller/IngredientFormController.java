@@ -5,8 +5,8 @@ public class IngredientFormController {
 
     }
 
-    public void goBack(){
-        System.out.println("Go back");
+    public void saveIngredient(){
+        System.out.println("Saved");
     }
 
     public void cancel(){

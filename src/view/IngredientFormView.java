@@ -10,7 +10,8 @@ import java.awt.event.ActionListener;
 
 public class IngredientFormView extends View {
     private IngredientFormController c;
-    public IngredientFormView(IngredientFormController c){
+
+    public IngredientFormView(IngredientFormController c) {
         this.c = c;
         this.setTitle("Brew Day! - Ingredient Form"); // set frame title
         this.setSize(800, 600); // set frame size
@@ -36,7 +37,7 @@ public class IngredientFormView extends View {
         JTextField nameTextField = new JTextField();
         JTextField amountTextField = new JTextField();
         JComboBox<UnitEnum> unitSelect = new JComboBox<>();
-        for(UnitEnum unit : UnitEnum.values()){
+        for (UnitEnum unit : UnitEnum.values()) {
             unitSelect.addItem(unit);
         }
 
@@ -73,7 +74,7 @@ public class IngredientFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.goBack();
+                c.saveIngredient();
             }
         });
 
@@ -85,6 +86,7 @@ public class IngredientFormView extends View {
         });
         this.add(pageEndButtonGroup, BorderLayout.PAGE_END);
     }
+
     @Override
     public void update() {
 
