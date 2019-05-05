@@ -19,7 +19,7 @@ public class IngredientFormView extends View {
 
         JPanel pageTitle = new JPanel();
         pageTitle.setLayout(new BoxLayout(pageTitle, BoxLayout.Y_AXIS));
-        JLabel title = new JLabel("Create New Ingredient");
+        JLabel title = new JLabel("Ingredient Form");
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
         pageTitle.add(title);
         this.add(pageTitle, BorderLayout.PAGE_START);
