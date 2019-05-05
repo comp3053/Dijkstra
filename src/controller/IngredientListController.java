@@ -1,5 +1,6 @@
 package controller;
 
+import model.Ingredient;
 import view.HomeView;
 import view.IngredientDetailView;
 import view.IngredientFormView;
@@ -21,9 +22,9 @@ public class IngredientListController {
         ifv.setVisible(true);
     }
 
-    public void ingredientDetail(){
+    public void ingredientDetail(Ingredient ingredient){
         IngredientDetailController idc = new IngredientDetailController();
-        IngredientDetailView idv = new IngredientDetailView(idc);
+        IngredientDetailView idv = new IngredientDetailView(idc,ingredient);
         idv.setVisible(true);
     }
 }
