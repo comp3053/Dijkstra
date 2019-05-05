@@ -8,7 +8,6 @@ import model.StorageIngredient;
 import utils.UnitEnum;
 
 import javax.swing.*;
-import javax.xml.ws.EndpointReference;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
