@@ -34,7 +34,13 @@ public class RecipeDetailView extends View {
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
 
-        button.addActionListener(e -> c.goBack());
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.goBack();
+                dispose();
+            }
+        });
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
@@ -53,13 +59,10 @@ public class RecipeDetailView extends View {
         jp2.add(word, BorderLayout.PAGE_START);
         JPanel jp3 = new JPanel();
         jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
-        //TODO: here should be dynamic list
-        JLabel ingredient1 = new JLabel(this.recipe.getIngredients().get(0).getName()+":"+this.recipe.getIngredients().get(0).getAmount()+this.recipe.getIngredients().get(0).getUnit().name());
-        JLabel ingredient2 = new JLabel("B Yeasts 2.0 grams");
-        JLabel ingredient3 = new JLabel("Water 1000.0 Milliliters");
-        jp3.add(ingredient1);
-        jp3.add(ingredient2);
-        jp3.add(ingredient3);
+        for(int i=0;i<recipe.getIngredients().size();i++) {
+            JLabel ingredient = new JLabel(this.recipe.getIngredients().get(i).getName() + ":" + this.recipe.getIngredients().get(i).getAmount() + this.recipe.getIngredients().get(i).getUnit().name());
+            jp3.add(ingredient);
+        }
         jp2.add(jp3, BorderLayout.CENTER);
         this.add(jp2, BorderLayout.CENTER);
     }
