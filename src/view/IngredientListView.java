@@ -72,7 +72,8 @@ public class IngredientListView extends View {
             detailBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //TODO: Show detail
+                    c.ingredientDetail();
+                    dispose();
                 }
             });
             editBtn.addActionListener(new ActionListener() {

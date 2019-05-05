@@ -27,7 +27,8 @@ public class IngredientDetailView extends View {
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                c.goBack();
+                dispose();
             }
         });
 

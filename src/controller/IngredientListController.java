@@ -1,6 +1,7 @@
 package controller;
 
 import view.HomeView;
+import view.IngredientDetailView;
 import view.IngredientFormView;
 
 public class IngredientListController {
@@ -18,5 +19,11 @@ public class IngredientListController {
         IngredientFormController ifc = new IngredientFormController();
         IngredientFormView ifv = new IngredientFormView(ifc);
         ifv.setVisible(true);
+    }
+
+    public void ingredientDetail(){
+        IngredientDetailController idc = new IngredientDetailController();
+        IngredientDetailView idv = new IngredientDetailView(idc);
+        idv.setVisible(true);
     }
 }
