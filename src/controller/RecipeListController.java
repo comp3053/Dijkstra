@@ -1,6 +1,7 @@
 package controller;
 
 import view.HomeView;
+import view.RecipeDetailView;
 import view.RecipeFormView;
 
 public class RecipeListController {
@@ -18,5 +19,11 @@ public class RecipeListController {
         RecipeFormController rfc = new RecipeFormController();
         RecipeFormView rfv = new RecipeFormView(rfc);
         rfv.setVisible(true);
+    }
+
+    public void recipeDetail(int recipeID) {
+        RecipeDetailController rdc = new RecipeDetailController();
+        RecipeDetailView rdv = new RecipeDetailView(rdc,recipeID);
+        rdv.setVisible(true);
     }
 }
