@@ -24,8 +24,12 @@ public class EquipmentInfoView extends View{
         this.setSize(600, 400); // set frame size
         this.setLayout(new BorderLayout());
         try {
-            this.equipment = ec.getLatestEquipment();//automatically get latest version of equipment
-        } catch (FetchDataException | InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
+            this.equipment=ec.getAll().get(0);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        } catch (InvalidEquipmentVolumeException e) {
+            e.printStackTrace();
+        } catch (EmptyEquipmentNameException e) {
             e.printStackTrace();
         }
 

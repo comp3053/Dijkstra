@@ -75,24 +75,6 @@ public class EquipmentController implements DatabaseController<Equipment> {
         }
         return true;
     }
-
-    public Equipment getLatestEquipment()throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException{
-        DatabaseHelper dbHelper = new DatabaseHelper();
-        Equipment equipment;
-        String query = "SELECT * FROM Equipment WHERE Equipment_ID=(SELECT MAX(Equipment_ID) FROM Equipment)";
-
-        try {
-            ResultSet rs = dbHelper.execSqlWithReturn(query);
-            String name =rs.getString(2);
-            int volume = rs.getInt(3);
-            equipment = new Equipment(name,volume);
-            dbHelper.closeConnection();
-        } catch (SQLiteConnectionException |SQLException e) {
-            e.printStackTrace();
-            throw new FetchDataException("Could not get Equipment");
-        }
-        return equipment;
-    }
 //
 //    public static void main(String[] args) {
 //        EquipmentController ec = new EquipmentController();
