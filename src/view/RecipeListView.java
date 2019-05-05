@@ -1,6 +1,9 @@
 package view;
 
+import controller.FetchDataException;
+import controller.RecipeController;
 import controller.RecipeListController;
+import model.Recipe;
 import utils.ButtonColumn;
 
 import javax.swing.*;
@@ -10,14 +13,24 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class RecipeListView extends View{
     private RecipeListController c;
+    private RecipeController rc;
+    private ArrayList<Recipe> recipe;
     public RecipeListView(RecipeListController c){
         this.c = c;
+        this.rc = new RecipeController();
         this.setTitle("Brew Day! - Manage Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        try {
+            this.recipe = rc.getAll();
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
+
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
 
@@ -54,7 +67,7 @@ public class RecipeListView extends View{
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
 
-        JLabel subtitle = new JLabel("X Recipes in the database");
+        JLabel subtitle = new JLabel(recipe.size()+" Recipes in the database");
         //help_word.setHorizontalAlignment(JLabel.CENTER);
         // Set Font size
         subtitle.setFont(new Font(subtitle.getFont().getFontName(), subtitle.getFont().getStyle(), 16));
@@ -64,18 +77,20 @@ public class RecipeListView extends View{
         mainPanel.add(word, BorderLayout.PAGE_START);
         JPanel listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < recipe.size(); i++) {
             JPanel listPanelIter = new JPanel();
             listPanelIter.setLayout(new FlowLayout());
-            JLabel nameLabel = new JLabel("Homer");
+            JLabel nameLabel = new JLabel(recipe.get(i).getName());
             listPanelIter.add(nameLabel);
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
             JButton deleteBtn = new JButton("delete");
+            int recipeID=recipe.get(i).getID();
             detailBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //TODO: Show detail
+                    c.recipeDetail(recipeID);
+                    dispose();
                 }
             });
             editBtn.addActionListener(new ActionListener() {
