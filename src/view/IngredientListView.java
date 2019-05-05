@@ -1,19 +1,31 @@
 package view;
 
+import controller.FetchDataException;
+import controller.IngredientController;
 import controller.IngredientListController;
+import model.Ingredient;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class IngredientListView extends View {
     private IngredientListController c;
+    private IngredientController ic;
+    private ArrayList<Ingredient> ingredients;
     public IngredientListView(IngredientListController c){
         this.c = c;
+        this.ic = new IngredientController();
         this.setTitle("Brew Day! - Ingredients List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
+        try {
+            this.ingredients=ic.getAll();
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -59,12 +71,12 @@ public class IngredientListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ingredients.size(); i++) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
-            JLabel ingredientName = new JLabel("Barley");
+            JLabel ingredientName = new JLabel(ingredients.get(i).getName());
             mainPanelIter.add(ingredientName);
-            JLabel ingredientAmount = new JLabel("15g");
+            JLabel ingredientAmount = new JLabel(""+ingredients.get(i).getAmount());
             mainPanelIter.add(ingredientAmount);
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
