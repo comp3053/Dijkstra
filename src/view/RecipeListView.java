@@ -62,21 +62,54 @@ public class RecipeListView extends View{
         word.add(subtitle);
 //        word.setBorder(new EmptyBorder(0,0,0,0));
         mainPanel.add(word, BorderLayout.PAGE_START);
-        String[] columnNames = {"First Name", "Last Name", ""};
-        Object[][] data =
-                {
-                        {"Homer", "Simpson", "delete Homer"},
-                        {"Madge", "Simpson", "delete Madge"},
-                        {"Bart",  "Simpson", "delete Bart"},
-                        {"Lisa",  "Simpson", "delete Lisa"},
-                };
-
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable( model );
+        JPanel listPanel = new JPanel();
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+        for (int i = 0; i < 5; i++) {
+            JPanel listPanelIter = new JPanel();
+            listPanelIter.setLayout(new FlowLayout());
+            JLabel nameLabel = new JLabel("Homer");
+            listPanelIter.add(nameLabel);
+            JButton detailBtn = new JButton("detail");
+            JButton editBtn = new JButton("edit");
+            JButton deleteBtn = new JButton("delete");
+            detailBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //TODO: Show detail
+                }
+            });
+            editBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //TODO: Edit ingredient
+                }
+            });
+            deleteBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //TODO: Delete ingredient
+                }
+            });
+            listPanelIter.add(detailBtn);
+            listPanelIter.add(editBtn);
+            listPanelIter.add(deleteBtn);
+            listPanel.add(listPanelIter);
+        }
+//        String[] columnNames = {"First Name", "Last Name", ""};
+//        Object[][] data =
+//                {
+//                        {"Homer", "Simpson", "delete Homer"},
+//                        {"Madge", "Simpson", "delete Madge"},
+//                        {"Bart",  "Simpson", "delete Bart"},
+//                        {"Lisa",  "Simpson", "delete Lisa"},
+//                };
+//
+//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+//        JTable table = new JTable( model );
         //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
         // TODO: still need a better solution
         // TODO: Warning pop up when hitting delete
-        mainPanel.add(table);
+        mainPanel.add(listPanel, BorderLayout.CENTER);
 //        JScrollPane scrollPane = new JScrollPane();
 //        scrollPane.add(table);
 //        jp2.add(scrollPane);
