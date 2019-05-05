@@ -76,15 +76,17 @@ public class IngredientListView extends View {
             mainPanelIter.setLayout(new FlowLayout());
             JLabel ingredientName = new JLabel(ingredients.get(i).getName());
             mainPanelIter.add(ingredientName);
-            JLabel ingredientAmount = new JLabel(""+ingredients.get(i).getAmount());
+            JLabel ingredientAmount = new JLabel(""+ingredients.get(i).getAmount()+ingredients.get(i).getUnit());
             mainPanelIter.add(ingredientAmount);
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
             JButton deleteBtn = new JButton("delete");
+
+            Ingredient ingredient = ingredients.get(i);
             detailBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    c.ingredientDetail();
+                    c.ingredientDetail(ingredient);
                     dispose();
                 }
             });
