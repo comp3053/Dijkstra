@@ -54,7 +54,7 @@ public class UpdateEquipmentInfoView extends View{
         groupLayout.setAutoCreateContainerGaps(true);
 
         JLabel nameLabel = new JLabel("Name");
-        JLabel volumeLabel = new JLabel("Volume (unit: L)");
+        JLabel volumeLabel = new JLabel("Volume (unit: mL)");
 
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
 
