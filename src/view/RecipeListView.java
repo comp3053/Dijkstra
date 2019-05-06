@@ -73,15 +73,15 @@ public class RecipeListView extends View{
         mainPanel.add(word, BorderLayout.PAGE_START);
         JPanel listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        for (int i = 0; i < recipe.size(); i++) {
+        for (Recipe value : recipe) {
             JPanel listPanelIter = new JPanel();
             listPanelIter.setLayout(new FlowLayout());
-            JLabel nameLabel = new JLabel(recipe.get(i).getName());
+            JLabel nameLabel = new JLabel(value.getName());
             listPanelIter.add(nameLabel);
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
             JButton deleteBtn = new JButton("delete");
-            int recipeID=recipe.get(i).getID();
+            int recipeID = value.getID();
             detailBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

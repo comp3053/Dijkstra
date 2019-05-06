@@ -69,9 +69,9 @@ public class Recipe {
             throw new InvalidOriginalBatchSizeException("Batch size could not be equal or less than 0!");
         }
         else{
-            for(int i = 0;i < this.ingredients.size();i++){
+            for (RecipeIngredient ingredient : this.ingredients) {
                 try {
-                    this.ingredients.get(i).setAmount(this.ingredients.get(i).getAmount()/originalBatchSize);
+                    ingredient.setAmount(ingredient.getAmount() / originalBatchSize);
                 } catch (InvalidIngredientAmountException e) {
                     e.printStackTrace();
                 }
@@ -91,9 +91,9 @@ public class Recipe {
     }
 
     public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddExisitingRecipeIngredientsException {
-        for(int i = 0; i < this.ingredients.size();i++){
-            if(this.ingredients.get(i)==recipeIngredients) {
-                throw new AddExisitingRecipeIngredientsException(recipeIngredients.getName()+"is already existed!");
+        for (RecipeIngredient ingredient : this.ingredients) {
+            if (ingredient == recipeIngredients) {
+                throw new AddExisitingRecipeIngredientsException(recipeIngredients.getName() + "is already existed!");
             }
         }
         this.ingredients.add(recipeIngredients);
