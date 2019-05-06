@@ -12,7 +12,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
         // Nothing to do
     }
 
-    public ArrayList<Equipment> getAll() throws FetchDataException, InvalidInputException, EmptyNameException {
+    public ArrayList<Equipment> getAll() {
 //        DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<Equipment> equipments = new ArrayList<>();
 //        String name;

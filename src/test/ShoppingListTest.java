@@ -18,7 +18,7 @@ public class ShoppingListTest {
     ArrayList<Ingredient> missingIngredients = new ArrayList<>();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         shoppingList = new ShoppingList(missingIngredients);
     }
 

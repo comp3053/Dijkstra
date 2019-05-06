@@ -11,7 +11,7 @@ public class RecipeIngredientTest {
     private  static RecipeIngredient recipeIngredient;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             recipeIngredient = new RecipeIngredient(1, "wheat", 5.0, UnitEnum.KILOGRAM);
         } catch (EmptyNameException | InvalidInputException e) {

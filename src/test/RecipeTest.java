@@ -15,7 +15,7 @@ public class RecipeTest {
     ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         recipe = new Recipe(1,"beer","good",recipeIngredients);
     }
 

@@ -19,7 +19,7 @@ public class BrewingRecordTest {
     Recipe recipe = new Recipe(1,"beer","good",recipeIngredients);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         brewingRecord = new BrewingRecord(1,date,10,recipe);
     }
 
