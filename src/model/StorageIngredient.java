@@ -3,6 +3,11 @@ package model;
 import utils.UnitEnum;
 
 public class StorageIngredient extends Ingredient {
+    public StorageIngredient(String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
+            InvalidIngredientAmountException {
+        super(name, amount, unit);
+    }
+
     public StorageIngredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
             InvalidIngredientAmountException {
         super(id, name, amount, unit);
