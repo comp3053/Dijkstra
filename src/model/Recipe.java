@@ -63,14 +63,15 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize) throws InvalidInputException {//originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1000mL amount.
+    public void amountConversion(double originalBatchSize) throws InvalidInputException {
+        //originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1L amount.
         if(originalBatchSize<=0){
             throw new InvalidInputException("Batch size could not be equal or less than 0!");
         }
         else{
             for (RecipeIngredient ingredient : this.ingredients) {
                 try {
-                    ingredient.setAmount(ingredient.getAmount() * originalBatchSize);
+                    ingredient.setAmount(ingredient.getAmount() * (1000 / originalBatchSize));
                 } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
