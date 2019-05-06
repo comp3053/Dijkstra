@@ -81,7 +81,7 @@ public class Recipe {
 
     public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyNotExisitingRecipeIngredientException {
         for(int i = 0;i < this.ingredients.size();i++){
-            if(this.ingredients.get(i).getName().equals(recipeIngredient.getName())==true){
+            if(this.ingredients.get(i).getName().equals(recipeIngredient.getName())){
                 this.ingredients.remove(i);
                 this.ingredients.add(i, recipeIngredient);
                 return;
