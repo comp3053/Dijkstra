@@ -7,8 +7,8 @@ import view.EquipmentInfoView;
 
 import javax.swing.*;
 
-public class UpdateEquipmentInforController {
-    public UpdateEquipmentInforController(){
+public class UpdateEquipmentInfoController {
+    public UpdateEquipmentInfoController(){
         // Nothing to do
     }
 

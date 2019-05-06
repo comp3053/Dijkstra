@@ -22,7 +22,7 @@ public class Starter {
 //                RecipeFormView rfv = new RecipeFormView(rfc);
 //                rfv.setVisible(true);
 //
-//                UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
+//                UpdateEquipmentInfoController ueic = new UpdateEquipmentInfoController();
 //                UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
 //                ueiv.setVisible(true);
 //

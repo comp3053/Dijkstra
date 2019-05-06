@@ -3,9 +3,6 @@ package controller;
 import view.HomeView;
 import view.UpdateEquipmentInfoView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EquipmentInfoController {
     public EquipmentInfoController(){
     }
@@ -18,7 +15,7 @@ public class EquipmentInfoController {
 
     public void turnUpdateInfo() {
         // TODO: Fill the exists Info to the field
-        UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
+        UpdateEquipmentInfoController ueic = new UpdateEquipmentInfoController();
         UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
         ueiv.setVisible(true);
     }

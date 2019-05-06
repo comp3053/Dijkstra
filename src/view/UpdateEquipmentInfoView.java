@@ -1,20 +1,18 @@
 package view;
 
-import controller.UpdateEquipmentInforController;
+import controller.UpdateEquipmentInfoController;
 import model.EmptyEquipmentNameException;
-import model.Equipment;
 import model.InvalidEquipmentVolumeException;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpdateEquipmentInfoView extends View{
-    private UpdateEquipmentInforController c;
+    private UpdateEquipmentInfoController c;
 
-    public UpdateEquipmentInfoView(UpdateEquipmentInforController c){
+    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c){
         this.c = c;
         this.setTitle("Brew Day! - Equipment Update"); // set frame title
         this.setSize(600, 400); // set frame size
