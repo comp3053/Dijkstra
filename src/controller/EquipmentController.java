@@ -1,8 +1,8 @@
 package controller;
 
-import utils.EmptyEquipmentNameException;
+import utils.EmptyNameException;
 import model.Equipment;
-import utils.InvalidEquipmentVolumeException;
+import utils.InvalidInputException;
 import utils.FetchDataException;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
         // Nothing to do
     }
 
-    public ArrayList<Equipment> getAll() throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException {
+    public ArrayList<Equipment> getAll() throws FetchDataException, InvalidInputException, EmptyNameException {
 //        DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<Equipment> equipments = new ArrayList<>();
 //        String name;
@@ -55,7 +55,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
 //        try {
 //            ec.getAll();
 //            dbHelper.closeConnection();
-//        } catch (InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
+//        } catch (InvalidInputException | EmptyNameException e) {
 //            e.printStackTrace();
 //            return false;
 //        } catch (FetchDataException e) {
@@ -78,7 +78,7 @@ public class EquipmentController implements DatabaseController<Equipment> {
 //            Equipment equipment = new Equipment("MyEquipment", 200);
 //            ec.update(equipment);
 //            System.out.println(ec.getAll().get(0).getName());
-//        } catch (FetchDataException | InvalidEquipmentVolumeException | EmptyEquipmentNameException e) {
+//        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
 //            e.printStackTrace();
 //        }
 //    }

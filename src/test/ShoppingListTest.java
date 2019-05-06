@@ -1,8 +1,8 @@
 package test;
 
-import utils.EmptyIngredientNameException;
+import utils.EmptyNameException;
 import model.Ingredient;
-import utils.InvalidIngredientAmountException;
+import utils.InvalidInputException;
 import model.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +39,7 @@ public class ShoppingListTest {
             ingredient = new Ingredient(1, "yeast", 100.0, UnitEnum.GRAM);
             shoppingList.addMissingIngredient(ingredient);
             assertEquals(ingredient,shoppingList.getMissingIngredients().get(0));
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

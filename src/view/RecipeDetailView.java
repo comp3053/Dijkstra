@@ -4,9 +4,9 @@ package view;
 import utils.FetchDataException;
 import controller.RecipeController;
 import controller.RecipeDetailController;
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
 import model.Recipe;
+import utils.InvalidInputException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class RecipeDetailView extends View {
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
         try {
             this.recipe = rc.getRecipe(recipeID);
-        } catch (FetchDataException | InvalidIngredientAmountException | EmptyIngredientNameException e) {
+        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
             e.printStackTrace();
         }
 

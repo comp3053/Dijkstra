@@ -70,7 +70,7 @@ public class RecipeController implements DatabaseController<Recipe> {
         throw new ObjectNotFoundException("Could not find the ingredient.");
     }
 
-    public Recipe getRecipe(int recipeID) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
+    public Recipe getRecipe(int recipeID) throws FetchDataException, InvalidInputException, EmptyNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         Recipe recipe;
         RecipeController rc = new RecipeController();
@@ -90,7 +90,7 @@ public class RecipeController implements DatabaseController<Recipe> {
         return recipe;
     }
 
-    public ArrayList<RecipeIngredient> getRecipeIngredient(int recipeID) throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
+    public ArrayList<RecipeIngredient> getRecipeIngredient(int recipeID) throws FetchDataException, InvalidInputException, EmptyNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         StorageIngredientController sc = new StorageIngredientController();
         ArrayList<RecipeIngredient> ingredients = new ArrayList<>();

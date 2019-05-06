@@ -1,8 +1,8 @@
 package test;
 
 import model.RecipeIngredient;
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import org.junit.Before;
 import utils.UnitEnum;
 
@@ -14,7 +14,7 @@ public class RecipeIngredientTest {
     public void setUp() throws Exception {
         try {
             recipeIngredient = new RecipeIngredient(1, "wheat", 5.0, UnitEnum.KILOGRAM);
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

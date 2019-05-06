@@ -29,7 +29,7 @@ public class IngredientController implements DatabaseController<Ingredient>{
         } catch (SQLiteConnectionException | SQLException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not fetch Equipment information.");
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
         return ingredients;

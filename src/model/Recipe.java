@@ -1,9 +1,8 @@
 package model;
 
-import utils.AddExisitingRecipeIngredientsException;
-import utils.InvalidIngredientAmountException;
-import utils.InvalidOriginalBatchSizeException;
-import utils.ModifyNotExisitingRecipeIngredientException;
+import utils.AddObjectException;
+import utils.InvalidInputException;
+import utils.ModifyObjectException;
 
 import java.util.ArrayList;
 
@@ -64,22 +63,22 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize) throws InvalidOriginalBatchSizeException {//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
+    public void amountConversion(double originalBatchSize) throws InvalidInputException {//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
         if(originalBatchSize<=0){
-            throw new InvalidOriginalBatchSizeException("Batch size could not be equal or less than 0!");
+            throw new InvalidInputException("Batch size could not be equal or less than 0!");
         }
         else{
             for (RecipeIngredient ingredient : this.ingredients) {
                 try {
                     ingredient.setAmount(ingredient.getAmount() / originalBatchSize);
-                } catch (InvalidIngredientAmountException e) {
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
 
-    public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyNotExisitingRecipeIngredientException {
+    public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyObjectException {
         for(int i = 0;i < this.ingredients.size();i++){
             if(this.ingredients.get(i).getName().equals(recipeIngredient.getName())){
                 this.ingredients.remove(i);
@@ -87,13 +86,13 @@ public class Recipe {
                 return;
             }
         }
-        throw new ModifyNotExisitingRecipeIngredientException("Cannot modify a recipe not existing!");
+        throw new ModifyObjectException("Cannot modify a recipe not existing!");
     }
 
-    public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddExisitingRecipeIngredientsException {
+    public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddObjectException {
         for (RecipeIngredient ingredient : this.ingredients) {
             if (ingredient == recipeIngredients) {
-                throw new AddExisitingRecipeIngredientsException(recipeIngredients.getName() + "is already existed!");
+                throw new AddObjectException(recipeIngredients.getName() + "is already existed!");
             }
         }
         this.ingredients.add(recipeIngredients);

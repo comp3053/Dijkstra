@@ -1,17 +1,17 @@
 package model;
 
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import utils.UnitEnum;
 
 public class RecipeIngredient extends Ingredient {
-    public RecipeIngredient(String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
-            InvalidIngredientAmountException {
+    public RecipeIngredient(String name, double amount, UnitEnum unit) throws EmptyNameException,
+            InvalidInputException {
         super(name, amount, unit);
     }
 
-    public RecipeIngredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
-            InvalidIngredientAmountException {
+    public RecipeIngredient(int id, String name, double amount, UnitEnum unit) throws EmptyNameException,
+            InvalidInputException {
         super(id, name, amount, unit);
     }
 }

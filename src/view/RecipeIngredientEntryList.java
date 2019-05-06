@@ -1,7 +1,7 @@
 package view;
 import model.*;
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 
 import java.util.ArrayList;
 import javax.swing.*;
@@ -87,7 +87,7 @@ public class RecipeIngredientEntryList extends JPanel{
                                 new Double(entrie.getInputBoxText().getText()),
                                 currentStorageIngredient.getUnit())
             );
-            }catch (EmptyIngredientNameException | InvalidIngredientAmountException e){
+            }catch (EmptyNameException | InvalidInputException e){
                 e.printStackTrace();
             }
         }

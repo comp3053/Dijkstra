@@ -1,7 +1,7 @@
 package test;
 
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import model.StorageIngredient;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class StorageIngredientTest {
     public void setUp() {
         try {
             storageIngredient = new StorageIngredient(1, "wheat", 5.0, UnitEnum.KILOGRAM);
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
@@ -26,14 +26,14 @@ public class StorageIngredientTest {
     public void addAmount() {
         try {
             storageIngredient.addAmount(5.0);
-        } catch (InvalidIngredientAmountException e) {
+        } catch (InvalidInputException e) {
             e.printStackTrace();
         }
         assertEquals(10.0, storageIngredient.getAmount(), 0.00);
 
         try {
             storageIngredient.addAmount(-10.0);
-        } catch (InvalidIngredientAmountException e) {
+        } catch (InvalidInputException e) {
             e.printStackTrace();
         }
         assertEquals(10.0, storageIngredient.getAmount(), 0.00);

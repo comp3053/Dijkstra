@@ -1,10 +1,10 @@
 package view;
 
 import controller.RecipeFormController;
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
 import model.RecipeIngredient;
 import model.StorageIngredient;
+import utils.InvalidInputException;
 import utils.UnitEnum;
 
 import javax.swing.*;
@@ -51,7 +51,7 @@ public class RecipeFormView extends View {
             testIngredient.add(new StorageIngredient(4,"A4", 20.0, UnitEnum.MILLILITER));
             testIngredient.add(new StorageIngredient(5,"A5", 0.2, UnitEnum.KILOGRAM));
             testIngredient.add(new StorageIngredient(6,"A6", 2.0, UnitEnum.GRAM));
-        }catch (EmptyIngredientNameException | InvalidIngredientAmountException e){
+        }catch (EmptyNameException | InvalidInputException e){
             e.printStackTrace();
         }
 

@@ -12,7 +12,7 @@ public class Equipment {
     private ModelListener ml;
 
 
-    public Equipment(String name, int volume) throws InvalidEquipmentVolumeException, EmptyEquipmentNameException {
+    public Equipment(String name, int volume) throws InvalidInputException, EmptyNameException {
         setName(name);
         setVolume(volume);
     }
@@ -21,9 +21,9 @@ public class Equipment {
         return this.name;
     }
 
-    public void setName(String name) throws EmptyEquipmentNameException {
+    public void setName(String name) throws EmptyNameException {
         if (name.isEmpty()) {
-            throw new EmptyEquipmentNameException("Equipment name cannot be empty!");
+            throw new EmptyNameException("Equipment name cannot be empty!");
         } else {
             this.name = name;
         }
@@ -33,11 +33,11 @@ public class Equipment {
         return this.volume;
     }
 
-    public void setVolume(int volume) throws InvalidEquipmentVolumeException {
+    public void setVolume(int volume) throws InvalidInputException {
         if (volume > 0) {
             this.volume = volume;
         } else {
-            throw new InvalidEquipmentVolumeException("Volume should be greater than 0!");
+            throw new InvalidInputException("Volume should be greater than 0!");
         }
     }
 
@@ -46,7 +46,7 @@ public class Equipment {
     }
 
     // Get single equipment by id, static
-    public static Equipment getEquipment(int id) throws FetchDataException, InvalidEquipmentVolumeException, EmptyEquipmentNameException {
+    public static Equipment getEquipment(int id) throws FetchDataException, InvalidInputException, EmptyNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         Equipment dbEquipment;
         String name;

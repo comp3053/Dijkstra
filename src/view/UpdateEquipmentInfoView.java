@@ -1,9 +1,9 @@
 package view;
 
 import controller.UpdateEquipmentInfoController;
-import utils.EmptyEquipmentNameException;
+import utils.EmptyNameException;
 import model.Equipment;
-import utils.InvalidEquipmentVolumeException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,7 +91,7 @@ public class UpdateEquipmentInfoView extends View{
                     }
                     c.goBack();
                     dispose();
-                } catch (EmptyEquipmentNameException | InvalidEquipmentVolumeException | NumberFormatException ex) {
+                } catch (EmptyNameException | InvalidInputException | NumberFormatException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Input invalid.");
                 }

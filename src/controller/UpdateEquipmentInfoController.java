@@ -1,8 +1,8 @@
 package controller;
 
-import utils.EmptyEquipmentNameException;
 import model.Equipment;
-import utils.InvalidEquipmentVolumeException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import utils.FetchDataException;
 import view.EquipmentInfoView;
 
@@ -15,7 +15,7 @@ public class UpdateEquipmentInfoController {
         this.m = m;
     }
 
-    public boolean saveEquipmentInfo(String Name, String Volumn) throws EmptyEquipmentNameException, InvalidEquipmentVolumeException, NumberFormatException {
+    public boolean saveEquipmentInfo(String Name, String Volumn) throws EmptyNameException, InvalidInputException, NumberFormatException {
         this.m = new Equipment(Name, Integer.parseInt(Volumn));
         System.out.println("The Equipment information are:" + " " + Name + " " + Volumn);
         int isSave = JOptionPane.showConfirmDialog(null,
@@ -36,7 +36,7 @@ public class UpdateEquipmentInfoController {
             EquipmentInfoView ei = new EquipmentInfoView(eic, equipment);
             equipment.setModelListener(ei);
             ei.setVisible(true);
-        } catch (FetchDataException | EmptyEquipmentNameException | InvalidEquipmentVolumeException e) {
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

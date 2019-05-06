@@ -1,8 +1,8 @@
 package controller;
 
-import utils.EmptyEquipmentNameException;
 import model.Equipment;
-import utils.InvalidEquipmentVolumeException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import utils.FetchDataException;
 import view.*;
 
@@ -34,7 +34,7 @@ public class HomeController {
             EquipmentInfoView ei = new EquipmentInfoView(eic, equipment);
             equipment.setModelListener(ei);
             ei.setVisible(true);
-        } catch (FetchDataException | EmptyEquipmentNameException | InvalidEquipmentVolumeException e) {
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

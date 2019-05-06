@@ -1,7 +1,7 @@
 package controller;
 
-import utils.EmptyIngredientNameException;
-import utils.InvalidIngredientAmountException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import model.StorageIngredient;
 import utils.*;
 
@@ -14,7 +14,7 @@ public class StorageIngredientController implements DatabaseController<StorageIn
         // Nothing to do
     }
 
-    public ArrayList<StorageIngredient> getAll() throws FetchDataException, InvalidIngredientAmountException, EmptyIngredientNameException {
+    public ArrayList<StorageIngredient> getAll() throws FetchDataException, InvalidInputException, EmptyNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<StorageIngredient> ingredients = new ArrayList<>();
         String name, unit;
@@ -38,7 +38,7 @@ public class StorageIngredientController implements DatabaseController<StorageIn
         return ingredients;
     }
 
-    public StorageIngredient getStorageIngredient(int ingredientID) throws FetchDataException, ObjectNotFoundException, InvalidIngredientAmountException, EmptyIngredientNameException {
+    public StorageIngredient getStorageIngredient(int ingredientID) throws FetchDataException, ObjectNotFoundException, InvalidInputException, EmptyNameException {
         ArrayList<StorageIngredient> ingredients = new StorageIngredientController().getAll();
         for (StorageIngredient ingredient : ingredients) {
             if (ingredient.getID() == ingredientID)
