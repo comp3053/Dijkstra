@@ -74,9 +74,7 @@ public class RecipeTest {
             } catch (AddExisitingRecipeIngredientsException e) {
                 e.printStackTrace();
             }
-        } catch (EmptyIngredientNameException e) {
-            e.printStackTrace();
-        } catch (InvalidIngredientAmountException e) {
+        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
             e.printStackTrace();
         }
     }
@@ -88,13 +86,7 @@ public class RecipeTest {
             recipe.addRecipeIngredient(water);
             recipe.amountConversion(50.0);
             assertEquals(2.0,recipe.getIngredients().get(0).getAmount(),0.0);
-        } catch (EmptyIngredientNameException e) {
-            e.printStackTrace();
-        } catch (InvalidIngredientAmountException e) {
-            e.printStackTrace();
-        } catch (AddExisitingRecipeIngredientsException e) {
-            e.printStackTrace();
-        } catch (InvalidOriginalBatchSizeException e) {
+        } catch (EmptyIngredientNameException | InvalidOriginalBatchSizeException | AddExisitingRecipeIngredientsException | InvalidIngredientAmountException e) {
             e.printStackTrace();
         }
     }
@@ -107,13 +99,7 @@ public class RecipeTest {
             recipe.addRecipeIngredient(water);
             recipe.modifyRecipeIngredient(modifyWater);
             assertEquals(2,recipe.getIngredients().get(0).getID());
-        } catch (EmptyIngredientNameException e) {
-            e.printStackTrace();
-        } catch (InvalidIngredientAmountException e) {
-            e.printStackTrace();
-        } catch (AddExisitingRecipeIngredientsException e) {
-            e.printStackTrace();
-        } catch (ModifyNotExisitingRecipeIngredientException e) {
+        } catch (EmptyIngredientNameException | ModifyNotExisitingRecipeIngredientException | AddExisitingRecipeIngredientsException | InvalidIngredientAmountException e) {
             e.printStackTrace();
         }
     }
