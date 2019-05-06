@@ -15,7 +15,7 @@ public class BrewingRecordTest {
 
     private static BrewingRecord brewingRecord;
     java.util.Date date = new java.util.Date();
-    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
     Recipe recipe = new Recipe(1,"beer","good",recipeIngredients);
 
     @Before
