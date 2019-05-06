@@ -84,7 +84,6 @@ public class Equipment {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Equipment SET Name='%s',Volume=%d WHERE Equipment_ID=1",
                 this.getName(), this.getVolume());
-        System.out.println("Query: " + query);
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();

@@ -86,11 +86,8 @@ public class UpdateEquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    boolean saveComplete = c.saveEquipmentInfo(name.getText(),volume.getText());
-                    if(saveComplete) {
+                    if(c.saveEquipmentInfo(name.getText(),volume.getText())) {
                         JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
-                    }else {
-                        JOptionPane.showMessageDialog(null, "Equipment Information was not saved");
                     }
                     c.goBack();
                     dispose();
