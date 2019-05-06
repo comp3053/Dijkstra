@@ -1,4 +1,4 @@
-package model;
+package utils;
 
 public class ModifyNotExisitingRecipeIngredientException extends Exception {
     public ModifyNotExisitingRecipeIngredientException(String msg){

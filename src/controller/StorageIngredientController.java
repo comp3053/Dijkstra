@@ -1,7 +1,7 @@
 package controller;
 
-import model.EmptyIngredientNameException;
-import model.InvalidIngredientAmountException;
+import utils.EmptyIngredientNameException;
+import utils.InvalidIngredientAmountException;
 import model.StorageIngredient;
 import utils.*;
 

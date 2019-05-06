@@ -1,11 +1,7 @@
 package view;
 
-import controller.EquipmentController;
 import controller.EquipmentInfoController;
-import utils.FetchDataException;
-import model.EmptyEquipmentNameException;
 import model.Equipment;
-import model.InvalidEquipmentVolumeException;
 
 import javax.swing.*;
 import java.awt.*;

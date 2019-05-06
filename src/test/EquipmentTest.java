@@ -1,8 +1,8 @@
 package test;
 
-import model.EmptyEquipmentNameException;
+import utils.EmptyEquipmentNameException;
 import model.Equipment;
-import model.InvalidEquipmentVolumeException;
+import utils.InvalidEquipmentVolumeException;
 import org.junit.Before;
 import org.junit.Test;
 

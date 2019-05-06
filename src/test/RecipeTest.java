@@ -3,7 +3,7 @@ package test;
 import model.*;
 import org.junit.Before;
 import org.junit.Test;
-import utils.UnitEnum;
+import utils.*;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class RecipeTest {
 
     private static Recipe recipe;
-    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
@@ -59,7 +59,7 @@ public class RecipeTest {
 
     @Test
     public void setIngredients() {
-        ArrayList<RecipeIngredient> modifyRecipeIngredient = new ArrayList<RecipeIngredient>();
+        ArrayList<RecipeIngredient> modifyRecipeIngredient = new ArrayList<>();
         recipe.setIngredients(modifyRecipeIngredient);
         assertEquals(modifyRecipeIngredient,recipe.getIngredients());
     }

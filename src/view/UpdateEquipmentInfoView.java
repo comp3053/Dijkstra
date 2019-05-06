@@ -1,9 +1,9 @@
 package view;
 
 import controller.UpdateEquipmentInfoController;
-import model.EmptyEquipmentNameException;
+import utils.EmptyEquipmentNameException;
 import model.Equipment;
-import model.InvalidEquipmentVolumeException;
+import utils.InvalidEquipmentVolumeException;
 
 import javax.swing.*;
 import java.awt.*;

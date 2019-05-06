@@ -1,8 +1,8 @@
 package view;
 
 import controller.RecipeFormController;
-import model.EmptyIngredientNameException;
-import model.InvalidIngredientAmountException;
+import utils.EmptyIngredientNameException;
+import utils.InvalidIngredientAmountException;
 import model.RecipeIngredient;
 import model.StorageIngredient;
 import utils.UnitEnum;
@@ -43,7 +43,7 @@ public class RecipeFormView extends View {
         this.add(mainPanel);
 
 
-        ArrayList<StorageIngredient> testIngredient = new ArrayList<StorageIngredient>();
+        ArrayList<StorageIngredient> testIngredient = new ArrayList<>();
         try{
             testIngredient.add(new StorageIngredient(1,"A1", 2.0, UnitEnum.GRAM));
             testIngredient.add(new StorageIngredient(2,"A2", 3.0, UnitEnum.LITER));

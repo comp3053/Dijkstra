@@ -1,10 +1,7 @@
 package controller;
 
 import model.*;
-import utils.DatabaseHelper;
-import utils.FetchDataException;
-import utils.SQLiteConnectionException;
-import utils.UnitEnum;
+import utils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +13,7 @@ public class IngredientController implements DatabaseController<Ingredient>{
     }
     public ArrayList<Ingredient> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         String name;
         double amount;
         String unit;

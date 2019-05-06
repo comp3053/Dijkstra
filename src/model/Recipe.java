@@ -1,5 +1,10 @@
 package model;
 
+import utils.AddExisitingRecipeIngredientsException;
+import utils.InvalidIngredientAmountException;
+import utils.InvalidOriginalBatchSizeException;
+import utils.ModifyNotExisitingRecipeIngredientException;
+
 import java.util.ArrayList;
 
 public class Recipe {
@@ -59,7 +64,7 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize) throws InvalidOriginalBatchSizeException{//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
+    public void amountConversion(double originalBatchSize) throws InvalidOriginalBatchSizeException {//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
         if(originalBatchSize<=0){
             throw new InvalidOriginalBatchSizeException("Batch size could not be equal or less than 0!");
         }
@@ -85,7 +90,7 @@ public class Recipe {
         throw new ModifyNotExisitingRecipeIngredientException("Cannot modify a recipe not existing!");
     }
 
-    public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddExisitingRecipeIngredientsException{
+    public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddExisitingRecipeIngredientsException {
         for(int i = 0; i < this.ingredients.size();i++){
             if(this.ingredients.get(i)==recipeIngredients) {
                 throw new AddExisitingRecipeIngredientsException(recipeIngredients.getName()+"is already existed!");

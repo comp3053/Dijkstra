@@ -1,13 +1,10 @@
 package test;
 
 import model.RecipeIngredient;
-import model.EmptyIngredientNameException;
-import model.InvalidIngredientAmountException;
+import utils.EmptyIngredientNameException;
+import utils.InvalidIngredientAmountException;
 import org.junit.Before;
-import org.junit.Test;
 import utils.UnitEnum;
-
-import static org.junit.Assert.*;
 
 public class RecipeIngredientTest {
 

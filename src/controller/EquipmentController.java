@@ -1,14 +1,10 @@
 package controller;
 
-import model.EmptyEquipmentNameException;
+import utils.EmptyEquipmentNameException;
 import model.Equipment;
-import model.InvalidEquipmentVolumeException;
-import utils.DatabaseHelper;
+import utils.InvalidEquipmentVolumeException;
 import utils.FetchDataException;
-import utils.SQLiteConnectionException;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EquipmentController implements DatabaseController<Equipment> {

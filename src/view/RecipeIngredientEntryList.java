@@ -1,8 +1,9 @@
 package view;
 import model.*;
+import utils.EmptyIngredientNameException;
+import utils.InvalidIngredientAmountException;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 
@@ -14,10 +15,10 @@ public class RecipeIngredientEntryList extends JPanel{
 
     public RecipeIngredientEntryList(ArrayList<StorageIngredient> ingredients) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.entries = new ArrayList<RecipeIngredientEntry>();
+        this.entries = new ArrayList<>();
 
         this.ingredients = ingredients;
-        this.ingredientNames = new ArrayList<String>();
+        this.ingredientNames = new ArrayList<>();
         for (StorageIngredient ingredient: ingredients){
             ingredientNames.add(ingredient.getName() + " (Unit: " + ingredient.getUnit().toString().toLowerCase() + ")");
         }
@@ -77,7 +78,7 @@ public class RecipeIngredientEntryList extends JPanel{
 
     }
     public ArrayList<RecipeIngredient> getIngredientList(){
-        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
         for (RecipeIngredientEntry entrie: entries){
             StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());
             try {

@@ -4,8 +4,8 @@ package view;
 import utils.FetchDataException;
 import controller.RecipeController;
 import controller.RecipeDetailController;
-import model.EmptyIngredientNameException;
-import model.InvalidIngredientAmountException;
+import utils.EmptyIngredientNameException;
+import utils.InvalidIngredientAmountException;
 import model.Recipe;
 
 import javax.swing.*;

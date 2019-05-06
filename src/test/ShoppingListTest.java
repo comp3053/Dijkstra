@@ -1,8 +1,8 @@
 package test;
 
-import model.EmptyIngredientNameException;
+import utils.EmptyIngredientNameException;
 import model.Ingredient;
-import model.InvalidIngredientAmountException;
+import utils.InvalidIngredientAmountException;
 import model.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class ShoppingListTest {
 
     private static ShoppingList shoppingList;
-    ArrayList<Ingredient> missingIngredients = new ArrayList<Ingredient>();
+    ArrayList<Ingredient> missingIngredients = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {

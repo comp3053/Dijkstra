@@ -1,8 +1,8 @@
 package test;
 
-import model.EmptyIngredientNameException;
+import utils.EmptyIngredientNameException;
 import model.Ingredient;
-import model.InvalidIngredientAmountException;
+import utils.InvalidIngredientAmountException;
 import org.junit.Ignore;
 import utils.UnitEnum;
 import org.junit.Before;

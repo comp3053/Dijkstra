@@ -1,9 +1,8 @@
 package controller;
 
-import model.EmptyEquipmentNameException;
+import utils.EmptyEquipmentNameException;
 import model.Equipment;
-import model.InvalidEquipmentVolumeException;
-import org.omg.CORBA.INTERNAL;
+import utils.InvalidEquipmentVolumeException;
 import utils.FetchDataException;
 import view.EquipmentInfoView;
 

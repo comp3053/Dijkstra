@@ -1,13 +1,10 @@
 package model;
 
 import controller.ModelListener;
-import utils.DatabaseHelper;
-import utils.SQLiteConnectionException;
-import utils.FetchDataException;
+import utils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.EventListener;
 
 public class Equipment {
     private String name;
