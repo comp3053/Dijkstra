@@ -5,7 +5,6 @@ import model.Recipe;
 import model.RecipeIngredient;
 import org.junit.Before;
 import org.junit.Test;
-import utils.UnitEnum;
 
 import java.util.ArrayList;
 

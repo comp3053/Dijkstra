@@ -1,6 +1,5 @@
 import controller.*;
 import view.*;
-import model.*;
 
 
 public class Starter {

@@ -1,7 +1,6 @@
 package view;
 
 import controller.ModelListener;
-import model.Equipment;
 
 import javax.swing.*;
 

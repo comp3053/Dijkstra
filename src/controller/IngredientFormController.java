@@ -1,6 +1,5 @@
 package controller;
 
-import utils.UnitEnum;
 import view.IngredientListView;
 
 public class IngredientFormController {

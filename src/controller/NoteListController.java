@@ -2,7 +2,6 @@ package controller;
 
 import view.BrewingHistoryListView;
 import view.HomeView;
-import view.NoteInputView;
 
 public class NoteListController {
     public NoteListController(){

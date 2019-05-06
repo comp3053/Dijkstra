@@ -1,9 +1,6 @@
 package controller;
 
-import utils.EmptyNameException;
 import model.Equipment;
-import utils.InvalidInputException;
-import utils.FetchDataException;
 
 import java.util.ArrayList;
 

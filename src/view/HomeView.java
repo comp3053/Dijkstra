@@ -1,7 +1,6 @@
 package view;
 
 import controller.HomeController;
-import controller.IngredientListController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
