@@ -1,5 +1,9 @@
 package controller;
 
+import model.EmptyEquipmentNameException;
+import model.Equipment;
+import model.InvalidEquipmentVolumeException;
+import utils.FetchDataException;
 import view.*;
 
 public class HomeController {
@@ -23,9 +27,16 @@ public class HomeController {
         nlv.setVisible(true);
     }
     public void startEquipmentInformation(){
-        EquipmentInfoController eic = new EquipmentInfoController();
-        EquipmentInfoView ei = new EquipmentInfoView(eic);
-        ei.setVisible(true);
+        Equipment equipment;
+        try {
+            equipment = Equipment.getEquipment(1);
+            EquipmentInfoController eic = new EquipmentInfoController(equipment);
+            EquipmentInfoView ei = new EquipmentInfoView(eic, equipment);
+            equipment.setModelListener(ei);
+            ei.setVisible(true);
+        } catch (FetchDataException | EmptyEquipmentNameException | InvalidEquipmentVolumeException e) {
+            e.printStackTrace();
+        }
     }
     public void startRecommend(){
 // TODO: Check if there are enough ingredient

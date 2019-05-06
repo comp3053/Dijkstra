@@ -3,6 +3,8 @@ package controller;
 import model.BrewingRecord;
 import model.Recipe;
 import utils.DatabaseHelper;
+import utils.FetchDataException;
+import utils.ObjectNotFoundException;
 import utils.SQLiteConnectionException;
 
 import java.sql.ResultSet;

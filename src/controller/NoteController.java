@@ -2,6 +2,8 @@ package controller;
 
 import model.Note;
 import utils.DatabaseHelper;
+import utils.FetchDataException;
+import utils.ObjectNotFoundException;
 import utils.SQLiteConnectionException;
 
 import java.sql.ResultSet;

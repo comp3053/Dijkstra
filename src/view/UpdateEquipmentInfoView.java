@@ -2,6 +2,7 @@ package view;
 
 import controller.UpdateEquipmentInfoController;
 import model.EmptyEquipmentNameException;
+import model.Equipment;
 import model.InvalidEquipmentVolumeException;
 
 import javax.swing.*;
@@ -11,9 +12,10 @@ import java.awt.event.ActionListener;
 
 public class UpdateEquipmentInfoView extends View{
     private UpdateEquipmentInfoController c;
-
-    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c){
+    private Equipment m;
+    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m){
         this.c = c;
+        this.m = m;
         this.setTitle("Brew Day! - Equipment Update"); // set frame title
         this.setSize(600, 400); // set frame size
         this.setLayout(new BorderLayout());
@@ -92,13 +94,10 @@ public class UpdateEquipmentInfoView extends View{
                     }
                     c.goBack();
                     dispose();
-                } catch (EmptyEquipmentNameException ex) {
+                } catch (EmptyEquipmentNameException | InvalidEquipmentVolumeException | NumberFormatException ex) {
                     ex.printStackTrace();
-                } catch (InvalidEquipmentVolumeException ex) {
-                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Input invalid.");
                 }
-                //TODO: Add operation to show status of insert
-                //dispose();
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

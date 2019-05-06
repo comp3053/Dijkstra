@@ -1,12 +1,9 @@
 package controller;
 
 import model.EmptyIngredientNameException;
-import model.Ingredient;
 import model.InvalidIngredientAmountException;
 import model.StorageIngredient;
-import utils.DatabaseHelper;
-import utils.SQLiteConnectionException;
-import utils.UnitEnum;
+import utils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

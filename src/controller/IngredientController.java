@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 import utils.DatabaseHelper;
+import utils.FetchDataException;
 import utils.SQLiteConnectionException;
 import utils.UnitEnum;
 
@@ -13,7 +14,7 @@ public class IngredientController implements DatabaseController<Ingredient>{
     public IngredientController(){
 
     }
-    public ArrayList<Ingredient> getAll() throws FetchDataException{
+    public ArrayList<Ingredient> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
         String name;

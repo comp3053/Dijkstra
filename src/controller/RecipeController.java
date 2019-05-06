@@ -1,11 +1,8 @@
 package controller;
 
 import model.*;
-import utils.DatabaseHelper;
-import utils.SQLiteConnectionException;
-import utils.UnitEnum;
+import utils.*;
 
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

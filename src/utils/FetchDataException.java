@@ -1,4 +1,4 @@
-package controller;
+package utils;
 
 public class FetchDataException extends Exception {
     public FetchDataException(String msg) {

@@ -1,7 +1,7 @@
 package view;
 
 
-import controller.FetchDataException;
+import utils.FetchDataException;
 import controller.RecipeController;
 import controller.RecipeDetailController;
 import model.EmptyIngredientNameException;

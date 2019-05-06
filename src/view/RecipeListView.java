@@ -1,15 +1,11 @@
 package view;
 
-import controller.FetchDataException;
+import utils.FetchDataException;
 import controller.RecipeController;
 import controller.RecipeListController;
 import model.Recipe;
-import utils.ButtonColumn;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

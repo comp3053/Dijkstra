@@ -1,6 +1,5 @@
 package view;
 
-import controller.FetchDataException;
 import controller.IngredientController;
 import controller.IngredientDetailController;
 import model.Ingredient;
