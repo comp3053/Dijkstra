@@ -127,6 +127,7 @@ public class IngredientListView extends View {
     @Override
     public void update() {
         mainPanel.removeAll();
+        mainPanel.repaint();
         try {
             createIngredientList(StorageIngredient.getAll());
         } catch (FetchDataException e) {
