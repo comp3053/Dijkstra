@@ -70,7 +70,11 @@ public class IngredientListView extends View {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         createIngredientList(m);
 
-        mainBody.add(mainPanel, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setAutoscrolls(true);
+        scrollPane.setViewportView(mainPanel);
+        mainBody.add(scrollPane);
+        //mainBody.add(mainPanel, BorderLayout.CENTER);
         // TODO: Ingredient List
 
         this.add(mainBody, BorderLayout.CENTER);
@@ -85,7 +89,7 @@ public class IngredientListView extends View {
             mainPanelIter.setLayout(new FlowLayout());
             JLabel ingredientName = new JLabel(ingredient.getName());
             mainPanelIter.add(ingredientName);
-            JLabel ingredientAmount = new JLabel("" + ingredient.getAmount() + ingredient.getUnit());
+            JLabel ingredientAmount = new JLabel("- Storage Amount: " + ingredient.getAmount() + " " + ingredient.getUnit().toString().toLowerCase());
             mainPanelIter.add(ingredientAmount);
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
