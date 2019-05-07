@@ -25,6 +25,10 @@ public class BrewDetailController {
         }
     }
 
+    public void applyBatchSize(int batchSize){
+        System.out.println("New Batch size is: " + batchSize);
+    }
+
     public void brewRecipe(){
         BrewReciptController brc = new BrewReciptController();
         BrewReciptView brv = new BrewReciptView(brc);

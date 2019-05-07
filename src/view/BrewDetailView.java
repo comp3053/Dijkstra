@@ -41,12 +41,20 @@ public class BrewDetailView extends View {
         textfieldWithLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         textfieldWithLabel.add(new JLabel("Batch Size"));
-
         JTextField batchSize = new JTextField();
         batchSize.setColumns(5);
         batchSize.setText("1000");
         batchSize.setToolTipText("Batch Size");
         textfieldWithLabel.add(batchSize);
+        JButton applyBatchSize = new JButton("Apply");
+        textfieldWithLabel.add(applyBatchSize);
+        applyBatchSize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.applyBatchSize(Integer.parseInt(batchSize.getText()));
+                //TODO
+            }
+        });
 //  TODO: Listen to the change of batch size and update
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
