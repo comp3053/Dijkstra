@@ -1,8 +1,7 @@
 package view;
 
-import controller.IngredientController;
 import controller.IngredientDetailController;
-import model.Ingredient;
+import model.StorageIngredient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +10,14 @@ import java.awt.event.ActionListener;
 
 public class IngredientDetailView extends View {
     private IngredientDetailController c;
-    private IngredientController ic;
-    private Ingredient ingredient;
-    public IngredientDetailView(IngredientDetailController c,Ingredient ingredient){
+    private StorageIngredient ingredient;
+
+    public IngredientDetailView(IngredientDetailController c, StorageIngredient ingredient) {
         this.c = c;
-        this.ic = new IngredientController();
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        this.ingredient=ingredient;
+        this.ingredient = ingredient;
 
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
@@ -42,7 +40,8 @@ public class IngredientDetailView extends View {
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                c.editIngredient(ingredient);
+                dispose();
             }
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);

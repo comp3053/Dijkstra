@@ -29,7 +29,7 @@ public class IngredientListController {
         ifv.setVisible(true);
     }
 
-    public void ingredientDetail(Ingredient ingredient){
+    public void ingredientDetail(StorageIngredient ingredient){
         IngredientDetailController idc = new IngredientDetailController();
         IngredientDetailView idv = new IngredientDetailView(idc,ingredient);
         idv.setVisible(true);

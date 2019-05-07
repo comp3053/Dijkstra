@@ -1,6 +1,7 @@
 package controller;
 
 import model.Equipment;
+import model.Recipe;
 import model.StorageIngredient;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
@@ -13,11 +14,14 @@ public class HomeController {
     }
     public void startManageRecipe(){
         RecipeListController rlc = new RecipeListController();
-        RecipeListView rlv = new RecipeListView(rlc);
-        rlv.setVisible(true);
+        try {
+            RecipeListView rlv = new RecipeListView(rlc, Recipe.getAll());
+            rlv.setVisible(true);
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
     public void startManageIngredient(){
-        // TODO: Pass in a Ingredient ArrayList
         IngredientListController ilc = new IngredientListController();
         try {
             IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());

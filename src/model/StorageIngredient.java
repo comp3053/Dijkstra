@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class StorageIngredient extends Ingredient {
+public class StorageIngredient extends Ingredient implements IDatabaseOperation<StorageIngredient> {
     private ModelListener listener;
 
 
@@ -15,20 +15,17 @@ public class StorageIngredient extends Ingredient {
         // Nothing to do
     }
 
-    public StorageIngredient(String name, double amount, UnitEnum unit) throws EmptyNameException,
-            InvalidInputException {
-        super(name, amount, unit);
-    }
-
     public StorageIngredient(int id, String name, double amount, UnitEnum unit) throws EmptyNameException,
             InvalidInputException {
         super(id, name, amount, unit);
     }
 
+    @Override
     public void addListener(ModelListener listener) {
         this.listener = listener;
     }
 
+    @Override
     public void notifyListener() {
         this.listener.update();
     }
@@ -41,6 +38,7 @@ public class StorageIngredient extends Ingredient {
         }
     }
 
+    @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("INSERT INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
@@ -72,6 +70,7 @@ public class StorageIngredient extends Ingredient {
         return true;
     }
 
+    @Override
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
