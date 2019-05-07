@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StorageIngredient extends Ingredient {
-//    private ModelListener listener;
+    private ModelListener listener;
 
 
     public StorageIngredient() {
@@ -25,13 +25,13 @@ public class StorageIngredient extends Ingredient {
         super(id, name, amount, unit);
     }
 
-//    public void addListener(ModelListener listener) {
-//        this.listener = listener;
-//    }
-//
-//    public void notifyListener() {
-//        this.listener.update();
-//    }
+    public void addListener(ModelListener listener) {
+        this.listener = listener;
+    }
+
+    public void notifyListener() {
+        this.listener.update();
+    }
 
     public void addAmount(double addition_amount) throws InvalidInputException {
         if (addition_amount <= 0) {
@@ -82,7 +82,7 @@ public class StorageIngredient extends Ingredient {
             e.printStackTrace();
             return false;
         }
-//        notifyListener();
+        notifyListener();
         return true;
     }
 

@@ -16,8 +16,8 @@ public class IngredientListView extends View {
     private IngredientListController c;
     private IngredientController ic;
     private ArrayList<StorageIngredient> m;
-    private JPanel mainBody;
     private JPanel mainPanel;
+    private JPanel mainBody;
 
     public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m){
         this.c = c;
@@ -26,7 +26,7 @@ public class IngredientListView extends View {
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
         this.m = m;
-        this.mainBody = new JPanel();
+        this.mainPanel = new JPanel();
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -41,7 +41,7 @@ public class IngredientListView extends View {
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
-
+        mainBody = new JPanel();
         mainBody.setLayout(new BorderLayout());
 
         JPanel JPanelSearchBar = new JPanel();
@@ -68,8 +68,8 @@ public class IngredientListView extends View {
             }
         });
         mainBody.add(JPanelSearchBar, BorderLayout.PAGE_START);
-
-        mainPanel = createIngredientList(m);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        createIngredientList(m);
 
         mainBody.add(mainPanel, BorderLayout.CENTER);
         // TODO: Ingredient List
@@ -80,9 +80,7 @@ public class IngredientListView extends View {
     }
 
 
-    public JPanel createIngredientList(ArrayList<StorageIngredient> ingredients) {
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+    private void createIngredientList(ArrayList<StorageIngredient> ingredients) {
         for (StorageIngredient ingredient : ingredients) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
@@ -93,6 +91,7 @@ public class IngredientListView extends View {
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
             JButton deleteBtn = new JButton("delete");
+            ingredient.addListener(this);
 
             detailBtn.addActionListener(new ActionListener() {
                 @Override
@@ -116,10 +115,7 @@ public class IngredientListView extends View {
                             "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                     if (isDelete == JOptionPane.YES_OPTION) {
                         boolean status = ingredient.delete();
-                        if (status) {
-                            mainPanel.remove(mainPanelIter);
-                            mainPanel.repaint();
-                        } else {
+                        if (!status) {
                             JOptionPane.showMessageDialog(null,
                                     String.format("Delete %s failed.", ingredient.getName()));
                         }
@@ -131,12 +127,17 @@ public class IngredientListView extends View {
             mainPanelIter.add(deleteBtn);
             mainPanel.add(mainPanelIter);
         }
-        return mainPanel;
     }
 
 
     @Override
     public void update() {
-
+        mainPanel.removeAll();
+        try {
+            createIngredientList(StorageIngredient.getAll());
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
+        mainPanel.revalidate();
     }
 }
