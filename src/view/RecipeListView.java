@@ -71,6 +71,7 @@ public class RecipeListView extends View{
         word.add(subtitle);
 //        word.setBorder(new EmptyBorder(0,0,0,0));
         mainPanel.add(word, BorderLayout.PAGE_START);
+
         JPanel listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
         for (Recipe value : recipe) {
@@ -106,24 +107,14 @@ public class RecipeListView extends View{
             listPanelIter.add(deleteBtn);
             listPanel.add(listPanelIter);
         }
-//        String[] columnNames = {"First Name", "Last Name", ""};
-//        Object[][] data =
-//                {
-//                        {"Homer", "Simpson", "delete Homer"},
-//                        {"Madge", "Simpson", "delete Madge"},
-//                        {"Bart",  "Simpson", "delete Bart"},
-//                        {"Lisa",  "Simpson", "delete Lisa"},
-//                };
-//
-//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-//        JTable table = new JTable( model );
-        //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
-        // TODO: still need a better solution
+
+        JScrollPane scrollPane = new JScrollPane(listPanel);
+        scrollPane.setAutoscrolls(true);
+        scrollPane.setViewportView(listPanel);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
         // TODO: Warning pop up when hitting delete
-        mainPanel.add(listPanel, BorderLayout.CENTER);
-//        JScrollPane scrollPane = new JScrollPane();
-//        scrollPane.add(table);
-//        jp2.add(scrollPane);
+//        mainPanel.add(listPanel, BorderLayout.CENTER);
         this.add(mainPanel, BorderLayout.CENTER);
     }
 
