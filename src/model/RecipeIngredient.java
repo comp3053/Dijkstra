@@ -91,6 +91,22 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return ingredients;
     }
 
+    public boolean isEnough() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            double storageAmount = rs.getDouble(3);
+            if (storageAmount < this.getAmount()) {
+                return false;
+            }
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public int getRecipeID() {
         return recipeID;
     }

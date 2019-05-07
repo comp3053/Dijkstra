@@ -104,6 +104,14 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients.add(recipeIngredients);
     }
 
+    public boolean isAvailable() {
+        for (RecipeIngredient ingredient : ingredients) {
+            if (!ingredient.isEnough())
+                return false;
+        }
+        return true;
+    }
+
     public static ArrayList<Recipe> getAll() throws FetchDataException, EmptyNameException, InvalidInputException {
         ArrayList<Recipe> recipes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
