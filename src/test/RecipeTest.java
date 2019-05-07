@@ -85,7 +85,7 @@ public class RecipeTest {
             RecipeIngredient water = new RecipeIngredient(1,"water",100.0, UnitEnum.LITER);
             recipe.addRecipeIngredient(water);
             recipe.amountConversion(50.0);
-            assertEquals(2.0,recipe.getIngredients().get(0).getAmount(),0.0);
+            assertEquals(5.0,recipe.getIngredients().get(0).getAmount(),0.0);
         } catch (EmptyNameException | InvalidInputException | AddObjectException e) {
             e.printStackTrace();
         }
