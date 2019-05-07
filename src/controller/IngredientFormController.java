@@ -14,10 +14,10 @@ public class IngredientFormController {
         this.m = m;
     }
 
-    public boolean saveIngredient(String Name,String Amount,int Unit){
+    public boolean saveIngredient(String Name,double Amount,int Unit){
         try {
             m.setName(Name);
-            m.setAmount(Double.parseDouble(Amount));
+            m.setAmount(Amount);
         } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }

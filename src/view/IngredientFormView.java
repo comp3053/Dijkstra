@@ -1,6 +1,7 @@
 package view;
 
 import controller.IngredientFormController;
+import jdk.nashorn.internal.scripts.JO;
 import model.Ingredient;
 import utils.UnitEnum;
 
@@ -85,9 +86,15 @@ public class IngredientFormView extends View {
                         "Are you sure to save current information?", "Warning",
                         JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (status == JOptionPane.YES_OPTION) {
-                    c.saveIngredient(nameTextField.getText(),amountTextField.getText(),unitSelect.getSelectedIndex());
-                    c.cancel();
-                    dispose();
+                    try {
+                        double amount = Double.parseDouble(amountTextField.getText())
+;                       c.saveIngredient(nameTextField.getText(),amount, unitSelect.getSelectedIndex());
+                        c.cancel();
+                        dispose();
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Amount is invalid!");
+                    }
+
                 }
 
             }
