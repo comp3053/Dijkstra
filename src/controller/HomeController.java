@@ -47,7 +47,7 @@ public class HomeController {
         RecipeController rc = new RecipeController();
         try {
             ArrayList<Recipe> recommendRecipe = rc.getAll();
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, true);
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
             rrlv.setVisible(true);
         } catch (FetchDataException e) {
             e.printStackTrace();
