@@ -70,7 +70,7 @@ public class Recipe {
         else{
             for (RecipeIngredient ingredient : this.ingredients) {
                 try {
-                    ingredient.setAmount(ingredient.getAmount() / originalBatchSize);
+                    ingredient.setAmount(ingredient.getAmount()* ( originalBatchSize/1000));
                 } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
