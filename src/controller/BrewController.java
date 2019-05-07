@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BrewController implements DatabaseController<BrewingRecord> {
+public class BrewController {
     public BrewController() {
         //Nothing to do
     }
