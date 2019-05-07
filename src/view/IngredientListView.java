@@ -17,7 +17,6 @@ public class IngredientListView extends View {
     private IngredientController ic;
     private ArrayList<StorageIngredient> m;
     private JPanel mainPanel;
-    private JPanel mainBody;
 
     public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m){
         this.c = c;
@@ -41,7 +40,7 @@ public class IngredientListView extends View {
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
-        mainBody = new JPanel();
+        JPanel mainBody = new JPanel();
         mainBody.setLayout(new BorderLayout());
 
         JPanel JPanelSearchBar = new JPanel();
