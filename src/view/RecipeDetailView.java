@@ -17,7 +17,8 @@ public class RecipeDetailView extends View {
     private RecipeDetailController c;
     private RecipeController rc;
     private Recipe recipe;
-    public RecipeDetailView(RecipeDetailController c,int recipeID){
+
+    public RecipeDetailView(RecipeDetailController c, int recipeID) {
         this.c = c;
         this.rc = new RecipeController();
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
@@ -44,31 +45,70 @@ public class RecipeDetailView extends View {
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
-        JPanel jp2 = new JPanel();
-        jp2.setLayout(new BorderLayout());
-        JPanel word = new JPanel();
-        word.setLayout(new BoxLayout(word, BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        JPanel pageTitle = new JPanel();
+        pageTitle.setLayout(new BoxLayout(pageTitle, BoxLayout.Y_AXIS));
         JLabel title = new JLabel("Recipe detail");
         //greeting.setHorizontalAlignment(JLabel.CENTER); // Vertical central the label in BorderLayout
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
-        JLabel subtitle = new JLabel(this.recipe.getName());
+        JLabel subtitle = new JLabel(this.recipe.getName() + "(for an 1000mL batch size brew)");
         subtitle.setFont(new Font(subtitle.getFont().getFontName(), subtitle.getFont().getStyle(), 16));
-        word.add(title);
-        word.add(subtitle);
-        jp2.add(word, BorderLayout.PAGE_START);
-        JPanel jp3 = new JPanel();
-        jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
-        for(int i=0;i<recipe.getIngredients().size();i++) {
-            JLabel ingredient = new JLabel(this.recipe.getIngredients().get(i).getName() + ":" + this.recipe.getIngredients().get(i).getAmount() + this.recipe.getIngredients().get(i).getUnit().name());
-            jp3.add(ingredient);
+        pageTitle.add(title);
+        pageTitle.add(subtitle);
+        mainPanel.add(pageTitle, BorderLayout.PAGE_START);
+
+        JPanel recipeDetailPanel = new JPanel();
+        recipeDetailPanel.setLayout(new BoxLayout(recipeDetailPanel, BoxLayout.Y_AXIS));
+        for (int i = 0; i < recipe.getIngredients().size(); i++) {
+            JLabel ingredient = new JLabel(this.recipe.getIngredients().get(i).getName() + ": "
+                    + this.recipe.getIngredients().get(i).getAmount() + " - Unit: "
+                    + this.recipe.getIngredients().get(i).getUnit().name());
+            recipeDetailPanel.add(ingredient);
         }
-        jp2.add(jp3, BorderLayout.CENTER);
-        this.add(jp2, BorderLayout.CENTER);
+//        JPanel description = new JPanel();
+//        description.setLayout(new FlowLayout());
+//        JLabel descLabel = new JLabel("Description:");
+//        description.add(descLabel);
+//        recipeDetailPanel.add(description);
+//        mainPanel.add(recipeDetailPanel, BorderLayout.CENTER);
+
+        JPanel recipePanel = new JPanel();
+        GroupLayout groupLayout = new GroupLayout(recipePanel);
+        recipePanel.setLayout(groupLayout);// Vertically display
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
+
+        JLabel ingredientLabel = new JLabel("Ingredient(s):");
+        JLabel descriptionLabel = new JLabel("Description:");
+
+        JLabel desc = new JLabel(recipe.getDescription());
+
+
+        GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
+
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(ingredientLabel)
+                .addComponent(descriptionLabel));
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(recipeDetailPanel)
+                .addComponent(desc));
+        groupLayout.setHorizontalGroup(hGroup);
+
+        GroupLayout.SequentialGroup vGroup = groupLayout.createSequentialGroup();
+
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(ingredientLabel).addComponent(recipeDetailPanel));
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(descriptionLabel).addComponent(desc));
+
+        groupLayout.setVerticalGroup(vGroup);
+
+        mainPanel.add(recipePanel, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
     }
 
     @Override
-    public void update(){
+    public void update() {
 
     }
 }
