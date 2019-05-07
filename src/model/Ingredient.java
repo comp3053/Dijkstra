@@ -10,6 +10,10 @@ public class Ingredient {
     private double amount;
     private UnitEnum unit;
 
+    public Ingredient() {
+        // Nothing to do
+    }
+
     public Ingredient(String name, double amount, UnitEnum unit) throws EmptyNameException,
             InvalidInputException {
         setName(name);
@@ -49,7 +53,7 @@ public class Ingredient {
         return this.amount;
     }
 
-    protected void setAmount(double amount) throws InvalidInputException {
+    public void setAmount(double amount) throws InvalidInputException {
         if (amount < 0) {
             throw new InvalidInputException("Ingredient amount should be greater than 0!");
         } else {
