@@ -2,9 +2,7 @@ package view;
 
 import model.StorageIngredient;
 import utils.FetchDataException;
-import controller.IngredientController;
 import controller.IngredientListController;
-import model.Ingredient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,13 +12,11 @@ import java.util.ArrayList;
 
 public class IngredientListView extends View {
     private IngredientListController c;
-    private IngredientController ic;
     private ArrayList<StorageIngredient> m;
     private JPanel mainPanel;
 
     public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m){
         this.c = c;
-        this.ic = new IngredientController();
         this.setTitle("Brew Day! - Ingredients List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -71,7 +67,6 @@ public class IngredientListView extends View {
         createIngredientList(m);
 
         mainBody.add(mainPanel, BorderLayout.CENTER);
-        // TODO: Ingredient List
 
         this.add(mainBody, BorderLayout.CENTER);
 
