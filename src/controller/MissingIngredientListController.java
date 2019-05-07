@@ -1,8 +1,12 @@
 package controller;
 
+import model.Recipe;
+import utils.FetchDataException;
 import view.HomeView;
 import view.MissingIngredientsListView;
 import view.RecommendRecipeListView;
+
+import java.util.ArrayList;
 
 public class MissingIngredientListController {
     public MissingIngredientListController(){
@@ -16,8 +20,14 @@ public class MissingIngredientListController {
     public void goBack(){
         // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, false);
-        rrlv.setVisible(true);
+        RecipeController rc = new RecipeController();
+        try {
+            ArrayList<Recipe> recommendRecipe = rc.getAll();
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipe, false);
+            rrlv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
 
     public void OK(){
