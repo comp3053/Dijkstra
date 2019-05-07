@@ -1,10 +1,13 @@
 package controller;
 
 import model.Equipment;
+import model.Recipe;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 import utils.FetchDataException;
 import view.*;
+
+import java.util.ArrayList;
 
 public class HomeController {
     public HomeController(){
@@ -41,7 +44,13 @@ public class HomeController {
     public void startRecommend(){
 // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, true);
-        rrlv.setVisible(true);
+        RecipeController rc = new RecipeController();
+        try {
+            ArrayList<Recipe> recommendRecipe = rc.getAll();
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, true);
+            rrlv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
 }
