@@ -68,7 +68,7 @@ public class DatabaseHelper {
                 c.commit(); // This statement cause SQLException
                 statement.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Warning:" + e.getMessage());
             }
 
         }
