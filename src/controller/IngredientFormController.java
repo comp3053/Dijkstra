@@ -1,43 +1,53 @@
 package controller;
 
+import model.StorageIngredient;
+import utils.EmptyNameException;
+import utils.FetchDataException;
+import utils.InvalidInputException;
+import utils.UnitEnum;
 import view.IngredientListView;
 
 public class IngredientFormController {
-    public IngredientFormController(){
+    private StorageIngredient m;
 
+    public IngredientFormController(StorageIngredient m){
+        this.m = m;
     }
 
-    public void saveIngredient(String Name,String Amount,int Unit){
-        //Unfinish
-        System.out.println("Parameters: "+ Name + Amount + Unit);
-        String strUnit = "ERROR";
+    public boolean saveIngredient(String Name,String Amount,int Unit){
+        try {
+            m.setName(Name);
+            m.setAmount(Double.parseDouble(Amount));
+        } catch (EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
+
         switch(Unit) {
             case 0:
-                strUnit = "MILLILITER";
+                m.setUnit(UnitEnum.valueOf("MILLILITER"));
                 break;
             case 1:
-                strUnit = "LITER";
+                m.setUnit(UnitEnum.valueOf("LITER"));
                 break;
             case 2:
-                strUnit = "GRAM";
+                m.setUnit(UnitEnum.valueOf("GRAM"));
                 break;
             case 3:
-                strUnit = "KILOGRAM";
+                m.setUnit(UnitEnum.valueOf("KILOGRAM"));
                 break;
         }
-        System.out.println("Parameters: "+ Name + Amount + strUnit);
-        /*
-            Ingredient ingredient = new Ingredient(Name,Amount,Unit);
-            IngredientController ic = new IngredientController();
-            return ic.update(ingredient);
-        */
-        System.out.println("Saved");
+        if (m.getID() == 0)
+            return m.insert();
+        return m.update();
     }
 
     public void cancel(){
-        // TODO: Pass in a Ingredient ArrayList
         IngredientListController ilc = new IngredientListController();
-        IngredientListView ilv = new IngredientListView(ilc);
-        ilv.setVisible(true);
+        try {
+            IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());
+            ilv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
 }
