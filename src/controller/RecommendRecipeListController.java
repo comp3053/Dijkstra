@@ -2,6 +2,7 @@ package controller;
 
 import view.BrewDetailView;
 import view.HomeView;
+import view.MissingIngredientsListView;
 
 public class RecommendRecipeListController {
     public RecommendRecipeListController(){
@@ -18,5 +19,11 @@ public class RecommendRecipeListController {
         BrewDetailController bdc = new BrewDetailController();
         BrewDetailView bdv = new BrewDetailView(bdc);
         bdv.setVisible(true);
+    }
+
+    public void generateShoppingList(){
+        MissingIngredientListController milc = new MissingIngredientListController();
+        MissingIngredientsListView milv = new MissingIngredientsListView(milc);
+        milv.setVisible(true);
     }
 }
