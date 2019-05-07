@@ -1,6 +1,7 @@
 package view;
 
 import controller.IngredientFormController;
+import model.Ingredient;
 import utils.UnitEnum;
 
 import javax.swing.*;
@@ -10,9 +11,12 @@ import java.awt.event.ActionListener;
 
 public class IngredientFormView extends View {
     private IngredientFormController c;
+    private Ingredient m;
 
-    public IngredientFormView(IngredientFormController c) {
+    public IngredientFormView(IngredientFormController c, Ingredient m) {
         this.c = c;
+        this.m = m;
+
         this.setTitle("Brew Day! - Ingredient Form"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -40,7 +44,10 @@ public class IngredientFormView extends View {
         for (UnitEnum unit : UnitEnum.values()) {
             unitSelect.addItem(unit);
         }
-
+        if (m.getID() > 0) {
+            nameTextField.setText(m.getName());
+            amountTextField.setText(Double.toString(m.getAmount()));
+        }
 
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
 
@@ -74,10 +81,15 @@ public class IngredientFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: save Ingredient to the DB
-                c.saveIngredient(nameTextField.getText(),amountTextField.getText(),unitSelect.getSelectedIndex());
-                c.cancel();
-                dispose();
+                int status = JOptionPane.showConfirmDialog(null,
+                        "Are you sure to save current information?", "Warning",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (status == JOptionPane.YES_OPTION) {
+                    c.saveIngredient(nameTextField.getText(),amountTextField.getText(),unitSelect.getSelectedIndex());
+                    c.cancel();
+                    dispose();
+                }
+
             }
         });
 
