@@ -1,16 +1,21 @@
 package view;
 
 import controller.RecommendRecipeListController;
+import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class RecommendRecipeListView extends View{
     private RecommendRecipeListController c;
-    public RecommendRecipeListView(RecommendRecipeListController c){
+    private ArrayList<Recipe> recommendRecipe;
+
+    public RecommendRecipeListView(RecommendRecipeListController c,ArrayList<Recipe> recommendRecipe){
         this.c = c;
+        this.recommendRecipe = recommendRecipe;
         this.setTitle("Brew Day! - Recommend Recipe List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -37,8 +42,8 @@ public class RecommendRecipeListView extends View{
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
-        for(int i =0;i<5;i++) {
-            JRadioButton msg_ingreNamei = new JRadioButton("Recipe E" + "11" + "Ingredient in use");
+        for(int i =0;i<recommendRecipe.size();i++) {
+            JRadioButton msg_ingreNamei = new JRadioButton(recommendRecipe.get(i).getName() + ": 11"+ "Ingredient in used");//TODO:show the number of recipeIngredient
             bg.add(msg_ingreNamei);
             mainPanel.add(msg_ingreNamei);
         }
