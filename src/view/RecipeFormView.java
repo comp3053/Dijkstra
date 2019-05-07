@@ -61,14 +61,26 @@ public class RecipeFormView extends View {
         scrollPane.setViewportView(recipeIngredientEntryList);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
+        JPanel buttonRecipeForm = new JPanel();
+        buttonRecipeForm.setLayout(new BorderLayout());
         JPanel recipeBatchSize = new JPanel();
         recipeBatchSize.setLayout(new FlowLayout());
         JLabel recipeBatchSizeTitle = new JLabel("Batch Size (Unit - mL):");
         recipeBatchSize.add(recipeBatchSizeTitle);
         JTextField recipeBatchSizeTextfield = new JTextField();
-        recipeBatchSizeTextfield.setColumns(20);
+        recipeBatchSizeTextfield.setColumns(5);
         recipeBatchSize.add(recipeBatchSizeTextfield);
-        mainPanel.add(recipeBatchSize, BorderLayout.PAGE_END);
+        buttonRecipeForm.add(recipeBatchSize, BorderLayout.PAGE_START);
+
+        JPanel recipeDescription = new JPanel();
+        recipeDescription.setLayout(new FlowLayout());
+        JLabel recipeDescriptionTitle = new JLabel("Recipe Description:");
+        recipeDescription.add(recipeDescriptionTitle);
+        JTextArea recipeDescrptionTextArea = new JTextArea(5,30);
+        recipeDescription.add(recipeDescrptionTextArea);
+        buttonRecipeForm.add(recipeDescription, BorderLayout.PAGE_END);
+
+        mainPanel.add(buttonRecipeForm, BorderLayout.PAGE_END);
         this.add(mainPanel);
 
         JPanel pageEndButtonGroup = new JPanel();
