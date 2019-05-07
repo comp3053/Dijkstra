@@ -1,5 +1,6 @@
 package controller;
 
+import model.Recipe;
 import view.BrewDetailView;
 import view.HomeView;
 import view.MissingIngredientsListView;
@@ -15,15 +16,15 @@ public class RecommendRecipeListController {
         hv.setVisible(true);
     }
 
-    public void brewRecipe(){
+    public void brewRecipe(Recipe recipe){
         BrewDetailController bdc = new BrewDetailController();
-        BrewDetailView bdv = new BrewDetailView(bdc);
+        BrewDetailView bdv = new BrewDetailView(bdc,recipe);
         bdv.setVisible(true);
     }
 
-    public void generateShoppingList(){
+    public void generateShoppingList(Recipe recipe){
         MissingIngredientListController milc = new MissingIngredientListController();
-        MissingIngredientsListView milv = new MissingIngredientsListView(milc);
+        MissingIngredientsListView milv = new MissingIngredientsListView(milc,recipe);
         milv.setVisible(true);
     }
 }
