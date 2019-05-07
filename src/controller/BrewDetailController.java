@@ -11,7 +11,7 @@ public class BrewDetailController {
     public void goBack(){
         // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
+        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, false);
         rrlv.setVisible(true);
     }
 

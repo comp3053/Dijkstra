@@ -41,7 +41,7 @@ public class HomeController {
     public void startRecommend(){
 // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
+        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, true);
         rrlv.setVisible(true);
     }
 }

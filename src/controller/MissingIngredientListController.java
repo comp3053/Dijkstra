@@ -1,5 +1,9 @@
 package controller;
 
+import view.HomeView;
+import view.MissingIngredientsListView;
+import view.RecommendRecipeListView;
+
 public class MissingIngredientListController {
     public MissingIngredientListController(){
 
@@ -10,10 +14,15 @@ public class MissingIngredientListController {
     }
 
     public void goBack(){
-        System.out.println("go back");
+        // TODO: Check if there are enough ingredient
+        RecommendRecipeListController rrlc = new RecommendRecipeListController();
+        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, false);
+        rrlv.setVisible(true);
     }
 
     public void OK(){
-        System.out.println("OK");
+        HomeController hc = new HomeController();
+        HomeView hv = new HomeView(hc);
+        hv.setVisible(true);
     }
 }

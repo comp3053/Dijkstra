@@ -11,7 +11,6 @@ public class Starter {
                 HomeView hv = new HomeView(hc);
                 hv.setVisible(true);
 
-                // TODO: Add a Extra path to test Recipe List when there is not enough ingredient
 //
 //                RecipeListController rlc = new RecipeListController();
 //                RecipeListView rv = new RecipeListView(rlc);
@@ -52,10 +51,6 @@ public class Starter {
 //                MissingIngredientsListView milv = new MissingIngredientsListView(milc);
 //                milv.setVisible(true);
 //
-//
-//                RecommendNotEnoughIngredientRecipeListController rilc = new RecommendNotEnoughIngredientRecipeListController();
-//                RecommendNotEnoughIngredientRecipeListView rilv = new RecommendNotEnoughIngredientRecipeListView(rilc);
-//                rilv.setVisible(true);
 //
 //                RecommendRecipeListController rrlc = new RecommendRecipeListController();
 //                RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);

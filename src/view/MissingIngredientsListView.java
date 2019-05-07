@@ -18,11 +18,12 @@ public class MissingIngredientsListView extends View{
         JPanel jp_header = new JPanel();
         jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        JButton btn_back = new JButton("back");
+        JButton btn_back = new JButton("< Back");
         btn_back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.goBack();
+                dispose();
             }
         });
         jp_header.add(btn_back);
@@ -66,6 +67,7 @@ public class MissingIngredientsListView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.OK();
+                dispose();
             }
         });
         jp_foot.add(btn_OK);
