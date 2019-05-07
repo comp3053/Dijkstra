@@ -1,7 +1,6 @@
 package view;
 
 import controller.IngredientFormController;
-import jdk.nashorn.internal.scripts.JO;
 import model.Ingredient;
 import utils.UnitEnum;
 
@@ -53,7 +52,7 @@ public class IngredientFormView extends View {
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
 
         hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameLabel)
-                .addComponent(amountLabel)).addComponent(unitLabel);
+                .addComponent(amountLabel).addComponent(unitLabel));
         hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameTextField)
                 .addComponent(amountTextField).addComponent(unitSelect));
         groupLayout.setHorizontalGroup(hGroup);
