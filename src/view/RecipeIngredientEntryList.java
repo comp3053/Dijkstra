@@ -83,7 +83,7 @@ public class RecipeIngredientEntryList extends JPanel{
             StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());
             try {
                 recipeIngredients.add(
-                        new RecipeIngredient(currentStorageIngredient.getName(),
+                        new RecipeIngredient(0, currentStorageIngredient.getName(),
                                 new Double(entrie.getInputBoxText().getText()),
                                 currentStorageIngredient.getUnit())
             );

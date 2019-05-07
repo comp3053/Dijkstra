@@ -1,7 +1,6 @@
 package view;
 
 import controller.RecipeListController;
-import jdk.nashorn.internal.scripts.JO;
 import model.Recipe;
 import utils.EmptyNameException;
 import utils.FetchDataException;
