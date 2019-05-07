@@ -92,9 +92,8 @@ public class RecipeController implements DatabaseController<Recipe> {
 
     public ArrayList<RecipeIngredient> getRecipeIngredient(int recipeID) throws FetchDataException, InvalidInputException, EmptyNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        StorageIngredientController sc = new StorageIngredientController();
         ArrayList<RecipeIngredient> ingredients = new ArrayList<>();
-        ArrayList<StorageIngredient> ingredientCategory = sc.getAll();
+        ArrayList<StorageIngredient> ingredientCategory = StorageIngredient.getAll();
         String name, unit;
         double amount;
         String query = String.format("SELECT * FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipeID);

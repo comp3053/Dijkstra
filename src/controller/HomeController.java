@@ -1,6 +1,7 @@
 package controller;
 
 import model.Equipment;
+import model.StorageIngredient;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 import utils.FetchDataException;
@@ -18,8 +19,12 @@ public class HomeController {
     public void startManageIngredient(){
         // TODO: Pass in a Ingredient ArrayList
         IngredientListController ilc = new IngredientListController();
-        IngredientListView ilv = new IngredientListView(ilc);
-        ilv.setVisible(true);
+        try {
+            IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());
+            ilv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
     public void startNoteList(){
         NoteListController nlc = new NoteListController();
