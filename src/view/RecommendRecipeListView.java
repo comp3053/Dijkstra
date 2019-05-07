@@ -50,10 +50,10 @@ public class RecommendRecipeListView extends View{
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
-        for(int i =0;i<recommendRecipe.size();i++) {
-            JRadioButton msg_ingreNamei = new JRadioButton(recommendRecipe.get(i).getName() + ": 11"+ "Ingredient in used");//TODO:show the number of recipeIngredient
-            bg.add(msg_ingreNamei);
-            mainPanel.add(msg_ingreNamei);
+        for(Recipe recommendRecipeItem: recommendRecipe) {
+            JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": 11"+ " Ingredient in used"); //TODO:show the number of recipeIngredient
+            bg.add(ingredientItem);
+            mainPanel.add(ingredientItem);
         }
         // TODO: Need to change to scrollable
         this.add(mainPanel, BorderLayout.CENTER);
