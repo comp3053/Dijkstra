@@ -19,7 +19,7 @@ public class EquipmentInfoController {
     public void turnUpdateInfo() {
         // TODO: Fill the exists Info to the field
         UpdateEquipmentInfoController ueic = new UpdateEquipmentInfoController(m);
-        UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic, m);
+        UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic, m, false);
         ueiv.setVisible(true);
     }
 }

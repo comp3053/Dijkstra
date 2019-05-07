@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class UpdateEquipmentInfoView extends View{
     private UpdateEquipmentInfoController c;
     private Equipment m;
-    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m){
+    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m, boolean firstTime){
         this.c = c;
         this.m = m;
         this.setTitle("Brew Day! - Equipment Update"); // set frame title
@@ -25,6 +25,9 @@ public class UpdateEquipmentInfoView extends View{
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
+        if (firstTime){
+            button.setEnabled(false);
+        }
         JLabel headerTitle = new JLabel("Update Equipment Information");
         headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
         topLeftButtonBar.add(headerTitle);
@@ -46,6 +49,11 @@ public class UpdateEquipmentInfoView extends View{
         JTextField volume = new JTextField();
         volume.setColumns(10);
         volume.setToolTipText("Volume");
+
+        if (!firstTime){
+            name.setText(m.getName());
+            volume.setText(String.valueOf(m.getVolume()));
+        }
 
         JPanel mainPanel = new JPanel();
         GroupLayout groupLayout = new GroupLayout(mainPanel);
@@ -86,7 +94,7 @@ public class UpdateEquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(c.saveEquipmentInfo(name.getText(),volume.getText())) {
+                    if(c.saveEquipmentInfo(name.getText(),volume.getText(), firstTime)) {
                         JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
                     }
                     c.goBack();
