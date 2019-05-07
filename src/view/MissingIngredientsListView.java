@@ -1,6 +1,7 @@
 package view;
 
 import controller.MissingIngredientListController;
+import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class MissingIngredientsListView extends View{
     private MissingIngredientListController c;
-    public MissingIngredientsListView(MissingIngredientListController c){
+    private Recipe recipe;
+    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe){
         this.c = c;
+        this.recipe = recipe;
         this.setTitle("Brew Day! - Missing Ingredient List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());

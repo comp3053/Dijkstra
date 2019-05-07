@@ -1,6 +1,7 @@
 package view;
 
 import controller.BrewDetailController;
+import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class BrewDetailView extends View {
     private BrewDetailController c;
-    public BrewDetailView(BrewDetailController c){
+    private Recipe recipe;
+    public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
+        this.recipe=recipe;
         this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
@@ -32,7 +35,7 @@ public class BrewDetailView extends View {
         mainPanel.setLayout(new BorderLayout());
         JPanel pageTitle = new JPanel();
         pageTitle.setLayout(new BorderLayout());
-        JLabel title = new JLabel("Recipe C"); // Recipe Name
+        JLabel title = new JLabel(this.recipe.getName());
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
         pageTitle.add(title, BorderLayout.LINE_START);
@@ -51,8 +54,8 @@ public class BrewDetailView extends View {
         applyBatchSize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.applyBatchSize(Integer.parseInt(batchSize.getText()));
-                //TODO
+                c.applyBatchSize(Double.valueOf(batchSize.getText()),recipe);
+                dispose();
             }
         });
 //  TODO: Listen to the change of batch size and update
