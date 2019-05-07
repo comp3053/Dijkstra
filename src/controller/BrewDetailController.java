@@ -2,6 +2,8 @@ package controller;
 
 import model.Recipe;
 import utils.FetchDataException;
+import utils.InvalidInputException;
+import view.BrewDetailView;
 import view.BrewReciptView;
 import view.RecommendRecipeListView;
 
@@ -25,8 +27,14 @@ public class BrewDetailController {
         }
     }
 
-    public void applyBatchSize(int batchSize){
-        System.out.println("New Batch size is: " + batchSize);
+    public void applyBatchSize(double batchSize,Recipe recipe){
+        try {
+            recipe.amountConversion(batchSize);
+            BrewDetailController bdc= new BrewDetailController();
+            BrewDetailView bdv = new BrewDetailView(bdc,recipe);
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
 
     public void brewRecipe(){
