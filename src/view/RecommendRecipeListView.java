@@ -51,9 +51,11 @@ public class RecommendRecipeListView extends View{
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
         for(Recipe recommendRecipeItem: recommendRecipe) {
-            JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": 11"+ " Ingredient in used"); //TODO:show the number of recipeIngredient
-            bg.add(ingredientItem);
-            mainPanel.add(ingredientItem);
+            if (!viewStatus&&recommendRecipeItem.isAvailable()) {
+                JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used"); //TODO:show the number of recipeIngredient
+                bg.add(ingredientItem);
+                mainPanel.add(ingredientItem);
+            }
         }
         // TODO: Need to change to scrollable
         this.add(mainPanel, BorderLayout.CENTER);
