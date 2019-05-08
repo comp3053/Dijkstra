@@ -1,7 +1,5 @@
 package model;
 
-import utils.DatabaseHelper;
-
 import java.util.ArrayList;
 
 public class RecipeForm {

@@ -1,6 +1,5 @@
 package controller;
 
-import model.Ingredient;
 import model.StorageIngredient;
 import view.HomeView;
 import view.IngredientDetailView;

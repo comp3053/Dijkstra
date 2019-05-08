@@ -1,10 +1,8 @@
 package view;
 
 import controller.RecipeFormController;
-import model.Recipe;
 import model.RecipeForm;
 import utils.EmptyNameException;
-import model.RecipeIngredient;
 import model.StorageIngredient;
 import utils.InvalidInputException;
 import utils.UnitEnum;
@@ -46,19 +44,6 @@ public class RecipeFormView extends View {
         recipeNameField.add(recipeNameTextfield);
         mainPanel.add(recipeNameField, BorderLayout.PAGE_START);
         this.add(mainPanel);
-
-
-        ArrayList<StorageIngredient> testIngredient = new ArrayList<>();
-        try{
-            testIngredient.add(new StorageIngredient(1,"A1", 2.0, UnitEnum.GRAM));
-            testIngredient.add(new StorageIngredient(2,"A2", 3.0, UnitEnum.LITER));
-            testIngredient.add(new StorageIngredient(3,"A3", 2.0, UnitEnum.KILOGRAM));
-            testIngredient.add(new StorageIngredient(4,"A4", 20.0, UnitEnum.MILLILITER));
-            testIngredient.add(new StorageIngredient(5,"A5", 0.2, UnitEnum.KILOGRAM));
-            testIngredient.add(new StorageIngredient(6,"A6", 2.0, UnitEnum.GRAM));
-        }catch (EmptyNameException | InvalidInputException e){
-            e.printStackTrace();
-        }
 
         RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(m.getStorageIngredients());
         if (m.getRecipe().getID() > 0) {
