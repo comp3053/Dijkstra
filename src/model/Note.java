@@ -77,14 +77,23 @@ public class Note {
 
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d)",
-                this.getCreateDate().getTime(), this.getContent(), this.getBrewID());
         try {
+            String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d);",
+                    this.getCreateDate().getTime(), this.getContent(), this.getBrewID());
+            dbHelper.execSqlNoReturn(query);
+            query = String.format("SELECT * FROM Note ORDER BY Note_ID DESC LIMIT 1");
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            this.setID(rs.getInt(1));
+            System.out.println("The brew ID is " + this.getBrewID());
+            query = String.format("UPDATE Brew SET Note_ID = %d WHERE Brew_ID = %d;",
+                    this.getID(),this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
         } catch (SQLiteConnectionException e) {
             e.printStackTrace();
             return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return true;
     }
@@ -136,9 +145,12 @@ public class Note {
 
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("DELETE FROM Note WHERE Note_ID = %d",
-                this.getID());
         try {
+            String query = String.format("DELETE FROM Note WHERE Note_ID = %d;",
+                    this.getID());
+            dbHelper.execSqlNoReturn(query);
+            query = String.format("UPDATE Brew SET Note_ID = %d WHERE Brew_ID = %d;",
+                    0,this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
             return true;
