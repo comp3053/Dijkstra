@@ -84,7 +84,7 @@ public class BrewDetailView extends View {
         brewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.brewRecipe();
+                c.brewRecipe(recipe);
                 dispose();
             }
         });

@@ -41,9 +41,9 @@ public class BrewDetailController {
         }
     }
 
-    public void brewRecipe(){
+    public void brewRecipe(Recipe recipe){
         BrewReciptController brc = new BrewReciptController();
-        BrewReciptView brv = new BrewReciptView(brc);
+        BrewReciptView brv = new BrewReciptView(brc,recipe);
         brv.setVisible(true);
     }
 }
