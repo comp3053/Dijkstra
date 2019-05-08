@@ -95,7 +95,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return ingredients;
     }
 
-    public static boolean deleteAll(int recipeID) {
+    static boolean deleteAll(int recipeID) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipeID);
         try {
@@ -124,7 +124,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return true;
     }
 
-    public int getRecipeID() {
+    private int getRecipeID() {
         return recipeID;
     }
 }

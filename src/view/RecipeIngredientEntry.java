@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class RecipeIngredientEntry extends JPanel {
+class RecipeIngredientEntry extends JPanel {
     private JComboBox IngredientSelector;
     private JTextField inputBoxText;
     private JButton addField;
@@ -27,11 +27,11 @@ public class RecipeIngredientEntry extends JPanel {
         add(this.minusField);
     }
 
-    public JComboBox getIngredientSelector() {
+    JComboBox getIngredientSelector() {
         return IngredientSelector;
     }
 
-    public JTextField getInputBoxText(){
+    JTextField getInputBoxText(){
         return inputBoxText;
     }
 
@@ -59,10 +59,10 @@ public class RecipeIngredientEntry extends JPanel {
         }
     }
 
-    public void enableAdd(boolean enabled) {
+    void enableAdd(boolean enabled) {
         this.addField.setEnabled(enabled);
     }
-    public void enableMinus(boolean enabled) {
+    void enableMinus(boolean enabled) {
         this.minusField.setEnabled(enabled);
     }
 }

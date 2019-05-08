@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
-public class RecipeIngredientEntryList extends JPanel{
+class RecipeIngredientEntryList extends JPanel{
     private ArrayList<RecipeIngredientEntry> entries;
     // Replace with your database stuff
     private ArrayList<StorageIngredient> ingredients;
@@ -24,7 +24,7 @@ public class RecipeIngredientEntryList extends JPanel{
         }
     }
 
-    public void cloneEntry(RecipeIngredientEntry entry) {
+    void cloneEntry(RecipeIngredientEntry entry) {
         Object selected = entry.getIngredientSelector().getSelectedItem();
         JComboBox copy = new JComboBox(this.ingredientNames.toArray());
         copy.setSelectedItem(selected);
@@ -53,7 +53,7 @@ public class RecipeIngredientEntryList extends JPanel{
         refresh();
     }
 
-    public void removeItem(RecipeIngredientEntry entry) {
+    void removeItem(RecipeIngredientEntry entry) {
         entries.remove(entry);
         remove(entry);
         refresh();
@@ -88,7 +88,7 @@ public class RecipeIngredientEntryList extends JPanel{
         }
 
     }
-    public ArrayList<RecipeIngredient> getIngredientList(){
+    ArrayList<RecipeIngredient> getIngredientList(){
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
         for (RecipeIngredientEntry entrie: entries){
             StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());

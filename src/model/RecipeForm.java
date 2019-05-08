@@ -12,7 +12,7 @@ public class RecipeForm {
         this.storageIngredients = storageIngredients;
     }
 
-    public boolean insertIngredients(int recipeID) {
+    private boolean insertIngredients(int recipeID) {
         boolean status = true;
         for (RecipeIngredient ingredient : recipeIngredients) {
             ingredient.setRecipeID(recipeID);
@@ -30,12 +30,12 @@ public class RecipeForm {
         return status;
     }
 
-    public boolean insert() {
+    private boolean insert() {
         recipe.setIngredients(recipeIngredients);
         return recipe.insert();
     }
 
-    public boolean update() {
+    private boolean update() {
         boolean status = true;
         status &= RecipeIngredient.deleteAll(recipe.getID());
         status &= recipe.update();
