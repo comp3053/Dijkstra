@@ -67,7 +67,7 @@ public class Equipment {
     // insert the current equipment model to the db
     public boolean insert() { // Do not use this directly
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Equipment VALUES (1,'%s',%d)",
+        String query = String.format("INSERT INTO Equipment (Equipment_ID, Name, Volume) VALUES (1,'%s',%d)",
                 this.getName(), this.getVolume());
         try {
             dbHelper.execSqlNoReturn(query);
