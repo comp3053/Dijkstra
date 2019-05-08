@@ -1,23 +1,30 @@
 package controller;
 
 import model.Note;
+import utils.FetchDataException;
 import view.NoteListView;
 
 import javax.swing.*;
 import java.util.Date;
 
 public class NoteInputController {
-    public NoteInputController(){
-
+    private Note m;
+    public NoteInputController(Note m){
+        this.m = m;
     }
 
-    public boolean saveNote(int brewID, String content){
-        Note note = new Note(brewID, new Date(), content);
-        NoteController nc = new NoteController();
-        return nc.insert(note);
+    public boolean saveNote(Note m,String content){
+        NoteListController nlc = new NoteListController();
+        NoteListView nlv = new NoteListView(nlc);
+        nlv.setVisible(true);
+        m.setContent(content);
+        if(m.getID() == 0)
+            return m.insert();
+        else
+            return m.update();
     }
 
-    public int backToNoteList(){
+    public int backToNoteList() throws FetchDataException {
         // return a status, check need close the current window or not
         int isSave = JOptionPane.showConfirmDialog(null,"Are you sure to leave without saving your note?","Warning",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
         if (isSave == 0){
