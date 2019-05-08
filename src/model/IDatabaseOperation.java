@@ -12,6 +12,6 @@ interface IDatabaseOperation<T> {
     void notifyListener();
 
     default String stringParser(String str) {
-        return str.replaceAll("\"", "\\\\\"").replaceAll("'", "\\\\\'");
+        return str.replaceAll("'", "''");
     }
 }
