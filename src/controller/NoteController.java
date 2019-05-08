@@ -11,10 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+//delete this later
 public class NoteController implements DatabaseController<Note> {
     public NoteController() {
         //Nothing to do
     }
+
 
     public ArrayList<Note> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
