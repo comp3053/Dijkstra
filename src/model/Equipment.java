@@ -6,7 +6,7 @@ import utils.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Equipment {
+public class Equipment implements IDatabaseOperation<Equipment> {
     private String name;
     private int volume;
     private ModelListener ml;
@@ -16,6 +16,7 @@ public class Equipment {
         setName(name);
         setVolume(volume);
     }
+
 
     public String getName() {
         return this.name;
@@ -67,8 +68,8 @@ public class Equipment {
     // insert the current equipment model to the db
     public boolean insert() { // Do not use this directly
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Equipment VALUES (1,'%s',%d)",
-                this.getName(), this.getVolume());
+        String query = String.format("INSERT INTO Equipment (Equipment_ID, Name, Volume) VALUES (1,'%s',%d)",
+                stringParser(this.getName()), this.getVolume());
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -83,7 +84,7 @@ public class Equipment {
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Equipment SET Name='%s',Volume=%d WHERE Equipment_ID=1",
-                this.getName(), this.getVolume());
+                stringParser(this.getName()), this.getVolume());
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -92,6 +93,22 @@ public class Equipment {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public boolean delete() {
+        return false;
+        // Equipment cannot be deleted
+    }
+
+    @Override
+    public void addListener(ModelListener listener) {
+        this.ml = listener;
+    }
+
+    @Override
+    public void notifyListener() {
+        ml.update();
     }
 
 }
