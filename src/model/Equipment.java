@@ -69,7 +69,7 @@ public class Equipment implements IDatabaseOperation<Equipment> {
     public boolean insert() { // Do not use this directly
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("INSERT INTO Equipment (Equipment_ID, Name, Volume) VALUES (1,'%s',%d)",
-                this.getName(), this.getVolume());
+                stringParser(this.getName()), this.getVolume());
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -84,7 +84,7 @@ public class Equipment implements IDatabaseOperation<Equipment> {
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Equipment SET Name='%s',Volume=%d WHERE Equipment_ID=1",
-                this.getName(), this.getVolume());
+                stringParser(this.getName()), this.getVolume());
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
