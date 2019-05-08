@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BrewController implements DatabaseController<BrewingRecord> {
+public class BrewController {
     public BrewController() {
         //Nothing to do
     }
@@ -27,7 +27,7 @@ public class BrewController implements DatabaseController<BrewingRecord> {
         throw new ObjectNotFoundException("Could not get corresponding recipe.");
     }
 
-    public ArrayList<BrewingRecord> getAll() throws FetchDataException, ObjectNotFoundException {
+    /*public ArrayList<BrewingRecord> getAll() throws FetchDataException, ObjectNotFoundException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
         int id, batchSize;
@@ -46,9 +46,9 @@ public class BrewController implements DatabaseController<BrewingRecord> {
             throw new FetchDataException("Could not get Brew Records.");
         }
         return brewingRecords;
-    }
+    }*/
 
-    public boolean insert(BrewingRecord brewingRecord) {
+    public static boolean insert(BrewingRecord brewingRecord) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("INSERT INTO Brew (Brew_Date,Batch_Size,Recipe_ID) VALUES (%d,%d,%d)",
                 brewingRecord.getBrewDate().getTime(), brewingRecord.getBatchSize(),

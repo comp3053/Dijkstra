@@ -1,5 +1,14 @@
 package model;
 
+import controller.RecipeController;
+import utils.DatabaseHelper;
+import utils.FetchDataException;
+import utils.ObjectNotFoundException;
+import utils.SQLiteConnectionException;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewingRecord {
@@ -51,5 +60,37 @@ public class BrewingRecord {
 
     private void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public static Recipe getRecipe(int recipeID) throws FetchDataException, ObjectNotFoundException {
+        RecipeController rc = new RecipeController();
+        ArrayList<Recipe> recipes = rc.getAll();
+        for (Recipe recipe : recipes) {
+            if (recipe.getID() == recipeID)
+                return recipe;
+        }
+        throw new ObjectNotFoundException("Could not get corresponding recipe.");
+    }
+
+    public static ArrayList<BrewingRecord> getAllBrewingRecord() throws FetchDataException, ObjectNotFoundException {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
+        int id, batchSize;
+        Date brewDate;
+        Recipe recipe;
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn("SELECT * FROM Brew WHERE NOTE_ID == 0");
+            while(rs.next()) {
+                id = rs.getInt(1);
+                brewDate = new Date(rs.getLong(2));
+                batchSize = rs.getInt(3);
+                recipe = getRecipe(rs.getInt(4));
+                brewingRecords.add(new BrewingRecord(id, brewDate, batchSize, recipe));
+            }
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            throw new FetchDataException("Could not get Brew Records.");
+        }
+        return brewingRecords;
     }
 }
