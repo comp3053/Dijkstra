@@ -6,7 +6,7 @@ import utils.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Equipment {
+public class Equipment implements IDatabaseOperation<Equipment> {
     private String name;
     private int volume;
     private ModelListener ml;
@@ -16,6 +16,7 @@ public class Equipment {
         setName(name);
         setVolume(volume);
     }
+
 
     public String getName() {
         return this.name;
@@ -92,6 +93,22 @@ public class Equipment {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public boolean delete() {
+        return false;
+        // Equipment cannot be deleted
+    }
+
+    @Override
+    public void addListener(ModelListener listener) {
+        this.ml = listener;
+    }
+
+    @Override
+    public void notifyListener() {
+        ml.update();
     }
 
 }
