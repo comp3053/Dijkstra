@@ -22,9 +22,6 @@ public class RecipeIngredientEntryList extends JPanel{
         for (StorageIngredient ingredient: ingredients){
             ingredientNames.add(ingredient.getName() + " (Unit: " + ingredient.getUnit().toString().toLowerCase() + ")");
         }
-
-        RecipeIngredientEntry initial = new RecipeIngredientEntry(new JComboBox(this.ingredientNames.toArray()), "", this);
-        addItem(initial);
     }
 
     public void cloneEntry(RecipeIngredientEntry entry) {
@@ -34,6 +31,20 @@ public class RecipeIngredientEntryList extends JPanel{
         RecipeIngredientEntry theClone = new RecipeIngredientEntry(copy, "", this);
 
         addItem(theClone);
+    }
+
+    void initForm() {
+        RecipeIngredientEntry initial = new RecipeIngredientEntry(new JComboBox(this.ingredientNames.toArray()), "", this);
+        addItem(initial);
+    }
+
+    void initIngredients(ArrayList<RecipeIngredient> ingredients) {
+        for (RecipeIngredient ingredient : ingredients) {
+            RecipeIngredientEntry entry = new RecipeIngredientEntry(new JComboBox(this.ingredientNames.toArray()),
+                    Double.toString(ingredient.getAmount()), this);
+            entry.getIngredientSelector().setSelectedIndex(ingredient.getID() - 1);
+            addItem(entry);
+        }
     }
 
     private void addItem(RecipeIngredientEntry entry) {
@@ -83,7 +94,7 @@ public class RecipeIngredientEntryList extends JPanel{
             StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());
             try {
                 recipeIngredients.add(
-                        new RecipeIngredient(0, currentStorageIngredient.getName(),
+                        new RecipeIngredient(currentStorageIngredient.getID(), currentStorageIngredient.getName(),
                                 new Double(entrie.getInputBoxText().getText()),
                                 currentStorageIngredient.getUnit())
             );

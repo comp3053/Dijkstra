@@ -2,6 +2,7 @@ package view;
 
 import controller.RecipeFormController;
 import model.Recipe;
+import model.RecipeForm;
 import utils.EmptyNameException;
 import model.RecipeIngredient;
 import model.StorageIngredient;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 
 public class RecipeFormView extends View {
     private RecipeFormController c;
-    private Recipe m;
+    private RecipeForm m;
 
-    public RecipeFormView(RecipeFormController c, Recipe m){
+    public RecipeFormView(RecipeFormController c, RecipeForm m){
         this.c = c;
         this.m = m;
         this.setTitle("Brew Day! - Recipe Form"); // set frame title
@@ -59,7 +60,14 @@ public class RecipeFormView extends View {
             e.printStackTrace();
         }
 
-        RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(testIngredient);
+        RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(m.getStorageIngredients());
+        if (m.getRecipe().getID() > 0) {
+            recipeNameTextfield.setText(m.getRecipe().getName());
+            recipeIngredientEntryList.initIngredients(m.getRecipeIngredients());
+        }
+        else {
+            recipeIngredientEntryList.initForm();
+        }
         JScrollPane scrollPane = new JScrollPane(recipeIngredientEntryList);
         scrollPane.setAutoscrolls(true);
         scrollPane.setViewportView(recipeIngredientEntryList);
@@ -84,12 +92,15 @@ public class RecipeFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<RecipeIngredient> recipeIngredients = recipeIngredientEntryList.getIngredientList();
+                m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
+                m.getRecipe().setName(recipeNameTextfield.getText());
+                m.getRecipe().setDescription("This is a kind of beer."); // TODO: Add description field
 //                GET the Ingredient List from GUI
 //                Check if there is a duplicate ingredient
 //                Check if there are invalid value
 //                Check if the fields are valid.
                 c.saveRecipe();
+                dispose();
             }
         });
 
