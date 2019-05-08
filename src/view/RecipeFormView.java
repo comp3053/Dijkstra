@@ -2,6 +2,7 @@ package view;
 
 import controller.RecipeFormController;
 import model.RecipeForm;
+import utils.DuplicateObjectException;
 import utils.EmptyNameException;
 import model.StorageIngredient;
 import utils.InvalidInputException;
@@ -77,8 +78,23 @@ public class RecipeFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
-                m.getRecipe().setName(recipeNameTextfield.getText());
+                String name = recipeNameTextfield.getText();
+                if (name.length() <= 0) {
+                    JOptionPane.showMessageDialog(null, "Please input recipe name!");
+                    return;
+                }
+                try {
+                    m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Invalid Ingredient Amount");
+                    return;
+                } catch (DuplicateObjectException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Some ingredients in recipe is duplicated.");
+                    return;
+                }
+                m.getRecipe().setName(name);
                 m.getRecipe().setDescription("This is a kind of beer."); // TODO: Add description field
 //                GET the Ingredient List from GUI
 //                Check if there is a duplicate ingredient

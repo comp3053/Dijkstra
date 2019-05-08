@@ -1,5 +1,6 @@
 package view;
 import model.*;
+import utils.DuplicateObjectException;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 
@@ -88,16 +89,26 @@ class RecipeIngredientEntryList extends JPanel{
         }
 
     }
-    ArrayList<RecipeIngredient> getIngredientList(){
+
+    private boolean isDuplicate(StorageIngredient current, ArrayList<RecipeIngredient> ingredients) {
+        for (RecipeIngredient ingredient : ingredients) {
+            if (ingredient.getName().equals(current.getName()))
+                return true;
+        }
+        return false;
+    }
+
+    ArrayList<RecipeIngredient> getIngredientList() throws NumberFormatException, DuplicateObjectException {
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
         for (RecipeIngredientEntry entrie: entries){
             StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());
             try {
+                if (isDuplicate(currentStorageIngredient, recipeIngredients))
+                    throw new DuplicateObjectException("Some ingredients in recipe is duplicated.");
                 recipeIngredients.add(
                         new RecipeIngredient(currentStorageIngredient.getID(), currentStorageIngredient.getName(),
                                 new Double(entrie.getInputBoxText().getText()),
-                                currentStorageIngredient.getUnit())
-            );
+                                currentStorageIngredient.getUnit()));
             }catch (EmptyNameException | InvalidInputException e){
                 e.printStackTrace();
             }
