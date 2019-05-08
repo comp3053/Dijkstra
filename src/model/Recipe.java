@@ -1,16 +1,22 @@
 package model;
 
-import utils.AddObjectException;
-import utils.InvalidInputException;
-import utils.ModifyObjectException;
+import controller.ModelListener;
+import utils.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Recipe {
+public class Recipe implements IDatabaseOperation<Recipe> {
     private int id;
     private String name;
     private String description;
     private ArrayList<RecipeIngredient> ingredients;
+    private ModelListener listener;
+
+    public Recipe() {
+        // Nothing to do
+    }
 
     public Recipe(int id, String name, String description) {
         setID(id);
@@ -97,5 +103,118 @@ public class Recipe {
             }
         }
         this.ingredients.add(recipeIngredients);
+    }
+
+    public boolean isAvailable() {
+        for (RecipeIngredient ingredient : ingredients) {
+            if (!ingredient.isEnough())
+                return false;
+        }
+        return true;
+    }
+
+    private int getNewID() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT Recipe_ID FROM Recipe WHERE Name='%s'", stringParser(this.getName()));
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            int newID = rs.getInt(1);
+            dbHelper.closeConnection();
+            return newID;
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public boolean update() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("UPDATE Recipe SET Name='%s',Description='%s' WHERE Recipe_ID=%d",
+                stringParser(this.getName()), stringParser(this.getDescription()), this.getID());
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static ArrayList<Recipe> getAll() throws FetchDataException, EmptyNameException, InvalidInputException {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = "SELECT * FROM Recipe";
+        int id;
+        String name, description;
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            while (rs.next()) {
+                id = rs.getInt(1);
+                name = rs.getString(2);
+                description = rs.getString(3);
+                recipes.add(new Recipe(id, name, description, RecipeIngredient.getAll(id)));
+            }
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            throw new FetchDataException("Fail to fetch recipes.");
+        }
+        return recipes;
+    }
+
+    @Override
+    public boolean insert() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        boolean status;
+        String query = String.format("INSERT INTO Recipe (Name,Description) VALUES ('%s','%s')",
+                stringParser(this.getName()), stringParser(this.getDescription()));
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        int recipeID = getNewID();
+        for (RecipeIngredient ingredient : ingredients) {
+            ingredient.setRecipeID(recipeID);
+            status = ingredient.insert();
+            if (!status)
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean delete() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        boolean status;
+        String query = String.format("DELETE FROM Recipe WHERE Recipe_ID=%d", this.getID());
+
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        for (RecipeIngredient ingredient : ingredients) {
+            status = ingredient.delete();
+            if (!status)
+                return false;
+        }
+        notifyListener();
+        return true;
+    }
+
+    @Override
+    public void addListener(ModelListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void notifyListener() {
+        listener.update();
     }
 }

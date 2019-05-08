@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class NoteController implements DatabaseController<Note> {
+public class NoteController {
     public NoteController() {
         //Nothing to do
     }
