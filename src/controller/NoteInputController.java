@@ -14,14 +14,26 @@ public class NoteInputController {
     }
 
     public boolean saveNote(Note m,String content){
-        NoteListController nlc = new NoteListController();
-        NoteListView nlv = new NoteListView(nlc);
-        nlv.setVisible(true);
         m.setContent(content);
-        if(m.getID() == 0)
-            return m.insert();
-        else
-            return m.update();
+        if(m.getID() == 0) {
+            if(m.insert()) {
+                NoteListController nlc = new NoteListController();
+                NoteListView nlv = new NoteListView(nlc);
+                nlv.setVisible(true);
+                return true;
+            }else {
+                return false;
+            }
+        }
+        else{
+            if(m.update()){
+            NoteListController nlc = new NoteListController();
+            NoteListView nlv = new NoteListView(nlc);
+            nlv.setVisible(true);
+            return true;}else{
+                return false;
+            }
+        }
     }
 
     public int backToNoteList() throws FetchDataException {

@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public class NoteListView extends View {
     private NoteListController c;
-    private ArrayList<Note> notes;
+    private JPanel mainPanel;
 
     public NoteListView(NoteListController c){
         this.c = c;
-        this.notes = c.readNoteList();
+        this.mainPanel = new JPanel();
         this.setTitle("Brew Day! - Note List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -53,9 +53,19 @@ public class NoteListView extends View {
 
         this.add(topButtonsAround, BorderLayout.NORTH);
 
-        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
+        createNoteList(c.readNoteList());
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setAutoscrolls(true);
+        scrollPane.setViewportView(mainPanel);
+//        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
+
+    }
+
+    public void createNoteList(ArrayList<Note> notes){
         for(Note note:notes) {
+            note.addListener(this);
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
             JLabel brewHistory = new JLabel("Brew History " + note.getID());
@@ -93,15 +103,17 @@ public class NoteListView extends View {
             mainPanelIter.add(deleteBtn);
             mainPanel.add(mainPanelIter);
         }
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        scrollPane.setAutoscrolls(true);
-        scrollPane.setViewportView(mainPanel);
-//        mainPanel.add(scrollPane, BorderLayout.CENTER);
-        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     @Override
     public void update() {
-        //repaint();
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        try {
+            createNoteList(c.readNoteList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mainPanel.revalidate();
     }
 }

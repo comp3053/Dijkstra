@@ -5,6 +5,7 @@ import utils.FetchDataException;
 import view.BrewingHistoryListView;
 import view.HomeView;
 import view.NoteInputView;
+import view.NoteListView;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -48,8 +49,6 @@ public class NoteListController {
         }else{
             JOptionPane.showMessageDialog(null,"Your note has not been deleted ","Success",JOptionPane.ERROR_MESSAGE);
         }
-
-
     }
 
     public void addNote(){

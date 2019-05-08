@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewingHistoryListController {
+    private NoteListView v;
     public BrewingHistoryListController(){
+        this.v = v;
     }
 
     public ArrayList<BrewingRecord> readBrewingHistoryList(){
@@ -38,6 +40,7 @@ public class BrewingHistoryListController {
         System.out.println("Taking notes...");
         Date currentTime = new Date();
         Note newNote = new Note(0,m.getID(),currentTime,"");
+        newNote.addListener(this.v);
         NoteInputController nic = new NoteInputController(newNote);
         NoteInputView niv = new NoteInputView(nic, newNote);
         niv.setVisible(true);

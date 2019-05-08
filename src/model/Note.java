@@ -11,19 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Note {
+public class Note implements IDatabaseOperation<Note>{
     private int id;
     private int brewID;
     private Date createDate;
     private String content;
-    private ModelListener ml;
-
-    public void setModelListener(ModelListener ml){
-        this.ml = ml;
-    }
-
-    public Note(){
-    }
+    private ModelListener listener;
 
     public Note(int brewID, String content){
         setBrewID(brewID);
@@ -153,11 +146,22 @@ public class Note {
                     0,this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
+            notifyListener();
             return true;
         } catch (SQLiteConnectionException e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public void addListener(ModelListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void notifyListener() {
+        this.listener.update();
     }
 }
 

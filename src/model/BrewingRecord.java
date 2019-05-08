@@ -1,5 +1,6 @@
 package model;
 
+import controller.ModelListener;
 import controller.RecipeController;
 import utils.DatabaseHelper;
 import utils.FetchDataException;
@@ -11,11 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BrewingRecord {
+public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
     private int id;
     private Date brewDate;
     private int batchSize;
     private Recipe recipe;
+    private ModelListener listener;
 
     public BrewingRecord(Date brew_date, int batch_size, Recipe recipe) {
         setBatchSize(batch_size);
@@ -92,5 +94,25 @@ public class BrewingRecord {
             throw new FetchDataException("Could not get Brew Records.");
         }
         return brewingRecords;
+    }
+
+    @Override
+    public boolean insert() {
+        return false;
+    }
+
+    @Override
+    public boolean delete() {
+        return false;
+    }
+
+    @Override
+    public void addListener(ModelListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void notifyListener() {
+        this.listener.update();
     }
 }
