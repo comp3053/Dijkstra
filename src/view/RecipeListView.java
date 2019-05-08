@@ -98,7 +98,8 @@ public class RecipeListView extends View{
             editBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //TODO: Edit ingredient
+                    c.editRecipe(recipe);
+                    dispose();
                 }
             });
             deleteBtn.addActionListener(new ActionListener() {

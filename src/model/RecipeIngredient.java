@@ -22,6 +22,10 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         this.recipeID = recipeID;
     }
 
+    public void setRecipeID(int recipeID) {
+        this.recipeID = recipeID;
+    }
+
     @Override
     public void addListener(ModelListener listener) {
         this.listener = listener;
@@ -89,6 +93,19 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
             throw new FetchDataException("Could not fetch recipe ingredients.");
         }
         return ingredients;
+    }
+
+    public static boolean deleteAll(int recipeID) {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipeID);
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public boolean isEnough() {
