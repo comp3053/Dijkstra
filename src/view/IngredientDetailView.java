@@ -1,8 +1,7 @@
 package view;
 
-import controller.IngredientController;
 import controller.IngredientDetailController;
-import model.Ingredient;
+import model.StorageIngredient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +10,14 @@ import java.awt.event.ActionListener;
 
 public class IngredientDetailView extends View {
     private IngredientDetailController c;
-    private IngredientController ic;
-    private Ingredient ingredient;
-    public IngredientDetailView(IngredientDetailController c,Ingredient ingredient){
+    private StorageIngredient ingredient;
+
+    public IngredientDetailView(IngredientDetailController c, StorageIngredient ingredient) {
         this.c = c;
-        this.ic = new IngredientController();
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        this.ingredient=ingredient;
+        this.ingredient = ingredient;
 
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
@@ -42,17 +40,45 @@ public class IngredientDetailView extends View {
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                c.editIngredient(ingredient);
+                dispose();
             }
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);
-        JPanel mainBody = new JPanel();
-        mainBody.setLayout(new BoxLayout(mainBody, BoxLayout.Y_AXIS));
-        mainBody.add(new JLabel("Name"));
-        mainBody.add(new JLabel(ingredient.getName()));
-        mainBody.add(new JLabel("Amount"));
-        mainBody.add(new JLabel(ingredient.getAmount()+String.valueOf(ingredient.getUnit())));
-        this.add(mainBody, BorderLayout.CENTER);
+
+        JPanel mainPanel = new JPanel();
+        GroupLayout groupLayout = new GroupLayout(mainPanel);
+        mainPanel.setLayout(groupLayout);// Vertically display
+        groupLayout.setAutoCreateGaps(true);
+        groupLayout.setAutoCreateContainerGaps(true);
+
+        JLabel nameLabel = new JLabel("Name:");
+        JLabel amountLabel = new JLabel("Amount:");
+        JLabel unitLabel = new JLabel("Unit:");
+
+        JLabel nameValue = new JLabel(ingredient.getName());
+        JLabel amountValue = new JLabel(String.valueOf(ingredient.getAmount()));
+        JLabel unitValue = new JLabel(String.valueOf(ingredient.getUnit()));
+
+        GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
+
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameLabel)
+                .addComponent(amountLabel).addComponent(unitLabel));
+        hGroup.addGroup(groupLayout.createParallelGroup().addComponent(nameValue)
+                .addComponent(amountValue).addComponent(unitValue));
+        groupLayout.setHorizontalGroup(hGroup);
+
+        GroupLayout.SequentialGroup vGroup = groupLayout.createSequentialGroup();
+
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(nameLabel).addComponent(nameValue));
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(amountLabel).addComponent(amountValue));
+        vGroup.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(unitLabel).addComponent(unitValue));
+
+        groupLayout.setVerticalGroup(vGroup);
+        this.add(mainPanel, BorderLayout.CENTER);
     }
 
     @Override
