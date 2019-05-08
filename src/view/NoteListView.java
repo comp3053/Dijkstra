@@ -93,7 +93,11 @@ public class NoteListView extends View {
             mainPanelIter.add(deleteBtn);
             mainPanel.add(mainPanelIter);
         }
-        this.add(mainPanel, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setAutoscrolls(true);
+        scrollPane.setViewportView(mainPanel);
+//        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     @Override
