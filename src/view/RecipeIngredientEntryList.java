@@ -1,12 +1,14 @@
 package view;
 import model.*;
+import utils.DuplicateObjectException;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 
-public class RecipeIngredientEntryList extends JPanel{
+class RecipeIngredientEntryList extends JPanel{
     private ArrayList<RecipeIngredientEntry> entries;
     // Replace with your database stuff
     private ArrayList<StorageIngredient> ingredients;
@@ -14,19 +16,16 @@ public class RecipeIngredientEntryList extends JPanel{
 
     public RecipeIngredientEntryList(ArrayList<StorageIngredient> ingredients) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.entries = new ArrayList<RecipeIngredientEntry>();
+        this.entries = new ArrayList<>();
 
         this.ingredients = ingredients;
-        this.ingredientNames = new ArrayList<String>();
+        this.ingredientNames = new ArrayList<>();
         for (StorageIngredient ingredient: ingredients){
             ingredientNames.add(ingredient.getName() + " (Unit: " + ingredient.getUnit().toString().toLowerCase() + ")");
         }
-
-        RecipeIngredientEntry initial = new RecipeIngredientEntry(new JComboBox(this.ingredientNames.toArray()), "", this);
-        addItem(initial);
     }
 
-    public void cloneEntry(RecipeIngredientEntry entry) {
+    void cloneEntry(RecipeIngredientEntry entry) {
         Object selected = entry.getIngredientSelector().getSelectedItem();
         JComboBox copy = new JComboBox(this.ingredientNames.toArray());
         copy.setSelectedItem(selected);
@@ -35,13 +34,27 @@ public class RecipeIngredientEntryList extends JPanel{
         addItem(theClone);
     }
 
+    void initForm() {
+        RecipeIngredientEntry initial = new RecipeIngredientEntry(new JComboBox(this.ingredientNames.toArray()), "", this);
+        addItem(initial);
+    }
+
+    void initIngredients(ArrayList<RecipeIngredient> ingredients) {
+        for (RecipeIngredient ingredient : ingredients) {
+            RecipeIngredientEntry entry = new RecipeIngredientEntry(new JComboBox(this.ingredientNames.toArray()),
+                    Double.toString(ingredient.getAmount()), this);
+            entry.getIngredientSelector().setSelectedIndex(ingredient.getID() - 1);
+            addItem(entry);
+        }
+    }
+
     private void addItem(RecipeIngredientEntry entry) {
         this.entries.add(entry);
         add(entry);
         refresh();
     }
 
-    public void removeItem(RecipeIngredientEntry entry) {
+    void removeItem(RecipeIngredientEntry entry) {
         entries.remove(entry);
         remove(entry);
         refresh();
@@ -76,17 +89,27 @@ public class RecipeIngredientEntryList extends JPanel{
         }
 
     }
-    public ArrayList<RecipeIngredient> getIngredientList(){
-        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+
+    private boolean isDuplicate(StorageIngredient current, ArrayList<RecipeIngredient> ingredients) {
+        for (RecipeIngredient ingredient : ingredients) {
+            if (ingredient.getName().equals(current.getName()))
+                return true;
+        }
+        return false;
+    }
+
+    ArrayList<RecipeIngredient> getIngredientList() throws NumberFormatException, DuplicateObjectException {
+        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
         for (RecipeIngredientEntry entrie: entries){
             StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());
             try {
+                if (isDuplicate(currentStorageIngredient, recipeIngredients))
+                    throw new DuplicateObjectException("Some ingredients in recipe is duplicated.");
                 recipeIngredients.add(
-                        new RecipeIngredient(currentStorageIngredient.getName(),
+                        new RecipeIngredient(currentStorageIngredient.getID(), currentStorageIngredient.getName(),
                                 new Double(entrie.getInputBoxText().getText()),
-                                currentStorageIngredient.getUnit())
-            );
-            }catch (EmptyIngredientNameException | InvalidIngredientAmountException e){
+                                currentStorageIngredient.getUnit()));
+            }catch (EmptyNameException | InvalidInputException e){
                 e.printStackTrace();
             }
         }

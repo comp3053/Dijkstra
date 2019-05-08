@@ -2,6 +2,8 @@ package controller;
 
 import model.Note;
 import utils.DatabaseHelper;
+import utils.FetchDataException;
+import utils.ObjectNotFoundException;
 import utils.SQLiteConnectionException;
 
 import java.sql.ResultSet;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class NoteController implements DatabaseController<Note> {
+public class NoteController {
     public NoteController() {
         //Nothing to do
     }

@@ -3,7 +3,7 @@ package test;
 import model.*;
 import org.junit.Before;
 import org.junit.Test;
-import utils.UnitEnum;
+import utils.*;
 
 import java.util.ArrayList;
 
@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
 public class RecipeTest {
 
     private static Recipe recipe;
-    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+    ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         recipe = new Recipe(1,"beer","good",recipeIngredients);
     }
 
@@ -59,7 +59,7 @@ public class RecipeTest {
 
     @Test
     public void setIngredients() {
-        ArrayList<RecipeIngredient> modifyRecipeIngredient = new ArrayList<RecipeIngredient>();
+        ArrayList<RecipeIngredient> modifyRecipeIngredient = new ArrayList<>();
         recipe.setIngredients(modifyRecipeIngredient);
         assertEquals(modifyRecipeIngredient,recipe.getIngredients());
     }
@@ -71,12 +71,10 @@ public class RecipeTest {
             try {
                 recipe.addRecipeIngredient(water);
                 assertEquals(water,recipe.getIngredients().get(0));
-            } catch (AddExisitingRecipeIngredientsException e) {
+            } catch (AddObjectException e) {
                 e.printStackTrace();
             }
-        } catch (EmptyIngredientNameException e) {
-            e.printStackTrace();
-        } catch (InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
@@ -88,13 +86,7 @@ public class RecipeTest {
             recipe.addRecipeIngredient(water);
             recipe.amountConversion(50.0);
             assertEquals(2.0,recipe.getIngredients().get(0).getAmount(),0.0);
-        } catch (EmptyIngredientNameException e) {
-            e.printStackTrace();
-        } catch (InvalidIngredientAmountException e) {
-            e.printStackTrace();
-        } catch (AddExisitingRecipeIngredientsException e) {
-            e.printStackTrace();
-        } catch (InvalidOriginalBatchSizeException e) {
+        } catch (EmptyNameException | InvalidInputException | AddObjectException e) {
             e.printStackTrace();
         }
     }
@@ -107,13 +99,7 @@ public class RecipeTest {
             recipe.addRecipeIngredient(water);
             recipe.modifyRecipeIngredient(modifyWater);
             assertEquals(2,recipe.getIngredients().get(0).getID());
-        } catch (EmptyIngredientNameException e) {
-            e.printStackTrace();
-        } catch (InvalidIngredientAmountException e) {
-            e.printStackTrace();
-        } catch (AddExisitingRecipeIngredientsException e) {
-            e.printStackTrace();
-        } catch (ModifyNotExisitingRecipeIngredientException e) {
+        } catch (EmptyNameException | ModifyObjectException | AddObjectException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

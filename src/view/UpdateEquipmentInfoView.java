@@ -1,21 +1,21 @@
 package view;
 
-import controller.UpdateEquipmentInforController;
-import model.EmptyEquipmentNameException;
+import controller.UpdateEquipmentInfoController;
+import utils.EmptyNameException;
 import model.Equipment;
-import model.InvalidEquipmentVolumeException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpdateEquipmentInfoView extends View{
-    private UpdateEquipmentInforController c;
-
-    public UpdateEquipmentInfoView(UpdateEquipmentInforController c){
+    private UpdateEquipmentInfoController c;
+    private Equipment m;
+    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m){
         this.c = c;
+        this.m = m;
         this.setTitle("Brew Day! - Equipment Update"); // set frame title
         this.setSize(600, 400); // set frame size
         this.setLayout(new BorderLayout());
@@ -86,21 +86,15 @@ public class UpdateEquipmentInfoView extends View{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    boolean saveComplete = c.saveEquipmentInfo(name.getText(),volume.getText());
-                    if(saveComplete) {
+                    if(c.saveEquipmentInfo(name.getText(),volume.getText())) {
                         JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
-                    }else {
-                        JOptionPane.showMessageDialog(null, "Equipment Information was not saved");
                     }
                     c.goBack();
                     dispose();
-                } catch (EmptyEquipmentNameException ex) {
+                } catch (EmptyNameException | InvalidInputException | NumberFormatException ex) {
                     ex.printStackTrace();
-                } catch (InvalidEquipmentVolumeException ex) {
-                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Input invalid.");
                 }
-                //TODO: Add operation to show status of insert
-                //dispose();
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

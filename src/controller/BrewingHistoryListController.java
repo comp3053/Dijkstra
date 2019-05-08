@@ -1,6 +1,5 @@
 package controller;
 
-import view.BrewingHistoryListView;
 import view.NoteInputView;
 import view.NoteListView;
 

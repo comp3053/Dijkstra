@@ -2,22 +2,20 @@ package controller;
 
 import model.BrewingRecord;
 import model.Recipe;
-import utils.DatabaseHelper;
-import utils.SQLiteConnectionException;
+import utils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BrewController implements DatabaseController<BrewingRecord> {
+public class BrewController {
     public BrewController() {
         //Nothing to do
     }
 
-    public Recipe getRecipe(int recipeID) throws FetchDataException, ObjectNotFoundException {
-        RecipeController rc = new RecipeController();
-        ArrayList<Recipe> recipes = rc.getAll();
+    public Recipe getRecipe(int recipeID) throws FetchDataException, ObjectNotFoundException, EmptyNameException, InvalidInputException {
+        ArrayList<Recipe> recipes = Recipe.getAll();
         for (Recipe recipe : recipes) {
             if (recipe.getID() == recipeID)
                 return recipe;
@@ -42,6 +40,8 @@ public class BrewController implements DatabaseController<BrewingRecord> {
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not get Brew Records.");
+        } catch (EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
         }
         return brewingRecords;
     }

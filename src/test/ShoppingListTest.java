@@ -1,8 +1,8 @@
 package test;
 
-import model.EmptyIngredientNameException;
+import utils.EmptyNameException;
 import model.Ingredient;
-import model.InvalidIngredientAmountException;
+import utils.InvalidInputException;
 import model.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,10 +15,10 @@ import static org.junit.Assert.*;
 public class ShoppingListTest {
 
     private static ShoppingList shoppingList;
-    ArrayList<Ingredient> missingIngredients = new ArrayList<Ingredient>();
+    ArrayList<Ingredient> missingIngredients = new ArrayList<>();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         shoppingList = new ShoppingList(missingIngredients);
     }
 
@@ -39,7 +39,7 @@ public class ShoppingListTest {
             ingredient = new Ingredient(1, "yeast", 100.0, UnitEnum.GRAM);
             shoppingList.addMissingIngredient(ingredient);
             assertEquals(ingredient,shoppingList.getMissingIngredients().get(0));
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

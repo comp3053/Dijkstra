@@ -1,5 +1,7 @@
 package model;
 
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import utils.UnitEnum;
 
 public class Ingredient {
@@ -8,15 +10,19 @@ public class Ingredient {
     private double amount;
     private UnitEnum unit;
 
-    public Ingredient(String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
-            InvalidIngredientAmountException {
+    public Ingredient() {
+        // Nothing to do
+    }
+
+    public Ingredient(String name, double amount, UnitEnum unit) throws EmptyNameException,
+            InvalidInputException {
         setName(name);
         setAmount(amount);
         setUnit(unit);
     }
 
-    public Ingredient(int id, String name, double amount, UnitEnum unit) throws EmptyIngredientNameException,
-            InvalidIngredientAmountException {
+    public Ingredient(int id, String name, double amount, UnitEnum unit) throws EmptyNameException,
+            InvalidInputException {
         setID(id);
         setName(name);
         setAmount(amount);
@@ -35,9 +41,9 @@ public class Ingredient {
         return this.name;
     }
 
-    public void setName(String name) throws EmptyIngredientNameException {
+    public void setName(String name) throws EmptyNameException {
         if (name.isEmpty()) {
-            throw new EmptyIngredientNameException("Ingredient name cannot be empty!");
+            throw new EmptyNameException("Ingredient name cannot be empty!");
         } else {
             this.name = name;
         }
@@ -47,9 +53,9 @@ public class Ingredient {
         return this.amount;
     }
 
-    protected void setAmount(double amount) throws InvalidIngredientAmountException {
+    public void setAmount(double amount) throws InvalidInputException {
         if (amount < 0) {
-            throw new InvalidIngredientAmountException("Ingredient amount should be greater than 0!");
+            throw new InvalidInputException("Ingredient amount should be greater than 0!");
         } else {
             this.amount = amount;
         }

@@ -1,8 +1,8 @@
 package test;
 
-import model.EmptyIngredientNameException;
+import utils.EmptyNameException;
 import model.Ingredient;
-import model.InvalidIngredientAmountException;
+import utils.InvalidInputException;
 import org.junit.Ignore;
 import utils.UnitEnum;
 import org.junit.Before;
@@ -18,7 +18,7 @@ public class IngredientTest {
     public void setUp() {
         try {
             ingredient = new Ingredient(1, "yeast", 100.0, UnitEnum.GRAM);
-        } catch (EmptyIngredientNameException | InvalidIngredientAmountException e) {
+        } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
@@ -43,13 +43,13 @@ public class IngredientTest {
     public void setName() {
         try {
             ingredient.setName("water");
-        } catch (EmptyIngredientNameException e) {
+        } catch (EmptyNameException e) {
             e.printStackTrace();
         }
         assertEquals("water", ingredient.getName());
         try {
             ingredient.setName("");
-        } catch (EmptyIngredientNameException e) {
+        } catch (EmptyNameException e) {
             e.printStackTrace();
         }
         assertEquals("water", ingredient.getName());

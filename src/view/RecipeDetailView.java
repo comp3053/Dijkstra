@@ -1,11 +1,7 @@
 package view;
 
 
-import controller.FetchDataException;
-import controller.RecipeController;
 import controller.RecipeDetailController;
-import model.EmptyIngredientNameException;
-import model.InvalidIngredientAmountException;
 import model.Recipe;
 
 import javax.swing.*;
@@ -15,19 +11,13 @@ import java.awt.event.ActionListener;
 
 public class RecipeDetailView extends View {
     private RecipeDetailController c;
-    private RecipeController rc;
     private Recipe recipe;
-    public RecipeDetailView(RecipeDetailController c,int recipeID){
+    public RecipeDetailView(RecipeDetailController c,Recipe recipe){
         this.c = c;
-        this.rc = new RecipeController();
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        try {
-            this.recipe = rc.getRecipe(recipeID);
-        } catch (FetchDataException | InvalidIngredientAmountException | EmptyIngredientNameException e) {
-            e.printStackTrace();
-        }
+        this.recipe = recipe;
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));

@@ -1,10 +1,11 @@
 package view;
 
 import controller.RecipeFormController;
-import model.EmptyIngredientNameException;
-import model.InvalidIngredientAmountException;
-import model.RecipeIngredient;
+import model.RecipeForm;
+import utils.DuplicateObjectException;
+import utils.EmptyNameException;
 import model.StorageIngredient;
+import utils.InvalidInputException;
 import utils.UnitEnum;
 
 import javax.swing.*;
@@ -16,8 +17,11 @@ import java.util.ArrayList;
 
 public class RecipeFormView extends View {
     private RecipeFormController c;
-    public RecipeFormView(RecipeFormController c){
+    private RecipeForm m;
+
+    public RecipeFormView(RecipeFormController c, RecipeForm m){
         this.c = c;
+        this.m = m;
         this.setTitle("Brew Day! - Recipe Form"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
@@ -42,20 +46,14 @@ public class RecipeFormView extends View {
         mainPanel.add(recipeNameField, BorderLayout.PAGE_START);
         this.add(mainPanel);
 
-
-        ArrayList<StorageIngredient> testIngredient = new ArrayList<StorageIngredient>();
-        try{
-            testIngredient.add(new StorageIngredient(1,"A1", 2.0, UnitEnum.GRAM));
-            testIngredient.add(new StorageIngredient(2,"A2", 3.0, UnitEnum.LITER));
-            testIngredient.add(new StorageIngredient(3,"A3", 2.0, UnitEnum.KILOGRAM));
-            testIngredient.add(new StorageIngredient(4,"A4", 20.0, UnitEnum.MILLILITER));
-            testIngredient.add(new StorageIngredient(5,"A5", 0.2, UnitEnum.KILOGRAM));
-            testIngredient.add(new StorageIngredient(6,"A6", 2.0, UnitEnum.GRAM));
-        }catch (EmptyIngredientNameException | InvalidIngredientAmountException e){
-            e.printStackTrace();
+        RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(m.getStorageIngredients());
+        if (m.getRecipe().getID() > 0) {
+            recipeNameTextfield.setText(m.getRecipe().getName());
+            recipeIngredientEntryList.initIngredients(m.getRecipeIngredients());
         }
-
-        RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(testIngredient);
+        else {
+            recipeIngredientEntryList.initForm();
+        }
         JScrollPane scrollPane = new JScrollPane(recipeIngredientEntryList);
         scrollPane.setAutoscrolls(true);
         scrollPane.setViewportView(recipeIngredientEntryList);
@@ -80,12 +78,30 @@ public class RecipeFormView extends View {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<RecipeIngredient> recipeIngredients = recipeIngredientEntryList.getIngredientList();
+                String name = recipeNameTextfield.getText();
+                if (name.length() <= 0) {
+                    JOptionPane.showMessageDialog(null, "Please input recipe name!");
+                    return;
+                }
+                try {
+                    m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Invalid Ingredient Amount");
+                    return;
+                } catch (DuplicateObjectException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Some ingredients in recipe is duplicated.");
+                    return;
+                }
+                m.getRecipe().setName(name);
+                m.getRecipe().setDescription("This is a kind of beer."); // TODO: Add description field
 //                GET the Ingredient List from GUI
 //                Check if there is a duplicate ingredient
 //                Check if there are invalid value
 //                Check if the fields are valid.
                 c.saveRecipe();
+                dispose();
             }
         });
 

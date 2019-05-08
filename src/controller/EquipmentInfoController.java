@@ -1,13 +1,13 @@
 package controller;
 
+import model.Equipment;
 import view.HomeView;
 import view.UpdateEquipmentInfoView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EquipmentInfoController {
-    public EquipmentInfoController(){
+    private Equipment m;
+    public EquipmentInfoController(Equipment m){
+        this.m = m;
     }
 
     public void goBack() {
@@ -18,8 +18,8 @@ public class EquipmentInfoController {
 
     public void turnUpdateInfo() {
         // TODO: Fill the exists Info to the field
-        UpdateEquipmentInforController ueic = new UpdateEquipmentInforController();
-        UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic);
+        UpdateEquipmentInfoController ueic = new UpdateEquipmentInfoController(m);
+        UpdateEquipmentInfoView ueiv = new UpdateEquipmentInfoView(ueic, m);
         ueiv.setVisible(true);
     }
 }

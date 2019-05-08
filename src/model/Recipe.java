@@ -1,12 +1,22 @@
 package model;
 
+import controller.ModelListener;
+import utils.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Recipe {
+public class Recipe implements IDatabaseOperation<Recipe> {
     private int id;
     private String name;
     private String description;
     private ArrayList<RecipeIngredient> ingredients;
+    private ModelListener listener;
+
+    public Recipe() {
+        // Nothing to do
+    }
 
     public Recipe(int id, String name, String description) {
         setID(id);
@@ -59,38 +69,151 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize) throws InvalidOriginalBatchSizeException{//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
+    public void amountConversion(double originalBatchSize) throws InvalidInputException {//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
         if(originalBatchSize<=0){
-            throw new InvalidOriginalBatchSizeException("Batch size could not be equal or less than 0!");
+            throw new InvalidInputException("Batch size could not be equal or less than 0!");
         }
         else{
-            for(int i = 0;i < this.ingredients.size();i++){
+            for (RecipeIngredient ingredient : this.ingredients) {
                 try {
-                    this.ingredients.get(i).setAmount(this.ingredients.get(i).getAmount()/originalBatchSize);
-                } catch (InvalidIngredientAmountException e) {
+                    ingredient.setAmount(ingredient.getAmount() / originalBatchSize);
+                } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
 
-    public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyNotExisitingRecipeIngredientException {
+    public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyObjectException {
         for(int i = 0;i < this.ingredients.size();i++){
-            if(this.ingredients.get(i).getName().equals(recipeIngredient.getName())==true){
+            if(this.ingredients.get(i).getName().equals(recipeIngredient.getName())){
                 this.ingredients.remove(i);
                 this.ingredients.add(i, recipeIngredient);
                 return;
             }
         }
-        throw new ModifyNotExisitingRecipeIngredientException("Cannot modify a recipe not existing!");
+        throw new ModifyObjectException("Cannot modify a recipe not existing!");
     }
 
-    public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddExisitingRecipeIngredientsException{
-        for(int i = 0; i < this.ingredients.size();i++){
-            if(this.ingredients.get(i)==recipeIngredients) {
-                throw new AddExisitingRecipeIngredientsException(recipeIngredients.getName()+"is already existed!");
+    public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddObjectException {
+        for (RecipeIngredient ingredient : this.ingredients) {
+            if (ingredient == recipeIngredients) {
+                throw new AddObjectException(recipeIngredients.getName() + "is already existed!");
             }
         }
         this.ingredients.add(recipeIngredients);
+    }
+
+    public boolean isAvailable() {
+        for (RecipeIngredient ingredient : ingredients) {
+            if (!ingredient.isEnough())
+                return false;
+        }
+        return true;
+    }
+
+    private int getNewID() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT Recipe_ID FROM Recipe WHERE Name='%s'", stringParser(this.getName()));
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            int newID = rs.getInt(1);
+            dbHelper.closeConnection();
+            return newID;
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public boolean update() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("UPDATE Recipe SET Name='%s',Description='%s' WHERE Recipe_ID=%d",
+                stringParser(this.getName()), stringParser(this.getDescription()), this.getID());
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static ArrayList<Recipe> getAll() throws FetchDataException, EmptyNameException, InvalidInputException {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = "SELECT * FROM Recipe";
+        int id;
+        String name, description;
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            while (rs.next()) {
+                id = rs.getInt(1);
+                name = rs.getString(2);
+                description = rs.getString(3);
+                recipes.add(new Recipe(id, name, description, RecipeIngredient.getAll(id)));
+            }
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            throw new FetchDataException("Fail to fetch recipes.");
+        }
+        return recipes;
+    }
+
+    @Override
+    public boolean insert() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        boolean status;
+        String query = String.format("INSERT INTO Recipe (Name,Description) VALUES ('%s','%s')",
+                stringParser(this.getName()), stringParser(this.getDescription()));
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        int recipeID = getNewID();
+        for (RecipeIngredient ingredient : ingredients) {
+            ingredient.setRecipeID(recipeID);
+            status = ingredient.insert();
+            if (!status)
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean delete() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        boolean status;
+        String query = String.format("DELETE FROM Recipe WHERE Recipe_ID=%d", this.getID());
+
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        for (RecipeIngredient ingredient : ingredients) {
+            status = ingredient.delete();
+            if (!status)
+                return false;
+        }
+        notifyListener();
+        return true;
+    }
+
+    @Override
+    public void addListener(ModelListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void notifyListener() {
+        listener.update();
     }
 }

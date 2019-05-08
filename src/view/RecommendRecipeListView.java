@@ -1,6 +1,5 @@
 package view;
 
-import controller.RecommendNotEnoughIngredientRecipeListController;
 import controller.RecommendRecipeListController;
 
 import javax.swing.*;
