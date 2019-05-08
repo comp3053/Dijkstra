@@ -114,7 +114,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
 
     private int getNewID() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("SELECT Recipe_ID FROM Recipe WHERE Name='%s'", this.getName());
+        String query = String.format("SELECT Recipe_ID FROM Recipe WHERE Name=\"%s\"", stringParser(this.getName()));
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
             int newID = rs.getInt(1);
@@ -128,8 +128,8 @@ public class Recipe implements IDatabaseOperation<Recipe> {
 
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("UPDATE Recipe SET Name='%s',Description='%s' WHERE Recipe_ID=%d",
-                this.getName(), this.getDescription(), this.getID());
+        String query = String.format("UPDATE Recipe SET Name=\"%s\",Description=\"%s\" WHERE Recipe_ID=%d",
+                stringParser(this.getName()), stringParser(this.getDescription()), this.getID());
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -166,8 +166,8 @@ public class Recipe implements IDatabaseOperation<Recipe> {
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         boolean status;
-        String query = String.format("INSERT INTO Recipe (Name,Description) VALUES ('%s','%s')",
-                this.getName(), this.getDescription());
+        String query = String.format("INSERT INTO Recipe (Name,Description) VALUES (\"%s\",\"%s\")",
+                stringParser(this.getName()), stringParser(this.getDescription()));
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();

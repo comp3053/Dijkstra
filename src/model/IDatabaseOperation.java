@@ -10,4 +10,8 @@ interface IDatabaseOperation<T> {
     void addListener(ModelListener listener);
 
     void notifyListener();
+
+    default String stringParser(String str) {
+        return str.replaceAll("\"", "\\\\\"").replaceAll("'", "\\\\\'");
+    }
 }

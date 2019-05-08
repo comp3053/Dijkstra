@@ -41,9 +41,9 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
     @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
-                this.getName(), this.getAmount(), this.getUnit().toString());
-
+        String query = String.format("INSERT INTO Ingredient (Name, Amount, Unit) VALUES (\"%s\",%f,\"%s\")",
+                stringParser(this.getName()), this.getAmount(), this.getUnit().toString());
+        System.out.println(query);
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -56,8 +56,8 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
 
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("UPDATE Ingredient SET Name='%s',Amount=%f,Unit='%s' WHERE Ingredient_ID=%d",
-                this.getName(), this.getAmount(), this.getUnit().toString(), this.getID());
+        String query = String.format("UPDATE Ingredient SET Name=\"%s\",Amount=%f,Unit=\"%s\" WHERE Ingredient_ID=%d",
+                stringParser(this.getName()), this.getAmount(), this.getUnit().toString(), this.getID());
         System.out.println(query);
 
         try {
