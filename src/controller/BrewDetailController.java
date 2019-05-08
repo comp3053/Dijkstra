@@ -1,6 +1,7 @@
 package controller;
 
 import model.Recipe;
+import utils.EmptyNameException;
 import utils.FetchDataException;
 import utils.InvalidInputException;
 import view.BrewDetailView;
@@ -17,12 +18,15 @@ public class BrewDetailController {
     public void goBack(){
         // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecipeController rc = new RecipeController();
         try {
-            ArrayList<Recipe> recommendRecipe = rc.getAll();
+            ArrayList<Recipe> recommendRecipe = new Recipe().getAll();
             RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
             rrlv.setVisible(true);
         } catch (FetchDataException e) {
+            e.printStackTrace();
+        } catch (EmptyNameException e) {
+            e.printStackTrace();
+        } catch (InvalidInputException e) {
             e.printStackTrace();
         }
     }
