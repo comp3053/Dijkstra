@@ -4,9 +4,11 @@ import controller.BrewDetailController;
 import model.Recipe;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class BrewDetailView extends View {
     private BrewDetailController c;
@@ -64,11 +66,12 @@ public class BrewDetailView extends View {
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
-        Object[][] data =
-                {
-                        {"Barley", "GRAM", "3.5"},
-                        {"Yeast", "MILLILITER", "25"},
-                };
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        for (int i = 0;i<recipe.getIngredients().size();i++) {
+            data[i][0] = recipe.getIngredients().get(i).getName();
+            data[i][1] = recipe.getIngredients().get(i).getUnit();
+            data[i][2] = recipe.getIngredients().get(i).getAmount();
+        }
 
         JTable table = new JTable(data, columnNames);
         mainPanel.add(table, BorderLayout.CENTER);
