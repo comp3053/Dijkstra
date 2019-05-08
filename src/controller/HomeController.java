@@ -52,12 +52,21 @@ public class HomeController {
     public void startRecommend(){
 // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecipeController rc = new RecipeController();
         try {
-            ArrayList<Recipe> recommendRecipe = rc.getAll();
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
+            ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
+            RecommendRecipeListView rrlv;
+            rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, true);
+            for (int i = 0; i<recommendRecipe.size();i++) {
+                if (recommendRecipe.get(i).isAvailable()) {
+                    rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
+                }
+            }
             rrlv.setVisible(true);
         } catch (FetchDataException e) {
+            e.printStackTrace();
+        } catch (EmptyNameException e) {
+            e.printStackTrace();
+        } catch (InvalidInputException e) {
             e.printStackTrace();
         }
     }
