@@ -51,7 +51,7 @@ public class NoteController {
 
     public boolean insert(Note note) {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d)",
+        String query = String.format("INSERT OR IGNORE INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d)",
                 note.getCreateDate().getTime(), note.getContent(), note.getBrewID());
         try {
             dbHelper.execSqlNoReturn(query);

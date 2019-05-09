@@ -22,6 +22,10 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         this.recipeID = recipeID;
     }
 
+    public void setRecipeID(int recipeID) {
+        this.recipeID = recipeID;
+    }
+
     @Override
     public void addListener(ModelListener listener) {
         this.listener = listener;
@@ -35,7 +39,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
     @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Ingredient_in_Recipe VALUES (%d,%d,%f,'%s')",
+        String query = String.format("INSERT OR IGNORE INTO Ingredient_in_Recipe VALUES (%d,%d,%f,'%s')",
                 this.getRecipeID(), this.getID(), this.getAmount(), this.getUnit());
 
         try {
@@ -53,6 +57,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d AND Ingredient_ID=%d",
                 this.getRecipeID(), this.getID());
+        System.out.println(query);
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -91,6 +96,34 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return ingredients;
     }
 
+    static boolean deleteAll(int recipeID) {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipeID);
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean update() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("UPDATE Ingredient_in_Recipe SET Amount=%f",
+                this.getAmount());
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+            return true;
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean isEnough() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
@@ -107,7 +140,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return true;
     }
 
-    public int getRecipeID() {
+    private int getRecipeID() {
         return recipeID;
     }
 }
