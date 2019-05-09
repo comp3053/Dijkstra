@@ -31,19 +31,20 @@ public class BrewDetailController {
         }
     }
 
-    public void applyBatchSize(double batchSize,Recipe recipe){
+    public void applyBatchSize(double batchSize,Recipe recipe){//TODO:fixing the mathematical bug
         try {
             recipe.amountConversion(batchSize);
             BrewDetailController bdc= new BrewDetailController();
             BrewDetailView bdv = new BrewDetailView(bdc,recipe);
+            bdv.setVisible(true);
         } catch (InvalidInputException e) {
             e.printStackTrace();
         }
     }
 
-    public void brewRecipe(Recipe recipe){
+    public void brewRecipe(Recipe recipe,double batchSize){
         BrewReciptController brc = new BrewReciptController();
-        BrewReciptView brv = new BrewReciptView(brc,recipe);
+        BrewReciptView brv = new BrewReciptView(brc,recipe,batchSize);
         brv.setVisible(true);
     }
 }

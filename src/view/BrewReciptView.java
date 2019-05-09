@@ -11,9 +11,11 @@ import java.awt.event.ActionListener;
 public class BrewReciptView extends View {
     private BrewReciptController c;
     private Recipe recipe;
-    public BrewReciptView(BrewReciptController c, Recipe recipe){
+    private double batchSize;
+    public BrewReciptView(BrewReciptController c, Recipe recipe,double batchSize){
         this.c = c;
         this.recipe = recipe;
+        this.batchSize = batchSize;
         this.setTitle("Brew Day! - Brew Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
@@ -26,8 +28,8 @@ public class BrewReciptView extends View {
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
         word.add(title, BorderLayout.LINE_START);
-        JLabel batchSize = new JLabel("Batch Size: 1000mL");
-        word.add(batchSize, BorderLayout.LINE_END);
+        JLabel batchSizeLabel = new JLabel("Batch Size: "+this.batchSize);
+        word.add(batchSizeLabel, BorderLayout.LINE_END);
         jp2.add(word, BorderLayout.PAGE_START);
         this.add(jp2, BorderLayout.PAGE_START);
 
