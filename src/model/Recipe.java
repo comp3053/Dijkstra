@@ -112,6 +112,34 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         return true;
     }
 
+    private int getNewID() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT Recipe_ID FROM Recipe WHERE Name='%s'", stringParser(this.getName()));
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            int newID = rs.getInt(1);
+            dbHelper.closeConnection();
+            return newID;
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public boolean update() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("UPDATE Recipe SET Name='%s',Description='%s' WHERE Recipe_ID=%d",
+                stringParser(this.getName()), stringParser(this.getDescription()), this.getID());
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public static ArrayList<Recipe> getAll() throws FetchDataException, EmptyNameException, InvalidInputException {
         ArrayList<Recipe> recipes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -139,7 +167,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         DatabaseHelper dbHelper = new DatabaseHelper();
         boolean status;
         String query = String.format("INSERT INTO Recipe (Name,Description) VALUES ('%s','%s')",
-                this.getName(), this.getDescription());
+                stringParser(this.getName()), stringParser(this.getDescription()));
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -147,7 +175,9 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             e.printStackTrace();
             return false;
         }
+        int recipeID = getNewID();
         for (RecipeIngredient ingredient : ingredients) {
+            ingredient.setRecipeID(recipeID);
             status = ingredient.insert();
             if (!status)
                 return false;
