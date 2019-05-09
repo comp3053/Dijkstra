@@ -41,7 +41,7 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
     @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
+        String query = String.format("INSERT OR IGNORE INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
                 stringParser(this.getName()), this.getAmount(), this.getUnit().toString());
         System.out.println(query);
         try {

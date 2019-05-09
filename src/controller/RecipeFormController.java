@@ -15,6 +15,7 @@ public class RecipeFormController {
     }
 
     public void saveRecipe() {
+        System.out.println(m.getRecipeIngredients().get(0).getName());
         m.save();
         cancel();
     }

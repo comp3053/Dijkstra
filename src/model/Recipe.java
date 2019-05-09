@@ -76,7 +76,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         else{
             for (RecipeIngredient ingredient : this.ingredients) {
                 try {
-                    ingredient.setAmount(ingredient.getAmount()* ( originalBatchSize/1000));
+                    ingredient.setAmount(ingredient.getAmount()* (1000 / originalBatchSize));
                 } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +166,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         boolean status;
-        String query = String.format("INSERT INTO Recipe (Name,Description) VALUES ('%s','%s')",
+        String query = String.format("INSERT OR IGNORE INTO Recipe (Name,Description) VALUES ('%s','%s')",
                 stringParser(this.getName()), stringParser(this.getDescription()));
         try {
             dbHelper.execSqlNoReturn(query);
@@ -199,6 +199,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             return false;
         }
         for (RecipeIngredient ingredient : ingredients) {
+            ingredient.setRecipeID(getID());
             status = ingredient.delete();
             if (!status)
                 return false;

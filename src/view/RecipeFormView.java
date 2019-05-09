@@ -106,12 +106,16 @@ public class RecipeFormView extends View {
                     JOptionPane.showMessageDialog(null, "Some ingredients in recipe is duplicated.");
                     return;
                 }
+                try {
+                    m.setBatchSize(Double.parseDouble(recipeBatchSizeTextfield.getText()));
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Wrong batch size format.");
+                    return;
+                }
                 m.getRecipe().setName(name);
-                m.getRecipe().setDescription("This is a kind of beer."); // TODO: Add description field
-//                GET the Ingredient List from GUI
-//                Check if there is a duplicate ingredient
-//                Check if there are invalid value
-//                Check if the fields are valid.
+                m.getRecipe().setDescription(recipeDescrptionTextArea.getText());
+
                 c.saveRecipe();
                 dispose();
             }

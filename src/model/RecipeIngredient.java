@@ -39,7 +39,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
     @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Ingredient_in_Recipe VALUES (%d,%d,%f,'%s')",
+        String query = String.format("INSERT OR IGNORE INTO Ingredient_in_Recipe VALUES (%d,%d,%f,'%s')",
                 this.getRecipeID(), this.getID(), this.getAmount(), this.getUnit());
 
         try {
@@ -57,6 +57,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d AND Ingredient_ID=%d",
                 this.getRecipeID(), this.getID());
+        System.out.println(query);
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
