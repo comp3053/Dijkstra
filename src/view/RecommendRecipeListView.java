@@ -51,8 +51,15 @@ public class RecommendRecipeListView extends View{
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
         for(Recipe recommendRecipeItem: recommendRecipe) {
-            if (!viewStatus&&recommendRecipeItem.isAvailable()) {
-                JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used"); //TODO:show the number of recipeIngredient
+            if (!viewStatus) {
+                if (recommendRecipeItem.isAvailable()) {
+                    JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
+                    bg.add(ingredientItem);
+                    mainPanel.add(ingredientItem);
+                }
+            }
+            else {
+                JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
                 bg.add(ingredientItem);
                 mainPanel.add(ingredientItem);
             }
