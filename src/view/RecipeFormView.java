@@ -1,6 +1,7 @@
 package view;
 
 import controller.RecipeFormController;
+import model.Recipe;
 import utils.EmptyNameException;
 import model.RecipeIngredient;
 import model.StorageIngredient;
@@ -16,8 +17,11 @@ import java.util.ArrayList;
 
 public class RecipeFormView extends View {
     private RecipeFormController c;
-    public RecipeFormView(RecipeFormController c){
+    private Recipe m;
+
+    public RecipeFormView(RecipeFormController c, Recipe m){
         this.c = c;
+        this.m = m;
         this.setTitle("Brew Day! - Recipe Form"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame

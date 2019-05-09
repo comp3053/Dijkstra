@@ -1,6 +1,7 @@
 package view;
 
 import controller.MissingIngredientListController;
+import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class MissingIngredientsListView extends View{
     private MissingIngredientListController c;
-    public MissingIngredientsListView(MissingIngredientListController c){
+    private Recipe recipe;
+    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe){
         this.c = c;
+        this.recipe = recipe;
         this.setTitle("Brew Day! - Missing Ingredient List"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -28,7 +31,7 @@ public class MissingIngredientsListView extends View{
         });
         jp_header.add(btn_back);
 
-        JLabel msg_header = new JLabel("Missing Ingredient List For Recipe" + "A");
+        JLabel msg_header = new JLabel("Missing Ingredient List For Recipe" + this.recipe.getName());
         msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
         jp_header.add(msg_header);
 
@@ -47,13 +50,13 @@ public class MissingIngredientsListView extends View{
         JLabel msg_headAmount = new JLabel("amount");
         jp_main_sub.add(msg_headAmount);
         jp_main.add(jp_main_sub);
-        for(int i =0;i<5;i++) {
+        for(int i =0;i<this.recipe.getIngredients().size();i++) {
             jp_main_sub = new JPanel();
-            JLabel msg_ingreNamei = new JLabel("yeast");
+            JLabel msg_ingreNamei = new JLabel(this.recipe.getIngredients().get(i).getName());
             jp_main_sub.add(msg_ingreNamei);
-            JLabel msg_ingreUniti = new JLabel("gram");
+            JLabel msg_ingreUniti = new JLabel(this.recipe.getIngredients().get(i).getUnit().name());
             jp_main_sub.add(msg_ingreUniti);
-            JLabel msg_ingreAmounti = new JLabel("3.2");
+            JLabel msg_ingreAmounti = new JLabel(""+this.recipe.getIngredients().get(i).getAmount());
             jp_main_sub.add(msg_ingreAmounti);
             jp_main.add(jp_main_sub);
         }

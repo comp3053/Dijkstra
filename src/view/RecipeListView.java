@@ -1,9 +1,10 @@
 package view;
 
-import utils.FetchDataException;
-import controller.RecipeController;
 import controller.RecipeListController;
 import model.Recipe;
+import utils.EmptyNameException;
+import utils.FetchDataException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,19 +14,16 @@ import java.util.ArrayList;
 
 public class RecipeListView extends View{
     private RecipeListController c;
-    private RecipeController rc;
-    private ArrayList<Recipe> recipe;
-    public RecipeListView(RecipeListController c){
+    private JPanel listPanel;
+    private JLabel subtitle;
+
+    private ArrayList<Recipe> recipes;
+    public RecipeListView(RecipeListController c, ArrayList<Recipe> recipes){
         this.c = c;
-        this.rc = new RecipeController();
+        this.recipes = recipes;
         this.setTitle("Brew Day! - Manage Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        try {
-            this.recipe = rc.getAll();
-        } catch (FetchDataException e) {
-            e.printStackTrace();
-        }
 
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
@@ -63,7 +61,7 @@ public class RecipeListView extends View{
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
 
-        JLabel subtitle = new JLabel(recipe.size()+" Recipes in the database");
+        subtitle = new JLabel(recipes.size()+" Recipes in the database");
         //help_word.setHorizontalAlignment(JLabel.CENTER);
         // Set Font size
         subtitle.setFont(new Font(subtitle.getFont().getFontName(), subtitle.getFont().getStyle(), 16));
@@ -71,22 +69,29 @@ public class RecipeListView extends View{
         word.add(subtitle);
 //        word.setBorder(new EmptyBorder(0,0,0,0));
         mainPanel.add(word, BorderLayout.PAGE_START);
-
-        JPanel listPanel = new JPanel();
+        listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        for (Recipe value : recipe) {
+        createRecipeList(recipes);
+
+        mainPanel.add(listPanel, BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
+    }
+
+    private int createRecipeList(ArrayList<Recipe> recipes) {
+        for (Recipe recipe : recipes) {
             JPanel listPanelIter = new JPanel();
             listPanelIter.setLayout(new FlowLayout());
-            JLabel nameLabel = new JLabel(value.getName());
+            JLabel nameLabel = new JLabel(recipe.getName());
             listPanelIter.add(nameLabel);
             JButton detailBtn = new JButton("detail");
             JButton editBtn = new JButton("edit");
             JButton deleteBtn = new JButton("delete");
-            int recipeID = value.getID();
+            recipe.addListener(this);
+
             detailBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    c.recipeDetail(recipeID);
+                    c.recipeDetail(recipe);
                     dispose();
                 }
             });
@@ -99,7 +104,16 @@ public class RecipeListView extends View{
             deleteBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //TODO: Delete ingredient
+                    int isDelete = JOptionPane.showConfirmDialog(null,
+                            String.format("You are going to delete recipe %s", recipe.getName()),
+                            "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (isDelete == JOptionPane.YES_OPTION) {
+                        boolean status = recipe.delete();
+                        if (!status) {
+                            JOptionPane.showMessageDialog(null,
+                                    String.format("Delete %s failed.", recipe.getName()));
+                        }
+                    }
                 }
             });
             listPanelIter.add(detailBtn);
@@ -107,19 +121,19 @@ public class RecipeListView extends View{
             listPanelIter.add(deleteBtn);
             listPanel.add(listPanelIter);
         }
-
-        JScrollPane scrollPane = new JScrollPane(listPanel);
-        scrollPane.setAutoscrolls(true);
-        scrollPane.setViewportView(listPanel);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-
-        // TODO: Warning pop up when hitting delete
-//        mainPanel.add(listPanel, BorderLayout.CENTER);
-        this.add(mainPanel, BorderLayout.CENTER);
+        return recipes.size();
     }
 
     @Override
     public void update() {
-        //repaint();
+        listPanel.removeAll();
+        listPanel.repaint();
+        try {
+            int size = createRecipeList(Recipe.getAll());
+            subtitle.setText(size +" Recipes in the database");
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
+        listPanel.revalidate();
     }
 }

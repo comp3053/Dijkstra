@@ -1,6 +1,7 @@
 package view;
 
 import controller.BrewReciptController;
+import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class BrewReciptView extends View {
     private BrewReciptController c;
-    public BrewReciptView(BrewReciptController c){
+    private Recipe recipe;
+    public BrewReciptView(BrewReciptController c, Recipe recipe){
         this.c = c;
+        this.recipe = recipe;
         this.setTitle("Brew Day! - Brew Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
@@ -18,7 +21,7 @@ public class BrewReciptView extends View {
         jp2.setLayout(new BorderLayout());
         JPanel word = new JPanel();
         word.setLayout(new BorderLayout());
-        JLabel title = new JLabel("Recipe C"); // Recipe Name
+        JLabel title = new JLabel(this.recipe.getName()); // Recipe Name
         //greeting.setHorizontalAlignment(JLabel.CENTER); // Vertical central the label in BorderLayout
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
@@ -30,11 +33,12 @@ public class BrewReciptView extends View {
 
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
-        Object[][] data =
-                {
-                        {"Barley", "GRAM", "3.5"},
-                        {"Yeast", "MILLILITER", "25"},
-                };
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        for (int i = 0;i<recipe.getIngredients().size();i++) {
+            data[i][0] = recipe.getIngredients().get(i).getName();
+            data[i][1] = recipe.getIngredients().get(i).getUnit();
+            data[i][2] = recipe.getIngredients().get(i).getAmount();
+        }
 
         JTable table = new JTable(data, columnNames);
         this.add(table, BorderLayout.CENTER);

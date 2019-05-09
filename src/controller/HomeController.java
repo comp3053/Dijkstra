@@ -2,6 +2,7 @@ package controller;
 
 import model.Equipment;
 import model.Recipe;
+import model.StorageIngredient;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 import utils.FetchDataException;
@@ -15,14 +16,21 @@ public class HomeController {
     }
     public void startManageRecipe(){
         RecipeListController rlc = new RecipeListController();
-        RecipeListView rlv = new RecipeListView(rlc);
-        rlv.setVisible(true);
+        try {
+            RecipeListView rlv = new RecipeListView(rlc, Recipe.getAll());
+            rlv.setVisible(true);
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
     public void startManageIngredient(){
-        // TODO: Pass in a Ingredient ArrayList
         IngredientListController ilc = new IngredientListController();
-        IngredientListView ilv = new IngredientListView(ilc);
-        ilv.setVisible(true);
+        try {
+            IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());
+            ilv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
     public void startNoteList(){
         NoteListController nlc = new NoteListController();
@@ -44,12 +52,21 @@ public class HomeController {
     public void startRecommend(){
 // TODO: Check if there are enough ingredient
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecipeController rc = new RecipeController();
         try {
-            ArrayList<Recipe> recommendRecipe = rc.getAll();
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
+            ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
+            RecommendRecipeListView rrlv;
+            rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, true);
+            for (int i = 0; i<recommendRecipe.size();i++) {
+                if (recommendRecipe.get(i).isAvailable()) {
+                    rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
+                }
+            }
             rrlv.setVisible(true);
         } catch (FetchDataException e) {
+            e.printStackTrace();
+        } catch (EmptyNameException e) {
+            e.printStackTrace();
+        } catch (InvalidInputException e) {
             e.printStackTrace();
         }
     }
