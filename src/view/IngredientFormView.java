@@ -85,6 +85,10 @@ public class IngredientFormView extends View {
                         "Are you sure to save current information?", "Warning",
                         JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (status == JOptionPane.YES_OPTION) {
+                    if (nameTextField.getText().length() <= 0) {
+                        JOptionPane.showMessageDialog(null, "Invalid input!");
+                        return;
+                    }
                     try {
                         double amount = Double.parseDouble(amountTextField.getText())
 ;                       c.saveIngredient(nameTextField.getText(),amount, unitSelect.getSelectedIndex());

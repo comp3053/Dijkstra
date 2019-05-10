@@ -1,6 +1,9 @@
 package controller;
 
 import model.Recipe;
+import model.RecipeForm;
+import model.StorageIngredient;
+import utils.FetchDataException;
 import view.HomeView;
 import view.RecipeDetailView;
 import view.RecipeFormView;
@@ -17,10 +20,14 @@ public class RecipeListController {
     }
 
     public void newRecipe() {
-        Recipe recipe = new Recipe();
-        RecipeFormController rfc = new RecipeFormController(recipe);
-        RecipeFormView rfv = new RecipeFormView(rfc, recipe);
-        rfv.setVisible(true);
+        try {
+            RecipeForm recipeForm = new RecipeForm(new Recipe(), StorageIngredient.getAll());
+            RecipeFormController rfc = new RecipeFormController(recipeForm);
+            RecipeFormView rfv = new RecipeFormView(rfc, recipeForm);
+            rfv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
 
     public void recipeDetail(Recipe recipe) {
@@ -30,9 +37,15 @@ public class RecipeListController {
     }
 
     public void editRecipe(Recipe recipe) {
-        RecipeFormController rfc = new RecipeFormController(recipe);
-        RecipeFormView rfv = new RecipeFormView(rfc, recipe);
-        rfv.setVisible(true);
+        try {
+            RecipeForm m = new RecipeForm(recipe, StorageIngredient.getAll());
+            m.setRecipeIngredients(recipe.getIngredients());
+            RecipeFormController rfc = new RecipeFormController(m);
+            RecipeFormView rfv = new RecipeFormView(rfc, m);
+            rfv.setVisible(true);
+        } catch (FetchDataException e) {
+            e.printStackTrace();
+        }
     }
 
 
