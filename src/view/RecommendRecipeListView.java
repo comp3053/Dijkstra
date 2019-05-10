@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class RecommendRecipeListView extends View{
@@ -54,12 +55,14 @@ public class RecommendRecipeListView extends View{
             if (!viewStatus) {
                 if (recommendRecipeItem.isAvailable()) {
                     JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
+                    ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
                     bg.add(ingredientItem);
                     mainPanel.add(ingredientItem);
                 }
             }
             else {
                 JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
+                ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
                 bg.add(ingredientItem);
                 mainPanel.add(ingredientItem);
             }
@@ -78,6 +81,7 @@ public class RecommendRecipeListView extends View{
             generateListBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    System.out.println(bg.getSelection().getActionCommand());
                     c.generateShoppingList(fakeRecipe);
                     dispose();
                 }
