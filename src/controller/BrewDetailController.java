@@ -31,9 +31,9 @@ public class BrewDetailController {
         }
     }
 
-    public void applyBatchSize(double batchSize,Recipe recipe){//TODO:fixing the mathematical bug
+    public void applyBatchSize(double batchSize,Recipe recipe){
         try {
-            recipe.amountConversion(batchSize);
+            recipe.amountConversion(batchSize, 1000); //TODO: Replace 1000 with real target batchSize
             BrewDetailController bdc= new BrewDetailController();
             BrewDetailView bdv = new BrewDetailView(bdc,recipe);
             bdv.setVisible(true);
