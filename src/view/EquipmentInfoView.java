@@ -47,7 +47,7 @@ public class EquipmentInfoView extends View{
         groupLayout.setAutoCreateContainerGaps(true);
 
         JLabel nameLabel = new JLabel("Name");
-        JLabel volumeLabel = new JLabel("Volume (unit: L)");
+        JLabel volumeLabel = new JLabel("Volume (unit: mL)");
 
         this.nameValue = new JLabel(m.getName());
         this.volumeValue = new JLabel(Integer.toString(m.getVolume()));

@@ -69,14 +69,15 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize) throws InvalidInputException {//originalBatchSize should be used L as unit.This method is to convert all recipeIngredients to the 1L amount.
+    public void amountConversion(double originalBatchSize) throws InvalidInputException {
+        //originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1L amount.
         if(originalBatchSize<=0){
             throw new InvalidInputException("Batch size could not be equal or less than 0!");
         }
         else{
             for (RecipeIngredient ingredient : this.ingredients) {
                 try {
-                    ingredient.setAmount(ingredient.getAmount()* (1000 / originalBatchSize));
+                    ingredient.setAmount(ingredient.getAmount() * (1000 / originalBatchSize));
                 } catch (InvalidInputException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +167,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         boolean status;
-        String query = String.format("INSERT OR IGNORE INTO Recipe (Name,Description) VALUES ('%s','%s')",
+        String query = String.format("INSERT INTO Recipe (Name,Description) VALUES ('%s','%s')",
                 stringParser(this.getName()), stringParser(this.getDescription()));
         try {
             dbHelper.execSqlNoReturn(query);
@@ -199,7 +200,6 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             return false;
         }
         for (RecipeIngredient ingredient : ingredients) {
-            ingredient.setRecipeID(getID());
             status = ingredient.delete();
             if (!status)
                 return false;

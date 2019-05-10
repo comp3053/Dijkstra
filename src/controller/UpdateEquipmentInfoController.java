@@ -15,14 +15,17 @@ public class UpdateEquipmentInfoController {
         this.m = m;
     }
 
-    public boolean saveEquipmentInfo(String Name, String Volumn) throws EmptyNameException, InvalidInputException, NumberFormatException {
+    public boolean saveEquipmentInfo(String Name, String Volumn, boolean firstTime) throws EmptyNameException, InvalidInputException, NumberFormatException {
         this.m = new Equipment(Name, Integer.parseInt(Volumn));
-        System.out.println("The Equipment information are:" + " " + Name + " " + Volumn);
         int isSave = JOptionPane.showConfirmDialog(null,
                 "Modify equipment information will change your default batch size, are you sure to modify?",
                 "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         if (isSave == JOptionPane.YES_OPTION) {
-            return m.update();
+            if(firstTime){
+                return m.insert();
+            }else {
+                return m.update();
+            }
         } else {
             return false;
         }
