@@ -5,6 +5,8 @@ import view.BrewDetailView;
 import view.HomeView;
 import view.MissingIngredientsListView;
 
+import java.util.ArrayList;
+
 public class RecommendRecipeListController {
     public RecommendRecipeListController(){
 
@@ -16,15 +18,15 @@ public class RecommendRecipeListController {
         hv.setVisible(true);
     }
 
-    public void brewRecipe(Recipe recipe){
+    public void brewRecipe(ArrayList<Recipe> recommendRecipe, int recipeID){
         BrewDetailController bdc = new BrewDetailController();
-        BrewDetailView bdv = new BrewDetailView(bdc,recipe);
+        BrewDetailView bdv = new BrewDetailView(bdc,recommendRecipe.get(recipeID-1));
         bdv.setVisible(true);
     }
 
-    public void generateShoppingList(Recipe recipe){
+    public void generateShoppingList(ArrayList<Recipe> recommendRecipe, int recipeID){
         MissingIngredientListController milc = new MissingIngredientListController();
-        MissingIngredientsListView milv = new MissingIngredientsListView(milc,recipe);
+        MissingIngredientsListView milv = new MissingIngredientsListView(milc,recommendRecipe.get(recipeID-1));
         milv.setVisible(true);
     }
 }

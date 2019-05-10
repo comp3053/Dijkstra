@@ -40,12 +40,9 @@ public class RecommendRecipeListView extends View{
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
         JPanel mainPanel = new JPanel();
@@ -76,28 +73,16 @@ public class RecommendRecipeListView extends View{
         if (viewStatus){
             JButton generateListBtn = new JButton("Generate Shopping List");
             bottomLeftButtonBar.add(generateListBtn);
-            //TODO: need to get the Recipe that user choose
-            Recipe fakeRecipe = recommendRecipe.get(0);
-            generateListBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println(bg.getSelection().getActionCommand());
-                    c.generateShoppingList(fakeRecipe);
-                    dispose();
-                }
+            generateListBtn.addActionListener(e -> {
+                c.generateShoppingList(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
+                dispose();
             });
         }else {
             JButton brewButton = new JButton("Brew this recipe");
             bottomLeftButtonBar.add(brewButton);
-
-            //TODO: need to get the Recipe that user choose
-            Recipe fakeRecipe = recommendRecipe.get(0);
-            brewButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.brewRecipe(fakeRecipe);
-                    dispose();
-                }
+            brewButton.addActionListener(e -> {
+                c.brewRecipe(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
+                dispose();
             });
         }
 
