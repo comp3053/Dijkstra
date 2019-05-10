@@ -22,11 +22,7 @@ public class BrewDetailController {
             ArrayList<Recipe> recommendRecipe = new Recipe().getAll();
             RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
             rrlv.setVisible(true);
-        } catch (FetchDataException e) {
-            e.printStackTrace();
-        } catch (EmptyNameException e) {
-            e.printStackTrace();
-        } catch (InvalidInputException e) {
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

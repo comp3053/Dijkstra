@@ -13,6 +13,7 @@ import java.util.Vector;
 public class BrewDetailView extends View {
     private BrewDetailController c;
     private Recipe recipe;
+    private JTable table;
     public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
         this.recipe=recipe;
@@ -24,12 +25,9 @@ public class BrewDetailView extends View {
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
@@ -53,13 +51,7 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
-        applyBatchSize.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.applyBatchSize(Double.valueOf(batchSizeTextField.getText()),recipe);
-                dispose();
-            }
-        });
+        applyBatchSize.addActionListener(e -> c.applyBatchSize(Double.valueOf(batchSizeTextField.getText()),recipe));
 //  TODO: Listen to the change of batch size and update
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
@@ -81,12 +73,9 @@ public class BrewDetailView extends View {
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton brewButton = new JButton("Brew");
         bottomLeftButtonBar.add(brewButton);
-        brewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.brewRecipe(recipe,Double.valueOf(batchSizeTextField.getText()));
-                dispose();
-            }
+        brewButton.addActionListener(e -> {
+            c.brewRecipe(recipe,Double.valueOf(batchSizeTextField.getText()));
+            dispose();
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
