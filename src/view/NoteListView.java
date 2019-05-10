@@ -68,7 +68,7 @@ public class NoteListView extends View {
             note.addListener(this);
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
-            JLabel brewHistory = new JLabel("Brew History " + note.getID());
+            JLabel brewHistory = new JLabel("Note " + note.getID());
             mainPanelIter.add(brewHistory);
             JLabel forBrewingRecord = new JLabel("for Brewing History " + note.getBrewID());
             mainPanelIter.add(forBrewingRecord);

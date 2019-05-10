@@ -26,7 +26,7 @@ public class NoteContentView extends View {
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
-        JLabel headerTitle = new JLabel("Brew Note " + m.getID() + " for Brew History " + m.getBrewID());
+        JLabel headerTitle = new JLabel("Note " + m.getID() + " for Brew History " + m.getBrewID());
         headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
