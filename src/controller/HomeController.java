@@ -54,19 +54,16 @@ public class HomeController {
         RecommendRecipeListController rrlc = new RecommendRecipeListController();
         try {
             ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
-            RecommendRecipeListView rrlv;
-            rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, true);
-            for (int i = 0; i<recommendRecipe.size();i++) {
-                if (recommendRecipe.get(i).isAvailable()) {
-                    rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
+            boolean viewStatus = true;
+            for (Recipe recipe : recommendRecipe) {
+                if (recipe.isAvailable()) {
+                    viewStatus = false;
+                    break;
                 }
             }
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
             rrlv.setVisible(true);
-        } catch (FetchDataException e) {
-            e.printStackTrace();
-        } catch (EmptyNameException e) {
-            e.printStackTrace();
-        } catch (InvalidInputException e) {
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
