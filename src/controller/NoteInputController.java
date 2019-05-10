@@ -16,7 +16,7 @@ public class NoteInputController {
     public boolean saveNote(Note m,String content){
         if(content.isEmpty())
         {
-            JOptionPane.showMessageDialog(null,"The content cannot be empty!","Warning",JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(null,"The content cannot be empty!","Warning",JOptionPane.WARNING_MESSAGE);
             return false;
         }
         m.setContent(content);
