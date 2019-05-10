@@ -5,6 +5,7 @@ import model.Recipe;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +15,14 @@ public class BrewDetailView extends View {
     private BrewDetailController c;
     private Recipe recipe;
     private JTable table;
+    private DefaultTableModel tableModel;
     public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
-        this.recipe=recipe;
+        this.recipe = recipe;
         this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.table = new JTable();
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -51,7 +54,10 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
-        applyBatchSize.addActionListener(e -> c.applyBatchSize(Double.valueOf(batchSizeTextField.getText()),recipe));
+        applyBatchSize.addActionListener(e -> {
+            c.applyBatchSize(Double.valueOf(batchSizeTextField.getText()));
+            System.out.println(recipe.getIngredients().get(0).getAmount());
+        });
 //  TODO: Listen to the change of batch size and update
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
@@ -65,7 +71,9 @@ public class BrewDetailView extends View {
             data[i][2] = recipe.getIngredients().get(i).getAmount();
         }
 
-        JTable table = new JTable(data, columnNames);
+        tableModel = new DefaultTableModel(data, columnNames);
+        table = new JTable(tableModel);
+
         mainPanel.add(table, BorderLayout.CENTER);
         this.add(mainPanel, BorderLayout.CENTER);
 
@@ -74,13 +82,24 @@ public class BrewDetailView extends View {
         JButton brewButton = new JButton("Brew");
         bottomLeftButtonBar.add(brewButton);
         brewButton.addActionListener(e -> {
-            c.brewRecipe(recipe,Double.valueOf(batchSizeTextField.getText()));
+            c.brewRecipe(Double.valueOf(batchSizeTextField.getText()));
             dispose();
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
+
+
     @Override
     public void update() {
+        String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        for (int i = 0;i<recipe.getIngredients().size();i++) {
+            data[i][0] = recipe.getIngredients().get(i).getName();
+            data[i][1] = recipe.getIngredients().get(i).getUnit();
+            data[i][2] = recipe.getIngredients().get(i).getAmount();
+        }
+        tableModel.setDataVector(data, columnNames);
+        tableModel.fireTableDataChanged();
     }
 }

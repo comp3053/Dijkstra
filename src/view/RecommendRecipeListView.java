@@ -49,20 +49,10 @@ public class RecommendRecipeListView extends View{
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
         for(Recipe recommendRecipeItem: recommendRecipe) {
-            if (!viewStatus) {
-                if (recommendRecipeItem.isAvailable()) {
-                    JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
-                    ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
-                    bg.add(ingredientItem);
-                    mainPanel.add(ingredientItem);
-                }
-            }
-            else {
-                JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
-                ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
-                bg.add(ingredientItem);
-                mainPanel.add(ingredientItem);
-            }
+            JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
+            ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
+            bg.add(ingredientItem);
+            mainPanel.add(ingredientItem);
         }
         // TODO: Need to change to scrollable
         this.add(mainPanel, BorderLayout.CENTER);

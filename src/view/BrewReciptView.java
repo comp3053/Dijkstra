@@ -12,7 +12,7 @@ public class BrewReciptView extends View {
     private BrewReciptController c;
     private Recipe recipe;
     private double batchSize;
-    public BrewReciptView(BrewReciptController c, Recipe recipe,double batchSize){
+    public BrewReciptView(BrewReciptController c, Recipe recipe, double batchSize){
         this.c = c;
         this.recipe = recipe;
         this.batchSize = batchSize;
@@ -48,12 +48,9 @@ public class BrewReciptView extends View {
         footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveBtn = new JButton("Finish");
         footerPanel.add(saveBtn);
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.finish();
-                dispose();
-            }
+        saveBtn.addActionListener(e -> {
+            c.finish();
+            dispose();
         });
         this.add(footerPanel, BorderLayout.PAGE_END);
     }

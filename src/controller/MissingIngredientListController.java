@@ -20,14 +20,23 @@ public class MissingIngredientListController {
     }
 
     public void goBack(){
-        RecommendRecipeListController rrlc = new RecommendRecipeListController();
         try {
             ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
+            ArrayList<Integer> notAvailableList = new ArrayList();
+            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
             boolean viewStatus = true;
             for (Recipe recipe : recommendRecipe) {
                 if (recipe.isAvailable()) {
                     viewStatus = false;
-                    break;
+                }
+                else{
+                    //recommendRecipe.remove(recipe);
+                    notAvailableList.add(recommendRecipe.indexOf(recipe));
+                }
+            }
+            if (!viewStatus){
+                for(Integer index: notAvailableList){
+                    recommendRecipe.remove(index.intValue());
                 }
             }
             RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);

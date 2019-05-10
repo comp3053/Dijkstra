@@ -11,36 +11,49 @@ import view.RecommendRecipeListView;
 import java.util.ArrayList;
 
 public class BrewDetailController {
-    public BrewDetailController(){
-
+    private Recipe m;
+    public BrewDetailController(Recipe m){
+        this.m = m;
     }
 
     public void goBack(){
-        // TODO: Check if there are enough ingredient
-        RecommendRecipeListController rrlc = new RecommendRecipeListController();
         try {
-            ArrayList<Recipe> recommendRecipe = new Recipe().getAll();
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, false);
+            ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
+            ArrayList<Integer> notAvailableList = new ArrayList();
+            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
+            boolean viewStatus = true;
+            for (Recipe recipe : recommendRecipe) {
+                if (recipe.isAvailable()) {
+                    viewStatus = false;
+                }
+                else{
+                    //recommendRecipe.remove(recipe);
+                    notAvailableList.add(recommendRecipe.indexOf(recipe));
+                }
+            }
+            if (!viewStatus){
+                for(Integer index: notAvailableList){
+                    recommendRecipe.remove(index.intValue());
+                }
+            }
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
             rrlv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
 
-    public void applyBatchSize(double batchSize,Recipe recipe){
+    public void applyBatchSize(double batchSize){
         try {
-            recipe.amountConversion(batchSize, 1000); //TODO: Replace 1000 with real target batchSize
-            BrewDetailController bdc= new BrewDetailController();
-            BrewDetailView bdv = new BrewDetailView(bdc,recipe);
-            bdv.setVisible(true);
+            m.amountConversion(batchSize, 1000); //TODO: Replace 1000 with real target batchSize
         } catch (InvalidInputException e) {
             e.printStackTrace();
         }
     }
 
-    public void brewRecipe(Recipe recipe,double batchSize){
+    public void brewRecipe(double batchSize){
         BrewReciptController brc = new BrewReciptController();
-        BrewReciptView brv = new BrewReciptView(brc,recipe,batchSize);
+        BrewReciptView brv = new BrewReciptView(brc, m, batchSize);
         brv.setVisible(true);
     }
 }

@@ -8,8 +8,9 @@ import view.MissingIngredientsListView;
 import java.util.ArrayList;
 
 public class RecommendRecipeListController {
-    public RecommendRecipeListController(){
-
+    private ArrayList<Recipe> recommendRecipes;
+    public RecommendRecipeListController(ArrayList<Recipe> recommendRecipes){
+        this.recommendRecipes= recommendRecipes;
     }
 
     public void goBack(){
@@ -19,9 +20,17 @@ public class RecommendRecipeListController {
     }
 
     public void brewRecipe(ArrayList<Recipe> recommendRecipe, int recipeID){
-        BrewDetailController bdc = new BrewDetailController();
-        BrewDetailView bdv = new BrewDetailView(bdc,recommendRecipe.get(recipeID-1));
-        bdv.setVisible(true);
+
+        for(Recipe recipe: recommendRecipe){
+            if (recipe.getID() == recipeID){
+                BrewDetailController bdc = new BrewDetailController(recipe);
+                BrewDetailView bdv = new BrewDetailView(bdc,recipe);
+                recipe.addListener(bdv);
+                bdv.setVisible(true);
+                break;
+            }
+        }
+
     }
 
     public void generateShoppingList(ArrayList<Recipe> recommendRecipe, int recipeID){
