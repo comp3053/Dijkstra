@@ -1,20 +1,22 @@
 package model;
 
+import utils.DatabaseHelper;
+import utils.SQLiteConnectionException;
 import java.util.Date;
 
-public class BrewingRecord {
+public class BrewingRecord{
     private int id;
     private Date brewDate;
-    private int batchSize;
+    private double batchSize;
     private Recipe recipe;
 
-    public BrewingRecord(Date brew_date, int batch_size, Recipe recipe) {
+    public BrewingRecord(Date brew_date, double batch_size, Recipe recipe) {
         setBatchSize(batch_size);
         setBrewDate(brew_date);
         setRecipe(recipe);
     }
 
-    public BrewingRecord(int id, Date brew_date, int batch_size, Recipe recipe) {
+    public BrewingRecord(int id, Date brew_date, double batch_size, Recipe recipe) {
         setID(id);
         setBatchSize(batch_size);
         setBrewDate(brew_date);
@@ -37,11 +39,11 @@ public class BrewingRecord {
         this.brewDate = brewDate;
     }
 
-    public int getBatchSize() {
+    public double getBatchSize() {
         return batchSize;
     }
 
-    public void setBatchSize(int batchSize) {
+    public void setBatchSize(double batchSize) {
         this.batchSize = batchSize;
     }
 

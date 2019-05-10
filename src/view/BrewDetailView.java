@@ -16,13 +16,15 @@ public class BrewDetailView extends View {
     private Recipe recipe;
     private JTable table;
     private DefaultTableModel tableModel;
-    public BrewDetailView(BrewDetailController c, Recipe recipe){
+    private double orginalVolumn;
+    public BrewDetailView(BrewDetailController c, Recipe recipe, int equipmentVolumn){
         this.c = c;
         this.recipe = recipe;
         this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
         this.table = new JTable();
+        this.orginalVolumn = equipmentVolumn;
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -49,15 +51,12 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(new JLabel("Batch Size"));
         JTextField batchSizeTextField = new JTextField();
         batchSizeTextField.setColumns(5);
-        batchSizeTextField.setText("1000");
+        batchSizeTextField.setText(String.valueOf(orginalVolumn));
         batchSizeTextField.setToolTipText("Batch Size");
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
-        applyBatchSize.addActionListener(e -> {
-            c.applyBatchSize(Double.valueOf(batchSizeTextField.getText()));
-            System.out.println(recipe.getIngredients().get(0).getAmount());
-        });
+        applyBatchSize.addActionListener(e -> orginalVolumn=c.applyBatchSize(orginalVolumn,Double.valueOf(batchSizeTextField.getText())));
 //  TODO: Listen to the change of batch size and update
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);

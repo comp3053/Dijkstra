@@ -1,14 +1,15 @@
 package controller;
 
+import model.BrewingRecord;
 import model.Recipe;
 import utils.EmptyNameException;
 import utils.FetchDataException;
 import utils.InvalidInputException;
-import view.BrewDetailView;
 import view.BrewReciptView;
 import view.RecommendRecipeListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BrewDetailController {
     private Recipe m;
@@ -43,12 +44,14 @@ public class BrewDetailController {
         }
     }
 
-    public void applyBatchSize(double batchSize){
+    public double applyBatchSize(double originalBatchSize, double targetBatchSize){
         try {
-            m.amountConversion(batchSize, 1000); //TODO: Replace 1000 with real target batchSize
+            m.amountConversion(originalBatchSize, targetBatchSize);
+            return targetBatchSize;
         } catch (InvalidInputException e) {
             e.printStackTrace();
         }
+        return originalBatchSize;
     }
 
     public void brewRecipe(double batchSize){
