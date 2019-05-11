@@ -1,6 +1,8 @@
 package view;
 
 import controller.NoteInputController;
+import model.Note;
+import utils.FetchDataException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,8 +12,10 @@ import java.awt.event.ActionListener;
 
 public class NoteInputView extends View{
     private NoteInputController c;
-    public NoteInputView(NoteInputController c, int brewID){
+    private Note m;
+    public NoteInputView(NoteInputController c, Note m){
         this.c = c;
+        this.m = m;
         this.setTitle("Brew Day! - Edit Note"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
@@ -20,7 +24,7 @@ public class NoteInputView extends View{
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
-        JLabel headerTitle = new JLabel("Writing note for brewing history " + brewID);
+        JLabel headerTitle = new JLabel("Writing Note for Brewing History " + m.getBrewID());
         headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
@@ -28,8 +32,12 @@ public class NoteInputView extends View{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (c.backToNoteList() == 1){
-                    dispose();
+                try {
+                    if (c.backToNoteList() == 1){
+                        dispose();
+                    }
+                } catch (FetchDataException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -40,7 +48,7 @@ public class NoteInputView extends View{
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(0,20,10,20)); // top and left padding for recommend entry
 
-        JTextArea input_noteContent = new JTextArea("Please write down your note here");
+        JTextArea input_noteContent = new JTextArea(m.getContent());
         mainPanel.add(input_noteContent,BorderLayout.CENTER);
 
         this.add(mainPanel, BorderLayout.CENTER);
@@ -52,8 +60,19 @@ public class NoteInputView extends View{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                c.saveNote(brewID, input_noteContent.getText());
-                //TODO: Add operation to show status of insert
+                if(input_noteContent.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,"The content cannot be empty!","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+                else {
+                    boolean insertSuccess = c.saveNote(m, input_noteContent.getText());
+                    if (insertSuccess) {
+                        JOptionPane.showMessageDialog(null, "Your note have been saved", "Success", JOptionPane.PLAIN_MESSAGE);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //TODO: Add operation to show status of insert
+                }
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
