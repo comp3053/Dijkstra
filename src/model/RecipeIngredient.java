@@ -125,15 +125,15 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         }
     }
 
-    public boolean isEnough() {
+    public boolean isEnough(int equipmentSize) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
-            System.out.println("Fuck");
             double storageAmount = rs.getDouble(3);
             dbHelper.closeConnection();
-            if (storageAmount < this.getAmount()) {
+            if (storageAmount < this.getAmount() / 1000 * equipmentSize) {
+                System.out.println(this.getName() + " need extra " + (this.getAmount() / 1000 * equipmentSize - storageAmount) + " " + this.getUnit().toString().toLowerCase());
                 return false;
             }
         } catch (SQLException | SQLiteConnectionException e) {

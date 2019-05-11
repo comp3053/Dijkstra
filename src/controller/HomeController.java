@@ -56,7 +56,8 @@ public class HomeController {
             RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
             boolean viewStatus = true;
             for (Recipe recipe : recommendRecipe) {
-                if (recipe.isAvailable()) {
+                if (recipe.isAvailable(Equipment.getEquipment(1).getVolume())) {
+                    System.out.println("OK recipe: " + recipe.getName());
                     viewStatus = false;
                 }
                 else{
