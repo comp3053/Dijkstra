@@ -51,10 +51,9 @@ public class HomeController {
         }
     }
     public void startRecommend(){
-// TODO: Check if there are enough ingredient
         try {
-            ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
-            ArrayList<Integer> notAvailableList = new ArrayList();
+            ArrayList<Recipe> recommendRecipe =  Recipe.getAll();
+            ArrayList<Integer> notAvailableList = new ArrayList<>();
             RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
             boolean viewStatus = true;
             for (Recipe recipe : recommendRecipe) {

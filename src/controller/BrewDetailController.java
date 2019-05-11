@@ -1,5 +1,6 @@
 package controller;
 
+import model.BrewingRecord;
 import model.Recipe;
 import utils.EmptyNameException;
 import utils.FetchDataException;
@@ -9,6 +10,7 @@ import view.BrewReciptView;
 import view.RecommendRecipeListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BrewDetailController {
     private Recipe m;
@@ -17,42 +19,26 @@ public class BrewDetailController {
     }
 
     public void goBack(){
-        try {
-            ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
-            ArrayList<Integer> notAvailableList = new ArrayList();
-            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
-            boolean viewStatus = true;
-            for (Recipe recipe : recommendRecipe) {
-                if (recipe.isAvailable()) {
-                    viewStatus = false;
-                }
-                else{
-                    //recommendRecipe.remove(recipe);
-                    notAvailableList.add(recommendRecipe.indexOf(recipe));
-                }
-            }
-            if (!viewStatus){
-                for(Integer index: notAvailableList){
-                    recommendRecipe.remove(index.intValue());
-                }
-            }
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
-            rrlv.setVisible(true);
-        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
-            e.printStackTrace();
-        }
+        HomeController hc = new HomeController();
+        hc.startRecommend();
     }
 
-    public void applyBatchSize(double batchSize){
+    public void applyBatchSize(double originBatchSize, double currentBatchSize){
         try {
-            m.amountConversion(batchSize, 1000); //TODO: Replace 1000 with real target batchSize
+            m.amountConversion(originBatchSize, currentBatchSize);
         } catch (InvalidInputException e) {
             e.printStackTrace();
         }
     }
 
-    public void brewRecipe(double batchSize){
+    public void brewRecipe(int batchSize){
         BrewReciptController brc = new BrewReciptController();
+        BrewingRecord br = new BrewingRecord(new Date(), batchSize, m);
+        try {
+            br.insert();
+        } catch (EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
         BrewReciptView brv = new BrewReciptView(brc, m, batchSize);
         brv.setVisible(true);
     }
