@@ -89,6 +89,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
                 unit = UnitEnum.valueOf(rs.getString(4));
                 ingredients.add(new RecipeIngredient(ingredientID, name, amount, unit));
             }
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not fetch recipe ingredients.");
@@ -133,6 +134,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
             if (storageAmount < this.getAmount()) {
                 return false;
             }
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             return false;
