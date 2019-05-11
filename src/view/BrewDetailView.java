@@ -51,7 +51,7 @@ public class BrewDetailView extends View {
         JPanel textfieldWithLabel = new JPanel();
         textfieldWithLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        textfieldWithLabel.add(new JLabel("Batch Size"));
+        textfieldWithLabel.add(new JLabel("Batch Size (mL)"));
         JTextField batchSizeTextField = new JTextField();
         batchSizeTextField.setColumns(5);
         batchSizeTextField.setText("1000");
