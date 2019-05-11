@@ -36,11 +36,12 @@ public class BrewReciptView extends View {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];
-        for (int i = 0;i<recipe.getIngredients().size();i++) {
-            data[i][0] = recipe.getIngredients().get(i).getName();
-            data[i][1] = recipe.getIngredients().get(i).getUnit();
-            data[i][2] = recipe.getIngredients().get(i).getAmount();
-        }
+        recipe.getIngredients().forEach(ingredient -> {
+            int index = recipe.getIngredients().indexOf(ingredient);
+            data[index][0] = ingredient.getName();
+            data[index][1] = ingredient.getUnit();
+            data[index][2] = ingredient.getAmount();
+        });
 
         JTable table = new JTable(data, columnNames);
         this.add(new JScrollPane(table), BorderLayout.CENTER);
