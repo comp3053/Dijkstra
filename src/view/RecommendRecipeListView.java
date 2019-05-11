@@ -64,8 +64,16 @@ public class RecommendRecipeListView extends View{
             JButton generateListBtn = new JButton("Generate Shopping List");
             bottomLeftButtonBar.add(generateListBtn);
             generateListBtn.addActionListener(e -> {
-                c.generateShoppingList(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
-                dispose();
+                if(bg.getSelection()!=null) {
+                    c.generateShoppingList(recommendRecipe, Integer.valueOf(bg.getSelection().getActionCommand()));
+                    dispose();
+                }
+                else {
+                    Object[] options = { "OK" };
+                    JOptionPane.showOptionDialog(null, "Please choose one recipe.", "Warning",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                            null, options, options[0]);
+                }
             });
         }else {
             JButton brewButton = new JButton("Brew this recipe");
