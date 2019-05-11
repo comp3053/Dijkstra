@@ -60,13 +60,19 @@ public class NoteInputView extends View{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean insertSuccess = c.saveNote(m,input_noteContent.getText());
-                if(insertSuccess){
-                    JOptionPane.showMessageDialog(null,"Your note have been saved","Success",JOptionPane.PLAIN_MESSAGE);
-                    dispose();}else{
-                    JOptionPane.showMessageDialog(null,"Error!","Error",JOptionPane.ERROR_MESSAGE);
+                if(input_noteContent.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,"The content cannot be empty!","Warning",JOptionPane.WARNING_MESSAGE);
                 }
-                //TODO: Add operation to show status of insert
+                else {
+                    boolean insertSuccess = c.saveNote(m, input_noteContent.getText());
+                    if (insertSuccess) {
+                        JOptionPane.showMessageDialog(null, "Your note have been saved", "Success", JOptionPane.PLAIN_MESSAGE);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    //TODO: Add operation to show status of insert
+                }
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
