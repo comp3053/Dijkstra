@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class RecipeForm {
     private Recipe recipe;
-    private double batchSize;
+    private int batchSize;
     private ArrayList<StorageIngredient> storageIngredients;
     private ArrayList<RecipeIngredient> recipeIngredients;
 
@@ -68,7 +68,7 @@ public class RecipeForm {
         return recipe;
     }
 
-    public void setBatchSize(double batchSize) {
+    public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
     }
 

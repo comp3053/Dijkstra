@@ -70,7 +70,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize, double targetBatchSize) throws InvalidInputException {
+    public void amountConversion(int originalBatchSize, int targetBatchSize) throws InvalidInputException {
         //originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1L amount.
         try {
             if(originalBatchSize < 0 && originalBatchSize <= Equipment.getEquipment(1).getVolume()){
@@ -79,7 +79,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             else{
                 for (RecipeIngredient ingredient : this.ingredients) {
                     try {
-                        ingredient.setAmount(ingredient.getAmount() * (targetBatchSize / originalBatchSize));
+                        ingredient.setAmount(ingredient.getAmount() * (targetBatchSize * 1.0 / originalBatchSize));
                         if(this.listener != null){
                             this.notifyListener();
                         }

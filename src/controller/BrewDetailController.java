@@ -19,7 +19,7 @@ public class BrewDetailController {
         hc.startRecommend();
     }
 
-    public void applyBatchSize(double originBatchSize, double currentBatchSize){
+    public void applyBatchSize(int originBatchSize, int currentBatchSize){
         try {
             m.amountConversion(originBatchSize, currentBatchSize);
         } catch (InvalidInputException e) {

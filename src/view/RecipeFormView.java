@@ -100,7 +100,7 @@ public class RecipeFormView extends View {
                 return;
             }
             try {
-                m.setBatchSize(Double.parseDouble(recipeBatchSizeTextfield.getText()));
+                m.setBatchSize(Integer.parseInt(recipeBatchSizeTextfield.getText()));
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Wrong batch size format.");
