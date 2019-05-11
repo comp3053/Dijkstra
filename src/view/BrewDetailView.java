@@ -73,8 +73,7 @@ public class BrewDetailView extends View {
 
         tableModel = new DefaultTableModel(data, columnNames);
         table = new JTable(tableModel);
-
-        mainPanel.add(table, BorderLayout.CENTER);
+        mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel bottomLeftButtonBar = new JPanel();

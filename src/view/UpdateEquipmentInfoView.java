@@ -82,8 +82,6 @@ public class UpdateEquipmentInfoView extends View{
 
         groupLayout.setVerticalGroup(vGroup);
 
-        //TODO: can replace these column with last equipment information
-
         this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel bottomLeftButtonBar = new JPanel();
