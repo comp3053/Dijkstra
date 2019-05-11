@@ -71,8 +71,15 @@ public class RecommendRecipeListView extends View{
             JButton brewButton = new JButton("Brew this recipe");
             bottomLeftButtonBar.add(brewButton);
             brewButton.addActionListener(e -> {
-                c.brewRecipe(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
-                dispose();
+                if(bg.getSelection()!=null){
+                    c.brewRecipe(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
+                    dispose();
+                } else{
+                    Object[] options = { "OK" };
+                    JOptionPane.showOptionDialog(null, "Please choose one recipe.", "Warning",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                            null, options, options[0]);
+                }
             });
         }
 
