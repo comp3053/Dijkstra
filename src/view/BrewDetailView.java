@@ -74,10 +74,11 @@ public class BrewDetailView extends View {
                     originBatchSize = currentBatchSize;
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Invalid batch size!");
+                    JOptionPane.showMessageDialog(null, "Batch size should greater than 0 and less or equal to you equipment volume " + equimentBatchSize);
                 }
             } catch (NumberFormatException ex) {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Batch size should be a positive integer!");
+
             }
         });
 
