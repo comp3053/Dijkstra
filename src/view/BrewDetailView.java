@@ -16,6 +16,9 @@ public class BrewDetailView extends View {
     private Recipe recipe;
     private JTable table;
     private DefaultTableModel tableModel;
+    private double originBatchSize;
+    private double currentBatchSize;
+
     public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
         this.recipe = recipe;
@@ -23,6 +26,8 @@ public class BrewDetailView extends View {
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
         this.table = new JTable();
+        this.originBatchSize = 1000;
+        this.currentBatchSize = 1000;
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -55,21 +60,16 @@ public class BrewDetailView extends View {
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
         applyBatchSize.addActionListener(e -> {
-            c.applyBatchSize(Double.valueOf(batchSizeTextField.getText()));
-            System.out.println(recipe.getIngredients().get(0).getAmount());
+            currentBatchSize = Double.parseDouble(batchSizeTextField.getText());
+            c.applyBatchSize(originBatchSize, currentBatchSize);
+            originBatchSize = currentBatchSize;
         });
-//  TODO: Listen to the change of batch size and update
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
-        Object[][] data = new Object[recipe.getIngredients().size()][3];
-        for (int i = 0;i<recipe.getIngredients().size();i++) {
-            data[i][0] = recipe.getIngredients().get(i).getName();
-            data[i][1] = recipe.getIngredients().get(i).getUnit();
-            data[i][2] = recipe.getIngredients().get(i).getAmount();
-        }
+        Object[][] data = initObjectTable();
 
         tableModel = new DefaultTableModel(data, columnNames);
         table = new JTable(tableModel);
@@ -82,23 +82,28 @@ public class BrewDetailView extends View {
         JButton brewButton = new JButton("Brew");
         bottomLeftButtonBar.add(brewButton);
         brewButton.addActionListener(e -> {
-            c.brewRecipe(Double.valueOf(batchSizeTextField.getText()));
+            c.brewRecipe(Integer.parseInt(batchSizeTextField.getText()));
             dispose();
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
+    }
+
+    private Object[][] initObjectTable() {
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        recipe.getIngredients().forEach(ingredient -> {
+            int index = recipe.getIngredients().indexOf(ingredient);
+            data[index][0] = ingredient.getName();
+            data[index][1] = ingredient.getUnit();
+            data[index][2] = ingredient.getAmount();
+        });
+        return data;
     }
 
 
     @Override
     public void update() {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
-
-        Object[][] data = new Object[recipe.getIngredients().size()][3];
-        for (int i = 0;i<recipe.getIngredients().size();i++) {
-            data[i][0] = recipe.getIngredients().get(i).getName();
-            data[i][1] = recipe.getIngredients().get(i).getUnit();
-            data[i][2] = recipe.getIngredients().get(i).getAmount();
-        }
+        Object[][] data = initObjectTable();
         tableModel.setDataVector(data, columnNames);
         tableModel.fireTableDataChanged();
     }
