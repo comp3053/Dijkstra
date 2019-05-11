@@ -163,6 +163,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
                 description = rs.getString(3);
                 recipes.add(new Recipe(id, name, description, RecipeIngredient.getAll(id)));
             }
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Fail to fetch recipes.");

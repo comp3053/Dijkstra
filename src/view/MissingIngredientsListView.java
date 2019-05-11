@@ -4,6 +4,7 @@ import controller.MissingIngredientListController;
 import model.Recipe;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,8 @@ import java.awt.event.ActionListener;
 public class MissingIngredientsListView extends View{
     private MissingIngredientListController c;
     private Recipe recipe;
+    private JTable table;
+    private DefaultTableModel tableModel;
     public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe){
         this.c = c;
         this.recipe = recipe;
@@ -39,28 +42,21 @@ public class MissingIngredientsListView extends View{
 
         c.readMissingIngredientList();
 
-        JPanel jp_main = new JPanel();
-        jp_main.setLayout(new BoxLayout(jp_main,BoxLayout.Y_AXIS));
-        JPanel jp_main_sub = new JPanel();
-        jp_main_sub.setLayout(new FlowLayout());
-        JLabel msg_headName = new JLabel("name");
-        jp_main_sub.add(msg_headName);
-        JLabel msg_headUnit = new JLabel("unit");
-        jp_main_sub.add(msg_headUnit);
-        JLabel msg_headAmount = new JLabel("amount");
-        jp_main_sub.add(msg_headAmount);
-        jp_main.add(jp_main_sub);
-        for(int i =0;i<this.recipe.getIngredients().size();i++) {
-            jp_main_sub = new JPanel();
-            JLabel msg_ingreNamei = new JLabel(this.recipe.getIngredients().get(i).getName());
-            jp_main_sub.add(msg_ingreNamei);
-            JLabel msg_ingreUniti = new JLabel(this.recipe.getIngredients().get(i).getUnit().name());
-            jp_main_sub.add(msg_ingreUniti);
-            JLabel msg_ingreAmounti = new JLabel(""+this.recipe.getIngredients().get(i).getAmount());
-            jp_main_sub.add(msg_ingreAmounti);
-            jp_main.add(jp_main_sub);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        String[] columnNames = {"Ingredient", "Unit", "Amount"};
+
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        for (int i = 0;i<recipe.getIngredients().size();i++) {
+            data[i][0] = recipe.getIngredients().get(i).getName();
+            data[i][1] = recipe.getIngredients().get(i).getUnit();
+            data[i][2] = recipe.getIngredients().get(i).getAmount();
         }
-        this.add(jp_main, BorderLayout.CENTER);
+
+        tableModel = new DefaultTableModel(data, columnNames);
+        table = new JTable(tableModel);
+        mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel jp_foot = new JPanel();
         jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -80,6 +76,14 @@ public class MissingIngredientsListView extends View{
 
     @Override
     public void update() {
-        //repaint();
+        String[] columnNames = {"Ingredient", "Unit", "Amount"};
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        for (int i = 0;i<recipe.getIngredients().size();i++) {
+            data[i][0] = recipe.getIngredients().get(i).getName();
+            data[i][1] = recipe.getIngredients().get(i).getUnit();
+            data[i][2] = recipe.getIngredients().get(i).getAmount();
+        }
+        tableModel.setDataVector(data, columnNames);
+        tableModel.fireTableDataChanged();
     }
 }

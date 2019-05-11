@@ -20,30 +20,8 @@ public class MissingIngredientListController {
     }
 
     public void goBack(){
-        try {
-            ArrayList<Recipe> recommendRecipe =  new Recipe().getAll();
-            ArrayList<Integer> notAvailableList = new ArrayList();
-            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
-            boolean viewStatus = true;
-            for (Recipe recipe : recommendRecipe) {
-                if (recipe.isAvailable()) {
-                    viewStatus = false;
-                }
-                else{
-                    //recommendRecipe.remove(recipe);
-                    notAvailableList.add(recommendRecipe.indexOf(recipe));
-                }
-            }
-            if (!viewStatus){
-                for(Integer index: notAvailableList){
-                    recommendRecipe.remove(index.intValue());
-                }
-            }
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
-            rrlv.setVisible(true);
-        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
-            e.printStackTrace();
-        }
+        HomeController hc = new HomeController();
+        hc.startRecommend();
     }
 
     public void OK(){
