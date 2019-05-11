@@ -115,9 +115,10 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients.add(recipeIngredients);
     }
 
-    public boolean isAvailable() {
+    public boolean isAvailable(int equipmentSize) {
+        System.out.println(this.name);
         for (RecipeIngredient ingredient : ingredients) {
-            if (!ingredient.isEnough())
+            if (!ingredient.isEnough(equipmentSize))
                 return false;
         }
         return true;
