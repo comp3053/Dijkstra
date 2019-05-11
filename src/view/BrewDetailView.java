@@ -16,8 +16,8 @@ public class BrewDetailView extends View {
     private Recipe recipe;
     private JTable table;
     private DefaultTableModel tableModel;
-    private double originBatchSize;
-    private double currentBatchSize;
+    private int originBatchSize;
+    private int currentBatchSize;
 
     public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
@@ -60,10 +60,16 @@ public class BrewDetailView extends View {
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
         applyBatchSize.addActionListener(e -> {
-            currentBatchSize = Double.parseDouble(batchSizeTextField.getText());
+            try {
+                currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Invalid batch size!");
+                return;
+            }
             c.applyBatchSize(originBatchSize, currentBatchSize);
             try {
-                double equimentBatchSize = Equipment.getEquipment(1).getVolume();
+                int equimentBatchSize = Equipment.getEquipment(1).getVolume();
                 if(currentBatchSize>0&&currentBatchSize< equimentBatchSize){
                     originBatchSize = currentBatchSize;
                 }
@@ -88,7 +94,13 @@ public class BrewDetailView extends View {
         JButton brewButton = new JButton("Brew");
         bottomLeftButtonBar.add(brewButton);
         brewButton.addActionListener(e -> {
-            c.brewRecipe(Integer.parseInt(batchSizeTextField.getText()));
+            try {
+                c.brewRecipe(currentBatchSize);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Invalid batch size!");
+                return;
+            }
             dispose();
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
