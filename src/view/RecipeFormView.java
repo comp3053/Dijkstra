@@ -111,7 +111,7 @@ public class RecipeFormView extends View {
             m.getRecipe().setName(name);
             m.getRecipe().setDescription(recipeDescrptionTextArea.getText());
 
-            c.saveRecipe();
+            c.saveRecipe(Integer.parseInt(recipeBatchSizeTextfield.getText()));
             dispose();
         });
 
