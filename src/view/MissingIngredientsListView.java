@@ -31,7 +31,7 @@ public class MissingIngredientsListView extends View{
         });
         jp_header.add(btn_back);
 
-        JLabel msg_header = new JLabel("Missing Ingredient List For Recipe" + this.recipe.getName());
+        JLabel msg_header = new JLabel("Missing Ingredient List For Recipe " + this.recipe.getName());
         msg_header.setFont(new Font(msg_header.getFont().getFontName(), msg_header.getFont().getStyle(), 24));
         jp_header.add(msg_header);
 
