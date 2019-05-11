@@ -1,6 +1,10 @@
 package controller;
 
+import model.Equipment;
 import model.Recipe;
+import utils.EmptyNameException;
+import utils.FetchDataException;
+import utils.InvalidInputException;
 import view.BrewDetailView;
 import view.HomeView;
 import view.MissingIngredientsListView;
@@ -22,6 +26,12 @@ public class RecommendRecipeListController {
     public void brewRecipe(ArrayList<Recipe> recommendRecipe, int recipeID){
         for(Recipe recipe: recommendRecipe){
             if (recipe.getID() == recipeID){
+                try {
+                    int equipmentBatchSize=Equipment.getEquipment(1).getVolume();
+                    recipe.amountConversion(1000,equipmentBatchSize);
+                } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
+                    e.printStackTrace();
+                }
                 BrewDetailController bdc = new BrewDetailController(recipe);
                 BrewDetailView bdv = new BrewDetailView(bdc,recipe);
                 recipe.addListener(bdv);

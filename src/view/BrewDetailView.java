@@ -18,6 +18,7 @@ public class BrewDetailView extends View {
     private DefaultTableModel tableModel;
     private int originBatchSize;
     private int currentBatchSize;
+    private int equimentBatchSize;
 
     public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
@@ -26,8 +27,13 @@ public class BrewDetailView extends View {
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
         this.table = new JTable();
-        this.originBatchSize = 1000;
-        this.currentBatchSize = 1000;
+        try {
+            this.equimentBatchSize = Equipment.getEquipment(1).getVolume();
+            this.originBatchSize = equimentBatchSize;
+            this.currentBatchSize = equimentBatchSize;
+        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
+            e.printStackTrace();
+        }
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -54,7 +60,7 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(new JLabel("Batch Size (mL)"));
         JTextField batchSizeTextField = new JTextField();
         batchSizeTextField.setColumns(5);
-        batchSizeTextField.setText("1000");
+        batchSizeTextField.setText(String.valueOf(this.equimentBatchSize));
         batchSizeTextField.setToolTipText("Batch Size");
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
@@ -62,18 +68,15 @@ public class BrewDetailView extends View {
         applyBatchSize.addActionListener(e -> {
             try {
                 currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Invalid batch size!");
-                return;
-            }
-            c.applyBatchSize(originBatchSize, currentBatchSize);
-            try {
-                int equimentBatchSize = Equipment.getEquipment(1).getVolume();
-                if(currentBatchSize>0&&currentBatchSize< equimentBatchSize){
+                System.out.println(currentBatchSize+"  "+originBatchSize);
+                if(currentBatchSize>0&&currentBatchSize<= equimentBatchSize){
+                    c.applyBatchSize(originBatchSize, currentBatchSize);
                     originBatchSize = currentBatchSize;
                 }
-            } catch (FetchDataException| InvalidInputException |EmptyNameException ex) {
+                else{
+                    JOptionPane.showMessageDialog(null, "Invalid batch size!");
+                }
+            } catch (NumberFormatException ex) {
                 ex.printStackTrace();
             }
         });
