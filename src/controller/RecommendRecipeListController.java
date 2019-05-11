@@ -28,14 +28,10 @@ public class RecommendRecipeListController {
         for(Recipe recipe: recommendRecipe){
             if (recipe.getID() == recipeID){
                 BrewDetailController bdc = new BrewDetailController(recipe);
-                try {
-                    BrewDetailView bdv = new BrewDetailView(bdc,recipe,Equipment.getEquipment(1).getVolume());
-                    recipe.addListener(bdv);
-                    bdv.setVisible(true);
-                    break;
-                } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
-                    e.printStackTrace();
-                }
+                BrewDetailView bdv = new BrewDetailView(bdc,recipe);
+                recipe.addListener(bdv);
+                bdv.setVisible(true);
+                break;
             }
         }
 
