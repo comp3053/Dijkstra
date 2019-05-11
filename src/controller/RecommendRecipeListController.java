@@ -1,7 +1,6 @@
 package controller;
 
-import model.Equipment;
-import model.Recipe;
+import model.*;
 import utils.EmptyNameException;
 import utils.FetchDataException;
 import utils.InvalidInputException;
@@ -43,8 +42,26 @@ public class RecommendRecipeListController {
     }
 
     public void generateShoppingList(ArrayList<Recipe> recommendRecipe, int recipeID){
-        MissingIngredientListController milc = new MissingIngredientListController();
-        MissingIngredientsListView milv = new MissingIngredientsListView(milc,recommendRecipe.get(recipeID-1));
-        milv.setVisible(true);
+        try {
+            Recipe recipe = recommendRecipe.get(recipeID-1);
+            ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
+            ArrayList<StorageIngredient> storageIngredients = StorageIngredient.getAll();
+            for(int i =0;i<recipe.getIngredients().size();i++) {
+                for (StorageIngredient storageIngredient : storageIngredients) {
+                    if (storageIngredient.getID() == recipe.getIngredients().get(i).getID()) {
+                        if (storageIngredient.getAmount() < recipe.getIngredients().get(i).getAmount()) {
+                            recipe.getIngredients().get(i).setAmount(recipe.getIngredients().get(i).getAmount() - storageIngredient.getAmount());
+                            recipeIngredients.add(recipe.getIngredients().get(i));
+                        }
+                    }
+                }
+            }
+            recipe.setIngredients(recipeIngredients);
+            MissingIngredientListController milc = new MissingIngredientListController();
+            MissingIngredientsListView milv = new MissingIngredientsListView(milc,recipe);
+            milv.setVisible(true);
+        } catch (FetchDataException | InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
 }
