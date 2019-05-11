@@ -82,46 +82,40 @@ public class RecipeFormView extends View {
         JButton cancelBtn = new JButton("Cancel");
         pageEndButtonGroup.add(saveBtn);
         pageEndButtonGroup.add(cancelBtn);
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = recipeNameTextfield.getText();
-                if (name.length() <= 0) {
-                    JOptionPane.showMessageDialog(null, "Please input recipe name!");
-                    return;
-                }
-                try {
-                    m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Invalid Ingredient Amount");
-                    return;
-                } catch (DuplicateObjectException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Some ingredients in recipe is duplicated.");
-                    return;
-                }
-                try {
-                    m.setBatchSize(Double.parseDouble(recipeBatchSizeTextfield.getText()));
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Wrong batch size format.");
-                    return;
-                }
-                m.getRecipe().setName(name);
-                m.getRecipe().setDescription(recipeDescrptionTextArea.getText());
-
-                c.saveRecipe();
-                dispose();
+        saveBtn.addActionListener(e -> {
+            String name = recipeNameTextfield.getText();
+            if (name.length() <= 0) {
+                JOptionPane.showMessageDialog(null, "Please input recipe name!");
+                return;
             }
+            try {
+                m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Invalid Ingredient Amount");
+                return;
+            } catch (DuplicateObjectException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Some ingredients in recipe is duplicated.");
+                return;
+            }
+            try {
+                m.setBatchSize(Double.parseDouble(recipeBatchSizeTextfield.getText()));
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Wrong batch size format.");
+                return;
+            }
+            m.getRecipe().setName(name);
+            m.getRecipe().setDescription(recipeDescrptionTextArea.getText());
+
+            c.saveRecipe();
+            dispose();
         });
 
-        cancelBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.cancel();
-                dispose();
-            }
+        cancelBtn.addActionListener(e -> {
+            c.cancel();
+            dispose();
         });
         this.add(pageEndButtonGroup, BorderLayout.PAGE_END);
     }

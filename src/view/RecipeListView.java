@@ -35,20 +35,14 @@ public class RecipeListView extends View{
         topButtonsAround.add(Box.createHorizontalGlue());
         topButtonsAround.add(rightButton);
 
-        leftButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        leftButton.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
-        rightButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.newRecipe();
-                dispose();
-            }
+        rightButton.addActionListener(e -> {
+            c.newRecipe();
+            dispose();
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);
 
@@ -88,32 +82,23 @@ public class RecipeListView extends View{
             JButton deleteBtn = new JButton("delete");
             recipe.addListener(this);
 
-            detailBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.recipeDetail(recipe);
-                    dispose();
-                }
+            detailBtn.addActionListener(e -> {
+                c.recipeDetail(recipe);
+                dispose();
             });
-            editBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.editRecipe(recipe);
-                    dispose();
-                }
+            editBtn.addActionListener(e -> {
+                c.editRecipe(recipe);
+                dispose();
             });
-            deleteBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int isDelete = JOptionPane.showConfirmDialog(null,
-                            String.format("You are going to delete recipe %s", recipe.getName()),
-                            "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                    if (isDelete == JOptionPane.YES_OPTION) {
-                        boolean status = recipe.delete();
-                        if (!status) {
-                            JOptionPane.showMessageDialog(null,
-                                    String.format("Delete %s failed.", recipe.getName()));
-                        }
+            deleteBtn.addActionListener(e -> {
+                int isDelete = JOptionPane.showConfirmDialog(null,
+                        String.format("You are going to delete recipe %s", recipe.getName()),
+                        "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (isDelete == JOptionPane.YES_OPTION) {
+                    boolean status = recipe.delete();
+                    if (!status) {
+                        JOptionPane.showMessageDialog(null,
+                                String.format("Delete %s failed.", recipe.getName()));
                     }
                 }
             });

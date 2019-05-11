@@ -24,12 +24,9 @@ public class RecipeDetailView extends View {
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
