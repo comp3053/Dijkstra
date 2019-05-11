@@ -3,16 +3,11 @@ package view;
 import controller.RecipeFormController;
 import model.RecipeForm;
 import utils.DuplicateObjectException;
-import utils.EmptyNameException;
-import model.StorageIngredient;
-import utils.InvalidInputException;
-import utils.UnitEnum;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 
 public class RecipeFormView extends View {

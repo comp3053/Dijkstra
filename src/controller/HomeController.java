@@ -8,7 +8,6 @@ import utils.InvalidInputException;
 import utils.FetchDataException;
 import view.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeController {

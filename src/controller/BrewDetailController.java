@@ -3,13 +3,9 @@ package controller;
 import model.BrewingRecord;
 import model.Recipe;
 import utils.EmptyNameException;
-import utils.FetchDataException;
 import utils.InvalidInputException;
-import view.BrewDetailView;
 import view.BrewReciptView;
-import view.RecommendRecipeListView;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewDetailController {
