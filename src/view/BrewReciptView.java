@@ -26,7 +26,7 @@ public class BrewReciptView extends View {
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
         word.add(title, BorderLayout.LINE_START);
-        JLabel batchSizeLabel = new JLabel("Batch Size: "+this.batchSize);
+        JLabel batchSizeLabel = new JLabel("Batch Size: " + this.batchSize + " mL");
         word.add(batchSizeLabel, BorderLayout.LINE_END);
         jp2.add(word, BorderLayout.PAGE_START);
         this.add(jp2, BorderLayout.PAGE_START);

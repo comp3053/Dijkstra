@@ -62,7 +62,12 @@ public class RecommendRecipeListView extends View{
             bottomLeftButtonBar.add(generateListBtn);
             generateListBtn.addActionListener(e -> {
                 try {
-                    c.generateShoppingList(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
+                    for (Recipe recipe : recommendRecipe){
+                        if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())){
+                            c.generateShoppingList(recipe);
+                        }
+                    }
+
                 } catch (NullPointerException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Please select a recipe.");
@@ -75,7 +80,11 @@ public class RecommendRecipeListView extends View{
             bottomLeftButtonBar.add(brewButton);
             brewButton.addActionListener(e -> {
                 try {
-                    c.brewRecipe(recommendRecipe,Integer.valueOf(bg.getSelection().getActionCommand()));
+                    for (Recipe recipe : recommendRecipe){
+                        if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())){
+                            c.brewRecipe(recipe);
+                        }
+                    }
                 } catch (NullPointerException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Please select a recipe.");
