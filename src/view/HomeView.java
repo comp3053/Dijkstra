@@ -23,36 +23,24 @@ public class HomeView extends View {
         JButton btn3 = new JButton("Note List");
         JButton btn4 = new JButton("Equipment Information");
         jp1.add(btn1);
-        btn1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hc.startManageRecipe();
-                dispose();
-            }
+        btn1.addActionListener(e -> {
+            hc.startManageRecipe();
+            dispose();
         });
         jp1.add(btn2);
-        btn2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hc.startManageIngredient();
-                dispose();
-            }
+        btn2.addActionListener(e -> {
+            hc.startManageIngredient();
+            dispose();
         });
         jp1.add(btn3);
-        btn3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hc.startNoteList();
-                dispose();
-            }
+        btn3.addActionListener(e -> {
+            hc.startNoteList();
+            dispose();
         });
         jp1.add(btn4);
-        btn4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hc.startEquipmentInformation();
-                dispose();
-            }
+        btn4.addActionListener(e -> {
+            hc.startEquipmentInformation();
+            dispose();
         });
         this.add(jp1, BorderLayout.PAGE_START); // add two button
 
@@ -73,12 +61,9 @@ public class HomeView extends View {
         jp2.add(greeting);
         jp2.add(help_word);
         jp2.add(recommend_btn);
-        recommend_btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hc.startRecommend();
-                dispose();
-            }
+        recommend_btn.addActionListener(e -> {
+            hc.startRecommend();
+            dispose();
         });
         this.add(jp2, BorderLayout.CENTER); // add a panel
         JPanel copyright = new JPanel();

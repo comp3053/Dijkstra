@@ -29,20 +29,14 @@ public class IngredientDetailView extends View {
         topButtonsAround.add(Box.createHorizontalGlue());
         topButtonsAround.add(editBtn);
 
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        backBtn.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
-        editBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.editIngredient(ingredient);
-                dispose();
-            }
+        editBtn.addActionListener(e -> {
+            c.editIngredient(ingredient);
+            dispose();
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);
 

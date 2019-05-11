@@ -23,12 +23,9 @@ public class BrewingHistoryListView extends View {
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
         this.add(topLeftButtonBar, BorderLayout.NORTH);
@@ -43,12 +40,9 @@ public class BrewingHistoryListView extends View {
             JLabel timeText = new JLabel("2019-04-28 ");
             mainPanelIter.add(timeText);
             JButton btn_takeNote = new JButton("Take note");
-            btn_takeNote.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.takeNote();
-                    dispose();
-                }
+            btn_takeNote.addActionListener(e -> {
+                c.takeNote();
+                dispose();
             });
             mainPanelIter.add(btn_takeNote);
             mainPanel.add(mainPanelIter);

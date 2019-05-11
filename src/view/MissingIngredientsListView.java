@@ -25,12 +25,9 @@ public class MissingIngredientsListView extends View{
         jp_header.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JButton btn_back = new JButton("< Back");
-        btn_back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        btn_back.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
         jp_header.add(btn_back);
 
@@ -47,11 +44,12 @@ public class MissingIngredientsListView extends View{
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];
-        for (int i = 0;i<recipe.getIngredients().size();i++) {
-            data[i][0] = recipe.getIngredients().get(i).getName();
-            data[i][1] = recipe.getIngredients().get(i).getUnit();
-            data[i][2] = recipe.getIngredients().get(i).getAmount();
-        }
+        recipe.getIngredients().forEach(ingredient -> {
+            int index = recipe.getIngredients().indexOf(ingredient);
+            data[index][0] = ingredient.getName();
+            data[index][1] = ingredient.getUnit();
+            data[index][2] = ingredient.getAmount();
+        });
 
         tableModel = new DefaultTableModel(data, columnNames);
         table = new JTable(tableModel);
@@ -62,12 +60,9 @@ public class MissingIngredientsListView extends View{
         jp_foot.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         JButton btn_OK = new JButton("OK");
-        btn_OK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.OK();
-                dispose();
-            }
+        btn_OK.addActionListener(e -> {
+            c.OK();
+            dispose();
         });
         jp_foot.add(btn_OK);
 
