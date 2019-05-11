@@ -42,13 +42,6 @@ public class RecipeFormView extends View {
         this.add(mainPanel);
 
         RecipeIngredientEntryList recipeIngredientEntryList = new RecipeIngredientEntryList(m.getStorageIngredients());
-        if (m.getRecipe().getID() > 0) {
-            recipeNameTextfield.setText(m.getRecipe().getName());
-            recipeIngredientEntryList.initIngredients(m.getRecipeIngredients());
-        }
-        else {
-            recipeIngredientEntryList.initForm();
-        }
         JScrollPane scrollPane = new JScrollPane(recipeIngredientEntryList);
         scrollPane.setAutoscrolls(true);
         scrollPane.setViewportView(recipeIngredientEntryList);
@@ -76,6 +69,15 @@ public class RecipeFormView extends View {
         mainPanel.add(buttonRecipeForm, BorderLayout.PAGE_END);
         this.add(mainPanel);
 
+        if (m.getRecipe().getID() > 0) {
+            recipeNameTextfield.setText(m.getRecipe().getName());
+            recipeIngredientEntryList.initIngredients(m.getRecipeIngredients());
+            recipeDescrptionTextArea.setText(m.getRecipe().getDescription());
+            recipeBatchSizeTextfield.setText("1000");
+        }
+        else {
+            recipeIngredientEntryList.initForm();
+        }
         JPanel pageEndButtonGroup = new JPanel();
         pageEndButtonGroup.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton saveBtn = new JButton("Save");
