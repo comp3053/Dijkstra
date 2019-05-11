@@ -41,14 +41,14 @@ public class MissingIngredientsListView extends View{
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        String[] columnNames = {"Ingredient", "Unit", "Amount"};
+        String[] columnNames = {"Ingredient", "Amount", "Unit"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];
         recipe.getIngredients().forEach(ingredient -> {
             int index = recipe.getIngredients().indexOf(ingredient);
             data[index][0] = ingredient.getName();
-            data[index][1] = ingredient.getUnit();
-            data[index][2] = ingredient.getAmount();
+            data[index][1] = ingredient.getAmount() > 0 ? ingredient.getAmount() : "Storage Sufficiently";
+            data[index][2] = ingredient.getUnit();
         });
 
         tableModel = new DefaultTableModel(data, columnNames);
