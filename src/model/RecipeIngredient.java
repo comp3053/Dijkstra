@@ -130,11 +130,12 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
+            System.out.println("Fuck");
             double storageAmount = rs.getDouble(3);
+            dbHelper.closeConnection();
             if (storageAmount < this.getAmount()) {
                 return false;
             }
-            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             return false;
