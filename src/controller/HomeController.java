@@ -3,12 +3,15 @@ package controller;
 import model.Equipment;
 import model.Recipe;
 import model.StorageIngredient;
+import utils.CustomRecipeComparator;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 import utils.FetchDataException;
 import view.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class HomeController {
     public HomeController(){
@@ -70,6 +73,7 @@ public class HomeController {
                     recommendRecipe.remove(index.intValue());
                 }
             }
+            Collections.sort(recommendRecipe, new CustomRecipeComparator());
             RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
             rrlv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
