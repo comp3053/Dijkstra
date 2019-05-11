@@ -3,6 +3,7 @@ package model;
 import controller.ModelListener;
 import utils.*;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -84,6 +85,8 @@ public class Recipe implements IDatabaseOperation<Recipe> {
                         }
                     } catch (InvalidInputException e) {
                         e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Please choose a valid input.");
+                        return;
                     }
                 }
             }

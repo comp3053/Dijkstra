@@ -1,10 +1,6 @@
 package controller;
 
-import model.Equipment;
 import model.Recipe;
-import utils.EmptyNameException;
-import utils.FetchDataException;
-import utils.InvalidInputException;
 import view.BrewDetailView;
 import view.HomeView;
 import view.MissingIngredientsListView;
@@ -24,7 +20,6 @@ public class RecommendRecipeListController {
     }
 
     public void brewRecipe(ArrayList<Recipe> recommendRecipe, int recipeID){
-
         for(Recipe recipe: recommendRecipe){
             if (recipe.getID() == recipeID){
                 BrewDetailController bdc = new BrewDetailController(recipe);

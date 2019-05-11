@@ -1,7 +1,11 @@
 package view;
 
 import controller.BrewDetailController;
+import model.Equipment;
 import model.Recipe;
+import utils.EmptyNameException;
+import utils.FetchDataException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -58,7 +62,14 @@ public class BrewDetailView extends View {
         applyBatchSize.addActionListener(e -> {
             currentBatchSize = Double.parseDouble(batchSizeTextField.getText());
             c.applyBatchSize(originBatchSize, currentBatchSize);
-            originBatchSize = currentBatchSize;
+            try {
+                double equimentBatchSize = Equipment.getEquipment(1).getVolume();
+                if(currentBatchSize>0&&currentBatchSize< equimentBatchSize){
+                    originBatchSize = currentBatchSize;
+                }
+            } catch (FetchDataException| InvalidInputException |EmptyNameException ex) {
+                ex.printStackTrace();
+            }
         });
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
