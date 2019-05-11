@@ -43,7 +43,7 @@ public class BrewReciptView extends View {
         }
 
         JTable table = new JTable(data, columnNames);
-        this.add(table, BorderLayout.CENTER);
+        this.add(new JScrollPane(table), BorderLayout.CENTER);
         JPanel footerPanel = new JPanel();
         footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveBtn = new JButton("Finish");
