@@ -130,9 +130,7 @@ public class Note implements IDatabaseOperation<Note>{
             }
             dbHelper.closeConnection();
             return notes;
-        } catch (SQLiteConnectionException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
         }
         return null;
