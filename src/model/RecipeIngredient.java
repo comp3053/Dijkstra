@@ -16,12 +16,6 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         super(ingredientID, name, amount, unit);
     }
 
-    public RecipeIngredient(int ingredientID, String name, double amount, UnitEnum unit, int recipeID) throws EmptyNameException,
-            InvalidInputException {
-        super(ingredientID, name, amount, unit);
-        this.recipeID = recipeID;
-    }
-
     public void setRecipeID(int recipeID) {
         this.recipeID = recipeID;
     }

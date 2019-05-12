@@ -19,6 +19,21 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         // Nothing to do
     }
 
+    public Recipe(int id) {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT * FROM Recipe WHERE Recipe_ID=%d", id);
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            this.setName(rs.getString(2));
+            this.setDescription(rs.getString(3));
+            this.setIngredients(RecipeIngredient.getAll(id));
+            dbHelper.closeConnection();
+        } catch (SQLException | SQLiteConnectionException | FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Recipe(int id, String name, String description) {
         setID(id);
         setName(name);
@@ -73,14 +88,13 @@ public class Recipe implements IDatabaseOperation<Recipe> {
     public void amountConversion(int originalBatchSize, int targetBatchSize) throws InvalidInputException {
         //originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1L amount.
         try {
-            if(originalBatchSize < 0 && originalBatchSize <= Equipment.getEquipment(1).getVolume()){
+            if (originalBatchSize < 0 && originalBatchSize <= Equipment.getEquipment(1).getVolume()) {
                 throw new InvalidInputException("Batch size could not be equal or less than 0!");
-            }
-            else{
+            } else {
                 for (RecipeIngredient ingredient : this.ingredients) {
                     try {
                         ingredient.setAmount(ingredient.getAmount() * (targetBatchSize * 1.0 / originalBatchSize));
-                        if(this.listener != null){
+                        if (this.listener != null) {
                             this.notifyListener();
                         }
                     } catch (InvalidInputException e) {
@@ -96,8 +110,8 @@ public class Recipe implements IDatabaseOperation<Recipe> {
     }
 
     public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyObjectException {
-        for(int i = 0;i < this.ingredients.size();i++){
-            if(this.ingredients.get(i).getName().equals(recipeIngredient.getName())){
+        for (int i = 0; i < this.ingredients.size(); i++) {
+            if (this.ingredients.get(i).getName().equals(recipeIngredient.getName())) {
                 this.ingredients.remove(i);
                 this.ingredients.add(i, recipeIngredient);
                 return;

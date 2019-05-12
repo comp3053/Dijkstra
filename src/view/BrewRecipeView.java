@@ -1,22 +1,23 @@
 package view;
 
-import controller.BrewReciptController;
+import controller.BrewRecipeController;
 import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BrewReciptView extends View {
-    private BrewReciptController c;
+public class BrewRecipeView extends View {
+    private BrewRecipeController c;
     private Recipe recipe;
     private double batchSize;
-    public BrewReciptView(BrewReciptController c, Recipe recipe, double batchSize){
+
+    public BrewRecipeView(BrewRecipeController c, Recipe recipe, double batchSize) {
         this.c = c;
         this.recipe = recipe;
         this.batchSize = batchSize;
-        this.setTitle("Brew Day! - Brew Recipe"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.setTitle("Brew Day! - Brew Recipe"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
         JPanel jp2 = new JPanel();
         jp2.setLayout(new BorderLayout());
         JPanel word = new JPanel();
@@ -53,6 +54,7 @@ public class BrewReciptView extends View {
         });
         this.add(footerPanel, BorderLayout.PAGE_END);
     }
+
     @Override
     public void update() {
 

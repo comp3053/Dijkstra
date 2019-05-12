@@ -9,11 +9,11 @@ import view.RecipeListView;
 public class RecipeDetailController {
     private Recipe m;
 
-    public RecipeDetailController(Recipe m){
+    public RecipeDetailController(Recipe m) {
         this.m = m;
     }
 
-    public void goBack(){
+    public void goBack() {
         RecipeListController rlc = new RecipeListController();
         try {
             RecipeListView rlv = new RecipeListView(rlc, Recipe.getAll());

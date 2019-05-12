@@ -7,16 +7,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class RecommendRecipeListView extends View{
+public class RecommendRecipeListView extends View {
     private RecommendRecipeListController c;
     private ArrayList<Recipe> recommendRecipe;
 
     // viewStatus, false: enough ingredient, true: not enough
-    public RecommendRecipeListView(RecommendRecipeListController c, ArrayList<Recipe> recommendRecipe, boolean viewStatus){
+    public RecommendRecipeListView(RecommendRecipeListController c, ArrayList<Recipe> recommendRecipe, boolean viewStatus) {
         this.c = c;
         this.recommendRecipe = recommendRecipe;
-        this.setTitle("Brew Day! - Recommend Recipe List"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Recommend Recipe List"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
 
         JPanel topLeftButtonBar = new JPanel();
@@ -27,7 +27,7 @@ public class RecommendRecipeListView extends View{
         headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
-        if (viewStatus){
+        if (viewStatus) {
             JPanel missingLabel = new JPanel();
             missingLabel.setBackground(Color.YELLOW);
             JLabel missingAlert = new JLabel("Ingredient Not Enough");
@@ -43,27 +43,26 @@ public class RecommendRecipeListView extends View{
         });
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
-        for(Recipe recommendRecipeItem: recommendRecipe) {
-            JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": "+ recommendRecipeItem.getIngredients().size()+ " Ingredient in used");
+        for (Recipe recommendRecipeItem : recommendRecipe) {
+            JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": " + recommendRecipeItem.getIngredients().size() + " Ingredient in used");
             ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
             bg.add(ingredientItem);
             mainPanel.add(ingredientItem);
         }
-        // TODO: Need to change to scrollable
-        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(new JScrollPane(mainPanel), BorderLayout.CENTER);
 
 
         JPanel bottomLeftButtonBar = new JPanel();
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        if (viewStatus){
+        if (viewStatus) {
             JButton generateListBtn = new JButton("Generate Shopping List");
             bottomLeftButtonBar.add(generateListBtn);
             generateListBtn.addActionListener(e -> {
                 try {
-                    for (Recipe recipe : recommendRecipe){
-                        if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())){
+                    for (Recipe recipe : recommendRecipe) {
+                        if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
                             c.generateShoppingList(recipe);
                         }
                     }
@@ -75,13 +74,13 @@ public class RecommendRecipeListView extends View{
                 }
                 dispose();
             });
-        }else {
+        } else {
             JButton brewButton = new JButton("Brew this recipe");
             bottomLeftButtonBar.add(brewButton);
             brewButton.addActionListener(e -> {
                 try {
-                    for (Recipe recipe : recommendRecipe){
-                        if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())){
+                    for (Recipe recipe : recommendRecipe) {
+                        if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
                             c.brewRecipe(recipe);
                         }
                     }
@@ -97,6 +96,7 @@ public class RecommendRecipeListView extends View{
 
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
+
     @Override
     public void update() {
         //repaint();

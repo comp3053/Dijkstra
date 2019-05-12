@@ -14,23 +14,21 @@ import java.awt.*;
 public class BrewDetailView extends View {
     private BrewDetailController c;
     private Recipe recipe;
-    private JTable table;
     private DefaultTableModel tableModel;
     private int originBatchSize;
     private int currentBatchSize;
-    private int equimentBatchSize;
+    private int equipmentBatchSize;
 
-    public BrewDetailView(BrewDetailController c, Recipe recipe){
+    public BrewDetailView(BrewDetailController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
-        this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        this.table = new JTable();
+        this.setTitle("Brew Day! - Brew Recipe Details"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
         try {
-            this.equimentBatchSize = Equipment.getEquipment(1).getVolume();
-            this.originBatchSize = equimentBatchSize;
-            this.currentBatchSize = equimentBatchSize;
+            this.equipmentBatchSize = Equipment.getEquipment(1).getVolume();
+            this.originBatchSize = equipmentBatchSize;
+            this.currentBatchSize = equipmentBatchSize;
         } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
             e.printStackTrace();
         }
@@ -60,7 +58,7 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(new JLabel("Batch Size (mL)"));
         JTextField batchSizeTextField = new JTextField();
         batchSizeTextField.setColumns(5);
-        batchSizeTextField.setText(String.valueOf(this.equimentBatchSize));
+        batchSizeTextField.setText(String.valueOf(this.equipmentBatchSize));
         batchSizeTextField.setToolTipText("Batch Size");
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
@@ -68,13 +66,12 @@ public class BrewDetailView extends View {
         applyBatchSize.addActionListener(e -> {
             try {
                 currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
-                System.out.println(currentBatchSize+"  "+originBatchSize);
-                if(currentBatchSize>0&&currentBatchSize<= equimentBatchSize){
+                System.out.println(currentBatchSize + "  " + originBatchSize);
+                if (currentBatchSize > 0 && currentBatchSize <= equipmentBatchSize) {
                     c.applyBatchSize(originBatchSize, currentBatchSize);
                     originBatchSize = currentBatchSize;
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Batch size should greater than 0 and less or equal to you equipment volume " + equimentBatchSize);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Batch size should greater than 0 and less or equal to you equipment volume " + equipmentBatchSize);
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Batch size should be a positive integer!");
@@ -89,7 +86,7 @@ public class BrewDetailView extends View {
         Object[][] data = initObjectTable();
 
         tableModel = new DefaultTableModel(data, columnNames);
-        table = new JTable(tableModel);
+        JTable table = new JTable(tableModel);
         mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         this.add(mainPanel, BorderLayout.CENTER);
 

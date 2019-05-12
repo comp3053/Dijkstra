@@ -15,8 +15,8 @@ public class IngredientFormView extends View {
         this.c = c;
         this.m = m;
 
-        this.setTitle("Brew Day! - Ingredient Form"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Ingredient Form"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
 
         JPanel pageTitle = new JPanel();
@@ -66,8 +66,6 @@ public class IngredientFormView extends View {
 
         groupLayout.setVerticalGroup(vGroup);
 
-        //TODO: can replace these column with last equipment information
-
         this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel pageEndButtonGroup = new JPanel();
@@ -86,8 +84,8 @@ public class IngredientFormView extends View {
                     return;
                 }
                 try {
-                    double amount = Double.parseDouble(amountTextField.getText())
-;                       c.saveIngredient(nameTextField.getText(),amount, unitSelect.getSelectedIndex());
+                    double amount = Double.parseDouble(amountTextField.getText());
+                    c.saveIngredient(nameTextField.getText(), amount, unitSelect.getSelectedIndex());
                     c.cancel();
                     dispose();
                 } catch (NumberFormatException exception) {

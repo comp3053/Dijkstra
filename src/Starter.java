@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class Starter {
     public static void main(String[] args) {
-        // run that code on the event dispatch thread
+        // Run that code on the event dispatch thread
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
                 Equipment equipment = Equipment.getEquipment(1);

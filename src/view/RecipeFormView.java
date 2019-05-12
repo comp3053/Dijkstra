@@ -12,12 +12,12 @@ public class RecipeFormView extends View {
     private RecipeFormController c;
     private RecipeForm m;
 
-    public RecipeFormView(RecipeFormController c, RecipeForm m){
+    public RecipeFormView(RecipeFormController c, RecipeForm m) {
         this.c = c;
         this.m = m;
-        this.setTitle("Brew Day! - Recipe Form"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.setTitle("Brew Day! - Recipe Form"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
 
         JPanel pageTitle = new JPanel();
         pageTitle.setLayout(new BoxLayout(pageTitle, BoxLayout.Y_AXIS));
@@ -60,8 +60,8 @@ public class RecipeFormView extends View {
         recipeDescription.setLayout(new FlowLayout());
         JLabel recipeDescriptionTitle = new JLabel("Recipe Description:");
         recipeDescription.add(recipeDescriptionTitle);
-        JTextArea recipeDescrptionTextArea = new JTextArea(5,30);
-        recipeDescription.add(recipeDescrptionTextArea);
+        JTextArea recipeDescriptionTextArea = new JTextArea(5, 30);
+        recipeDescription.add(recipeDescriptionTextArea);
         buttonRecipeForm.add(recipeDescription, BorderLayout.PAGE_END);
 
         mainPanel.add(buttonRecipeForm, BorderLayout.PAGE_END);
@@ -70,10 +70,9 @@ public class RecipeFormView extends View {
         if (m.getRecipe().getID() > 0) {
             recipeNameTextfield.setText(m.getRecipe().getName());
             recipeIngredientEntryList.initIngredients(m.getRecipeIngredients());
-            recipeDescrptionTextArea.setText(m.getRecipe().getDescription());
+            recipeDescriptionTextArea.setText(m.getRecipe().getDescription());
             recipeBatchSizeTextfield.setText("1000");
-        }
-        else {
+        } else {
             recipeIngredientEntryList.initForm();
         }
         JPanel pageEndButtonGroup = new JPanel();
@@ -108,7 +107,7 @@ public class RecipeFormView extends View {
                 return;
             }
             m.getRecipe().setName(name);
-            m.getRecipe().setDescription(recipeDescrptionTextArea.getText());
+            m.getRecipe().setDescription(recipeDescriptionTextArea.getText());
 
             c.saveRecipe(Integer.parseInt(recipeBatchSizeTextfield.getText()));
             dispose();
@@ -122,7 +121,7 @@ public class RecipeFormView extends View {
     }
 
     @Override
-    public void update(){
+    public void update() {
 
     }
 }

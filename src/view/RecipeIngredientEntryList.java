@@ -1,4 +1,5 @@
 package view;
+
 import model.*;
 import utils.DuplicateObjectException;
 import utils.EmptyNameException;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
-class RecipeIngredientEntryList extends JPanel{
+class RecipeIngredientEntryList extends JPanel {
     private ArrayList<RecipeIngredientEntry> entries;
     // Replace with your database stuff
     private ArrayList<StorageIngredient> ingredients;
@@ -20,7 +21,7 @@ class RecipeIngredientEntryList extends JPanel{
 
         this.ingredients = ingredients;
         this.ingredientNames = new ArrayList<>();
-        for (StorageIngredient ingredient: ingredients){
+        for (StorageIngredient ingredient : ingredients) {
             ingredientNames.add(ingredient.getName() + " (Unit: " + ingredient.getUnit().toString().toLowerCase() + ")");
         }
     }
@@ -62,11 +63,10 @@ class RecipeIngredientEntryList extends JPanel{
 
     private void refresh() {
         revalidate();
-        if (entries.size() < this.ingredients.size()){
+        if (entries.size() < this.ingredients.size()) {
             if (entries.size() == 1) {
                 entries.get(0).enableMinus(false);
-            }
-            else {
+            } else {
                 for (RecipeIngredientEntry e : entries) {
                     e.enableMinus(true);
                 }
@@ -74,11 +74,10 @@ class RecipeIngredientEntryList extends JPanel{
             for (RecipeIngredientEntry e : entries) {
                 e.enableAdd(true);
             }
-        }else{
+        } else {
             if (entries.size() == 1) {
                 entries.get(0).enableMinus(false);
-            }
-            else {
+            } else {
                 for (RecipeIngredientEntry e : entries) {
                     e.enableMinus(true);
                 }
@@ -100,16 +99,16 @@ class RecipeIngredientEntryList extends JPanel{
 
     ArrayList<RecipeIngredient> getIngredientList() throws NumberFormatException, DuplicateObjectException {
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
-        for (RecipeIngredientEntry entrie: entries){
-            StorageIngredient currentStorageIngredient = this.ingredients.get(entrie.getIngredientSelector().getSelectedIndex());
+        for (RecipeIngredientEntry entry : entries) {
+            StorageIngredient currentStorageIngredient = this.ingredients.get(entry.getIngredientSelector().getSelectedIndex());
             try {
                 if (isDuplicate(currentStorageIngredient, recipeIngredients))
                     throw new DuplicateObjectException("Some ingredients in recipe is duplicated.");
                 recipeIngredients.add(
                         new RecipeIngredient(currentStorageIngredient.getID(), currentStorageIngredient.getName(),
-                                new Double(entrie.getInputBoxText().getText()),
+                                new Double(entry.getInputBoxText().getText()),
                                 currentStorageIngredient.getUnit()));
-            }catch (EmptyNameException | InvalidInputException e){
+            } catch (EmptyNameException | InvalidInputException e) {
                 e.printStackTrace();
             }
         }

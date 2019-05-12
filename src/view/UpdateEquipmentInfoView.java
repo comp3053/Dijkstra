@@ -8,14 +8,15 @@ import utils.InvalidInputException;
 import javax.swing.*;
 import java.awt.*;
 
-public class UpdateEquipmentInfoView extends View{
+public class UpdateEquipmentInfoView extends View {
     private UpdateEquipmentInfoController c;
     private Equipment m;
-    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m, boolean firstTime){
+
+    public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m, boolean firstTime) {
         this.c = c;
         this.m = m;
-        this.setTitle("Brew Day! - Equipment Update"); // set frame title
-        this.setSize(600, 400); // set frame size
+        this.setTitle("Brew Day! - Equipment Update"); // Set frame title
+        this.setSize(600, 400); // Set frame size
         this.setLayout(new BorderLayout());
 
 
@@ -23,7 +24,7 @@ public class UpdateEquipmentInfoView extends View{
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
-        if (firstTime){
+        if (firstTime) {
             button.setEnabled(false);
         }
         JLabel headerTitle = new JLabel("Update Equipment Information");
@@ -45,7 +46,7 @@ public class UpdateEquipmentInfoView extends View{
         volume.setColumns(10);
         volume.setToolTipText("Volume");
 
-        if (!firstTime){
+        if (!firstTime) {
             name.setText(m.getName());
             volume.setText(String.valueOf(m.getVolume()));
         }
@@ -85,7 +86,7 @@ public class UpdateEquipmentInfoView extends View{
         bottomLeftButtonBar.add(saveButton);
         saveButton.addActionListener(e -> {
             try {
-                if(c.saveEquipmentInfo(name.getText(),volume.getText(), firstTime)) {
+                if (c.saveEquipmentInfo(name.getText(), volume.getText(), firstTime)) {
                     JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
                 }
                 c.goBack();

@@ -1,16 +1,21 @@
 package view;
 
 import controller.BrewingHistoryListController;
+import model.BrewingRecord;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BrewingHistoryListView extends View {
     private BrewingHistoryListController c;
-    public BrewingHistoryListView(BrewingHistoryListController c){
-        this.setTitle("Brew Day! - Brewing History"); // set frame title
-        this.setSize(800, 600); // set frame size
+    private ArrayList<BrewingRecord> brewingRecords;
+
+    public BrewingHistoryListView(BrewingHistoryListController c, ArrayList<BrewingRecord> brewingRecords) {
+        this.setTitle("Brew Day! - Brewing History"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
+        this.brewingRecords = brewingRecords;
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -29,17 +34,17 @@ public class BrewingHistoryListView extends View {
         this.add(topLeftButtonBar, BorderLayout.NORTH);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
-        for(int i =0;i<5;i++) {
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        for (BrewingRecord brewingRecord : brewingRecords) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
-            JLabel historyID = new JLabel("brew history" + " 03 ");
+            JLabel historyID = new JLabel("Brew History " + brewingRecord.getID());
             mainPanelIter.add(historyID);
-            JLabel timeText = new JLabel("2019-04-28 ");
+            JLabel timeText = new JLabel(String.valueOf(brewingRecord.getBrewDate()));
             mainPanelIter.add(timeText);
             JButton btn_takeNote = new JButton("Take note");
             btn_takeNote.addActionListener(e -> {
-                c.takeNote();
+                c.takeNote(brewingRecord);
                 dispose();
             });
             mainPanelIter.add(btn_takeNote);

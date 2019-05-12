@@ -2,24 +2,24 @@ package controller;
 
 import model.BrewingRecord;
 import model.Recipe;
-import utils.EmptyNameException;
 import utils.InvalidInputException;
-import view.BrewReciptView;
+import view.BrewRecipeView;
 
 import java.util.Date;
 
 public class BrewDetailController {
     private Recipe m;
-    public BrewDetailController(Recipe m){
+
+    public BrewDetailController(Recipe m) {
         this.m = m;
     }
 
-    public void goBack(){
+    public void goBack() {
         HomeController hc = new HomeController();
         hc.startRecommend();
     }
 
-    public void applyBatchSize(int originBatchSize, int currentBatchSize){
+    public void applyBatchSize(int originBatchSize, int currentBatchSize) {
         try {
             m.amountConversion(originBatchSize, currentBatchSize);
         } catch (InvalidInputException e) {
@@ -27,15 +27,11 @@ public class BrewDetailController {
         }
     }
 
-    public void brewRecipe(int batchSize){
-        BrewReciptController brc = new BrewReciptController();
+    public void brewRecipe(int batchSize) {
+        BrewRecipeController brc = new BrewRecipeController();
         BrewingRecord br = new BrewingRecord(new Date(), batchSize, m);
-        try {
-            br.insert();
-        } catch (EmptyNameException | InvalidInputException e) {
-            e.printStackTrace();
-        }
-        BrewReciptView brv = new BrewReciptView(brc, m, batchSize);
+        br.insert();
+        BrewRecipeView brv = new BrewRecipeView(brc, m, batchSize);
         brv.setVisible(true);
     }
 }

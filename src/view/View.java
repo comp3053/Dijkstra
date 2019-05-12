@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public abstract class View extends JFrame implements ModelListener {
 
-    public View(){
+    public View() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

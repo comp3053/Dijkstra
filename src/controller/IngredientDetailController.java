@@ -6,10 +6,11 @@ import view.IngredientFormView;
 import view.IngredientListView;
 
 public class IngredientDetailController {
-    public IngredientDetailController(){
-
+    public IngredientDetailController() {
+        // Nothing to do
     }
-    public void goBack(){
+
+    public void goBack() {
         IngredientListController ilc = new IngredientListController();
         try {
             IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());

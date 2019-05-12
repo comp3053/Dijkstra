@@ -6,13 +6,13 @@ import model.Equipment;
 import javax.swing.*;
 import java.awt.*;
 
-public class EquipmentInfoView extends View{
+public class EquipmentInfoView extends View {
     private EquipmentInfoController c;
     private Equipment m;
     private JLabel nameValue;
     private JLabel volumeValue;
 
-    public EquipmentInfoView(EquipmentInfoController c, Equipment m){
+    public EquipmentInfoView(EquipmentInfoController c, Equipment m) {
         this.c = c;
         this.m = m;
         this.setTitle("Brew Day! - Equipment Information"); // set frame title

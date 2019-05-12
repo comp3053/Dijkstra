@@ -13,10 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class HomeController {
-    public HomeController(){
+    public HomeController() {
         // Nothing to do
     }
-    public void startManageRecipe(){
+
+    public void startManageRecipe() {
         RecipeListController rlc = new RecipeListController();
         try {
             RecipeListView rlv = new RecipeListView(rlc, Recipe.getAll());
@@ -25,7 +26,8 @@ public class HomeController {
             e.printStackTrace();
         }
     }
-    public void startManageIngredient(){
+
+    public void startManageIngredient() {
         IngredientListController ilc = new IngredientListController();
         try {
             IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());
@@ -34,12 +36,14 @@ public class HomeController {
             e.printStackTrace();
         }
     }
-    public void startNoteList(){
+
+    public void startNoteList() {
         NoteListController nlc = new NoteListController();
         NoteListView nlv = new NoteListView(nlc);
         nlv.setVisible(true);
     }
-    public void startEquipmentInformation(){
+
+    public void startEquipmentInformation() {
         Equipment equipment;
         try {
             equipment = Equipment.getEquipment(1);
@@ -51,9 +55,10 @@ public class HomeController {
             e.printStackTrace();
         }
     }
-    public void startRecommend(){
+
+    public void startRecommend() {
         try {
-            ArrayList<Recipe> recommendRecipe =  Recipe.getAll();
+            ArrayList<Recipe> recommendRecipe = Recipe.getAll();
             ArrayList<Integer> notAvailableList = new ArrayList<>();
             RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
             boolean viewStatus = true;
@@ -61,19 +66,18 @@ public class HomeController {
                 if (recipe.isAvailable(Equipment.getEquipment(1).getVolume())) {
                     System.out.println("OK recipe: " + recipe.getName());
                     viewStatus = false;
-                }
-                else{
+                } else {
                     //recommendRecipe.remove(recipe);
                     notAvailableList.add(recommendRecipe.indexOf(recipe));
                 }
             }
-            if (!viewStatus){
-                for(int i = notAvailableList.size() - 1; i >= 0; i--){
+            if (!viewStatus) {
+                for (int i = notAvailableList.size() - 1; i >= 0; i--) {
                     recommendRecipe.remove(notAvailableList.get(i).intValue());
                 }
             }
             Collections.sort(recommendRecipe, new CustomRecipeComparator());
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipe, viewStatus);
             rrlv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
