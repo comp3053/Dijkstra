@@ -13,10 +13,10 @@ public class IngredientListView extends View {
     private ArrayList<StorageIngredient> m;
     private JPanel mainPanel;
 
-    public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m){
+    public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m) {
         this.c = c;
-        this.setTitle("Brew Day! - Ingredients List"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Ingredients List"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
         this.m = m;
         this.mainPanel = new JPanel();
@@ -61,7 +61,7 @@ public class IngredientListView extends View {
 
         this.add(mainBody, BorderLayout.CENTER);
 
-        
+
     }
 
 

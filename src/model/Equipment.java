@@ -42,7 +42,7 @@ public class Equipment implements IDatabaseOperation<Equipment> {
         }
     }
 
-    public void setModelListener(ModelListener ml){
+    public void setModelListener(ModelListener ml) {
         this.ml = ml;
     }
 
@@ -65,7 +65,7 @@ public class Equipment implements IDatabaseOperation<Equipment> {
         return dbEquipment;
     }
 
-    // insert the current equipment model to the db
+    // Insert the current equipment model to the db
     public boolean insert() { // Do not use this directly
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("INSERT INTO Equipment (Equipment_ID, Name, Volume) VALUES (1,'%s',%d)",
@@ -80,7 +80,7 @@ public class Equipment implements IDatabaseOperation<Equipment> {
         return true;
     }
 
-    // update the equipment by current equipment object
+    // Update the equipment by current equipment object
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Equipment SET Name='%s',Volume=%d WHERE Equipment_ID=1",

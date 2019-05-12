@@ -7,16 +7,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class MissingIngredientsListView extends View{
+public class MissingIngredientsListView extends View {
     private MissingIngredientListController c;
     private Recipe recipe;
     private JTable table;
     private DefaultTableModel tableModel;
-    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe){
+
+    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
-        this.setTitle("Brew Day! - Missing Ingredient List"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Missing Ingredient List"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
 
         JPanel jp_header = new JPanel();
@@ -35,7 +36,6 @@ public class MissingIngredientsListView extends View{
 
         this.add(jp_header, BorderLayout.NORTH);
 
-        c.readMissingIngredientList();
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -71,7 +71,7 @@ public class MissingIngredientsListView extends View{
     public void update() {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
         Object[][] data = new Object[recipe.getIngredients().size()][3];
-        for (int i = 0;i<recipe.getIngredients().size();i++) {
+        for (int i = 0; i < recipe.getIngredients().size(); i++) {
             data[i][0] = recipe.getIngredients().get(i).getName();
             data[i][1] = recipe.getIngredients().get(i).getUnit();
             data[i][2] = recipe.getIngredients().get(i).getAmount();

@@ -10,11 +10,11 @@ import view.IngredientListView;
 public class IngredientFormController {
     private StorageIngredient m;
 
-    public IngredientFormController(StorageIngredient m){
+    public IngredientFormController(StorageIngredient m) {
         this.m = m;
     }
 
-    public boolean saveIngredient(String Name,double Amount,int Unit){
+    public boolean saveIngredient(String Name, double Amount, int Unit) {
         try {
             m.setName(Name);
             m.setAmount(Amount);
@@ -22,7 +22,7 @@ public class IngredientFormController {
             e.printStackTrace();
         }
 
-        switch(Unit) {
+        switch (Unit) {
             case 0:
                 m.setUnit(UnitEnum.valueOf("MILLILITER"));
                 break;
@@ -41,7 +41,7 @@ public class IngredientFormController {
         return m.update();
     }
 
-    public void cancel(){
+    public void cancel() {
         IngredientListController ilc = new IngredientListController();
         try {
             IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());

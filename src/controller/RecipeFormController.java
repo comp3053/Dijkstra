@@ -10,7 +10,7 @@ import view.RecipeListView;
 public class RecipeFormController {
     private RecipeForm m;
 
-    public RecipeFormController(RecipeForm m){
+    public RecipeFormController(RecipeForm m) {
         this.m = m;
     }
 
@@ -24,12 +24,12 @@ public class RecipeFormController {
         cancel();
     }
 
-    public void cancel(){
+    public void cancel() {
         RecipeListController rlc = new RecipeListController();
         try {
             RecipeListView rlv = new RecipeListView(rlc, Recipe.getAll());
             rlv.setVisible(true);
-        }  catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }

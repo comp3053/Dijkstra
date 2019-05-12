@@ -10,7 +10,7 @@ public class RecipeForm {
     private ArrayList<StorageIngredient> storageIngredients;
     private ArrayList<RecipeIngredient> recipeIngredients;
 
-    public RecipeForm (Recipe recipe, ArrayList<StorageIngredient> storageIngredients) {
+    public RecipeForm(Recipe recipe, ArrayList<StorageIngredient> storageIngredients) {
         this.recipe = recipe;
         this.storageIngredients = storageIngredients;
     }

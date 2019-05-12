@@ -11,11 +11,11 @@ public class NoteContentView extends View {
     private NoteContentController c;
     private Note m;
 
-    public NoteContentView(NoteContentController c, Note m){
+    public NoteContentView(NoteContentController c, Note m) {
         this.c = c;
         this.m = m;
-        this.setTitle("Brew Day! - Note Detail"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Note Detail"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
 
         JPanel topLeftButtonBar = new JPanel();
@@ -38,8 +38,8 @@ public class NoteContentView extends View {
         mainPanel.setLayout(new BorderLayout());
         JLabel noteContent = new JLabel(m.getContent());
         noteContent.setVerticalAlignment(1);
-        mainPanel.setBorder(new EmptyBorder(20,20,0,0));
-        mainPanel.add(noteContent,BorderLayout.CENTER);
+        mainPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
+        mainPanel.add(noteContent, BorderLayout.CENTER);
 
         this.add(mainPanel, BorderLayout.CENTER);
     }

@@ -31,7 +31,7 @@ class RecipeIngredientEntry extends JPanel {
         return IngredientSelector;
     }
 
-    JTextField getInputBoxText(){
+    JTextField getInputBoxText() {
         return inputBoxText;
     }
 
@@ -62,6 +62,7 @@ class RecipeIngredientEntry extends JPanel {
     void enableAdd(boolean enabled) {
         this.addField.setEnabled(enabled);
     }
+
     void enableMinus(boolean enabled) {
         this.minusField.setEnabled(enabled);
     }

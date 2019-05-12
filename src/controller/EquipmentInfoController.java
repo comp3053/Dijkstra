@@ -6,7 +6,8 @@ import view.UpdateEquipmentInfoView;
 
 public class EquipmentInfoController {
     private Equipment m;
-    public EquipmentInfoController(Equipment m){
+
+    public EquipmentInfoController(Equipment m) {
         this.m = m;
     }
 

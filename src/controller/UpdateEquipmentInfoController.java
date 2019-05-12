@@ -21,9 +21,9 @@ public class UpdateEquipmentInfoController {
                 "Modify equipment information will change your default batch size, are you sure to modify?",
                 "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         if (isSave == JOptionPane.YES_OPTION) {
-            if(firstTime){
+            if (firstTime) {
                 return m.insert();
-            }else {
+            } else {
                 return m.update();
             }
         } else {

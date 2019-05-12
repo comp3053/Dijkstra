@@ -10,36 +10,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Note implements IDatabaseOperation<Note>{
+public class Note implements IDatabaseOperation<Note> {
     private int id;
     private int brewID;
     private Date createDate;
     private String content;
     private ModelListener listener;
 
-    public Note(int brewID, String content){
-        setBrewID(brewID);
-        setContent(content);
-    }
-
-    public Note(int brewID, Date createDate,String content){
+    public Note(int brewID, Date createDate, String content) {
         setBrewID(brewID);
         setCreateDate(createDate);
         setContent(content);
     }
 
-    public Note(int id, int brewID, Date createDate,String content){
+    public Note(int id, int brewID, Date createDate, String content) {
         setID(id);
         setBrewID(brewID);
         setCreateDate(createDate);
         setContent(content);
     }
 
-    public int getID(){
+    public int getID() {
         return this.id;
     }
 
-    public void setID(int id){
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -59,12 +54,12 @@ public class Note implements IDatabaseOperation<Note>{
         this.createDate = createDate;
     }
 
-    public String getContent(){
+    public String getContent() {
         return this.content;
     }
 
-    public void setContent(String content){
-        this.content=content;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public boolean insert() {
@@ -83,7 +78,7 @@ public class Note implements IDatabaseOperation<Note>{
             // Set Note ID for corresponding Brew Record
             dbHelper.connectSQLite();
             query = String.format("UPDATE Brew SET Note_ID = %d WHERE Brew_ID = %d;",
-                    this.getID(),this.getBrewID());
+                    this.getID(), this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
@@ -111,13 +106,13 @@ public class Note implements IDatabaseOperation<Note>{
         ArrayList<Note> notes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = "SELECT * FROM Note";
-        int id,brewID;
+        int id, brewID;
         Date createDate;
         String content;
         String CreateDateString;
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
-            while(rs.next()) {
+            while (rs.next()) {
                 id = rs.getInt(1);
                 CreateDateString = rs.getString(2);
                 //System.out.println(CreateDateString);
@@ -126,7 +121,7 @@ public class Note implements IDatabaseOperation<Note>{
                 //System.out.println(createDate);
                 content = rs.getString(3);
                 brewID = rs.getInt(4);
-                notes.add(new Note(id,brewID,createDate,content));
+                notes.add(new Note(id, brewID, createDate, content));
             }
             dbHelper.closeConnection();
             return notes;
@@ -143,7 +138,7 @@ public class Note implements IDatabaseOperation<Note>{
                     this.getID());
             dbHelper.execSqlNoReturn(query);
             query = String.format("UPDATE Brew SET Note_ID = %d WHERE Brew_ID = %d;",
-                    0,this.getBrewID());
+                    0, this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
             notifyListener();

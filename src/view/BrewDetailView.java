@@ -19,12 +19,12 @@ public class BrewDetailView extends View {
     private int currentBatchSize;
     private int equipmentBatchSize;
 
-    public BrewDetailView(BrewDetailController c, Recipe recipe){
+    public BrewDetailView(BrewDetailController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
-        this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
+        this.setTitle("Brew Day! - Brew Recipe Details"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
         try {
             this.equipmentBatchSize = Equipment.getEquipment(1).getVolume();
             this.originBatchSize = equipmentBatchSize;
@@ -66,12 +66,11 @@ public class BrewDetailView extends View {
         applyBatchSize.addActionListener(e -> {
             try {
                 currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
-                System.out.println(currentBatchSize+"  "+originBatchSize);
-                if(currentBatchSize>0&&currentBatchSize<= equipmentBatchSize){
+                System.out.println(currentBatchSize + "  " + originBatchSize);
+                if (currentBatchSize > 0 && currentBatchSize <= equipmentBatchSize) {
                     c.applyBatchSize(originBatchSize, currentBatchSize);
                     originBatchSize = currentBatchSize;
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Batch size should greater than 0 and less or equal to you equipment volume " + equipmentBatchSize);
                 }
             } catch (NumberFormatException ex) {

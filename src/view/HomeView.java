@@ -9,11 +9,11 @@ import java.awt.*;
 public class HomeView extends View {
     private HomeController hc;
 
-    public HomeView(HomeController hc){
+    public HomeView(HomeController hc) {
         this.hc = hc;
-        this.setTitle("Brew Day! - Home"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
+        this.setTitle("Brew Day! - Home"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
         JPanel jp1 = new JPanel();
         jp1.setLayout(new FlowLayout());
         JButton btn1 = new JButton("Manage Recipe");
@@ -43,7 +43,7 @@ public class HomeView extends View {
         this.add(jp1, BorderLayout.PAGE_START); // add two button
 
         JPanel jp2 = new JPanel();
-        jp2.setBorder(new EmptyBorder(100,50,0,0)); // top and left padding for recommend entry
+        jp2.setBorder(new EmptyBorder(100, 50, 0, 0)); // Top and left padding for recommend entry
         jp2.setLayout(new BoxLayout(jp2, BoxLayout.Y_AXIS));// Vertically display
         JLabel greeting = new JLabel("Hello");
         //greeting.setHorizontalAlignment(JLabel.CENTER); // Vertical central the label in BorderLayout

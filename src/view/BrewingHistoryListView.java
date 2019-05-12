@@ -10,9 +10,10 @@ import java.util.ArrayList;
 public class BrewingHistoryListView extends View {
     private BrewingHistoryListController c;
     private ArrayList<BrewingRecord> brewingRecords;
-    public BrewingHistoryListView(BrewingHistoryListController c, ArrayList<BrewingRecord> brewingRecords){
-        this.setTitle("Brew Day! - Brewing History"); // set frame title
-        this.setSize(800, 600); // set frame size
+
+    public BrewingHistoryListView(BrewingHistoryListController c, ArrayList<BrewingRecord> brewingRecords) {
+        this.setTitle("Brew Day! - Brewing History"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
         this.brewingRecords = brewingRecords;
 
@@ -33,8 +34,8 @@ public class BrewingHistoryListView extends View {
         this.add(topLeftButtonBar, BorderLayout.NORTH);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
-        for(BrewingRecord brewingRecord: brewingRecords) {
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        for (BrewingRecord brewingRecord : brewingRecords) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
             JLabel historyID = new JLabel("Brew History " + brewingRecord.getID());

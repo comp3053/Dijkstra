@@ -5,7 +5,6 @@ import model.Note;
 import view.NoteInputView;
 import view.NoteListView;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewingHistoryListController {
@@ -14,16 +13,9 @@ public class BrewingHistoryListController {
         // Nothing to do
     }
 
-    public ArrayList<BrewingRecord> readBrewingHistoryList() {
-        ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
-        brewingRecords = BrewingRecord.getAll();
-        return brewingRecords;
-    }
-
     public void goBack() {
         NoteListController nlc = new NoteListController();
-        NoteListView nlv = null;
-        nlv = new NoteListView(nlc);
+        NoteListView nlv = new NoteListView(nlc);
         nlv.setVisible(true);
     }
 

@@ -12,9 +12,9 @@ public class IngredientDetailView extends View {
 
     public IngredientDetailView(IngredientDetailController c, StorageIngredient ingredient) {
         this.c = c;
-        this.setTitle("Brew Day! - Recipe Detail"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
+        this.setTitle("Brew Day! - Recipe Detail"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
         this.ingredient = ingredient;
 
         JPanel topButtonsAround = new JPanel();

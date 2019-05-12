@@ -6,7 +6,7 @@ import view.IngredientDetailView;
 import view.IngredientFormView;
 
 public class IngredientListController {
-    public IngredientListController(){
+    public IngredientListController() {
         // Nothing to do
     }
 
@@ -16,21 +16,21 @@ public class IngredientListController {
         hv.setVisible(true);
     }
 
-    public void addIngredient(){
+    public void addIngredient() {
         IngredientFormController ifc = new IngredientFormController(new StorageIngredient());
         IngredientFormView ifv = new IngredientFormView(ifc, new StorageIngredient());
         ifv.setVisible(true);
     }
 
-    public void editIngredient(StorageIngredient ingredient){
+    public void editIngredient(StorageIngredient ingredient) {
         IngredientFormController ifc = new IngredientFormController(ingredient);
         IngredientFormView ifv = new IngredientFormView(ifc, ingredient);
         ifv.setVisible(true);
     }
 
-    public void ingredientDetail(StorageIngredient ingredient){
+    public void ingredientDetail(StorageIngredient ingredient) {
         IngredientDetailController idc = new IngredientDetailController();
-        IngredientDetailView idv = new IngredientDetailView(idc,ingredient);
+        IngredientDetailView idv = new IngredientDetailView(idc, ingredient);
         idv.setVisible(true);
     }
 }

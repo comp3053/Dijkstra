@@ -2,20 +2,20 @@ package view;
 
 import controller.NoteInputController;
 import model.Note;
-import utils.FetchDataException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class NoteInputView extends View{
+public class NoteInputView extends View {
     private NoteInputController c;
     private Note m;
-    public NoteInputView(NoteInputController c, Note m){
+
+    public NoteInputView(NoteInputController c, Note m) {
         this.c = c;
         this.m = m;
-        this.setTitle("Brew Day! - Edit Note"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Edit Note"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
 
         JPanel topLeftButtonBar = new JPanel();
@@ -28,12 +28,8 @@ public class NoteInputView extends View{
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
         button.addActionListener(e -> {
-            try {
-                if (c.backToNoteList() == 1){
-                    dispose();
-                }
-            } catch (FetchDataException ex) {
-                ex.printStackTrace();
+            if (c.backToNoteList() == 1) {
+                dispose();
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
@@ -41,10 +37,10 @@ public class NoteInputView extends View{
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(new EmptyBorder(0,20,10,20)); // top and left padding for recommend entry
+        mainPanel.setBorder(new EmptyBorder(0, 20, 10, 20)); // top and left padding for recommend entry
 
         JTextArea input_noteContent = new JTextArea(m.getContent());
-        mainPanel.add(input_noteContent,BorderLayout.CENTER);
+        mainPanel.add(input_noteContent, BorderLayout.CENTER);
 
         this.add(mainPanel, BorderLayout.CENTER);
 
@@ -53,10 +49,9 @@ public class NoteInputView extends View{
         JButton saveButton = new JButton("Save");
         bottomLeftButtonBar.add(saveButton);
         saveButton.addActionListener(e -> {
-            if(input_noteContent.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null,"The content cannot be empty!","Warning",JOptionPane.WARNING_MESSAGE);
-            }
-            else {
+            if (input_noteContent.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "The content cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
                 boolean insertSuccess = c.saveNote(m, input_noteContent.getText());
                 if (insertSuccess) {
                     JOptionPane.showMessageDialog(null, "Your note have been saved", "Success", JOptionPane.PLAIN_MESSAGE);

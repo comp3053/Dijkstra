@@ -10,11 +10,12 @@ import java.awt.*;
 public class RecipeDetailView extends View {
     private RecipeDetailController c;
     private Recipe recipe;
-    public RecipeDetailView(RecipeDetailController c,Recipe recipe){
+
+    public RecipeDetailView(RecipeDetailController c, Recipe recipe) {
         this.c = c;
-        this.setTitle("Brew Day! - Recipe Detail"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
+        this.setTitle("Brew Day! - Recipe Detail"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
         this.recipe = recipe;
 
         JPanel topLeftButtonBar = new JPanel();

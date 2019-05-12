@@ -6,19 +6,17 @@ import model.Note;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class NoteListView extends View {
     private NoteListController c;
     private JPanel mainPanel;
 
-    public NoteListView(NoteListController c){
+    public NoteListView(NoteListController c) {
         this.c = c;
         this.mainPanel = new JPanel();
-        this.setTitle("Brew Day! - Note List"); // set frame title
-        this.setSize(800, 600); // set frame size
+        this.setTitle("Brew Day! - Note List"); // Set frame title
+        this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
 
         JPanel topButtonsAround = new JPanel();
@@ -47,7 +45,7 @@ public class NoteListView extends View {
 
         this.add(topButtonsAround, BorderLayout.NORTH);
 
-        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         createNoteList(c.readNoteList());
         JScrollPane scrollPane = new JScrollPane(mainPanel);
         scrollPane.setAutoscrolls(true);
@@ -57,8 +55,8 @@ public class NoteListView extends View {
 
     }
 
-    public void createNoteList(ArrayList<Note> notes){
-        for(Note note:notes) {
+    public void createNoteList(ArrayList<Note> notes) {
+        for (Note note : notes) {
             note.addListener(this);
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
@@ -71,7 +69,7 @@ public class NoteListView extends View {
             JButton deleteBtn = new JButton("delete");
             detailBtn.addActionListener(e -> {
                 NoteContentController ncc = new NoteContentController();
-                NoteContentView ncv = new NoteContentView(ncc,note);
+                NoteContentView ncv = new NoteContentView(ncc, note);
                 // TODO: Need to change according to click (better pass in a model)
                 ncv.setVisible(true);
                 dispose();

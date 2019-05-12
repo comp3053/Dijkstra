@@ -10,18 +10,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class RecipeListView extends View{
+public class RecipeListView extends View {
     private RecipeListController c;
     private JPanel listPanel;
     private JLabel subtitle;
 
     private ArrayList<Recipe> recipes;
-    public RecipeListView(RecipeListController c, ArrayList<Recipe> recipes){
+
+    public RecipeListView(RecipeListController c, ArrayList<Recipe> recipes) {
         this.c = c;
         this.recipes = recipes;
-        this.setTitle("Brew Day! - Manage Recipe"); // set frame title
-        this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
+        this.setTitle("Brew Day! - Manage Recipe"); // Set frame title
+        this.setSize(800, 600); // Set frame size
+        this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
 
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
@@ -53,7 +54,7 @@ public class RecipeListView extends View{
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
 
-        subtitle = new JLabel(recipes.size()+" Recipes in the database");
+        subtitle = new JLabel(recipes.size() + " Recipes in the database");
         //help_word.setHorizontalAlignment(JLabel.CENTER);
         // Set Font size
         subtitle.setFont(new Font(subtitle.getFont().getFontName(), subtitle.getFont().getStyle(), 16));
@@ -114,7 +115,7 @@ public class RecipeListView extends View{
         listPanel.repaint();
         try {
             int size = createRecipeList(Recipe.getAll());
-            subtitle.setText(size +" Recipes in the database");
+            subtitle.setText(size + " Recipes in the database");
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
