@@ -28,6 +28,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             this.setName(rs.getString(2));
             this.setDescription(rs.getString(3));
             this.setIngredients(RecipeIngredient.getAll(id));
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException | FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
