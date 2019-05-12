@@ -5,8 +5,6 @@ import controller.NoteInputController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NoteInputView extends View{
     private NoteInputController c;
@@ -25,12 +23,9 @@ public class NoteInputView extends View{
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (c.backToNoteList() == 1){
-                    dispose();
-                }
+        button.addActionListener(e -> {
+            if (c.backToNoteList() == 1){
+                dispose();
             }
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
@@ -49,12 +44,9 @@ public class NoteInputView extends View{
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveButton = new JButton("Save");
         bottomLeftButtonBar.add(saveButton);
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.saveNote(brewID, input_noteContent.getText());
-                //TODO: Add operation to show status of insert
-            }
+        saveButton.addActionListener(e -> {
+            c.saveNote(brewID, input_noteContent.getText());
+            //TODO: Add operation to show status of insert
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }

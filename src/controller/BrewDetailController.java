@@ -1,23 +1,41 @@
 package controller;
 
+import model.BrewingRecord;
+import model.Recipe;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
 import view.BrewReciptView;
-import view.RecommendRecipeListView;
+
+import java.util.Date;
 
 public class BrewDetailController {
-    public BrewDetailController(){
-
+    private Recipe m;
+    public BrewDetailController(Recipe m){
+        this.m = m;
     }
 
     public void goBack(){
-        // TODO: Check if there are enough ingredient
-        RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
-        rrlv.setVisible(true);
+        HomeController hc = new HomeController();
+        hc.startRecommend();
     }
 
-    public void brewRecipe(){
+    public void applyBatchSize(int originBatchSize, int currentBatchSize){
+        try {
+            m.amountConversion(originBatchSize, currentBatchSize);
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void brewRecipe(int batchSize){
         BrewReciptController brc = new BrewReciptController();
-        BrewReciptView brv = new BrewReciptView(brc);
+        BrewingRecord br = new BrewingRecord(new Date(), batchSize, m);
+        try {
+            br.insert();
+        } catch (EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
+        BrewReciptView brv = new BrewReciptView(brc, m, batchSize);
         brv.setVisible(true);
     }
 }

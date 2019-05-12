@@ -5,8 +5,6 @@ import model.Equipment;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EquipmentInfoView extends View{
     private EquipmentInfoController c;
@@ -30,12 +28,9 @@ public class EquipmentInfoView extends View{
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
@@ -76,12 +71,9 @@ public class EquipmentInfoView extends View{
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveButton = new JButton("Update");
         bottomLeftButtonBar.add(saveButton);
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.turnUpdateInfo();
-                dispose();
-            }
+        saveButton.addActionListener(e -> {
+            c.turnUpdateInfo();
+            dispose();
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }

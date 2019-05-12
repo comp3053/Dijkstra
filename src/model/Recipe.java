@@ -3,6 +3,7 @@ package model;
 import controller.ModelListener;
 import utils.*;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -69,19 +70,28 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients = ingredients;
     }
 
-    public void amountConversion(double originalBatchSize) throws InvalidInputException {
+    public void amountConversion(int originalBatchSize, int targetBatchSize) throws InvalidInputException {
         //originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1L amount.
-        if(originalBatchSize<=0){
-            throw new InvalidInputException("Batch size could not be equal or less than 0!");
-        }
-        else{
-            for (RecipeIngredient ingredient : this.ingredients) {
-                try {
-                    ingredient.setAmount(ingredient.getAmount() * (1000 / originalBatchSize));
-                } catch (InvalidInputException e) {
-                    e.printStackTrace();
+        try {
+            if(originalBatchSize < 0 && originalBatchSize <= Equipment.getEquipment(1).getVolume()){
+                throw new InvalidInputException("Batch size could not be equal or less than 0!");
+            }
+            else{
+                for (RecipeIngredient ingredient : this.ingredients) {
+                    try {
+                        ingredient.setAmount(ingredient.getAmount() * (targetBatchSize * 1.0 / originalBatchSize));
+                        if(this.listener != null){
+                            this.notifyListener();
+                        }
+                    } catch (InvalidInputException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Please choose a valid input.");
+                        return;
+                    }
                 }
             }
+        } catch (FetchDataException | EmptyNameException e) {
+            e.printStackTrace();
         }
     }
 
@@ -105,9 +115,10 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients.add(recipeIngredients);
     }
 
-    public boolean isAvailable() {
+    public boolean isAvailable(int equipmentSize) {
+        System.out.println(this.name);
         for (RecipeIngredient ingredient : ingredients) {
-            if (!ingredient.isEnough())
+            if (!ingredient.isEnough(equipmentSize))
                 return false;
         }
         return true;
@@ -156,6 +167,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
                 description = rs.getString(3);
                 recipes.add(new Recipe(id, name, description, RecipeIngredient.getAll(id)));
             }
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Fail to fetch recipes.");

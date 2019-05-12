@@ -6,8 +6,6 @@ import controller.IngredientListController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class IngredientListView extends View {
@@ -28,12 +26,9 @@ public class IngredientListView extends View {
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
         JPanel mainBody = new JPanel();
@@ -48,19 +43,11 @@ public class IngredientListView extends View {
         JButton buttonAdd = new JButton("Add");
         JPanelSearchBar.add(buttonSearch);
         JPanelSearchBar.add(buttonAdd);
-        buttonSearch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Search Clicked");
-            }
-        });
+        buttonSearch.addActionListener(e -> System.out.println("Search Clicked"));
 
-        buttonAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.addIngredient();
-                dispose();
-            }
+        buttonAdd.addActionListener(e -> {
+            c.addIngredient();
+            dispose();
         });
         mainBody.add(JPanelSearchBar, BorderLayout.PAGE_START);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -91,32 +78,23 @@ public class IngredientListView extends View {
             JButton deleteBtn = new JButton("delete");
             ingredient.addListener(this);
 
-            detailBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.ingredientDetail(ingredient);
-                    dispose();
-                }
+            detailBtn.addActionListener(e -> {
+                c.ingredientDetail(ingredient);
+                dispose();
             });
-            editBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.editIngredient(ingredient);
-                    dispose();
-                }
+            editBtn.addActionListener(e -> {
+                c.editIngredient(ingredient);
+                dispose();
             });
-            deleteBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int isDelete = JOptionPane.showConfirmDialog(null,
-                            String.format("You are going to delete ingredient %s", ingredient.getName()),
-                            "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                    if (isDelete == JOptionPane.YES_OPTION) {
-                        boolean status = ingredient.delete();
-                        if (!status) {
-                            JOptionPane.showMessageDialog(null,
-                                    String.format("Delete %s failed.", ingredient.getName()));
-                        }
+            deleteBtn.addActionListener(e -> {
+                int isDelete = JOptionPane.showConfirmDialog(null,
+                        String.format("You are going to delete ingredient %s", ingredient.getName()),
+                        "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (isDelete == JOptionPane.YES_OPTION) {
+                    boolean status = ingredient.delete();
+                    if (!status) {
+                        JOptionPane.showMessageDialog(null,
+                                String.format("Delete %s failed.", ingredient.getName()));
                     }
                 }
             });

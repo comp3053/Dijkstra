@@ -77,6 +77,7 @@ public class DatabaseHelper {
     public void closeConnection() {
         try {
             c.close();
+            System.out.println("SQLite connection closed.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

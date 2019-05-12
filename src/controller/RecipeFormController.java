@@ -14,7 +14,12 @@ public class RecipeFormController {
         this.m = m;
     }
 
-    public void saveRecipe() {
+    public void saveRecipe(int batchSize) {
+        try {
+            m.getRecipe().amountConversion(batchSize, 1000);
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        }
         m.save();
         cancel();
     }

@@ -6,8 +6,6 @@ import utils.UnitEnum;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class IngredientFormView extends View {
     private IngredientFormController c;
@@ -78,37 +76,31 @@ public class IngredientFormView extends View {
         JButton cancelBtn = new JButton("Cancel");
         pageEndButtonGroup.add(saveBtn);
         pageEndButtonGroup.add(cancelBtn);
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int status = JOptionPane.showConfirmDialog(null,
-                        "Are you sure to save current information?", "Warning",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (status == JOptionPane.YES_OPTION) {
-                    if (nameTextField.getText().length() <= 0) {
-                        JOptionPane.showMessageDialog(null, "Invalid input!");
-                        return;
-                    }
-                    try {
-                        double amount = Double.parseDouble(amountTextField.getText())
+        saveBtn.addActionListener(e -> {
+            int status = JOptionPane.showConfirmDialog(null,
+                    "Are you sure to save current information?", "Warning",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (status == JOptionPane.YES_OPTION) {
+                if (nameTextField.getText().length() <= 0) {
+                    JOptionPane.showMessageDialog(null, "Invalid input!");
+                    return;
+                }
+                try {
+                    double amount = Double.parseDouble(amountTextField.getText())
 ;                       c.saveIngredient(nameTextField.getText(),amount, unitSelect.getSelectedIndex());
-                        c.cancel();
-                        dispose();
-                    } catch (NumberFormatException exception) {
-                        JOptionPane.showMessageDialog(null, "Amount is invalid!");
-                    }
-
+                    c.cancel();
+                    dispose();
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null, "Amount is invalid!");
                 }
 
             }
+
         });
 
-        cancelBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.cancel();
-                dispose();
-            }
+        cancelBtn.addActionListener(e -> {
+            c.cancel();
+            dispose();
         });
         this.add(pageEndButtonGroup, BorderLayout.PAGE_END);
     }

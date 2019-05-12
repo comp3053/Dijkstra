@@ -3,10 +3,14 @@ package controller;
 import model.Equipment;
 import model.Recipe;
 import model.StorageIngredient;
+import utils.CustomRecipeComparator;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 import utils.FetchDataException;
 import view.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeController {
     public HomeController(){
@@ -48,9 +52,31 @@ public class HomeController {
         }
     }
     public void startRecommend(){
-// TODO: Check if there are enough ingredient
-        RecommendRecipeListController rrlc = new RecommendRecipeListController();
-        RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc);
-        rrlv.setVisible(true);
+        try {
+            ArrayList<Recipe> recommendRecipe =  Recipe.getAll();
+            ArrayList<Integer> notAvailableList = new ArrayList<>();
+            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
+            boolean viewStatus = true;
+            for (Recipe recipe : recommendRecipe) {
+                if (recipe.isAvailable(Equipment.getEquipment(1).getVolume())) {
+                    System.out.println("OK recipe: " + recipe.getName());
+                    viewStatus = false;
+                }
+                else{
+                    //recommendRecipe.remove(recipe);
+                    notAvailableList.add(recommendRecipe.indexOf(recipe));
+                }
+            }
+            if (!viewStatus){
+                for(int i = notAvailableList.size() - 1; i >= 0; i--){
+                    recommendRecipe.remove(notAvailableList.get(i).intValue());
+                }
+            }
+            Collections.sort(recommendRecipe, new CustomRecipeComparator());
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc,recommendRecipe, viewStatus);
+            rrlv.setVisible(true);
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
 }

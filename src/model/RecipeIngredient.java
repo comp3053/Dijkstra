@@ -39,7 +39,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
     @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Ingredient_in_Recipe VALUES (%d,%d,%f,'%s')",
+        String query = String.format("INSERT OR IGNORE INTO Ingredient_in_Recipe VALUES (%d,%d,%f,'%s')",
                 this.getRecipeID(), this.getID(), this.getAmount(), this.getUnit());
 
         try {
@@ -88,6 +88,7 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
                 unit = UnitEnum.valueOf(rs.getString(4));
                 ingredients.add(new RecipeIngredient(ingredientID, name, amount, unit));
             }
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not fetch recipe ingredients.");
@@ -108,13 +109,30 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return true;
     }
 
-    public boolean isEnough() {
+    @Override
+    public boolean update() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("UPDATE Ingredient_in_Recipe SET Amount=%f",
+                this.getAmount());
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+            return true;
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean isEnough(int equipmentSize) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
             double storageAmount = rs.getDouble(3);
-            if (storageAmount < this.getAmount()) {
+            dbHelper.closeConnection();
+            if (storageAmount < this.getAmount() / 1000 * equipmentSize) {
+                System.out.println(this.getName() + " need extra " + (this.getAmount() / 1000 * equipmentSize - storageAmount) + " " + this.getUnit().toString().toLowerCase());
                 return false;
             }
         } catch (SQLException | SQLiteConnectionException e) {

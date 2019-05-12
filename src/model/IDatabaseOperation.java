@@ -7,6 +7,8 @@ interface IDatabaseOperation<T> {
 
     boolean delete();
 
+    boolean update();
+
     void addListener(ModelListener listener);
 
     void notifyListener();
