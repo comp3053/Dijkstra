@@ -69,8 +69,8 @@ public class HomeController {
                 }
             }
             if (!viewStatus){
-                for(Integer index: notAvailableList){
-                    recommendRecipe.remove(index.intValue());
+                for(int i = notAvailableList.size() - 1; i >= 0; i--){
+                    recommendRecipe.remove(notAvailableList.get(i).intValue());
                 }
             }
             Collections.sort(recommendRecipe, new CustomRecipeComparator());
