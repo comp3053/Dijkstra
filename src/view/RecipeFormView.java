@@ -60,8 +60,8 @@ public class RecipeFormView extends View {
         recipeDescription.setLayout(new FlowLayout());
         JLabel recipeDescriptionTitle = new JLabel("Recipe Description:");
         recipeDescription.add(recipeDescriptionTitle);
-        JTextArea recipeDescrptionTextArea = new JTextArea(5,30);
-        recipeDescription.add(recipeDescrptionTextArea);
+        JTextArea recipeDescriptionTextArea = new JTextArea(5,30);
+        recipeDescription.add(recipeDescriptionTextArea);
         buttonRecipeForm.add(recipeDescription, BorderLayout.PAGE_END);
 
         mainPanel.add(buttonRecipeForm, BorderLayout.PAGE_END);
@@ -70,7 +70,7 @@ public class RecipeFormView extends View {
         if (m.getRecipe().getID() > 0) {
             recipeNameTextfield.setText(m.getRecipe().getName());
             recipeIngredientEntryList.initIngredients(m.getRecipeIngredients());
-            recipeDescrptionTextArea.setText(m.getRecipe().getDescription());
+            recipeDescriptionTextArea.setText(m.getRecipe().getDescription());
             recipeBatchSizeTextfield.setText("1000");
         }
         else {
@@ -108,7 +108,7 @@ public class RecipeFormView extends View {
                 return;
             }
             m.getRecipe().setName(name);
-            m.getRecipe().setDescription(recipeDescrptionTextArea.getText());
+            m.getRecipe().setDescription(recipeDescriptionTextArea.getText());
 
             c.saveRecipe(Integer.parseInt(recipeBatchSizeTextfield.getText()));
             dispose();

@@ -13,7 +13,7 @@ public class HomeView extends View {
         this.hc = hc;
         this.setTitle("Brew Day! - Home"); // set frame title
         this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
         JPanel jp1 = new JPanel();
         jp1.setLayout(new FlowLayout());
         JButton btn1 = new JButton("Manage Recipe");

@@ -3,7 +3,7 @@ package controller;
 import model.BrewingRecord;
 import model.Recipe;
 import utils.InvalidInputException;
-import view.BrewReciptView;
+import view.BrewRecipeView;
 
 import java.util.Date;
 
@@ -27,10 +27,10 @@ public class BrewDetailController {
     }
 
     public void brewRecipe(int batchSize){
-        BrewReciptController brc = new BrewReciptController();
+        BrewRecipeController brc = new BrewRecipeController();
         BrewingRecord br = new BrewingRecord(new Date(), batchSize, m);
         br.insert();
-        BrewReciptView brv = new BrewReciptView(brc, m, batchSize);
+        BrewRecipeView brv = new BrewRecipeView(brc, m, batchSize);
         brv.setVisible(true);
     }
 }

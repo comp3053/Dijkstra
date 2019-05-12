@@ -2,8 +2,8 @@ package controller;
 
 import view.HomeView;
 
-public class BrewReciptController {
-    public BrewReciptController(){
+public class BrewRecipeController {
+    public BrewRecipeController(){
 
     }
     public void finish(){

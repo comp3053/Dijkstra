@@ -14,7 +14,7 @@ public class RecipeDetailView extends View {
         this.c = c;
         this.setTitle("Brew Day! - Recipe Detail"); // set frame title
         this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
         this.recipe = recipe;
 
         JPanel topLeftButtonBar = new JPanel();

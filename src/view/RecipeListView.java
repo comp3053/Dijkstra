@@ -21,7 +21,7 @@ public class RecipeListView extends View{
         this.recipes = recipes;
         this.setTitle("Brew Day! - Manage Recipe"); // set frame title
         this.setSize(800, 600); // set frame size
-        this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.setLayout(new BorderLayout()); // set BorderLayout to the frame
 
         JPanel topButtonsAround = new JPanel();
         topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));

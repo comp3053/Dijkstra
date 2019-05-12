@@ -1,16 +1,16 @@
 package view;
 
-import controller.BrewReciptController;
+import controller.BrewRecipeController;
 import model.Recipe;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BrewReciptView extends View {
-    private BrewReciptController c;
+public class BrewRecipeView extends View {
+    private BrewRecipeController c;
     private Recipe recipe;
     private double batchSize;
-    public BrewReciptView(BrewReciptController c, Recipe recipe, double batchSize){
+    public BrewRecipeView(BrewRecipeController c, Recipe recipe, double batchSize){
         this.c = c;
         this.recipe = recipe;
         this.batchSize = batchSize;
