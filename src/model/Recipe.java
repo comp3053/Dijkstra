@@ -19,6 +19,20 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         // Nothing to do
     }
 
+    public Recipe(int id) {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT * FROM Recipe WHERE Recipe_ID=%d", id);
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            this.setName(rs.getString(2));
+            this.setDescription(rs.getString(3));
+            this.setIngredients(RecipeIngredient.getAll(id));
+        } catch (SQLException | SQLiteConnectionException | FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Recipe(int id, String name, String description) {
         setID(id);
         setName(name);
