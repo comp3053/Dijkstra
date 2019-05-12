@@ -66,7 +66,7 @@ public class Note implements IDatabaseOperation<Note> {
         DatabaseHelper dbHelper = new DatabaseHelper();
         try {
             String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d);",
-                    this.getCreateDate().getTime(), this.getContent(), this.getBrewID());
+                    this.getCreateDate().getTime(), stringParser(this.getContent()), this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
             // Get the latest Note ID
@@ -91,7 +91,7 @@ public class Note implements IDatabaseOperation<Note> {
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Note SET Content='%s' WHERE Brew_ID=%d",
-                this.getContent(), this.getBrewID());
+                stringParser(this.getContent()), this.getBrewID());
         try {
             dbHelper.execSqlUpdate(query);
             dbHelper.closeConnection();
