@@ -72,7 +72,7 @@ public class ButtonColumn extends AbstractCellEditor
      *
      * @param focusBorder the foreground color
      */
-    public void setFocusBorder(Border focusBorder) {
+    private void setFocusBorder(Border focusBorder) {
         this.focusBorder = focusBorder;
         editButton.setBorder(focusBorder);
     }

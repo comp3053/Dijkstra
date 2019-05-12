@@ -55,7 +55,7 @@ public class NoteListView extends View {
 
     }
 
-    public void createNoteList(ArrayList<Note> notes) {
+    private void createNoteList(ArrayList<Note> notes) {
         for (Note note : notes) {
             note.addListener(this);
             JPanel mainPanelIter = new JPanel();
