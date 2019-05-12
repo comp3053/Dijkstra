@@ -30,11 +30,7 @@ public class BrewDetailController {
     public void brewRecipe(int batchSize){
         BrewReciptController brc = new BrewReciptController();
         BrewingRecord br = new BrewingRecord(new Date(), batchSize, m);
-        try {
-            br.insert();
-        } catch (EmptyNameException | InvalidInputException e) {
-            e.printStackTrace();
-        }
+        br.insert();
         BrewReciptView brv = new BrewReciptView(brc, m, batchSize);
         brv.setVisible(true);
     }
