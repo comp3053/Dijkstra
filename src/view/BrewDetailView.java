@@ -14,7 +14,6 @@ import java.awt.*;
 public class BrewDetailView extends View {
     private BrewDetailController c;
     private Recipe recipe;
-    private JTable table;
     private DefaultTableModel tableModel;
     private int originBatchSize;
     private int currentBatchSize;
@@ -26,7 +25,6 @@ public class BrewDetailView extends View {
         this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
-        this.table = new JTable();
         try {
             this.equimentBatchSize = Equipment.getEquipment(1).getVolume();
             this.originBatchSize = equimentBatchSize;
@@ -89,7 +87,7 @@ public class BrewDetailView extends View {
         Object[][] data = initObjectTable();
 
         tableModel = new DefaultTableModel(data, columnNames);
-        table = new JTable(tableModel);
+        JTable table = new JTable(tableModel);
         mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         this.add(mainPanel, BorderLayout.CENTER);
 

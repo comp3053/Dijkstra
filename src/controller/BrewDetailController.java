@@ -2,7 +2,6 @@ package controller;
 
 import model.BrewingRecord;
 import model.Recipe;
-import utils.EmptyNameException;
 import utils.InvalidInputException;
 import view.BrewReciptView;
 

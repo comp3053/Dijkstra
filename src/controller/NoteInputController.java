@@ -5,7 +5,6 @@ import utils.FetchDataException;
 import view.NoteListView;
 
 import javax.swing.*;
-import java.util.Date;
 
 public class NoteInputController {
     private Note m;

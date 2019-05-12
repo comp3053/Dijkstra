@@ -1,8 +1,6 @@
 package controller;
 
-import utils.FetchDataException;
 import view.NoteListView;
-import model.Note;
 
 public class NoteContentController {
     public NoteContentController(){

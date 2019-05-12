@@ -1,8 +1,6 @@
 package view;
 
-import utils.FetchDataException;
 import controller.NoteContentController;
-import utils.ObjectNotFoundException;
 import model.Note;
 
 import javax.swing.*;

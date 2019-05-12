@@ -2,8 +2,6 @@ package controller;
 
 import model.BrewingRecord;
 import model.Note;
-import utils.FetchDataException;
-import utils.ObjectNotFoundException;
 import view.NoteInputView;
 import view.NoteListView;
 
