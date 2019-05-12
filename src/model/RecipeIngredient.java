@@ -57,7 +57,6 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d AND Ingredient_ID=%d",
                 this.getRecipeID(), this.getID());
-        System.out.println(query);
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();

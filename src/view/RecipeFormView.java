@@ -92,6 +92,7 @@ public class RecipeFormView extends View {
             }
             try {
                 m.setRecipeIngredients(recipeIngredientEntryList.getIngredientList());
+                m.getRecipe().setIngredients(m.getRecipeIngredients());
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Invalid Ingredient Amount");
