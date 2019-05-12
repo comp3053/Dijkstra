@@ -74,19 +74,22 @@ public class Note implements IDatabaseOperation<Note>{
             String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d);",
                     this.getCreateDate().getTime(), this.getContent(), this.getBrewID());
             dbHelper.execSqlNoReturn(query);
-            query = String.format("SELECT * FROM Note ORDER BY Note_ID DESC LIMIT 1");
-            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            dbHelper.closeConnection();
+            // Get the latest Note ID
+            dbHelper.connectSQLite();
+            ResultSet rs = dbHelper.execSqlWithReturn("SELECT * FROM Note ORDER BY Note_ID DESC LIMIT 1");
             this.setID(rs.getInt(1));
+            dbHelper.closeConnection();
             System.out.println("The brew ID is " + this.getBrewID());
+            // Set Note ID for corresponding Brew Record
+            dbHelper.connectSQLite();
             query = String.format("UPDATE Brew SET Note_ID = %d WHERE Brew_ID = %d;",
                     this.getID(),this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
-        } catch (SQLiteConnectionException e) {
+        } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return true;
     }
