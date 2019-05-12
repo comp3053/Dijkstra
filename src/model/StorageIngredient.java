@@ -15,6 +15,21 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
         // Nothing to do
     }
 
+    public StorageIngredient(int id) throws EmptyNameException, InvalidInputException {
+        this.setID(id);
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", id);
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            this.setName(rs.getString(2));
+            this.setUnit(UnitEnum.valueOf(rs.getString(4)));
+            this.setAmount(rs.getDouble(3));
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public StorageIngredient(int id, String name, double amount, UnitEnum unit) throws EmptyNameException,
             InvalidInputException {
         super(id, name, amount, unit);
@@ -41,9 +56,8 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
     @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        String query = String.format("INSERT INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
+        String query = String.format("INSERT OR IGNORE INTO Ingredient (Name, Amount, Unit) VALUES ('%s',%f,'%s')",
                 stringParser(this.getName()), this.getAmount(), this.getUnit().toString());
-        System.out.println(query);
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -58,7 +72,6 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Ingredient SET Name='%s',Amount=%f,Unit='%s' WHERE Ingredient_ID=%d",
                 stringParser(this.getName()), this.getAmount(), this.getUnit().toString(), this.getID());
-        System.out.println(query);
 
         try {
             dbHelper.execSqlUpdate(query);
@@ -101,6 +114,7 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
                 unit = rs.getString(4);
                 ingredients.add(new StorageIngredient(id, name, amount, UnitEnum.valueOf(unit)));
             }
+            dbHelper.closeConnection();
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
             throw new FetchDataException("Could not fetch Storage Ingredients.");

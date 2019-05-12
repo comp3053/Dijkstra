@@ -7,8 +7,6 @@ import utils.InvalidInputException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UpdateEquipmentInfoView extends View{
     private UpdateEquipmentInfoController c;
@@ -33,12 +31,9 @@ public class UpdateEquipmentInfoView extends View{
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
@@ -82,27 +77,22 @@ public class UpdateEquipmentInfoView extends View{
 
         groupLayout.setVerticalGroup(vGroup);
 
-        //TODO: can replace these column with last equipment information
-
         this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel bottomLeftButtonBar = new JPanel();
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveButton = new JButton("Save");
         bottomLeftButtonBar.add(saveButton);
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if(c.saveEquipmentInfo(name.getText(),volume.getText(), firstTime)) {
-                        JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
-                    }
-                    c.goBack();
-                    dispose();
-                } catch (EmptyNameException | InvalidInputException | NumberFormatException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Input invalid.");
+        saveButton.addActionListener(e -> {
+            try {
+                if(c.saveEquipmentInfo(name.getText(),volume.getText(), firstTime)) {
+                    JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
                 }
+                c.goBack();
+                dispose();
+            } catch (EmptyNameException | InvalidInputException | NumberFormatException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Input invalid.");
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);

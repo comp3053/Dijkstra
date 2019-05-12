@@ -1,9 +1,12 @@
 package model;
 
+import utils.InvalidInputException;
+
 import java.util.ArrayList;
 
 public class RecipeForm {
     private Recipe recipe;
+    private int batchSize;
     private ArrayList<StorageIngredient> storageIngredients;
     private ArrayList<RecipeIngredient> recipeIngredients;
 
@@ -32,6 +35,12 @@ public class RecipeForm {
 
     private boolean insert() {
         recipe.setIngredients(recipeIngredients);
+        try {
+            recipe.amountConversion(batchSize, 1000);
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+            return false;
+        }
         return recipe.insert();
     }
 
@@ -57,6 +66,14 @@ public class RecipeForm {
 
     public Recipe getRecipe() {
         return recipe;
+    }
+
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
+    }
+
+    public double getBatchSize() {
+        return batchSize;
     }
 
     public ArrayList<StorageIngredient> getStorageIngredients() {

@@ -35,20 +35,14 @@ public class NoteListView extends View {
         topButtonsAround.add(Box.createHorizontalGlue());
         topButtonsAround.add(rightButton);
 
-        leftButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        leftButton.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
-        rightButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.addNote();
-                dispose();
-            }
+        rightButton.addActionListener(e -> {
+            c.addNote();
+            dispose();
         });
 
         this.add(topButtonsAround, BorderLayout.NORTH);
@@ -75,28 +69,17 @@ public class NoteListView extends View {
             JButton detailBtn = new JButton("detail");
             JButton modifyBtn = new JButton("modify");
             JButton deleteBtn = new JButton("delete");
-            detailBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    NoteContentController ncc = new NoteContentController();
-                    NoteContentView ncv = new NoteContentView(ncc,note);
-                    // TODO: Need to change according to click (better pass in a model)
-                    ncv.setVisible(true);
-                    dispose();
-                }
+            noteBtn.addActionListener(e -> {
+                NoteContentController ncc = new NoteContentController();
+                NoteContentView ncv = new NoteContentView(ncc, 1);
+                // TODO: Need to change according to click (better pass in a model)
+                ncv.setVisible(true);
+                dispose();
             });
-            deleteBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    c.delete(note);
-                }
-            });
-            modifyBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            deleteBtn.addActionListener(e -> c.delete(note));
+            modifyBtn.addActionListener(e -> {
                     c.modify(note);
                     dispose();
-                }
             });
             mainPanelIter.add(detailBtn);
             mainPanelIter.add(modifyBtn);

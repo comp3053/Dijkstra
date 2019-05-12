@@ -1,5 +1,7 @@
 package controller;
 
+import view.HomeView;
+
 public class MissingIngredientListController {
     public MissingIngredientListController(){
 
@@ -10,10 +12,13 @@ public class MissingIngredientListController {
     }
 
     public void goBack(){
-        System.out.println("go back");
+        HomeController hc = new HomeController();
+        hc.startRecommend();
     }
 
     public void OK(){
-        System.out.println("OK");
+        HomeController hc = new HomeController();
+        HomeView hv = new HomeView(hc);
+        hv.setVisible(true);
     }
 }

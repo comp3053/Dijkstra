@@ -9,10 +9,6 @@ public class NoteContentController {
 
     }
 
-    public String readNoteContent(){
-        return "This is content";
-    }
-
     public void goBack(){
         NoteListController nlc = new NoteListController();
         NoteListView nlv = null;

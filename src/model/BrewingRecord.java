@@ -10,6 +10,11 @@ import utils.SQLiteConnectionException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import utils.DatabaseHelper;
+import utils.EmptyNameException;
+import utils.InvalidInputException;
+import utils.SQLiteConnectionException;
+
 import java.util.Date;
 
 public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
@@ -64,47 +69,39 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         this.recipe = recipe;
     }
 
-    public static Recipe getRecipe(int recipeID) throws FetchDataException, ObjectNotFoundException {
-        RecipeController rc = new RecipeController();
-        ArrayList<Recipe> recipes = rc.getAll();
-        for (Recipe recipe : recipes) {
-            if (recipe.getID() == recipeID)
-                return recipe;
-        }
-        throw new ObjectNotFoundException("Could not get corresponding recipe.");
-    }
-
-    public static ArrayList<BrewingRecord> getAllBrewingRecord() throws FetchDataException, ObjectNotFoundException {
+    public boolean insert() throws EmptyNameException, InvalidInputException {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
-        int id, batchSize;
-        Date brewDate;
-        Recipe recipe;
+        String query = String.format("INSERT INTO Brew (Brew_Date,Batch_Size,Recipe_ID,Note_ID) VALUES" +
+                "(%d,%d,%d,0)", brewDate.getTime(), batchSize, recipe.getID());
         try {
-            ResultSet rs = dbHelper.execSqlWithReturn("SELECT * FROM Brew WHERE NOTE_ID == 0");
-            while(rs.next()) {
-                id = rs.getInt(1);
-                brewDate = new Date(rs.getLong(2));
-                batchSize = rs.getInt(3);
-                recipe = getRecipe(rs.getInt(4));
-                brewingRecords.add(new BrewingRecord(id, brewDate, batchSize, recipe));
-            }
-        } catch (SQLException | SQLiteConnectionException e) {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
             e.printStackTrace();
-            throw new FetchDataException("Could not get Brew Records.");
+            return false;
         }
-        return brewingRecords;
+        // Update StorageIngredient amount
+        for (RecipeIngredient ingredient : recipe.getIngredients()) {
+            StorageIngredient storageIngredient = new StorageIngredient(ingredient.getID());
+            storageIngredient.setAmount(storageIngredient.getAmount() - ingredient.getAmount());
+            storageIngredient.update();
+        }
+        return true;
     }
 
-    @Override
-    public boolean insert() {
-        return false;
-    }
-
-    @Override
     public boolean delete() {
-        return false;
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("DELETE FROM Brew WHERE Brew_ID=%d", id);
+        try {
+            dbHelper.execSqlNoReturn(query);
+            dbHelper.closeConnection();
+        } catch (SQLiteConnectionException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
+}
 
     @Override
     public void addListener(ModelListener listener) {

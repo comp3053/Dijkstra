@@ -1,30 +1,47 @@
 package view;
 
 import controller.BrewDetailController;
+import model.Equipment;
+import model.Recipe;
+import utils.EmptyNameException;
+import utils.FetchDataException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BrewDetailView extends View {
     private BrewDetailController c;
-    public BrewDetailView(BrewDetailController c){
+    private Recipe recipe;
+    private JTable table;
+    private DefaultTableModel tableModel;
+    private int originBatchSize;
+    private int currentBatchSize;
+    private int equimentBatchSize;
+
+    public BrewDetailView(BrewDetailController c, Recipe recipe){
         this.c = c;
+        this.recipe = recipe;
         this.setTitle("Brew Day! - Brew Recipe Details"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout()); // set borderlayout to the frame
+        this.table = new JTable();
+        try {
+            this.equimentBatchSize = Equipment.getEquipment(1).getVolume();
+            this.originBatchSize = equimentBatchSize;
+            this.currentBatchSize = equimentBatchSize;
+        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
+            e.printStackTrace();
+        }
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
 
@@ -32,7 +49,7 @@ public class BrewDetailView extends View {
         mainPanel.setLayout(new BorderLayout());
         JPanel pageTitle = new JPanel();
         pageTitle.setLayout(new BorderLayout());
-        JLabel title = new JLabel("Recipe C"); // Recipe Name
+        JLabel title = new JLabel(this.recipe.getName());
         // Set Font size
         title.setFont(new Font(title.getFont().getFontName(), title.getFont().getStyle(), 36));
         pageTitle.add(title, BorderLayout.LINE_START);
@@ -40,44 +57,76 @@ public class BrewDetailView extends View {
         JPanel textfieldWithLabel = new JPanel();
         textfieldWithLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        textfieldWithLabel.add(new JLabel("Batch Size"));
+        textfieldWithLabel.add(new JLabel("Batch Size (mL)"));
+        JTextField batchSizeTextField = new JTextField();
+        batchSizeTextField.setColumns(5);
+        batchSizeTextField.setText(String.valueOf(this.equimentBatchSize));
+        batchSizeTextField.setToolTipText("Batch Size");
+        textfieldWithLabel.add(batchSizeTextField);
+        JButton applyBatchSize = new JButton("Apply");
+        textfieldWithLabel.add(applyBatchSize);
+        applyBatchSize.addActionListener(e -> {
+            try {
+                currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
+                System.out.println(currentBatchSize+"  "+originBatchSize);
+                if(currentBatchSize>0&&currentBatchSize<= equimentBatchSize){
+                    c.applyBatchSize(originBatchSize, currentBatchSize);
+                    originBatchSize = currentBatchSize;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Batch size should greater than 0 and less or equal to you equipment volume " + equimentBatchSize);
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Batch size should be a positive integer!");
 
-        JTextField batchSize = new JTextField();
-        batchSize.setColumns(5);
-        batchSize.setText("1000");
-        batchSize.setToolTipText("Batch Size");
-        textfieldWithLabel.add(batchSize);
-//  TODO: Listen to the change of batch size and update
+            }
+        });
 
         pageTitle.add(textfieldWithLabel, BorderLayout.LINE_END);
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
-        Object[][] data =
-                {
-                        {"Barley", "GRAM", "3.5"},
-                        {"Yeast", "MILLILITER", "25"},
-                };
+        Object[][] data = initObjectTable();
 
-        JTable table = new JTable(data, columnNames);
-        mainPanel.add(table, BorderLayout.CENTER);
+        tableModel = new DefaultTableModel(data, columnNames);
+        table = new JTable(tableModel);
+        mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         this.add(mainPanel, BorderLayout.CENTER);
 
         JPanel bottomLeftButtonBar = new JPanel();
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton brewButton = new JButton("Brew");
         bottomLeftButtonBar.add(brewButton);
-        brewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.brewRecipe();
-                dispose();
+        brewButton.addActionListener(e -> {
+            try {
+                c.brewRecipe(currentBatchSize);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Invalid batch size!");
+                return;
             }
+            dispose();
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
+
+    private Object[][] initObjectTable() {
+        Object[][] data = new Object[recipe.getIngredients().size()][3];
+        recipe.getIngredients().forEach(ingredient -> {
+            int index = recipe.getIngredients().indexOf(ingredient);
+            data[index][0] = ingredient.getName();
+            data[index][1] = ingredient.getUnit();
+            data[index][2] = ingredient.getAmount();
+        });
+        return data;
+    }
+
+
     @Override
     public void update() {
-
+        String[] columnNames = {"Ingredient", "Unit", "Amount"};
+        Object[][] data = initObjectTable();
+        tableModel.setDataVector(data, columnNames);
+        tableModel.fireTableDataChanged();
     }
 }

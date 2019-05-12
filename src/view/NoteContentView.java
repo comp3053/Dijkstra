@@ -8,8 +8,6 @@ import model.Note;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NoteContentView extends View {
     private NoteContentController c;
@@ -31,12 +29,9 @@ public class NoteContentView extends View {
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                c.goBack();
-                dispose();
-            }
+        button.addActionListener(e -> {
+            c.goBack();
+            dispose();
         });
 
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);
