@@ -102,7 +102,7 @@ public class Note implements IDatabaseOperation<Note> {
         }
     }
 
-    public static ArrayList<Note> getAllNotes() throws FetchDataException {
+    public static ArrayList<Note> getAll() {
         ArrayList<Note> notes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = "SELECT * FROM Note";

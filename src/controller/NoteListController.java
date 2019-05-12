@@ -22,13 +22,8 @@ public class NoteListController {
 
     public ArrayList<Note> readNoteList() {
         ArrayList<Note> notes;
-        try {
-            notes = Note.getAllNotes();
-            return notes;
-        } catch (FetchDataException e) {
-            e.printStackTrace();
-            return null;
-        }
+        notes = Note.getAll();
+        return notes;
     }
 
     public void modify(Note m) {
