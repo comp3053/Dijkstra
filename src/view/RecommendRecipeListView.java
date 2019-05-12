@@ -51,8 +51,7 @@ public class RecommendRecipeListView extends View {
             bg.add(ingredientItem);
             mainPanel.add(ingredientItem);
         }
-        // TODO: Need to change to scrollable
-        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(new JScrollPane(mainPanel), BorderLayout.CENTER);
 
 
         JPanel bottomLeftButtonBar = new JPanel();
