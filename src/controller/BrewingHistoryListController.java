@@ -11,36 +11,28 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewingHistoryListController {
-    private NoteListView v;
-    public BrewingHistoryListController(){
-        this.v = v;
+
+    public BrewingHistoryListController() {
+        // Nothing to do
     }
 
-    public ArrayList<BrewingRecord> readBrewingHistoryList(){
-        try {
-            ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
-            brewingRecords = BrewingRecord.getAllBrewingRecord();
-            return brewingRecords;
-        } catch (FetchDataException e) {
-            e.printStackTrace();
-        } catch (ObjectNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public ArrayList<BrewingRecord> readBrewingHistoryList() {
+        ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
+        brewingRecords = BrewingRecord.getAll();
+        return brewingRecords;
     }
 
-    public void goBack(){
+    public void goBack() {
         NoteListController nlc = new NoteListController();
         NoteListView nlv = null;
         nlv = new NoteListView(nlc);
         nlv.setVisible(true);
     }
 
-    public void takeNote(BrewingRecord m){
+    public void takeNote(BrewingRecord m) {
         System.out.println("Taking notes...");
         Date currentTime = new Date();
-        Note newNote = new Note(0,m.getID(),currentTime,"");
-        newNote.addListener(this.v);
+        Note newNote = new Note(0, m.getID(), currentTime, "");
         NoteInputController nic = new NoteInputController(newNote);
         NoteInputView niv = new NoteInputView(nic, newNote);
         niv.setVisible(true);

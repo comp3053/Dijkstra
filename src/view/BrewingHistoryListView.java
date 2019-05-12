@@ -1,6 +1,7 @@
 package view;
 
 import controller.BrewingHistoryListController;
+import model.BrewingRecord;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +11,12 @@ import java.util.ArrayList;
 
 public class BrewingHistoryListView extends View {
     private BrewingHistoryListController c;
-    public BrewingHistoryListView(BrewingHistoryListController c){
+    private ArrayList<BrewingRecord> brewingRecords;
+    public BrewingHistoryListView(BrewingHistoryListController c, ArrayList<BrewingRecord> brewingRecords){
         this.setTitle("Brew Day! - Brewing History"); // set frame title
         this.setSize(800, 600); // set frame size
         this.setLayout(new BorderLayout());
+        this.brewingRecords = brewingRecords;
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -33,7 +36,7 @@ public class BrewingHistoryListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
-        for(BrewingRecord brewingRecord: BrewingRecords) {
+        for(BrewingRecord brewingRecord: brewingRecords) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
             JLabel historyID = new JLabel("Brew History " + brewingRecord.getID());

@@ -1,20 +1,14 @@
 package model;
 
 import controller.ModelListener;
-import controller.RecipeController;
-import utils.DatabaseHelper;
-import utils.FetchDataException;
-import utils.ObjectNotFoundException;
-import utils.SQLiteConnectionException;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import utils.DatabaseHelper;
 import utils.EmptyNameException;
 import utils.InvalidInputException;
 import utils.SQLiteConnectionException;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
@@ -69,7 +63,8 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         this.recipe = recipe;
     }
 
-    public boolean insert() throws EmptyNameException, InvalidInputException {
+    @Override
+    public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("INSERT INTO Brew (Brew_Date,Batch_Size,Recipe_ID,Note_ID) VALUES" +
                 "(%d,%d,%d,0)", brewDate.getTime(), batchSize, recipe.getID());
@@ -82,11 +77,21 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         }
         // Update StorageIngredient amount
         for (RecipeIngredient ingredient : recipe.getIngredients()) {
-            StorageIngredient storageIngredient = new StorageIngredient(ingredient.getID());
-            storageIngredient.setAmount(storageIngredient.getAmount() - ingredient.getAmount());
-            storageIngredient.update();
+            try {
+                StorageIngredient storageIngredient = new StorageIngredient(ingredient.getID());
+                storageIngredient.setAmount(storageIngredient.getAmount() - ingredient.getAmount());
+                storageIngredient.update();
+            } catch (EmptyNameException | InvalidInputException e) {
+                e.printStackTrace();
+            }
         }
         return true;
+    }
+
+    @Override
+    public boolean update() {
+        // Brewing Record do not have an update
+        return false;
     }
 
     public boolean delete() {
@@ -101,7 +106,29 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         }
         return true;
     }
-}
+
+    public static ArrayList<BrewingRecord> getAll() {
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = "SELECT * FROM Brew WHERE Note_ID=0";
+        ArrayList<BrewingRecord> brewingRecords = new ArrayList<>();
+        int id, batchSize, recipeID;
+        Date date;
+
+        try {
+            ResultSet rs = dbHelper.execSqlWithReturn(query);
+            while (rs.next()) {
+                id = rs.getInt(1);
+                batchSize = rs.getInt(3);
+                date = new Date(rs.getLong(2));
+                recipeID = rs.getInt(4);
+                brewingRecords.add(new BrewingRecord(id, date, batchSize, new Recipe(recipeID)));
+            }
+            dbHelper.closeConnection();
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+        }
+        return brewingRecords;
+    }
 
     @Override
     public void addListener(ModelListener listener) {

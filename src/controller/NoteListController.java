@@ -1,5 +1,6 @@
 package controller;
 
+import model.BrewingRecord;
 import model.Note;
 import utils.FetchDataException;
 import view.BrewingHistoryListView;
@@ -53,7 +54,7 @@ public class NoteListController {
 
     public void addNote(){
         BrewingHistoryListController bhlc = new BrewingHistoryListController();
-        BrewingHistoryListView bhlv = new BrewingHistoryListView(bhlc);
+        BrewingHistoryListView bhlv = new BrewingHistoryListView(bhlc, BrewingRecord.getAll());
         bhlv.setVisible(true);
     }
 }
