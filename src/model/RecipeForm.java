@@ -35,12 +35,6 @@ public class RecipeForm {
 
     private boolean insert() {
         recipe.setIngredients(recipeIngredients);
-        try {
-            recipe.amountConversion(batchSize, 1000);
-        } catch (InvalidInputException e) {
-            e.printStackTrace();
-            return false;
-        }
         return recipe.insert();
     }
 
