@@ -7,8 +7,6 @@ import utils.InvalidInputException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UpdateEquipmentInfoView extends View{
     private UpdateEquipmentInfoController c;

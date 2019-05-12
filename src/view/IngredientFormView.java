@@ -6,8 +6,6 @@ import utils.UnitEnum;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class IngredientFormView extends View {
     private IngredientFormController c;

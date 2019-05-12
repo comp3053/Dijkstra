@@ -5,8 +5,6 @@ import controller.NoteListController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NoteListView extends View {
     private NoteListController c;
