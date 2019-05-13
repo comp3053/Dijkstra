@@ -45,6 +45,11 @@ public class IngredientFormView extends View {
         if (m.getID() > 0) {
             nameTextField.setText(m.getName());
             amountTextField.setText(Double.toString(m.getAmount()));
+            for (UnitEnum unit : UnitEnum.values()) {
+                if (!unit.equals(m.getUnit())) {
+                    unitSelect.removeItem(unit);
+                }
+            }
         }
 
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
