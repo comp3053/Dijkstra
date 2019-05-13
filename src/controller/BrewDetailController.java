@@ -15,9 +15,9 @@ public class BrewDetailController {
         this.m = m;
     }
 
-    public void goBack(ArrayList<Recipe> recommendRecipe) {
+    public void goBack(ArrayList<Recipe> recommendRecipes) {
         HomeController hc = new HomeController();
-        hc.startRecommend(recommendRecipe);
+        hc.startRecommend(recommendRecipes);
     }
 
     public void applyBatchSize(int originBatchSize, int currentBatchSize) {

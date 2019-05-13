@@ -10,9 +10,9 @@ public class MissingIngredientListController {
         // Nothing to do
     }
 
-    public void goBack(ArrayList<Recipe> recommendRecipe) {
+    public void goBack(ArrayList<Recipe> recommendRecipes) {
         HomeController hc = new HomeController();
-        hc.startRecommend(recommendRecipe);
+        hc.startRecommend(recommendRecipes);
     }
 
     public void OK() {

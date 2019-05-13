@@ -13,12 +13,12 @@ import java.util.ArrayList;
 
 public class HomeView extends View {
     private HomeController hc;
-    private ArrayList<Recipe> recommendRecipe;
+    private ArrayList<Recipe> recommendRecipes;
 
     public HomeView(HomeController hc) {
         this.hc = hc;
         try {
-            this.recommendRecipe = Recipe.getAll();
+            this.recommendRecipes = Recipe.getAll();
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
@@ -71,8 +71,9 @@ public class HomeView extends View {
         jp2.add(help_word);
         jp2.add(recommend_btn);
         recommend_btn.addActionListener(e -> {
-            if (this.recommendRecipe.size()>0) {
-                hc.startRecommend(recommendRecipe);
+            //Judge if there is any recommend recipe,give a warning
+            if (this.recommendRecipes.size()>0) {
+                hc.startRecommend(recommendRecipes);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "There should have at least one recipe to start recommend recipe!");
