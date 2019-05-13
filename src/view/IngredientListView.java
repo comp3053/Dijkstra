@@ -86,7 +86,7 @@ public class IngredientListView extends View {
                     boolean status = ingredient.delete();
                     if (!status) {
                         JOptionPane.showMessageDialog(null,
-                                String.format("Delete %s failed.", ingredient.getName()));
+                                String.format("Delete %s failed. There are recipes including this ingredient.", ingredient.getName()));
                     }
                 }
             });
