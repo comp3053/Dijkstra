@@ -215,7 +215,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
     @Override
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        boolean status;
+        boolean status = true;
         String query = String.format("DELETE FROM Recipe WHERE Recipe_ID=%d", this.getID());
 
         try {
@@ -225,13 +225,9 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             e.printStackTrace();
             return false;
         }
-        for (RecipeIngredient ingredient : ingredients) {
-            status = ingredient.delete();
-            if (!status)
-                return false;
-        }
+        status = RecipeIngredient.deleteAll(this.getID());
         notifyListener();
-        return true;
+        return status;
     }
 
     @Override
