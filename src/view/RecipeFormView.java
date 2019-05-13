@@ -107,7 +107,7 @@ public class RecipeFormView extends View {
             try {
                 int batchSize = Integer.parseInt(recipeBatchSizeTextfield.getText());
                 if (batchSize <= 0) {
-                    JOptionPane.showMessageDialog(null, "Ingredient amount should be more than 0.");
+                    JOptionPane.showMessageDialog(null, "Batch size should be more than 0.");
                     return;
                 }
                 m.setBatchSize(batchSize);
