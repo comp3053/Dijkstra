@@ -52,7 +52,9 @@ public class NoteInputView extends View {
             if (input_noteContent.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "The content cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
-                boolean insertSuccess = c.saveNote(m, input_noteContent.getText());
+                String NoteInputString = input_noteContent.getText();
+                //NoteInputString = NoteInputString.replace("\n","<br>");
+                boolean insertSuccess = c.saveNote(m, NoteInputString);
                 if (insertSuccess) {
                     JOptionPane.showMessageDialog(null, "Your note have been saved", "Success", JOptionPane.PLAIN_MESSAGE);
                     dispose();
