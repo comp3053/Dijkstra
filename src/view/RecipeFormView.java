@@ -3,6 +3,7 @@ package view;
 import controller.RecipeFormController;
 import model.RecipeForm;
 import utils.DuplicateObjectException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,9 +99,18 @@ public class RecipeFormView extends View {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Some ingredients in recipe is duplicated.");
                 return;
+            } catch (InvalidInputException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Ingredient amount should be more than 0.");
+                return;
             }
             try {
-                m.setBatchSize(Integer.parseInt(recipeBatchSizeTextfield.getText()));
+                int batchSize = Integer.parseInt(recipeBatchSizeTextfield.getText());
+                if (batchSize <= 0) {
+                    JOptionPane.showMessageDialog(null, "Ingredient amount should be more than 0.");
+                    return;
+                }
+                m.setBatchSize(batchSize);
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Wrong batch size format.");

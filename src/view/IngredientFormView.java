@@ -45,6 +45,11 @@ public class IngredientFormView extends View {
         if (m.getID() > 0) {
             nameTextField.setText(m.getName());
             amountTextField.setText(Double.toString(m.getAmount()));
+            for (UnitEnum unit : UnitEnum.values()) {
+                if (!unit.equals(m.getUnit())) {
+                    unitSelect.removeItem(unit);
+                }
+            }
         }
 
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
@@ -85,6 +90,10 @@ public class IngredientFormView extends View {
                 }
                 try {
                     double amount = Double.parseDouble(amountTextField.getText());
+                    if (amount < 0) {
+                        JOptionPane.showMessageDialog(null, "Amount should be more than 0.");
+                        return;
+                    }
                     c.saveIngredient(nameTextField.getText(), amount, unitSelect.getSelectedIndex());
                     c.cancel();
                     dispose();

@@ -97,18 +97,20 @@ class RecipeIngredientEntryList extends JPanel {
         return false;
     }
 
-    ArrayList<RecipeIngredient> getIngredientList() throws NumberFormatException, DuplicateObjectException {
+    ArrayList<RecipeIngredient> getIngredientList() throws NumberFormatException, DuplicateObjectException, InvalidInputException {
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
         for (RecipeIngredientEntry entry : entries) {
             StorageIngredient currentStorageIngredient = this.ingredients.get(entry.getIngredientSelector().getSelectedIndex());
             try {
                 if (isDuplicate(currentStorageIngredient, recipeIngredients))
                     throw new DuplicateObjectException("Some ingredients in recipe is duplicated.");
+                if (new Double(entry.getInputBoxText().getText()) <= 0)
+                    throw new InvalidInputException("Ingredient amount should be more than 0.");
                 recipeIngredients.add(
                         new RecipeIngredient(currentStorageIngredient.getID(), currentStorageIngredient.getName(),
                                 new Double(entry.getInputBoxText().getText()),
                                 currentStorageIngredient.getUnit()));
-            } catch (EmptyNameException | InvalidInputException e) {
+            } catch (EmptyNameException e) {
                 e.printStackTrace();
             }
         }
