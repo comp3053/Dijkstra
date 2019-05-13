@@ -21,35 +21,28 @@ public class IngredientListView extends View {
         this.m = m;
         this.mainPanel = new JPanel();
 
-        JPanel topLeftButtonBar = new JPanel();
-        topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JButton button = new JButton("< Back");
-        topLeftButtonBar.add(button);
+        JPanel mainBody = new JPanel();
+        mainBody.setLayout(new BorderLayout());
+        JPanel topButtonsAround = new JPanel();
+        topButtonsAround.setLayout(new BoxLayout(topButtonsAround, BoxLayout.LINE_AXIS));
 
-        button.addActionListener(e -> {
+        JButton leftButton = new JButton("< Back");
+        JButton rightButton = new JButton("Add");
+
+        topButtonsAround.add(leftButton);
+        topButtonsAround.add(Box.createHorizontalGlue());
+        topButtonsAround.add(rightButton);
+
+        leftButton.addActionListener(e -> {
             c.goBack();
             dispose();
         });
-        this.add(topLeftButtonBar, BorderLayout.PAGE_START);
-        JPanel mainBody = new JPanel();
-        mainBody.setLayout(new BorderLayout());
 
-        JPanel JPanelSearchBar = new JPanel();
-        JPanelSearchBar.setLayout(new FlowLayout());
-        JTextField recipe_name_textfield = new JTextField();
-        recipe_name_textfield.setColumns(20);
-        JPanelSearchBar.add(recipe_name_textfield);
-        JButton buttonSearch = new JButton("Search");
-        JButton buttonAdd = new JButton("Add");
-        JPanelSearchBar.add(buttonSearch);
-        JPanelSearchBar.add(buttonAdd);
-        buttonSearch.addActionListener(e -> System.out.println("Search Clicked"));
-
-        buttonAdd.addActionListener(e -> {
+        rightButton.addActionListener(e -> {
             c.addIngredient();
             dispose();
         });
-        mainBody.add(JPanelSearchBar, BorderLayout.PAGE_START);
+        this.add(topButtonsAround, BorderLayout.PAGE_START);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         createIngredientList(m);
 
@@ -57,7 +50,6 @@ public class IngredientListView extends View {
         scrollPane.setAutoscrolls(true);
         scrollPane.setViewportView(mainPanel);
         mainBody.add(scrollPane);
-        //mainBody.add(mainPanel, BorderLayout.CENTER);
 
         this.add(mainBody, BorderLayout.CENTER);
 
