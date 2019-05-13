@@ -42,9 +42,10 @@ public class NoteContentView extends View {
         noteContent.setLineWrap(true);
         noteContent.setBackground(new Color(238,238,238));
         noteContent.setEditable(false);
+        JScrollPane scrollPaneForNoteShow = new JScrollPane(noteContent);
         //noteContent.setVerticalAlignment(1);
         mainPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
-        mainPanel.add(noteContent, BorderLayout.CENTER);
+        mainPanel.add(scrollPaneForNoteShow, BorderLayout.CENTER);
 
         this.add(mainPanel, BorderLayout.CENTER);
     }
