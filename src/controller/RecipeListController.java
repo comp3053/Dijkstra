@@ -8,6 +8,8 @@ import view.HomeView;
 import view.RecipeDetailView;
 import view.RecipeFormView;
 
+import javax.swing.*;
+
 public class RecipeListController {
     public RecipeListController() {
         // Nothing to do
@@ -19,15 +21,23 @@ public class RecipeListController {
         hv.setVisible(true);
     }
 
-    public void newRecipe() {
+    public boolean newRecipe() {
         try {
-            RecipeForm recipeForm = new RecipeForm(new Recipe(), StorageIngredient.getAll());
-            RecipeFormController rfc = new RecipeFormController(recipeForm);
-            RecipeFormView rfv = new RecipeFormView(rfc, recipeForm);
-            rfv.setVisible(true);
+            if (StorageIngredient.getAll().size() > 0){
+                RecipeForm recipeForm = new RecipeForm(new Recipe(), StorageIngredient.getAll());
+                RecipeFormController rfc = new RecipeFormController(recipeForm);
+                RecipeFormView rfv = new RecipeFormView(rfc, recipeForm);
+                rfv.setVisible(true);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "There should be at least one ingredient before create new recipe!");
+                return false;
+            }
         } catch (FetchDataException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public void recipeDetail(Recipe recipe) {

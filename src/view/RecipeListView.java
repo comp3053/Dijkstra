@@ -40,8 +40,9 @@ public class RecipeListView extends View {
         });
 
         rightButton.addActionListener(e -> {
-            c.newRecipe();
-            dispose();
+            if (c.newRecipe()){
+                dispose();
+            }
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);
 
