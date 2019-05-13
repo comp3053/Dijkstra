@@ -6,6 +6,7 @@ import model.Recipe;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MissingIngredientsListView extends View {
     private MissingIngredientListController c;
@@ -13,7 +14,7 @@ public class MissingIngredientsListView extends View {
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe) {
+    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe, ArrayList<Recipe> recommendRecipe) {
         this.c = c;
         this.recipe = recipe;
         this.setTitle("Brew Day! - Missing Ingredient List"); // Set frame title
@@ -25,7 +26,7 @@ public class MissingIngredientsListView extends View {
 
         JButton btn_back = new JButton("< Back");
         btn_back.addActionListener(e -> {
-            c.goBack();
+            c.goBack(recommendRecipe);
             dispose();
         });
         jp_header.add(btn_back);

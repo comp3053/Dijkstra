@@ -10,6 +10,7 @@ import utils.InvalidInputException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BrewDetailView extends View {
     private BrewDetailController c;
@@ -19,7 +20,7 @@ public class BrewDetailView extends View {
     private int currentBatchSize;
     private int equipmentBatchSize;
 
-    public BrewDetailView(BrewDetailController c, Recipe recipe) {
+    public BrewDetailView(BrewDetailController c, Recipe recipe, ArrayList<Recipe> recommendRecipes) {
         this.c = c;
         this.recipe = recipe;
         this.setTitle("Brew Day! - Brew Recipe Details"); // Set frame title
@@ -38,7 +39,7 @@ public class BrewDetailView extends View {
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
         button.addActionListener(e -> {
-            c.goBack();
+            c.goBack(recommendRecipes);
             dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);

@@ -1,16 +1,27 @@
 package view;
 
 import controller.HomeController;
+import model.Recipe;
+import utils.EmptyNameException;
+import utils.FetchDataException;
+import utils.InvalidInputException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class HomeView extends View {
     private HomeController hc;
+    private ArrayList<Recipe> recommendRecipe;
 
     public HomeView(HomeController hc) {
         this.hc = hc;
+        try {
+            this.recommendRecipe = Recipe.getAll();
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+            e.printStackTrace();
+        }
         this.setTitle("Brew Day! - Home"); // Set frame title
         this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout()); // Set BorderLayout to the frame
@@ -60,8 +71,12 @@ public class HomeView extends View {
         jp2.add(help_word);
         jp2.add(recommend_btn);
         recommend_btn.addActionListener(e -> {
-            hc.startRecommend();
-            dispose();
+            if (this.recommendRecipe.size()>0) {
+                hc.startRecommend(recommendRecipe);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "There should have at least one recipe to start recommend recipe!");
+            }
         });
         this.add(jp2, BorderLayout.CENTER); // add a panel
         JPanel copyright = new JPanel();

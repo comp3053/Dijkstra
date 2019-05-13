@@ -5,6 +5,7 @@ import model.Recipe;
 import utils.InvalidInputException;
 import view.BrewRecipeView;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class BrewDetailController {
@@ -14,9 +15,9 @@ public class BrewDetailController {
         this.m = m;
     }
 
-    public void goBack() {
+    public void goBack(ArrayList<Recipe> recommendRecipe) {
         HomeController hc = new HomeController();
-        hc.startRecommend();
+        hc.startRecommend(recommendRecipe);
     }
 
     public void applyBatchSize(int originBatchSize, int currentBatchSize) {

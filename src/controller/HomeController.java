@@ -56,9 +56,8 @@ public class HomeController {
         }
     }
 
-    public void startRecommend() {
+    public void startRecommend(ArrayList<Recipe> recommendRecipe) {
         try {
-            ArrayList<Recipe> recommendRecipe = Recipe.getAll();
             ArrayList<Integer> notAvailableList = new ArrayList<>();
             RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
             boolean viewStatus = true;
@@ -76,10 +75,10 @@ public class HomeController {
                     recommendRecipe.remove(notAvailableList.get(i).intValue());
                 }
             }
-            Collections.sort(recommendRecipe, new CustomRecipeComparator());
+            recommendRecipe.sort(new CustomRecipeComparator());
             RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipe, viewStatus);
             rrlv.setVisible(true);
-        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
             e.printStackTrace();
         }
     }

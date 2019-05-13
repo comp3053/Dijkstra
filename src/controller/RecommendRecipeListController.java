@@ -23,7 +23,7 @@ public class RecommendRecipeListController {
         hv.setVisible(true);
     }
 
-    public void brewRecipe(Recipe recommendRecipe) {
+    public void brewRecipe(Recipe recommendRecipe,ArrayList<Recipe> recommendRecipes) {
         try {
             int equipmentBatchSize = Equipment.getEquipment(1).getVolume();
             recommendRecipe.amountConversion(1000, equipmentBatchSize);
@@ -31,12 +31,12 @@ public class RecommendRecipeListController {
             e.printStackTrace();
         }
         BrewDetailController bdc = new BrewDetailController(recommendRecipe);
-        BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe);
+        BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe,recommendRecipes);
         recommendRecipe.addListener(bdv);
         bdv.setVisible(true);
     }
 
-    public void generateShoppingList(Recipe notEnoughRecommendRecipe) {
+    public void generateShoppingList(Recipe notEnoughRecommendRecipe,ArrayList<Recipe> recommendRecipes) {
         try {
             ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
             ArrayList<StorageIngredient> storageIngredients = StorageIngredient.getAll();
@@ -53,7 +53,7 @@ public class RecommendRecipeListController {
             }
             notEnoughRecommendRecipe.setIngredients(recipeIngredients);
             MissingIngredientListController milc = new MissingIngredientListController();
-            MissingIngredientsListView milv = new MissingIngredientsListView(milc, notEnoughRecommendRecipe);
+            MissingIngredientsListView milv = new MissingIngredientsListView(milc, notEnoughRecommendRecipe,recommendRecipes);
             milv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();

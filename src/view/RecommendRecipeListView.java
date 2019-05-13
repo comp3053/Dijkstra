@@ -63,7 +63,7 @@ public class RecommendRecipeListView extends View {
                 try {
                     for (Recipe recipe : recommendRecipe) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
-                            c.generateShoppingList(recipe);
+                            c.generateShoppingList(recipe,recommendRecipe);
                         }
                     }
 
@@ -81,7 +81,7 @@ public class RecommendRecipeListView extends View {
                 try {
                     for (Recipe recipe : recommendRecipe) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
-                            c.brewRecipe(recipe);
+                            c.brewRecipe(recipe,recommendRecipe);
                         }
                     }
                 } catch (NullPointerException ex) {
