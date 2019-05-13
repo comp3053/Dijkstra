@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class RecommendRecipeListView extends View {
     private RecommendRecipeListController c;
-    private ArrayList<Recipe> recommendRecipe;
+    private ArrayList<Recipe> recommendRecipes;
 
     // viewStatus, false: enough ingredient, true: not enough
-    public RecommendRecipeListView(RecommendRecipeListController c, ArrayList<Recipe> recommendRecipe, boolean viewStatus) {
+    public RecommendRecipeListView(RecommendRecipeListController c, ArrayList<Recipe> recommendRecipes, boolean viewStatus) {
         this.c = c;
-        this.recommendRecipe = recommendRecipe;
+        this.recommendRecipes = recommendRecipes;
         this.setTitle("Brew Day! - Recommend Recipe List"); // Set frame title
         this.setSize(800, 600); // Set frame size
         this.setLayout(new BorderLayout());
@@ -45,7 +45,7 @@ public class RecommendRecipeListView extends View {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
-        for (Recipe recommendRecipeItem : recommendRecipe) {
+        for (Recipe recommendRecipeItem : recommendRecipes) {
             JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": " + recommendRecipeItem.getIngredients().size() + " Ingredient in used");
             ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
             bg.add(ingredientItem);
@@ -61,9 +61,9 @@ public class RecommendRecipeListView extends View {
             bottomLeftButtonBar.add(generateListBtn);
             generateListBtn.addActionListener(e -> {
                 try {
-                    for (Recipe recipe : recommendRecipe) {
+                    for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
-                            c.generateShoppingList(recipe);
+                            c.generateShoppingList(recipe, recommendRecipes);
                         }
                     }
 
@@ -79,9 +79,9 @@ public class RecommendRecipeListView extends View {
             bottomLeftButtonBar.add(brewButton);
             brewButton.addActionListener(e -> {
                 try {
-                    for (Recipe recipe : recommendRecipe) {
+                    for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
-                            c.brewRecipe(recipe);
+                            c.brewRecipe(recipe, recommendRecipes);
                         }
                     }
                 } catch (NullPointerException ex) {

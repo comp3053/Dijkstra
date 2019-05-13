@@ -40,7 +40,10 @@ public class NoteInputView extends View {
         mainPanel.setBorder(new EmptyBorder(0, 20, 10, 20)); // top and left padding for recommend entry
 
         JTextArea input_noteContent = new JTextArea(m.getContent());
-        mainPanel.add(input_noteContent, BorderLayout.CENTER);
+        input_noteContent.setLineWrap(true); //allow enter automatically
+        input_noteContent.setWrapStyleWord(true);
+        JScrollPane scrollPaneForNoteInput = new JScrollPane(input_noteContent);
+        mainPanel.add(scrollPaneForNoteInput, BorderLayout.CENTER);
 
         this.add(mainPanel, BorderLayout.CENTER);
 

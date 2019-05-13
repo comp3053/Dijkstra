@@ -36,7 +36,8 @@ public class NoteContentView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        JLabel noteContent = new JLabel(m.getContent());
+        String ContentToShow = "<html>" + m.getContent().replaceAll("\n","<br/>") + "</html>";
+        JLabel noteContent = new JLabel(ContentToShow);
         noteContent.setVerticalAlignment(1);
         mainPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
         mainPanel.add(noteContent, BorderLayout.CENTER);
