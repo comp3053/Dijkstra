@@ -90,6 +90,10 @@ public class IngredientFormView extends View {
                 }
                 try {
                     double amount = Double.parseDouble(amountTextField.getText());
+                    if (amount < 0) {
+                        JOptionPane.showMessageDialog(null, "Amount should be more than 0.");
+                        return;
+                    }
                     c.saveIngredient(nameTextField.getText(), amount, unitSelect.getSelectedIndex());
                     c.cancel();
                     dispose();
