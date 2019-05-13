@@ -86,6 +86,18 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
     @Override
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
+        String checkExist = String.format("SELECT * FROM Ingredient_in_Recipe WHERE Ingredient_ID=%d", this.getID());
+        try {
+            boolean status = true;
+            ResultSet rs = dbHelper.execSqlWithReturn(checkExist);
+            while (rs.next()) {
+                status = false;
+            }
+            if (!status)
+                return false;
+        } catch (SQLException | SQLiteConnectionException e) {
+            e.printStackTrace();
+        }
         String query = String.format("DELETE FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
         try {
             dbHelper.execSqlNoReturn(query);
