@@ -56,30 +56,29 @@ public class HomeController {
         }
     }
 
-    public void startRecommend() {
+    public void startRecommend(ArrayList<Recipe> recommendRecipes) {
         try {
-            ArrayList<Recipe> recommendRecipe = Recipe.getAll();
             ArrayList<Integer> notAvailableList = new ArrayList<>();
-            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
+            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipes);
             boolean viewStatus = true;
-            for (Recipe recipe : recommendRecipe) {
+            for (Recipe recipe : recommendRecipes) {
                 if (recipe.isAvailable(Equipment.getEquipment(1).getVolume())) {
                     System.out.println("OK recipe: " + recipe.getName());
                     viewStatus = false;
                 } else {
-                    //recommendRecipe.remove(recipe);
-                    notAvailableList.add(recommendRecipe.indexOf(recipe));
+                    //recommendRecipes.remove(recipe);
+                    notAvailableList.add(recommendRecipes.indexOf(recipe));
                 }
             }
             if (!viewStatus) {
                 for (int i = notAvailableList.size() - 1; i >= 0; i--) {
-                    recommendRecipe.remove(notAvailableList.get(i).intValue());
+                    recommendRecipes.remove(notAvailableList.get(i).intValue());
                 }
             }
-            Collections.sort(recommendRecipe, new CustomRecipeComparator());
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipe, viewStatus);
+            recommendRecipes.sort(new CustomRecipeComparator());
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipes, viewStatus);
             rrlv.setVisible(true);
-        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
+        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
             e.printStackTrace();
         }
     }
