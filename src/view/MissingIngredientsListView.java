@@ -40,6 +40,7 @@ public class MissingIngredientsListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        //automatically display the corresponding required ingredient(name, amount, unit) in table.
         String[] columnNames = {"Ingredient", "Amount", "Unit"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];
@@ -67,7 +68,7 @@ public class MissingIngredientsListView extends View {
 
         this.add(jp_foot, BorderLayout.SOUTH);
     }
-
+    //update the whole page
     @Override
     public void update() {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
