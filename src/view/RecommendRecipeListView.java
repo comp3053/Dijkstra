@@ -45,6 +45,7 @@ public class RecommendRecipeListView extends View {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
+        //for loop use to display all corresponding recipes and the amount of the ingredient will used in the table
         for (Recipe recommendRecipeItem : recommendRecipes) {
             JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": " + recommendRecipeItem.getIngredients().size() + " Ingredient in used");
             ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
@@ -56,11 +57,16 @@ public class RecommendRecipeListView extends View {
 
         JPanel bottomLeftButtonBar = new JPanel();
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        //different view status will generate different button.
+        // True -> Generate shopping list
+        // False -> brew recipe
         if (viewStatus) {
             JButton generateListBtn = new JButton("Generate Shopping List");
             bottomLeftButtonBar.add(generateListBtn);
             generateListBtn.addActionListener(e -> {
                 try {
+                    //get the selected recipe to generate shopping list
                     for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
                             c.generateShoppingList(recipe, recommendRecipes);
@@ -79,6 +85,7 @@ public class RecommendRecipeListView extends View {
             bottomLeftButtonBar.add(brewButton);
             brewButton.addActionListener(e -> {
                 try {
+                    //get the selected recipe to generate brew detail
                     for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
                             c.brewRecipe(recipe, recommendRecipes);
