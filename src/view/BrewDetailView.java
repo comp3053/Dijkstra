@@ -64,6 +64,8 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
+
+        //update the table information once the apply batch size button clicked
         applyBatchSize.addActionListener(e -> {
             try {
                 currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
@@ -84,6 +86,7 @@ public class BrewDetailView extends View {
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
+        //generate the corresponding information of the recipe ingredient in the table
         Object[][] data = initObjectTable();
 
         tableModel = new DefaultTableModel(data, columnNames);
@@ -108,6 +111,7 @@ public class BrewDetailView extends View {
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
 
+    //display the corresponding information of ingredient (name unit amount)
     private Object[][] initObjectTable() {
         Object[][] data = new Object[recipe.getIngredients().size()][3];
         recipe.getIngredients().forEach(ingredient -> {
@@ -119,7 +123,7 @@ public class BrewDetailView extends View {
         return data;
     }
 
-
+    //update the whole view.
     @Override
     public void update() {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
