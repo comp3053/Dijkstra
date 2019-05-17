@@ -39,7 +39,7 @@ public class BrewDetailView extends View {
         JButton button = new JButton("< Back");
         topLeftButtonBar.add(button);
         button.addActionListener(e -> {
-            c.goBack(recommendRecipes);
+            c.goBack();
             dispose();
         });
         this.add(topLeftButtonBar, BorderLayout.PAGE_START);

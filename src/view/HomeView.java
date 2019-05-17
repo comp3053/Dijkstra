@@ -73,7 +73,7 @@ public class HomeView extends View {
         recommend_btn.addActionListener(e -> {
             //Judge if there is any recommend recipe,give a warning
             if (this.recommendRecipes.size()>0) {
-                hc.startRecommend(recommendRecipes);
+                hc.startRecommend();
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "There should have at least one recipe to start recommend recipe!");

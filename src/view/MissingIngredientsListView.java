@@ -26,7 +26,7 @@ public class MissingIngredientsListView extends View {
 
         JButton btn_back = new JButton("< Back");
         btn_back.addActionListener(e -> {
-            c.goBack(recommendRecipes);
+            c.goBack();
             dispose();
         });
         jp_header.add(btn_back);
