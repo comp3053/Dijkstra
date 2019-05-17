@@ -17,7 +17,7 @@ public class HomeController {
         // Nothing to do
     }
 
-    public void startManageRecipe() {
+    public void startManageRecipe() {// go to the Recipe List view
         RecipeListController rlc = new RecipeListController();
         try {
             RecipeListView rlv = new RecipeListView(rlc, Recipe.getAll());
@@ -27,7 +27,7 @@ public class HomeController {
         }
     }
 
-    public void startManageIngredient() {
+    public void startManageIngredient() {// go to the Ingredient List view
         IngredientListController ilc = new IngredientListController();
         try {
             IngredientListView ilv = new IngredientListView(ilc, StorageIngredient.getAll());
@@ -37,13 +37,13 @@ public class HomeController {
         }
     }
 
-    public void startNoteList() {
+    public void startNoteList() {// go to the Note List view
         NoteListController nlc = new NoteListController();
         NoteListView nlv = new NoteListView(nlc);
         nlv.setVisible(true);
     }
 
-    public void startEquipmentInformation() {
+    public void startEquipmentInformation() {// go to the equipment information view
         Equipment equipment;
         try {
             equipment = Equipment.getEquipment(1);
@@ -56,29 +56,33 @@ public class HomeController {
         }
     }
 
-    public void startRecommend(ArrayList<Recipe> recommendRecipes) {
+    public void startRecommend() {//go to the recommend recipe list or shopping list view
         try {
+            ArrayList<Recipe> recommendRecipe = Recipe.getAll();
             ArrayList<Integer> notAvailableList = new ArrayList<>();
-            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipes);
-            boolean viewStatus = true;
-            for (Recipe recipe : recommendRecipes) {
+            RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
+            boolean viewStatus = true;// use to judge to show shopping list view or recommend recipe list view
+            // the for loop to judge if there is any recipe can brew
+            for (Recipe recipe : recommendRecipe) {
+                //According to the batch size of equipment ,
+                // if one recipe can brew, show the recommend recipe list view, else show the shopping list view.
                 if (recipe.isAvailable(Equipment.getEquipment(1).getVolume())) {
-                    System.out.println("OK recipe: " + recipe.getName());
                     viewStatus = false;
                 } else {
-                    //recommendRecipes.remove(recipe);
-                    notAvailableList.add(recommendRecipes.indexOf(recipe));
+                    notAvailableList.add(recommendRecipe.indexOf(recipe));
                 }
             }
+            //if there is some recipe available,
+            // we then need to remove the unavailable recipe and display them on recommend recipe list view
             if (!viewStatus) {
                 for (int i = notAvailableList.size() - 1; i >= 0; i--) {
-                    recommendRecipes.remove(notAvailableList.get(i).intValue());
+                    recommendRecipe.remove(notAvailableList.get(i).intValue());
                 }
             }
-            recommendRecipes.sort(new CustomRecipeComparator());
-            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipes, viewStatus);
+            recommendRecipe.sort(new CustomRecipeComparator());
+            RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipe, viewStatus);
             rrlv.setVisible(true);
-        } catch (FetchDataException | InvalidInputException | EmptyNameException e) {
+        } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
