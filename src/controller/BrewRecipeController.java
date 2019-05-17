@@ -7,7 +7,7 @@ public class BrewRecipeController {
 
     }
 
-    public void finish() {
+    public void finish() {//go to the home view
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);
         hv.setVisible(true);
