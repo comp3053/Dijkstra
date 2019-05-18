@@ -11,7 +11,12 @@ public class RecommendRecipeListView extends View {
     private RecommendRecipeListController c;
     private ArrayList<Recipe> recommendRecipes;
 
-    // viewStatus, false: enough ingredient, true: not enough
+    /**
+     * User interface for RecommendRecipe
+     * @param c Controller for current view.
+     * @param recommendRecipes Recipes which can brew now.
+     * @param viewStatus true: There is no recipe which could brew now. false: Recipes could brew exist.
+     */
     public RecommendRecipeListView(RecommendRecipeListController c, ArrayList<Recipe> recommendRecipes, boolean viewStatus) {
         this.c = c;
         this.recommendRecipes = recommendRecipes;
@@ -45,7 +50,7 @@ public class RecommendRecipeListView extends View {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         ButtonGroup bg = new ButtonGroup();
-        //for loop use to display all corresponding recipes and the amount of the ingredient will used in the table
+        // Display all corresponding recipes and the amount of the ingredient will used in the table
         for (Recipe recommendRecipeItem : recommendRecipes) {
             JRadioButton ingredientItem = new JRadioButton(recommendRecipeItem.getName() + ": " + recommendRecipeItem.getIngredients().size() + " Ingredient in used");
             ingredientItem.setActionCommand(String.valueOf(recommendRecipeItem.getID()));
@@ -58,9 +63,11 @@ public class RecommendRecipeListView extends View {
         JPanel bottomLeftButtonBar = new JPanel();
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        //different view status will generate different button.
-        // True -> Generate shopping list
-        // False -> brew recipe
+        /*
+         * Different view status will generate different button.
+         * True -> Generate shopping list
+         * False -> brew recipe
+         */
         if (viewStatus) {
             JButton generateListBtn = new JButton("Generate Shopping List");
             bottomLeftButtonBar.add(generateListBtn);
@@ -85,7 +92,7 @@ public class RecommendRecipeListView extends View {
             bottomLeftButtonBar.add(brewButton);
             brewButton.addActionListener(e -> {
                 try {
-                    //get the selected recipe to generate brew detail
+                    // Get the selected recipe to generate brew detail
                     for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
                             c.brewRecipe(recipe, recommendRecipes);

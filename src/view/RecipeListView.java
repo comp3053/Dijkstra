@@ -17,6 +17,11 @@ public class RecipeListView extends View {
 
     private ArrayList<Recipe> recipes;
 
+    /**
+     * User interface of RecipeList
+     * @param c Controller of current view.
+     * @param recipes All the recipes in the recipe list.
+     */
     public RecipeListView(RecipeListController c, ArrayList<Recipe> recipes) {
         this.c = c;
         this.recipes = recipes;
@@ -71,6 +76,11 @@ public class RecipeListView extends View {
         this.add(mainPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Create recipe list according to the model.
+     * @param recipes Recipe you use to create the recipe list.
+     * @return The length of recipe list.
+     */
     private int createRecipeList(ArrayList<Recipe> recipes) {
         for (Recipe recipe : recipes) {
             JPanel listPanelIter = new JPanel();
