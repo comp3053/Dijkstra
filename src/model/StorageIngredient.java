@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class StorageIngredient extends Ingredient implements IDatabaseOperation<StorageIngredient> {
+public class StorageIngredient extends Ingredient implements IDatabaseOperation {
     private ModelListener listener;
 
 
@@ -45,11 +45,16 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
         this.listener.update();
     }
 
-    public void addAmount(double addition_amount) throws InvalidInputException {
-        if (addition_amount <= 0) {
+    /**
+     * Add the amount of storage ingredient.
+     * @param additionAmount The delta of addition amount.
+     * @throws InvalidInputException Throws when amount is invalid.
+     */
+    public void addAmount(double additionAmount) throws InvalidInputException {
+        if (additionAmount <= 0) {
             throw new InvalidInputException("Addition amount should be greater than 0!");
         } else {
-            this.setAmount(this.getAmount() + addition_amount);
+            this.setAmount(this.getAmount() + additionAmount);
         }
     }
 
@@ -65,9 +70,11 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
             e.printStackTrace();
             return false;
         }
+
         return true;
     }
 
+    @Override
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Ingredient SET Name='%s',Amount=%f,Unit='%s' WHERE Ingredient_ID=%d",
@@ -80,6 +87,7 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
             e.printStackTrace();
             return false;
         }
+
         return true;
     }
 
@@ -98,6 +106,7 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
         }
+
         String query = String.format("DELETE FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
         try {
             dbHelper.execSqlNoReturn(query);
@@ -106,10 +115,16 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
             e.printStackTrace();
             return false;
         }
+
         notifyListener();
         return true;
     }
 
+    /**
+     * Get all the storage ingredients in database.
+     * @return The ArrayList of all the StorageIngredients.
+     * @throws FetchDataException Throws when database operation failed.
+     */
     public static ArrayList<StorageIngredient> getAll() throws FetchDataException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<StorageIngredient> ingredients = new ArrayList<>();
@@ -133,6 +148,7 @@ public class StorageIngredient extends Ingredient implements IDatabaseOperation<
         } catch (EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
         }
+
         return ingredients;
     }
 }
