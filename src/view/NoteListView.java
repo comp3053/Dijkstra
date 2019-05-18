@@ -55,6 +55,10 @@ public class NoteListView extends View {
 
     }
 
+    /**
+     * Create list of all notes exist in database.
+     * @param notes All the notes in database.
+     */
     private void createNoteList(ArrayList<Note> notes) {
         for (Note note : notes) {
             note.addListener(this);
@@ -70,7 +74,6 @@ public class NoteListView extends View {
             detailBtn.addActionListener(e -> {
                 NoteContentController ncc = new NoteContentController();
                 NoteContentView ncv = new NoteContentView(ncc, note);
-                // TODO: Need to change according to click (better pass in a model)
                 ncv.setVisible(true);
                 dispose();
             });
