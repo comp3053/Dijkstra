@@ -1,3 +1,7 @@
+/**
+ * Ingredient Class, represent Ingredient Entity in the System
+ * It has two subclasses, RecipeIngredient and StorageIngredient
+ */
 package model;
 
 import utils.EmptyNameException;
