@@ -10,6 +10,9 @@ public class IngredientDetailController {
         // Nothing to do
     }
 
+    /**
+     * Go back to ingredient list.
+     */
     public void goBack() {
         IngredientListController ilc = new IngredientListController();
         try {
@@ -20,6 +23,10 @@ public class IngredientDetailController {
         }
     }
 
+    /**
+     * Go to edit selected storage ingredient.
+     * @param ingredient Current storage ingredient information.
+     */
     public void editIngredient(StorageIngredient ingredient) {
         IngredientFormController ifc = new IngredientFormController(ingredient);
         IngredientFormView ifv = new IngredientFormView(ifc, ingredient);
