@@ -13,6 +13,9 @@ public class RecipeDetailController {
         this.m = m;
     }
 
+    /**
+     * Go back to RecipeListView.
+     */
     public void goBack() {
         RecipeListController rlc = new RecipeListController();
         try {
