@@ -15,12 +15,20 @@ public class BrewDetailController {
         this.m = m;
     }
 
-    public void goBack() {// go back to the recommend recipe list page
+    /**
+     * Go back to the recommend recipe list page.
+     */
+    public void goBack() {
         HomeController hc = new HomeController();
         hc.startRecommend();
     }
 
-    public void applyBatchSize(int originBatchSize, int currentBatchSize) {// change the ingredient batch size in the table
+    /**
+     * Change the ingredient batch size in the table.
+     * @param originBatchSize Current batch size applied to ingredients.
+     * @param currentBatchSize Latest batch size which need to apply to ingredients.
+     */
+    public void applyBatchSize(int originBatchSize, int currentBatchSize) {
         try {
             m.amountConversion(originBatchSize, currentBatchSize);
         } catch (InvalidInputException e) {
@@ -28,7 +36,11 @@ public class BrewDetailController {
         }
     }
 
-    public void brewRecipe(int batchSize) {// go to brew recipe page and also finish one brew(cost ingredient and add a brew history)
+    /**
+     * Go to brew recipe page and also finish one brew(cost ingredient and add a brew history)
+     * @param batchSize Batch size of recipe you brewed.
+     */
+    public void brewRecipe(int batchSize) {
         BrewRecipeController brc = new BrewRecipeController();
         BrewingRecord br = new BrewingRecord(new Date(), batchSize, m);
         br.insert();
