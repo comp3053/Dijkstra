@@ -46,6 +46,8 @@ public class RecipeDetailView extends View {
 
         JPanel recipeDetailPanel = new JPanel();
         recipeDetailPanel.setLayout(new BoxLayout(recipeDetailPanel, BoxLayout.Y_AXIS));
+
+        // Get all the ingredients in recipe and print them out.
         for (int i = 0; i < recipe.getIngredients().size(); i++) {
             JLabel ingredient = new JLabel(this.recipe.getIngredients().get(i).getName() + ": "
                     + this.recipe.getIngredients().get(i).getAmount() + " - Unit: "
