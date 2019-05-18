@@ -76,7 +76,7 @@ public class RecommendRecipeListView extends View {
                     //get the selected recipe to generate shopping list
                     for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
-                            c.generateShoppingList(recipe, recommendRecipes);
+                            c.generateShoppingList(recipe);
                         }
                     }
 

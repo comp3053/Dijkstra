@@ -13,17 +13,24 @@ import java.util.ArrayList;
 public class RecommendRecipeListController {
     private ArrayList<Recipe> recommendRecipes;
 
-    public RecommendRecipeListController(ArrayList<Recipe> recommendRecipes) {//initial the recommend recipe list controller
+    public RecommendRecipeListController(ArrayList<Recipe> recommendRecipes) {
         this.recommendRecipes = recommendRecipes;
     }
 
-    public void goBack() {// go back to the home view
+    /**
+     * Go back to home view.
+     */
+    public void goBack() {
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);
         hv.setVisible(true);
     }
 
-    public void brewRecipe(Recipe recommendRecipe) {// go to the recommend recipe view
+    /**
+     * Go to chosen recommend recipe view.
+     * @param recommendRecipe Recipe you want to watch detail.
+     */
+    public void brewRecipe(Recipe recommendRecipe) {
         try {
             int equipmentBatchSize = Equipment.getEquipment(1).getVolume();
             recommendRecipe.amountConversion(1000, equipmentBatchSize);
@@ -37,7 +44,11 @@ public class RecommendRecipeListController {
         bdv.setVisible(true);
     }
 
-    public void generateShoppingList(Recipe notEnoughRecommendRecipe,ArrayList<Recipe> recommendRecipes) {//go to the generate shopping list view
+    /**
+     * Go to the generate shopping list view.
+     * @param notEnoughRecommendRecipe Recipe which need to generate shopping list.
+     */
+    public void generateShoppingList(Recipe notEnoughRecommendRecipe) {
         try {
             ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
             ArrayList<StorageIngredient> storageIngredients = StorageIngredient.getAll();
