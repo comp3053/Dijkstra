@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Recipe implements IDatabaseOperation<Recipe> {
+public class Recipe implements IDatabaseOperation {
     private int id;
     private String name;
     private String description;
@@ -23,6 +23,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("SELECT * FROM Recipe WHERE Recipe_ID=%d", id);
 
+        // Get recipe from database by recipe id
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
             this.setName(rs.getString(2));
@@ -85,8 +86,14 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients = ingredients;
     }
 
+    /**
+     * Convert all the ingredients in recipe into unit/1L
+     * Attention: originalBatchSize should use ml as unit.
+     * @param originalBatchSize Batch size you input
+     * @param targetBatchSize Default value is 1000
+     * @throws InvalidInputException The format of batch size is wrong
+     */
     public void amountConversion(int originalBatchSize, int targetBatchSize) throws InvalidInputException {
-        //originalBatchSize should be used mL as unit.This method is to convert all recipeIngredients to the 1L amount.
         try {
             if (originalBatchSize < 0 && originalBatchSize <= Equipment.getEquipment(1).getVolume()) {
                 throw new InvalidInputException("Batch size could not be equal or less than 0!");
@@ -109,6 +116,11 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         }
     }
 
+    /**
+     * Modify the constitute ingredient for current recipe
+     * @param recipeIngredient New ingredients for current recipe
+     * @throws ModifyObjectException Throws when an object does not exist in database
+     */
     public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyObjectException {
         for (int i = 0; i < this.ingredients.size(); i++) {
             if (this.ingredients.get(i).getName().equals(recipeIngredient.getName())) {
@@ -120,6 +132,11 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         throw new ModifyObjectException("Cannot modify a recipe not existing!");
     }
 
+    /**
+     * Add new recipe ingredients into current recipe
+     * @param recipeIngredients New recipe ingredients need to added into recipe
+     * @throws AddObjectException Throws when the ingredient exists in recipe
+     */
     public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddObjectException {
         for (RecipeIngredient ingredient : this.ingredients) {
             if (ingredient == recipeIngredients) {
@@ -129,18 +146,29 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         this.ingredients.add(recipeIngredients);
     }
 
+    /**
+     * Check if the recipe is available according to the amount of storage ingredient amount
+     * @param equipmentSize Size of equipment
+     * @return Whether the recipe is available for brewing
+     */
     public boolean isAvailable(int equipmentSize) {
-        System.out.println(this.name);
         for (RecipeIngredient ingredient : ingredients) {
             if (!ingredient.isEnough(equipmentSize))
                 return false;
         }
+
         return true;
     }
 
+    /**
+     * Get the ID of current recipe when it has inserted into database just now.
+     * @return New ID of current recipe. If could not get new ID, it would return -1.
+     */
     private int getNewID() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("SELECT Recipe_ID FROM Recipe WHERE Name='%s'", stringParser(this.getName()));
+
+        // Find new ID in database
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
             int newID = rs.getInt(1);
@@ -152,10 +180,13 @@ public class Recipe implements IDatabaseOperation<Recipe> {
         }
     }
 
+    @Override
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Recipe SET Name='%s',Description='%s' WHERE Recipe_ID=%d",
                 stringParser(this.getName()), stringParser(this.getDescription()), this.getID());
+
+        // Update information of recipe in database.
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -163,9 +194,17 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             e.printStackTrace();
             return false;
         }
+
         return true;
     }
 
+    /**
+     * Obtain all the recipes in database
+     * @return An ArrayList of all the recipes.
+     * @throws FetchDataException Throws when fail to get information from database.
+     * @throws EmptyNameException Throws when the name of current recipe is empty.
+     * @throws InvalidInputException Throws
+     */
     public static ArrayList<Recipe> getAll() throws FetchDataException, EmptyNameException, InvalidInputException {
         ArrayList<Recipe> recipes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -186,6 +225,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             e.printStackTrace();
             throw new FetchDataException("Fail to fetch recipes.");
         }
+
         return recipes;
     }
 
@@ -202,6 +242,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             e.printStackTrace();
             return false;
         }
+
         int recipeID = getNewID();
         for (RecipeIngredient ingredient : ingredients) {
             ingredient.setRecipeID(recipeID);
@@ -209,13 +250,14 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             if (!status)
                 return false;
         }
+
         return true;
     }
 
     @Override
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
-        boolean status = true;
+        boolean status;
         String query = String.format("DELETE FROM Recipe WHERE Recipe_ID=%d", this.getID());
 
         try {
@@ -225,6 +267,7 @@ public class Recipe implements IDatabaseOperation<Recipe> {
             e.printStackTrace();
             return false;
         }
+
         status = RecipeIngredient.deleteAll(this.getID());
         notifyListener();
         return status;
