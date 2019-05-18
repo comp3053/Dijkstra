@@ -14,7 +14,7 @@ public class MissingIngredientsListView extends View {
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe, ArrayList<Recipe> recommendRecipes) {
+    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
         this.setTitle("Brew Day! - Missing Ingredient List"); // Set frame title
@@ -40,7 +40,7 @@ public class MissingIngredientsListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        //automatically display the corresponding required ingredient(name, amount, unit) in table.
+        // Automatically display the corresponding required ingredient(name, amount, unit) in table.
         String[] columnNames = {"Ingredient", "Amount", "Unit"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];
@@ -68,7 +68,7 @@ public class MissingIngredientsListView extends View {
 
         this.add(jp_foot, BorderLayout.SOUTH);
     }
-    //update the whole page
+
     @Override
     public void update() {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
