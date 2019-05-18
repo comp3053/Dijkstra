@@ -51,7 +51,6 @@ public class DatabaseHelper {
             try {
                 statement = c.createStatement();
                 rs = statement.executeQuery(query);
-                // TODO: Check when to close statement
             } catch (SQLException e) {
                 e.printStackTrace();
             }
