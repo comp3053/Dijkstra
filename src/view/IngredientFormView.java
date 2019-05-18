@@ -81,6 +81,8 @@ public class IngredientFormView extends View {
         pageEndButtonGroup.add(cancelBtn);
         saveBtn.addActionListener(e -> {
             double amount = Double.parseDouble(amountTextField.getText());
+
+            // Check if the amount of ingredient is valid.
             if (amount < 0) {
                 JOptionPane.showMessageDialog(null, "Amount should be more than 0.");
                 return;
@@ -88,6 +90,7 @@ public class IngredientFormView extends View {
                 int status = JOptionPane.showConfirmDialog(null,
                         "Are you sure to save current information?", "Warning",
                         JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                // Check the selection of user
                 if (status == JOptionPane.YES_OPTION) {
                     if (nameTextField.getText().length() <= 0) {
                         JOptionPane.showMessageDialog(null, "Invalid input!");

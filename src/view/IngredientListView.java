@@ -33,11 +33,13 @@ public class IngredientListView extends View {
         topButtonsAround.add(Box.createHorizontalGlue());
         topButtonsAround.add(rightButton);
 
+        // Setup action for back button.
         leftButton.addActionListener(e -> {
             c.goBack();
             dispose();
         });
 
+        // Setup action for add ingredient button
         rightButton.addActionListener(e -> {
             c.addIngredient();
             dispose();

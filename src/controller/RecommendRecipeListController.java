@@ -55,7 +55,7 @@ public class RecommendRecipeListController {
             }
             notEnoughRecommendRecipe.setIngredients(recipeIngredients);
             MissingIngredientListController milc = new MissingIngredientListController();
-            MissingIngredientsListView milv = new MissingIngredientsListView(milc, notEnoughRecommendRecipe,recommendRecipes);
+            MissingIngredientsListView milv = new MissingIngredientsListView(milc, notEnoughRecommendRecipe);
             milv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();
