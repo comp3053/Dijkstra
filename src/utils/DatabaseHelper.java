@@ -10,6 +10,7 @@ public class DatabaseHelper {
         this.connectSQLite();
     }
 
+    // Connect to SQLite
     public boolean connectSQLite() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -22,6 +23,7 @@ public class DatabaseHelper {
         return true;
     }
 
+    // Execute operations including INSERT, DELETE
     public void execSqlNoReturn(String query) throws SQLiteConnectionException {
         if (c == null) {
             // throw exception if SQLite not successful connect.
@@ -39,6 +41,7 @@ public class DatabaseHelper {
         }
     }
 
+    // Execute SELECT operation.
     public ResultSet execSqlWithReturn(String query) throws SQLiteConnectionException {
         ResultSet rs = null;
         if (c == null) {
@@ -56,6 +59,7 @@ public class DatabaseHelper {
         }
     }
 
+    // Execute UPDATE operation.
     public void execSqlUpdate(String updateQuery) throws SQLiteConnectionException {
         ResultSet rs = null;
         if (c == null) {
@@ -74,6 +78,7 @@ public class DatabaseHelper {
         }
     }
 
+    // Close the connection of database.
     public void closeConnection() {
         try {
             c.close();
