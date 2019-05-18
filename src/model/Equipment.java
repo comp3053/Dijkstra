@@ -45,12 +45,12 @@ public class Equipment implements IDatabaseOperation {
     }
 
     /**
-     * Get single equipment by id
-     * @param id Default value is 1, to get the only equipment in database
-     * @return Equipment object of only equipment in database
-     * @throws FetchDataException Throws when could not fetch data from database
-     * @throws InvalidInputException Throws when equipment's amount is invalid
-     * @throws EmptyNameException Throws when equipment's name is empty
+     * Get single equipment by id.
+     * @param id Default value is 1, to get the only equipment in database/
+     * @return Equipment object of only equipment in database.
+     * @throws FetchDataException Throws when could not fetch data from database.
+     * @throws InvalidInputException Throws when equipment's amount is invalid.
+     * @throws EmptyNameException Throws when equipment's name is empty.
      */
     public static Equipment getEquipment(int id) throws FetchDataException, InvalidInputException, EmptyNameException {
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -76,7 +76,7 @@ public class Equipment implements IDatabaseOperation {
     /**
      * Insert the current equipment model to database.
      * Attention: Do not use it directly because database could only contain 1 equipment!
-     * @return Whether the insert operation is successful
+     * @return Whether the insert operation is successful.
      */
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -97,7 +97,7 @@ public class Equipment implements IDatabaseOperation {
 
     /**
      * Update the information of equipment by current object.
-     * @return Whether the update operation is successful
+     * @return Whether the update operation is successful.
      */
     @Override
     public boolean update() {

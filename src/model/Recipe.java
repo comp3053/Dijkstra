@@ -87,11 +87,11 @@ public class Recipe implements IDatabaseOperation {
     }
 
     /**
-     * Convert all the ingredients in recipe into unit/1L
+     * Convert all the ingredients in recipe into unit/1L.
      * Attention: originalBatchSize should use ml as unit.
-     * @param originalBatchSize Batch size you input
-     * @param targetBatchSize Default value is 1000
-     * @throws InvalidInputException The format of batch size is wrong
+     * @param originalBatchSize Batch size you input.
+     * @param targetBatchSize Default value is 1000.
+     * @throws InvalidInputException The format of batch size is wrong.
      */
     public void amountConversion(int originalBatchSize, int targetBatchSize) throws InvalidInputException {
         try {
@@ -117,9 +117,9 @@ public class Recipe implements IDatabaseOperation {
     }
 
     /**
-     * Modify the constitute ingredient for current recipe
-     * @param recipeIngredient New ingredients for current recipe
-     * @throws ModifyObjectException Throws when an object does not exist in database
+     * Modify the constitute ingredient for current recipe.
+     * @param recipeIngredient New ingredients for current recipe.
+     * @throws ModifyObjectException Throws when an object does not exist in database.
      */
     public void modifyRecipeIngredient(RecipeIngredient recipeIngredient) throws ModifyObjectException {
         for (int i = 0; i < this.ingredients.size(); i++) {
@@ -133,9 +133,9 @@ public class Recipe implements IDatabaseOperation {
     }
 
     /**
-     * Add new recipe ingredients into current recipe
-     * @param recipeIngredients New recipe ingredients need to added into recipe
-     * @throws AddObjectException Throws when the ingredient exists in recipe
+     * Add new recipe ingredients into current recipe.
+     * @param recipeIngredients New recipe ingredients need to added into recipe.
+     * @throws AddObjectException Throws when the ingredient exists in recipe.
      */
     public void addRecipeIngredient(RecipeIngredient recipeIngredients) throws AddObjectException {
         for (RecipeIngredient ingredient : this.ingredients) {
@@ -147,9 +147,9 @@ public class Recipe implements IDatabaseOperation {
     }
 
     /**
-     * Check if the recipe is available according to the amount of storage ingredient amount
-     * @param equipmentSize Size of equipment
-     * @return Whether the recipe is available for brewing
+     * Check if the recipe is available according to the amount of storage ingredient amount.
+     * @param equipmentSize Size of equipment.
+     * @return Whether the recipe is available for brewing.
      */
     public boolean isAvailable(int equipmentSize) {
         for (RecipeIngredient ingredient : ingredients) {
@@ -199,7 +199,7 @@ public class Recipe implements IDatabaseOperation {
     }
 
     /**
-     * Obtain all the recipes in database
+     * Obtain all the recipes in database.
      * @return An ArrayList of all the recipes.
      * @throws FetchDataException Throws when fail to get information from database.
      * @throws EmptyNameException Throws when the name of current recipe is empty.

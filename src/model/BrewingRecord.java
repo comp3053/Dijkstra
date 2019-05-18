@@ -117,7 +117,7 @@ public class BrewingRecord implements IDatabaseOperation {
 
     /**
      * Obtain all the brewing records without note in database.
-     * @return All the brewing records without note in database
+     * @return All the brewing records without note in database.
      */
     public static ArrayList<BrewingRecord> getAll() {
         DatabaseHelper dbHelper = new DatabaseHelper();

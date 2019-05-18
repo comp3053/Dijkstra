@@ -5,7 +5,7 @@ import controller.ModelListener;
 interface IDatabaseOperation {
     /**
      * Insert current object into database.
-     * @return Whether the insert operation is successful
+     * @return Whether the insert operation is successful.
      */
     boolean insert();
 
@@ -16,14 +16,14 @@ interface IDatabaseOperation {
     boolean delete();
 
     /**
-     * Add listener of view to model and notify view when model change
+     * Add listener of view to model and notify view when model change.
      * @return Whether the update operation is successful.
      */
     boolean update();
 
     /**
      * Add listener of view to model and notify view when model change.
-     * @param listener The view which need to listen
+     * @param listener The view which need to listen.
      */
     void addListener(ModelListener listener);
 
@@ -34,8 +34,8 @@ interface IDatabaseOperation {
 
     /**
      * Parse string to avoid syntax error in database.
-     * @param str Origin string which need to parse
-     * @return Parsed string
+     * @param str Origin string which need to parse.
+     * @return Parsed string.
      */
     default String stringParser(String str) {
         return str.replaceAll("'", "''");
