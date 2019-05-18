@@ -15,12 +15,19 @@ public class RecipeListController {
         // Nothing to do
     }
 
+    /**
+     * Go back to homepage.
+     */
     public void goBack() {
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);
         hv.setVisible(true);
     }
 
+    /**
+     * Go to create new recipe view.
+     * @return Whether create of new recipe successfully.
+     */
     public boolean newRecipe() {
         try {
             if (StorageIngredient.getAll().size() > 0){
@@ -40,12 +47,20 @@ public class RecipeListController {
         return false;
     }
 
+    /**
+     * Go to detail of selected recipe.
+     * @param recipe Recipe you want to get detail information.
+     */
     public void recipeDetail(Recipe recipe) {
         RecipeDetailController rdc = new RecipeDetailController(recipe);
         RecipeDetailView rdv = new RecipeDetailView(rdc, recipe);
         rdv.setVisible(true);
     }
 
+    /**
+     * Go to edit selected recipe.
+     * @param recipe Recipe you want to edit.
+     */
     public void editRecipe(Recipe recipe) {
         try {
             RecipeForm m = new RecipeForm(recipe, StorageIngredient.getAll());
