@@ -19,6 +19,11 @@ public class BrewDetailView extends View {
     private int currentBatchSize;
     private int equipmentBatchSize;
 
+    /**
+     * User interface for detail of last brew.
+     * @param c Controller for BrewDetail.
+     * @param recipe Recipe which has brewed just now.
+     */
     public BrewDetailView(BrewDetailController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;

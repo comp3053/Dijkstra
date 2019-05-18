@@ -13,6 +13,11 @@ public class RecipeFormView extends View {
     private RecipeFormController c;
     private RecipeForm m;
 
+    /**
+     * User interface to edit recipe.
+     * @param c Controller of RecipeFormView.
+     * @param m Model to record all the information in RecipeForm.
+     */
     public RecipeFormView(RecipeFormController c, RecipeForm m) {
         this.c = c;
         this.m = m;

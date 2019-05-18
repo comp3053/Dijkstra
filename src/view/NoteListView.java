@@ -12,6 +12,10 @@ public class NoteListView extends View {
     private NoteListController c;
     private JPanel mainPanel;
 
+    /**
+     * List of all the notes in database.
+     * @param c Controller for NoteListView.
+     */
     public NoteListView(NoteListController c) {
         this.c = c;
         this.mainPanel = new JPanel();

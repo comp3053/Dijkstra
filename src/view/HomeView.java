@@ -15,6 +15,10 @@ public class HomeView extends View {
     private HomeController hc;
     private ArrayList<Recipe> recommendRecipes;
 
+    /**
+     * User interface of the home page.
+     * @param hc Controller for home page.
+     */
     public HomeView(HomeController hc) {
         this.hc = hc;
 

@@ -12,7 +12,7 @@ public class RecommendRecipeListView extends View {
     private ArrayList<Recipe> recommendRecipes;
 
     /**
-     * User interface for RecommendRecipe
+     * User interface for RecommendRecipe.
      * @param c Controller for current view.
      * @param recommendRecipes Recipes which can brew now.
      * @param viewStatus true: There is no recipe which could brew now. false: Recipes could brew exist.

@@ -11,6 +11,11 @@ public class BrewingHistoryListView extends View {
     private BrewingHistoryListController c;
     private ArrayList<BrewingRecord> brewingRecords;
 
+    /**
+     * User interface for Brewing History.
+     * @param c Controller for Brewing History.
+     * @param brewingRecords Information for brewing record.
+     */
     public BrewingHistoryListView(BrewingHistoryListController c, ArrayList<BrewingRecord> brewingRecords) {
         this.setTitle("Brew Day! - Brewing History"); // Set frame title
         this.setSize(800, 600); // Set frame size

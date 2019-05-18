@@ -18,7 +18,7 @@ public class RecipeListView extends View {
     private ArrayList<Recipe> recipes;
 
     /**
-     * User interface of RecipeList
+     * User interface of RecipeList.
      * @param c Controller of current view.
      * @param recipes All the recipes in the recipe list.
      */

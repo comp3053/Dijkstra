@@ -11,6 +11,11 @@ public class NoteContentView extends View {
     private NoteContentController c;
     private Note m;
 
+    /**
+     * User interface to watch the content of a note.
+     * @param c Controller for NoteContentView.
+     * @param m Note to watch content.
+     */
     public NoteContentView(NoteContentController c, Note m) {
         this.c = c;
         this.m = m;

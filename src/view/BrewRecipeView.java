@@ -11,6 +11,12 @@ public class BrewRecipeView extends View {
     private Recipe recipe;
     private double batchSize;
 
+    /**
+     * User interface for Brew a recipe.
+     * @param c Controller for brewing a recipe.
+     * @param recipe Recipe to brew.
+     * @param batchSize Batch size you plan to brew.
+     */
     public BrewRecipeView(BrewRecipeController c, Recipe recipe, double batchSize) {
         this.c = c;
         this.recipe = recipe;

@@ -11,6 +11,11 @@ public class IngredientFormView extends View {
     private IngredientFormController c;
     private Ingredient m;
 
+    /**
+     * User interface for editing ingredient information.
+     * @param c Controller for editing ingredient information.
+     * @param m Model to record ingredient information in current form.
+     */
     public IngredientFormView(IngredientFormController c, Ingredient m) {
         this.c = c;
         this.m = m;

@@ -10,6 +10,11 @@ public class IngredientDetailView extends View {
     private IngredientDetailController c;
     private StorageIngredient ingredient;
 
+    /**
+     * User interface for ingredient detail.
+     * @param c Controller for ingredient detail.
+     * @param ingredient Information of ingredient.
+     */
     public IngredientDetailView(IngredientDetailController c, StorageIngredient ingredient) {
         this.c = c;
         this.setTitle("Brew Day! - Recipe Detail"); // Set frame title

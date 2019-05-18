@@ -11,6 +11,11 @@ public class RecipeDetailView extends View {
     private RecipeDetailController c;
     private Recipe recipe;
 
+    /**
+     * User interface to watch the detail of selected recipe.
+     * @param c Controller of RecipeDetailView.
+     * @param recipe Recipe that you want to get detailed information.
+     */
     public RecipeDetailView(RecipeDetailController c, Recipe recipe) {
         this.c = c;
         this.setTitle("Brew Day! - Recipe Detail"); // Set frame title

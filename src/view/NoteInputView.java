@@ -11,6 +11,11 @@ public class NoteInputView extends View {
     private NoteInputController c;
     private Note m;
 
+    /**
+     * User interface to edit note.
+     * @param c Controller for note editing.
+     * @param m Note to edit.
+     */
     public NoteInputView(NoteInputController c, Note m) {
         this.c = c;
         this.m = m;

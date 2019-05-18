@@ -14,6 +14,11 @@ public class MissingIngredientsListView extends View {
     private JTable table;
     private DefaultTableModel tableModel;
 
+    /**
+     * User interface of missing ingredient of current recipe.
+     * @param c Controller of MissingIngredientListView.
+     * @param recipe Recipe you want to get missing ingredients.
+     */
     public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;

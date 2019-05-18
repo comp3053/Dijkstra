@@ -13,6 +13,11 @@ public class IngredientListView extends View {
     private ArrayList<StorageIngredient> m;
     private JPanel mainPanel;
 
+    /**
+     * User interface of storage ingredient list.
+     * @param c Controller for storage ingredient list.
+     * @param m All the storage ingredients in database.
+     */
     public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m) {
         this.c = c;
         this.setTitle("Brew Day! - Ingredients List"); // Set frame title
