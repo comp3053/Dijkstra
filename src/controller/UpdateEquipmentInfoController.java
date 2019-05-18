@@ -29,7 +29,7 @@ public class UpdateEquipmentInfoController {
         this.m = new Equipment(Name, Integer.parseInt(Volume));
         int isSave = JOptionPane.showConfirmDialog(null,
                 "Modify equipment information will change your default batch size, are you sure to modify?",
-                "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (isSave == JOptionPane.YES_OPTION) {
             if (firstTime) {
                 return m.insert();
