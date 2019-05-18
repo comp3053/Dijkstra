@@ -71,6 +71,8 @@ public class EquipmentInfoView extends View {
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveButton = new JButton("Update");
         bottomLeftButtonBar.add(saveButton);
+
+        // Setup action for save button
         saveButton.addActionListener(e -> {
             c.turnUpdateInfo();
             dispose();
