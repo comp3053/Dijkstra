@@ -32,9 +32,9 @@ public class BrewRecipeView extends View {
         jp2.add(word, BorderLayout.PAGE_START);
         this.add(jp2, BorderLayout.PAGE_START);
 
-        //show the used ingredient for this time brew to user
+        // Show the used ingredient for this time brew to user
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
-        //automatically get the name, unit and amount of used recipe ingredient
+        // Automatically get the name, unit and amount of used recipe ingredient
         Object[][] data = new Object[recipe.getIngredients().size()][3];
         recipe.getIngredients().forEach(ingredient -> {
             int index = recipe.getIngredients().indexOf(ingredient);
@@ -58,6 +58,6 @@ public class BrewRecipeView extends View {
 
     @Override
     public void update() {
-
+        // Nothing to do
     }
 }

@@ -35,6 +35,8 @@ public class BrewingHistoryListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        // Get brewing history which could take notes.
         for (BrewingRecord brewingRecord : brewingRecords) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());
