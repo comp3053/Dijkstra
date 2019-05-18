@@ -2,7 +2,6 @@ package model;
 
 import controller.ModelListener;
 import utils.DatabaseHelper;
-import utils.FetchDataException;
 import utils.SQLiteConnectionException;
 
 import java.sql.ResultSet;
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Note implements IDatabaseOperation<Note> {
+public class Note implements IDatabaseOperation {
     private int id;
     private int brewID;
     private Date createDate;
