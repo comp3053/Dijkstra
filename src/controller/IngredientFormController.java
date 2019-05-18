@@ -14,6 +14,13 @@ public class IngredientFormController {
         this.m = m;
     }
 
+    /**
+     * Save current ingredient to database.
+     * @param Name Name of ingredient you want to save.
+     * @param Amount Amount of ingredient you want to save.
+     * @param Unit Unit of ingredient you want to save.
+     * @return
+     */
     public boolean saveIngredient(String Name, double Amount, int Unit) {
         try {
             m.setName(Name);
@@ -41,6 +48,9 @@ public class IngredientFormController {
         return m.update();
     }
 
+    /**
+     * Cancel the edit of current ingredient and go back to ingredient list.
+     */
     public void cancel() {
         IngredientListController ilc = new IngredientListController();
         try {
