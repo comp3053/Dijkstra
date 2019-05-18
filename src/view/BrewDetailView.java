@@ -10,7 +10,6 @@ import utils.InvalidInputException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class BrewDetailView extends View {
     private BrewDetailController c;
@@ -20,7 +19,7 @@ public class BrewDetailView extends View {
     private int currentBatchSize;
     private int equipmentBatchSize;
 
-    public BrewDetailView(BrewDetailController c, Recipe recipe, ArrayList<Recipe> recommendRecipes) {
+    public BrewDetailView(BrewDetailController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
         this.setTitle("Brew Day! - Brew Recipe Details"); // Set frame title
@@ -65,11 +64,10 @@ public class BrewDetailView extends View {
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
 
-        //update the table information once the apply batch size button clicked
+        // Update the table information once the apply batch size button clicked
         applyBatchSize.addActionListener(e -> {
             try {
                 currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
-                System.out.println(currentBatchSize + "  " + originBatchSize);
                 if (currentBatchSize > 0 && currentBatchSize <= equipmentBatchSize) {
                     c.applyBatchSize(originBatchSize, currentBatchSize);
                     originBatchSize = currentBatchSize;
@@ -86,7 +84,7 @@ public class BrewDetailView extends View {
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
-        //generate the corresponding information of the recipe ingredient in the table
+        // Generate the corresponding information of the recipe ingredient in the table
         Object[][] data = initObjectTable();
 
         tableModel = new DefaultTableModel(data, columnNames);
@@ -111,7 +109,10 @@ public class BrewDetailView extends View {
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
 
-    //display the corresponding information of ingredient (name unit amount)
+    /**
+     * Initialize object for ingredient information table.
+     * @return Object to generate the table.
+     */
     private Object[][] initObjectTable() {
         Object[][] data = new Object[recipe.getIngredients().size()][3];
         recipe.getIngredients().forEach(ingredient -> {
@@ -123,7 +124,6 @@ public class BrewDetailView extends View {
         return data;
     }
 
-    //update the whole view.
     @Override
     public void update() {
         String[] columnNames = {"Ingredient", "Unit", "Amount"};

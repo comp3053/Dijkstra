@@ -23,7 +23,7 @@ public class RecommendRecipeListController {
         hv.setVisible(true);
     }
 
-    public void brewRecipe(Recipe recommendRecipe,ArrayList<Recipe> recommendRecipes) {// go to the recommend recipe view
+    public void brewRecipe(Recipe recommendRecipe) {// go to the recommend recipe view
         try {
             int equipmentBatchSize = Equipment.getEquipment(1).getVolume();
             recommendRecipe.amountConversion(1000, equipmentBatchSize);
@@ -31,7 +31,7 @@ public class RecommendRecipeListController {
             e.printStackTrace();
         }
         BrewDetailController bdc = new BrewDetailController(recommendRecipe);
-        BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe,recommendRecipes);
+        BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe);
         // add a listener for update the brew detail view
         recommendRecipe.addListener(bdv);
         bdv.setVisible(true);

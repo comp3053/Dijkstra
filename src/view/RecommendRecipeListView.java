@@ -95,7 +95,7 @@ public class RecommendRecipeListView extends View {
                     // Get the selected recipe to generate brew detail
                     for (Recipe recipe : recommendRecipes) {
                         if (recipe.getID() == Integer.valueOf(bg.getSelection().getActionCommand())) {
-                            c.brewRecipe(recipe, recommendRecipes);
+                            c.brewRecipe(recipe);
                         }
                     }
                 } catch (NullPointerException ex) {
