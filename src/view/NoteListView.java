@@ -55,6 +55,7 @@ public class NoteListView extends View {
 
     }
 
+    /* predict the note list  */
     private void createNoteList(ArrayList<Note> notes) {
         for (Note note : notes) {
             note.addListener(this);
@@ -86,6 +87,7 @@ public class NoteListView extends View {
         }
     }
 
+    /* update the View when the data is new */
     @Override
     public void update() {
         mainPanel.removeAll();

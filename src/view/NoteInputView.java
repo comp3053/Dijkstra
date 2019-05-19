@@ -11,6 +11,7 @@ public class NoteInputView extends View {
     private NoteInputController c;
     private Note m;
 
+    /*  */
     public NoteInputView(NoteInputController c, Note m) {
         this.c = c;
         this.m = m;

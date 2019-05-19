@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class Note implements IDatabaseOperation<Note> {
     private int id;
     private int brewID;
@@ -17,6 +18,7 @@ public class Note implements IDatabaseOperation<Note> {
     private String content;
     private ModelListener listener;
 
+    /* Initialize the Note model */
     public Note(int brewID, Date createDate, String content) {
         setBrewID(brewID);
         setCreateDate(createDate);
@@ -62,6 +64,7 @@ public class Note implements IDatabaseOperation<Note> {
         this.content = content;
     }
 
+    /* The methods that will insert the information of this instance into the database */
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         try {
@@ -88,6 +91,7 @@ public class Note implements IDatabaseOperation<Note> {
         return true;
     }
 
+    /* The methods that will update the information of this instance into the database */
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Note SET Content='%s' WHERE Brew_ID=%d",
@@ -102,6 +106,7 @@ public class Note implements IDatabaseOperation<Note> {
         }
     }
 
+    /* The methods that get all the note existed in the database, it needs for the view to list all note records */
     public static ArrayList<Note> getAll() {
         ArrayList<Note> notes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -131,6 +136,7 @@ public class Note implements IDatabaseOperation<Note> {
         return null;
     }
 
+    /* This methods will delete the inputting methods of the database */
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         try {
