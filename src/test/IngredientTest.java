@@ -11,11 +11,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class IngredientTest {
-
+    //initial part
     private static Ingredient ingredient;
 
     @Before
-    public void setUp() {
+    public void setUp() {//set up the ingredient class
         try {
             ingredient = new Ingredient(1, "yeast", 100.0, UnitEnum.GRAM);
         } catch (EmptyNameException | InvalidInputException e) {
@@ -24,23 +24,23 @@ public class IngredientTest {
     }
 
     @Test
-    public void getID() {
+    public void getID() {// test whether it can get ID
         assertEquals(1, ingredient.getID());
     }
 
     @Test
-    public void setID() {
+    public void setID() {// test whether it can set ID
         ingredient.setID(2);
         assertEquals(2, ingredient.getID());
     }
 
     @Test
-    public void getName() {
+    public void getName() {// test whether it can get name
         assertEquals("yeast", ingredient.getName());
     }
 
     @Test
-    public void setName() {
+    public void setName() {// test whether it can set name
         try {
             ingredient.setName("water");
         } catch (EmptyNameException e) {
@@ -56,7 +56,7 @@ public class IngredientTest {
     }
 
     @Test
-    public void getAmount() {
+    public void getAmount() {// test whether it can get amount
         assertEquals(100.0, ingredient.getAmount(), 0.00);
     }
 
@@ -66,12 +66,12 @@ public class IngredientTest {
     }
 
     @Test
-    public void getUnit() {
+    public void getUnit() {// test whether it can get the unit
         assertEquals(UnitEnum.GRAM, ingredient.getUnit());
     }
 
     @Test
-    public void setUnit() {
+    public void setUnit() {// test whether it can set the unit
         ingredient.setUnit(UnitEnum.KILOGRAM);
         assertEquals(UnitEnum.KILOGRAM, ingredient.getUnit());
     }
