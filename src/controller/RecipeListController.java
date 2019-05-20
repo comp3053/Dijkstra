@@ -37,8 +37,6 @@ public class RecipeListController {
                 rfv.setVisible(true);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "There should be at least one ingredient before create new recipe!");
                 return false;
             }
         } catch (FetchDataException e) {

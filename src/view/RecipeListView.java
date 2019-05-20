@@ -48,6 +48,10 @@ public class RecipeListView extends View {
             if (c.newRecipe()){
                 dispose();
             }
+            else {
+                JOptionPane.showMessageDialog(null,
+                        "There should be at least one ingredient before create new recipe!");
+            }
         });
         this.add(topButtonsAround, BorderLayout.PAGE_START);
 
