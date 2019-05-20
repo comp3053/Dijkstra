@@ -27,17 +27,10 @@ public class UpdateEquipmentInfoController {
      */
     public boolean saveEquipmentInfo(String Name, String Volume, boolean firstTime) throws EmptyNameException, InvalidInputException, NumberFormatException {
         this.m = new Equipment(Name, Integer.parseInt(Volume));
-        int isSave = JOptionPane.showConfirmDialog(null,
-                "Modify equipment information will change your default batch size, are you sure to modify?",
-                "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (isSave == JOptionPane.YES_OPTION) {
-            if (firstTime) {
-                return m.insert();
-            } else {
-                return m.update();
-            }
+        if (firstTime) {
+            return m.insert();
         } else {
-            return false;
+            return m.update();
         }
     }
 

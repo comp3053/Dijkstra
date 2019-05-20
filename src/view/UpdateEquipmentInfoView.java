@@ -92,7 +92,15 @@ public class UpdateEquipmentInfoView extends View {
         bottomLeftButtonBar.add(saveButton);
         saveButton.addActionListener(e -> {
             try {
-                if (c.saveEquipmentInfo(name.getText(), volume.getText(), firstTime)) {
+                boolean Result_saveEquipmentInfo = false;
+                int isSave = JOptionPane.showConfirmDialog(null,
+                        "Modify equipment information will change your default batch size, are you sure to modify?",
+                        "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (isSave == JOptionPane.YES_OPTION) {
+                    Result_saveEquipmentInfo = c.saveEquipmentInfo(name.getText(), volume.getText(), firstTime);
+                }
+                else {}
+                if (Result_saveEquipmentInfo) {
                     JOptionPane.showMessageDialog(null, "Equipment Information have been saved");
                 }
                 c.goBack();
