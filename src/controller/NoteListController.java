@@ -48,17 +48,10 @@ public class NoteListController {
      * Delete note you chose.
      * @param m The information of note you want to delete.
      */
-    public void delete(Note m) {
+    public boolean delete(Note m) {
         System.out.println("delete");
-        int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to delete your note?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (isSave == 0) {
-            if (m.delete())
-                JOptionPane.showMessageDialog(null, "Your note has been deleted", "Success", JOptionPane.PLAIN_MESSAGE);
-            else
-                JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Your note has not been deleted ", "Success", JOptionPane.ERROR_MESSAGE);
-        }
+        boolean result = m.delete();
+        return result;
     }
 
     /**
