@@ -17,12 +17,19 @@ public class RecommendRecipeListController {
         this.recommendRecipes = recommendRecipes;
     }
 
+    /**
+     * Go back to home view.
+     */
     public void goBack() {
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);
         hv.setVisible(true);
     }
 
+    /**
+     * Go to chosen recommend recipe view.
+     * @param recommendRecipe Recipe you want to watch detail.
+     */
     public void brewRecipe(Recipe recommendRecipe) {
         try {
             int equipmentBatchSize = Equipment.getEquipment(1).getVolume();
@@ -32,15 +39,21 @@ public class RecommendRecipeListController {
         }
         BrewDetailController bdc = new BrewDetailController(recommendRecipe);
         BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe);
+        // add a listener for update the brew detail view
         recommendRecipe.addListener(bdv);
         bdv.setVisible(true);
     }
 
+    /**
+     * Go to the generate shopping list view.
+     * @param notEnoughRecommendRecipe Recipe which need to generate shopping list.
+     */
     public void generateShoppingList(Recipe notEnoughRecommendRecipe) {
         try {
             ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
             ArrayList<StorageIngredient> storageIngredients = StorageIngredient.getAll();
             int equipment = Equipment.getEquipment(1).getVolume();
+            // for loop is used to get the required ingredient and calculate the required amount
             for (RecipeIngredient recipeIngredientItem : notEnoughRecommendRecipe.getIngredients()) {
                 for (StorageIngredient storageIngredient : storageIngredients) {
                     if (storageIngredient.getID() == recipeIngredientItem.getID()) {

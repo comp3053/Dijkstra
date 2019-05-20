@@ -19,6 +19,11 @@ public class BrewDetailView extends View {
     private int currentBatchSize;
     private int equipmentBatchSize;
 
+    /**
+     * User interface for detail of last brew.
+     * @param c Controller for BrewDetail.
+     * @param recipe Recipe which has brewed just now.
+     */
     public BrewDetailView(BrewDetailController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
@@ -63,10 +68,11 @@ public class BrewDetailView extends View {
         textfieldWithLabel.add(batchSizeTextField);
         JButton applyBatchSize = new JButton("Apply");
         textfieldWithLabel.add(applyBatchSize);
+
+        // Update the table information once the apply batch size button clicked
         applyBatchSize.addActionListener(e -> {
             try {
                 currentBatchSize = Integer.parseInt(batchSizeTextField.getText());
-                System.out.println(currentBatchSize + "  " + originBatchSize);
                 if (currentBatchSize > 0 && currentBatchSize <= equipmentBatchSize) {
                     c.applyBatchSize(originBatchSize, currentBatchSize);
                     originBatchSize = currentBatchSize;
@@ -83,6 +89,7 @@ public class BrewDetailView extends View {
         mainPanel.add(pageTitle, BorderLayout.PAGE_START);
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
 
+        // Generate the corresponding information of the recipe ingredient in the table
         Object[][] data = initObjectTable();
 
         tableModel = new DefaultTableModel(data, columnNames);
@@ -107,6 +114,10 @@ public class BrewDetailView extends View {
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
     }
 
+    /**
+     * Initialize object for ingredient information table.
+     * @return Object to generate the table.
+     */
     private Object[][] initObjectTable() {
         Object[][] data = new Object[recipe.getIngredients().size()][3];
         recipe.getIngredients().forEach(ingredient -> {
@@ -117,7 +128,6 @@ public class BrewDetailView extends View {
         });
         return data;
     }
-
 
     @Override
     public void update() {

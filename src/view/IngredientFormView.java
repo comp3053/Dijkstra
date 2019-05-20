@@ -11,6 +11,11 @@ public class IngredientFormView extends View {
     private IngredientFormController c;
     private Ingredient m;
 
+    /**
+     * User interface for editing ingredient information.
+     * @param c Controller for editing ingredient information.
+     * @param m Model to record ingredient information in current form.
+     */
     public IngredientFormView(IngredientFormController c, Ingredient m) {
         this.c = c;
         this.m = m;
@@ -45,6 +50,11 @@ public class IngredientFormView extends View {
         if (m.getID() > 0) {
             nameTextField.setText(m.getName());
             amountTextField.setText(Double.toString(m.getAmount()));
+            for (UnitEnum unit : UnitEnum.values()) {
+                if (!unit.equals(m.getUnit())) {
+                    unitSelect.removeItem(unit);
+                }
+            }
         }
 
         GroupLayout.SequentialGroup hGroup = groupLayout.createSequentialGroup();
@@ -75,23 +85,31 @@ public class IngredientFormView extends View {
         pageEndButtonGroup.add(saveBtn);
         pageEndButtonGroup.add(cancelBtn);
         saveBtn.addActionListener(e -> {
-            int status = JOptionPane.showConfirmDialog(null,
-                    "Are you sure to save current information?", "Warning",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (status == JOptionPane.YES_OPTION) {
-                if (nameTextField.getText().length() <= 0) {
-                    JOptionPane.showMessageDialog(null, "Invalid input!");
-                    return;
-                }
-                try {
-                    double amount = Double.parseDouble(amountTextField.getText());
-                    c.saveIngredient(nameTextField.getText(), amount, unitSelect.getSelectedIndex());
-                    c.cancel();
-                    dispose();
-                } catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(null, "Amount is invalid!");
-                }
+            double amount = Double.parseDouble(amountTextField.getText());
 
+            // Check if the amount of ingredient is valid.
+            if (amount < 0) {
+                JOptionPane.showMessageDialog(null, "Amount should be more than 0.");
+                return;
+            }else {
+                int status = JOptionPane.showConfirmDialog(null,
+                        "Are you sure to save current information?", "Warning",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                // Check the selection of user
+                if (status == JOptionPane.YES_OPTION) {
+                    if (nameTextField.getText().length() <= 0) {
+                        JOptionPane.showMessageDialog(null, "Invalid input!");
+                        return;
+                    }
+                    try {
+                        c.saveIngredient(nameTextField.getText(), amount, unitSelect.getSelectedIndex());
+                        c.cancel();
+                        dispose();
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Amount is invalid!");
+                    }
+
+                }
             }
 
         });

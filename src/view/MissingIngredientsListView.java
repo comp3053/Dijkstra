@@ -6,6 +6,7 @@ import model.Recipe;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MissingIngredientsListView extends View {
     private MissingIngredientListController c;
@@ -13,6 +14,11 @@ public class MissingIngredientsListView extends View {
     private JTable table;
     private DefaultTableModel tableModel;
 
+    /**
+     * User interface of missing ingredient of current recipe.
+     * @param c Controller of MissingIngredientListView.
+     * @param recipe Recipe you want to get missing ingredients.
+     */
     public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
@@ -39,6 +45,7 @@ public class MissingIngredientsListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        // Automatically display the corresponding required ingredient(name, amount, unit) in table.
         String[] columnNames = {"Ingredient", "Amount", "Unit"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];

@@ -7,6 +7,9 @@ public class BrewRecipeController {
 
     }
 
+    /**
+     * Go back to homepage.
+     */
     public void finish() {
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);

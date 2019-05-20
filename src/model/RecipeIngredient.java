@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RecipeIngredient extends Ingredient implements IDatabaseOperation<RecipeIngredient> {
+public class RecipeIngredient extends Ingredient implements IDatabaseOperation {
     private ModelListener listener;
     private int recipeID;
 
@@ -61,6 +61,14 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         return true;
     }
 
+    /**
+     * Get all the recipe ingredients by recipe ID.
+     * @param recipeID ID of recipe that you want to get all the recipe ingredients.
+     * @return All the recipe ingredients for the recipe.
+     * @throws FetchDataException Throws when database operation fails.
+     * @throws EmptyNameException Throws when the recipe's name is empty.
+     * @throws InvalidInputException Throws when the amount of recipe ingredient is invalid.
+     */
     public static ArrayList<RecipeIngredient> getAll(int recipeID) throws FetchDataException, EmptyNameException, InvalidInputException {
         DatabaseHelper dbHelper = new DatabaseHelper();
         ArrayList<RecipeIngredient> ingredients = new ArrayList<>();
@@ -87,9 +95,15 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
             e.printStackTrace();
             throw new FetchDataException("Could not fetch recipe ingredients.");
         }
+
         return ingredients;
     }
 
+    /**
+     * Delete all the recipe ingredient for the recipe.
+     * @param recipeID Recipe ID of deleted recipe.
+     * @return Whether the delete operation of recipe ingredient is successful.
+     */
     static boolean deleteAll(int recipeID) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Ingredient_in_Recipe WHERE Recipe_ID=%d", recipeID);
@@ -118,7 +132,12 @@ public class RecipeIngredient extends Ingredient implements IDatabaseOperation<R
         }
     }
 
-    public boolean isEnough(int equipmentSize) {
+    /**
+     * Check if the storage ingredient is enough for a brew according to the requirement of recipe ingredient amount.
+     * @param equipmentSize Size of our equipment.
+     * @return Whether the storage ingredient is enough for a brew.
+     */
+    boolean isEnough(int equipmentSize) {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("SELECT * FROM Ingredient WHERE Ingredient_ID=%d", this.getID());
         try {

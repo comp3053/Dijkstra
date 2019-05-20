@@ -14,6 +14,12 @@ class RecipeIngredientEntry extends JPanel {
     private JButton minusField;
     private RecipeIngredientEntryList parent;
 
+    /**
+     * Setup a new recipe ingredient entry.
+     * @param comboBox Component to choose ingredient.
+     * @param textFieldText The amount of current recipe ingredient.
+     * @param list All the RecipeIngredients in the form.
+     */
     public RecipeIngredientEntry(JComboBox comboBox, String textFieldText, RecipeIngredientEntryList list) {
         this.IngredientSelector = comboBox;
         this.parent = list;
@@ -35,6 +41,9 @@ class RecipeIngredientEntry extends JPanel {
         return inputBoxText;
     }
 
+    /**
+     * Initialize AddEntry button and setup action for it.
+     */
     public class AddEntryAction extends AbstractAction {
 
         public AddEntryAction() {
@@ -47,6 +56,9 @@ class RecipeIngredientEntry extends JPanel {
 
     }
 
+    /**
+     * Initialize RemoveEntry button and setup action for it.
+     */
     public class RemoveEntryAction extends AbstractAction {
 
         public RemoveEntryAction() {
@@ -59,10 +71,18 @@ class RecipeIngredientEntry extends JPanel {
         }
     }
 
+    /**
+     * Control whether the add button could be clicked.
+     * @param enabled Target status of add button.
+     */
     void enableAdd(boolean enabled) {
         this.addField.setEnabled(enabled);
     }
 
+    /**
+     * Control whether the minus button could be clicked.
+     * @param enabled Target status of minus button.
+     */
     void enableMinus(boolean enabled) {
         this.minusField.setEnabled(enabled);
     }

@@ -11,6 +11,12 @@ public class BrewRecipeView extends View {
     private Recipe recipe;
     private double batchSize;
 
+    /**
+     * User interface for Brew a recipe.
+     * @param c Controller for brewing a recipe.
+     * @param recipe Recipe to brew.
+     * @param batchSize Batch size you plan to brew.
+     */
     public BrewRecipeView(BrewRecipeController c, Recipe recipe, double batchSize) {
         this.c = c;
         this.recipe = recipe;
@@ -32,8 +38,9 @@ public class BrewRecipeView extends View {
         jp2.add(word, BorderLayout.PAGE_START);
         this.add(jp2, BorderLayout.PAGE_START);
 
+        // Show the used ingredient for this time brew to user
         String[] columnNames = {"Ingredient", "Unit", "Amount"};
-
+        // Automatically get the name, unit and amount of used recipe ingredient
         Object[][] data = new Object[recipe.getIngredients().size()][3];
         recipe.getIngredients().forEach(ingredient -> {
             int index = recipe.getIngredients().indexOf(ingredient);
@@ -57,6 +64,6 @@ public class BrewRecipeView extends View {
 
     @Override
     public void update() {
-
+        // Nothing to do
     }
 }

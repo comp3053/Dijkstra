@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
+public class BrewingRecord implements IDatabaseOperation {
     private int id;
     private Date brewDate;
     private int batchSize;
@@ -68,6 +68,8 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("INSERT INTO Brew (Brew_Date,Batch_Size,Recipe_ID,Note_ID) VALUES" +
                 "(%d,%d,%d,0)", brewDate.getTime(), batchSize, recipe.getID());
+
+        // Insert brewing record into database
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -75,6 +77,7 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
             e.printStackTrace();
             return false;
         }
+
         // Update StorageIngredient amount
         for (RecipeIngredient ingredient : recipe.getIngredients()) {
             try {
@@ -85,6 +88,7 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
                 e.printStackTrace();
             }
         }
+
         return true;
     }
 
@@ -94,9 +98,12 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         return false;
     }
 
+    @Override
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("DELETE FROM Brew WHERE Brew_ID=%d", id);
+
+        // Delete current object from database
         try {
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
@@ -104,9 +111,14 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
             e.printStackTrace();
             return false;
         }
+
         return true;
     }
 
+    /**
+     * Obtain all the brewing records without note in database.
+     * @return All the brewing records without note in database.
+     */
     public static ArrayList<BrewingRecord> getAll() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = "SELECT * FROM Brew WHERE Note_ID=0";
@@ -114,6 +126,7 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         int id, batchSize, recipeID;
         Date date;
 
+        // Get all the brewing record without note in database and add to a new ArrayList
         try {
             ResultSet rs = dbHelper.execSqlWithReturn(query);
             while (rs.next()) {
@@ -127,6 +140,7 @@ public class BrewingRecord implements IDatabaseOperation<BrewingRecord> {
         } catch (SQLException | SQLiteConnectionException e) {
             e.printStackTrace();
         }
+
         return brewingRecords;
     }
 

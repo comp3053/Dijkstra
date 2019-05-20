@@ -1,3 +1,9 @@
+/**
+ * Custom Comparator for ArrayList
+ * Use this class with the ArrayList sort method
+ * Sort the Recipe object in descending sort according to their ingredients amount
+ *
+ */
 package utils;
 
 import model.Recipe;

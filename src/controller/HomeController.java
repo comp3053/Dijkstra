@@ -17,6 +17,9 @@ public class HomeController {
         // Nothing to do
     }
 
+    /**
+     * Go to the Recipe List view
+     */
     public void startManageRecipe() {
         RecipeListController rlc = new RecipeListController();
         try {
@@ -27,6 +30,9 @@ public class HomeController {
         }
     }
 
+    /**
+     * Go to the Ingredient List view
+     */
     public void startManageIngredient() {
         IngredientListController ilc = new IngredientListController();
         try {
@@ -37,12 +43,18 @@ public class HomeController {
         }
     }
 
+    /**
+     * Go to the Note List view
+     */
     public void startNoteList() {
         NoteListController nlc = new NoteListController();
         NoteListView nlv = new NoteListView(nlc);
         nlv.setVisible(true);
     }
 
+    /**
+     * Go to the equipment information view
+     */
     public void startEquipmentInformation() {
         Equipment equipment;
         try {
@@ -56,27 +68,33 @@ public class HomeController {
         }
     }
 
+    /**
+     * Go to the recommend recipe list or shopping list view
+     */
     public void startRecommend() {
         try {
             ArrayList<Recipe> recommendRecipe = Recipe.getAll();
             ArrayList<Integer> notAvailableList = new ArrayList<>();
             RecommendRecipeListController rrlc = new RecommendRecipeListController(recommendRecipe);
-            boolean viewStatus = true;
+            boolean viewStatus = true;// Judge to show shopping list view or recommend recipe list view
+            // Judge if there is any recipe can brew
             for (Recipe recipe : recommendRecipe) {
+                // According to the batch size of equipment ,
+                // if one recipe can brew, show the recommend recipe list view, else show the shopping list view.
                 if (recipe.isAvailable(Equipment.getEquipment(1).getVolume())) {
-                    System.out.println("OK recipe: " + recipe.getName());
                     viewStatus = false;
                 } else {
-                    //recommendRecipe.remove(recipe);
                     notAvailableList.add(recommendRecipe.indexOf(recipe));
                 }
             }
+            // If there is some recipe available,
+            // we need to remove the unavailable recipe and display them on recommend recipe list view
             if (!viewStatus) {
                 for (int i = notAvailableList.size() - 1; i >= 0; i--) {
                     recommendRecipe.remove(notAvailableList.get(i).intValue());
                 }
             }
-            Collections.sort(recommendRecipe, new CustomRecipeComparator());
+            recommendRecipe.sort(new CustomRecipeComparator());
             RecommendRecipeListView rrlv = new RecommendRecipeListView(rrlc, recommendRecipe, viewStatus);
             rrlv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {

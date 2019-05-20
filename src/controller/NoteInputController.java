@@ -12,6 +12,12 @@ public class NoteInputController {
         this.m = m;
     }
 
+    /**
+     * Save note to database.
+     * @param m Note you want to save to database.
+     * @param content Content of current note.
+     * @return Whether save note operation done successfully.
+     */
     public boolean saveNote(Note m, String content) {
         m.setContent(content);
         if (m.getID() == 0) {
@@ -35,15 +41,18 @@ public class NoteInputController {
         }
     }
 
+    /**
+     * Go back to note list view.
+     * @return A status to check if we need to close the current window. 1 -> Go back; 0 -> Do nothing.
+     */
     public int backToNoteList() {
-        // Return a status, check need close the current window or not
-        int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to leave without saving your note?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to leave without saving your note?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (isSave == 0) {
             NoteListController nlc = new NoteListController();
             NoteListView nlv = new NoteListView(nlc);
             nlv.setVisible(true);
             return 1;
-        } else if (isSave == 1 || isSave == 2) {
+        } else if (isSave == 1) {
             // Do Nothing
             return 0;
         }

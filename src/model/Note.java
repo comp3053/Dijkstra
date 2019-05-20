@@ -2,7 +2,6 @@ package model;
 
 import controller.ModelListener;
 import utils.DatabaseHelper;
-import utils.FetchDataException;
 import utils.SQLiteConnectionException;
 
 import java.sql.ResultSet;
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Note implements IDatabaseOperation<Note> {
+public class Note implements IDatabaseOperation {
     private int id;
     private int brewID;
     private Date createDate;
@@ -62,11 +61,14 @@ public class Note implements IDatabaseOperation<Note> {
         this.content = content;
     }
 
+    @Override
     public boolean insert() {
         DatabaseHelper dbHelper = new DatabaseHelper();
+        String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d);",
+                this.getCreateDate().getTime(), stringParser(this.getContent()), this.getBrewID());
+
+        // Insert note into database and update note information in brewing record.
         try {
-            String query = String.format("INSERT INTO Note (Create_Date, Content, Brew_ID) VALUES (%d,'%s',%d);",
-                    this.getCreateDate().getTime(), stringParser(this.getContent()), this.getBrewID());
             dbHelper.execSqlNoReturn(query);
             dbHelper.closeConnection();
             // Get the latest Note ID
@@ -85,9 +87,11 @@ public class Note implements IDatabaseOperation<Note> {
             e.printStackTrace();
             return false;
         }
+
         return true;
     }
 
+    @Override
     public boolean update() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         String query = String.format("UPDATE Note SET Content='%s' WHERE Brew_ID=%d",
@@ -102,6 +106,10 @@ public class Note implements IDatabaseOperation<Note> {
         }
     }
 
+    /**
+     * Get all the notes in database.
+     * @return An ArrayList of all the notes.
+     */
     public static ArrayList<Note> getAll() {
         ArrayList<Note> notes = new ArrayList<>();
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -115,10 +123,8 @@ public class Note implements IDatabaseOperation<Note> {
             while (rs.next()) {
                 id = rs.getInt(1);
                 CreateDateString = rs.getString(2);
-                //System.out.println(CreateDateString);
                 long lt = new Long(CreateDateString);
                 createDate = new Date(lt);
-                //System.out.println(createDate);
                 content = rs.getString(3);
                 brewID = rs.getInt(4);
                 notes.add(new Note(id, brewID, createDate, content));
@@ -131,6 +137,7 @@ public class Note implements IDatabaseOperation<Note> {
         return null;
     }
 
+    @Override
     public boolean delete() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         try {

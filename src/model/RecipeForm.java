@@ -1,7 +1,5 @@
 package model;
 
-import utils.InvalidInputException;
-
 import java.util.ArrayList;
 
 public class RecipeForm {
@@ -15,6 +13,11 @@ public class RecipeForm {
         this.storageIngredients = storageIngredients;
     }
 
+    /**
+     * Insert ingredients into recipe.
+     * @param recipeID Recipe you need to insert ingredients into.
+     * @return Whether the insert operation is successful.
+     */
     private boolean insertIngredients(int recipeID) {
         boolean status = true;
         for (RecipeIngredient ingredient : recipeIngredients) {
@@ -24,6 +27,10 @@ public class RecipeForm {
         return status;
     }
 
+    /**
+     * Save the information in the recipe form into Recipe and RecipeIngredients.
+     * @return Whether the save operation is successful.
+     */
     public boolean save() {
         boolean status;
         if (recipe.getID() == 0)
@@ -33,11 +40,19 @@ public class RecipeForm {
         return status;
     }
 
+    /**
+     * Insert recipe information into database if recipe not exist.
+     * @return Whether the insert operation is successful.
+     */
     private boolean insert() {
         recipe.setIngredients(recipeIngredients);
         return recipe.insert();
     }
 
+    /**
+     * Update recipe information of database if recipe exists.
+     * @return Whether the update operation is successful.
+     */
     private boolean update() {
         boolean status = true;
         status &= RecipeIngredient.deleteAll(recipe.getID());
