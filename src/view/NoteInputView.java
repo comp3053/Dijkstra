@@ -33,7 +33,11 @@ public class NoteInputView extends View {
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
         button.addActionListener(e -> {
-            if (c.backToNoteList() == 1) {
+            boolean result_Leave = false;
+            int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to leave without saving your note?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (isSave == 0)
+                result_Leave = c.backToNoteList();
+            if (result_Leave) {
                 dispose();
             }
         });
