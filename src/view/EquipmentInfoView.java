@@ -12,6 +12,11 @@ public class EquipmentInfoView extends View {
     private JLabel nameValue;
     private JLabel volumeValue;
 
+    /**
+     * User interface of equipment detail.
+     * @param c Controller for equipment detail.
+     * @param m Information of your equipment.
+     */
     public EquipmentInfoView(EquipmentInfoController c, Equipment m) {
         this.c = c;
         this.m = m;
@@ -71,6 +76,8 @@ public class EquipmentInfoView extends View {
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveButton = new JButton("Update");
         bottomLeftButtonBar.add(saveButton);
+
+        // Setup action for save button
         saveButton.addActionListener(e -> {
             c.turnUpdateInfo();
             dispose();

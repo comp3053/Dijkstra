@@ -13,6 +13,11 @@ public class IngredientListView extends View {
     private ArrayList<StorageIngredient> m;
     private JPanel mainPanel;
 
+    /**
+     * User interface of storage ingredient list.
+     * @param c Controller for storage ingredient list.
+     * @param m All the storage ingredients in database.
+     */
     public IngredientListView(IngredientListController c, ArrayList<StorageIngredient> m) {
         this.c = c;
         this.setTitle("Brew Day! - Ingredients List"); // Set frame title
@@ -33,11 +38,13 @@ public class IngredientListView extends View {
         topButtonsAround.add(Box.createHorizontalGlue());
         topButtonsAround.add(rightButton);
 
+        // Setup action for back button.
         leftButton.addActionListener(e -> {
             c.goBack();
             dispose();
         });
 
+        // Setup action for add ingredient button
         rightButton.addActionListener(e -> {
             c.addIngredient();
             dispose();
@@ -86,7 +93,7 @@ public class IngredientListView extends View {
                     boolean status = ingredient.delete();
                     if (!status) {
                         JOptionPane.showMessageDialog(null,
-                                String.format("Delete %s failed.", ingredient.getName()));
+                                String.format("Delete %s failed. There are recipes including this ingredient.", ingredient.getName()));
                     }
                 }
             });

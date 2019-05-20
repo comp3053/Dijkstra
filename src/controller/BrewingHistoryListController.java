@@ -13,12 +13,19 @@ public class BrewingHistoryListController {
         // Nothing to do
     }
 
+    /**
+     * Go back to note list page.
+     */
     public void goBack() {
         NoteListController nlc = new NoteListController();
         NoteListView nlv = new NoteListView(nlc);
         nlv.setVisible(true);
     }
 
+    /**
+     * Go to take note for a brewing record.
+     * @param m Brewing record you want to take note.
+     */
     public void takeNote(BrewingRecord m) {
         System.out.println("Taking notes...");
         Date currentTime = new Date();

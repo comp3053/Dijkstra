@@ -11,6 +11,11 @@ public class NoteContentView extends View {
     private NoteContentController c;
     private Note m;
 
+    /**
+     * User interface to watch the content of a note.
+     * @param c Controller for NoteContentView.
+     * @param m Note to watch content.
+     */
     public NoteContentView(NoteContentController c, Note m) {
         this.c = c;
         this.m = m;
@@ -38,6 +43,8 @@ public class NoteContentView extends View {
         mainPanel.setLayout(new BorderLayout());
         //String ContentToShow = "<html>" + m.getContent().replaceAll("\n","<br/>") + "</html>";
         //JLabel noteContent = new JLabel(ContentToShow);
+
+        // Setup content for current note
         JTextArea noteContent = new JTextArea(m.getContent());
         noteContent.setLineWrap(true);
         noteContent.setBackground(new Color(238,238,238));

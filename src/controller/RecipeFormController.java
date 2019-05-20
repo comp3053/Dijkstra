@@ -14,8 +14,13 @@ public class RecipeFormController {
         this.m = m;
     }
 
+    /**
+     * Save recipe in recipe form.
+     * @param batchSize Batch size you set in RecipeForm.
+     */
     public void saveRecipe(int batchSize) {
         try {
+            // Convert amount of ingredients into amount/1L.
             m.getRecipe().amountConversion(batchSize, 1000);
         } catch (InvalidInputException e) {
             e.printStackTrace();
@@ -24,6 +29,9 @@ public class RecipeFormController {
         cancel();
     }
 
+    /**
+     * Go back to RecipeListView.
+     */
     public void cancel() {
         RecipeListController rlc = new RecipeListController();
         try {

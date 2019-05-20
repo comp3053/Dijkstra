@@ -1,3 +1,7 @@
+/**
+ * This abstract class extends a JFrame and set the window size and exit action
+ * implements the ModelListener Interface
+ */
 package view;
 
 import controller.ModelListener;

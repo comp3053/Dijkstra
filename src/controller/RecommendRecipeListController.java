@@ -17,13 +17,20 @@ public class RecommendRecipeListController {
         this.recommendRecipes = recommendRecipes;
     }
 
+    /**
+     * Go back to home view.
+     */
     public void goBack() {
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);
         hv.setVisible(true);
     }
 
-    public void brewRecipe(Recipe recommendRecipe,ArrayList<Recipe> recommendRecipes) {
+    /**
+     * Go to chosen recommend recipe view.
+     * @param recommendRecipe Recipe you want to watch detail.
+     */
+    public void brewRecipe(Recipe recommendRecipe) {
         try {
             int equipmentBatchSize = Equipment.getEquipment(1).getVolume();
             recommendRecipe.amountConversion(1000, equipmentBatchSize);
@@ -31,16 +38,22 @@ public class RecommendRecipeListController {
             e.printStackTrace();
         }
         BrewDetailController bdc = new BrewDetailController(recommendRecipe);
-        BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe,recommendRecipes);
+        BrewDetailView bdv = new BrewDetailView(bdc, recommendRecipe);
+        // add a listener for update the brew detail view
         recommendRecipe.addListener(bdv);
         bdv.setVisible(true);
     }
 
-    public void generateShoppingList(Recipe notEnoughRecommendRecipe,ArrayList<Recipe> recommendRecipes) {
+    /**
+     * Go to the generate shopping list view.
+     * @param notEnoughRecommendRecipe Recipe which need to generate shopping list.
+     */
+    public void generateShoppingList(Recipe notEnoughRecommendRecipe) {
         try {
             ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<>();
             ArrayList<StorageIngredient> storageIngredients = StorageIngredient.getAll();
             int equipment = Equipment.getEquipment(1).getVolume();
+            // for loop is used to get the required ingredient and calculate the required amount
             for (RecipeIngredient recipeIngredientItem : notEnoughRecommendRecipe.getIngredients()) {
                 for (StorageIngredient storageIngredient : storageIngredients) {
                     if (storageIngredient.getID() == recipeIngredientItem.getID()) {
@@ -53,7 +66,7 @@ public class RecommendRecipeListController {
             }
             notEnoughRecommendRecipe.setIngredients(recipeIngredients);
             MissingIngredientListController milc = new MissingIngredientListController();
-            MissingIngredientsListView milv = new MissingIngredientsListView(milc, notEnoughRecommendRecipe,recommendRecipes);
+            MissingIngredientsListView milv = new MissingIngredientsListView(milc, notEnoughRecommendRecipe);
             milv.setVisible(true);
         } catch (FetchDataException | EmptyNameException | InvalidInputException e) {
             e.printStackTrace();

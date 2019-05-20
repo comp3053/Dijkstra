@@ -11,6 +11,11 @@ public class BrewingHistoryListView extends View {
     private BrewingHistoryListController c;
     private ArrayList<BrewingRecord> brewingRecords;
 
+    /**
+     * User interface for Brewing History.
+     * @param c Controller for Brewing History.
+     * @param brewingRecords Information for brewing record.
+     */
     public BrewingHistoryListView(BrewingHistoryListController c, ArrayList<BrewingRecord> brewingRecords) {
         this.setTitle("Brew Day! - Brewing History"); // Set frame title
         this.setSize(800, 600); // Set frame size
@@ -35,6 +40,8 @@ public class BrewingHistoryListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        // Get brewing history which could take notes.
         for (BrewingRecord brewingRecord : brewingRecords) {
             JPanel mainPanelIter = new JPanel();
             mainPanelIter.setLayout(new FlowLayout());

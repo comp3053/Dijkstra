@@ -11,6 +11,11 @@ public class RecipeDetailView extends View {
     private RecipeDetailController c;
     private Recipe recipe;
 
+    /**
+     * User interface to watch the detail of selected recipe.
+     * @param c Controller of RecipeDetailView.
+     * @param recipe Recipe that you want to get detailed information.
+     */
     public RecipeDetailView(RecipeDetailController c, Recipe recipe) {
         this.c = c;
         this.setTitle("Brew Day! - Recipe Detail"); // Set frame title
@@ -46,6 +51,8 @@ public class RecipeDetailView extends View {
 
         JPanel recipeDetailPanel = new JPanel();
         recipeDetailPanel.setLayout(new BoxLayout(recipeDetailPanel, BoxLayout.Y_AXIS));
+
+        // Get all the ingredients in recipe and print them out.
         for (int i = 0; i < recipe.getIngredients().size(); i++) {
             JLabel ingredient = new JLabel(this.recipe.getIngredients().get(i).getName() + ": "
                     + this.recipe.getIngredients().get(i).getAmount() + " - Unit: "

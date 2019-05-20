@@ -7,6 +7,9 @@ public class NoteContentController {
         // Nothing to do
     }
 
+    /**
+     * Go back to NoteListView.
+     */
     public void goBack() {
         NoteListController nlc = new NoteListController();
         NoteListView nlv;

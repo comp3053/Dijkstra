@@ -13,6 +13,7 @@ public class Starter {
         // Run that code on the event dispatch thread
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
+                // Check if the db have an equipment record
                 Equipment equipment = Equipment.getEquipment(1);
                 HomeController hc = new HomeController();
                 HomeView hv = new HomeView(hc);

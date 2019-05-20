@@ -14,7 +14,12 @@ public class MissingIngredientsListView extends View {
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe, ArrayList<Recipe> recommendRecipes) {
+    /**
+     * User interface of missing ingredient of current recipe.
+     * @param c Controller of MissingIngredientListView.
+     * @param recipe Recipe you want to get missing ingredients.
+     */
+    public MissingIngredientsListView(MissingIngredientListController c, Recipe recipe) {
         this.c = c;
         this.recipe = recipe;
         this.setTitle("Brew Day! - Missing Ingredient List"); // Set frame title
@@ -26,7 +31,7 @@ public class MissingIngredientsListView extends View {
 
         JButton btn_back = new JButton("< Back");
         btn_back.addActionListener(e -> {
-            c.goBack(recommendRecipes);
+            c.goBack();
             dispose();
         });
         jp_header.add(btn_back);
@@ -40,6 +45,7 @@ public class MissingIngredientsListView extends View {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        // Automatically display the corresponding required ingredient(name, amount, unit) in table.
         String[] columnNames = {"Ingredient", "Amount", "Unit"};
 
         Object[][] data = new Object[recipe.getIngredients().size()][3];

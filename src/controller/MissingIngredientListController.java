@@ -1,20 +1,23 @@
 package controller;
 
-import model.Recipe;
 import view.HomeView;
-
-import java.util.ArrayList;
 
 public class MissingIngredientListController {
     public MissingIngredientListController() {
         // Nothing to do
     }
 
-    public void goBack(ArrayList<Recipe> recommendRecipes) {
+    /**
+     * Go back to recommend list view.
+     */
+    public void goBack() {
         HomeController hc = new HomeController();
-        hc.startRecommend(recommendRecipes);
+        hc.startRecommend();
     }
 
+    /**
+     * Go back to homepage.
+     */
     public void OK() {
         HomeController hc = new HomeController();
         HomeView hv = new HomeView(hc);

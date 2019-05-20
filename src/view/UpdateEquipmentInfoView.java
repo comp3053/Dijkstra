@@ -12,6 +12,12 @@ public class UpdateEquipmentInfoView extends View {
     private UpdateEquipmentInfoController c;
     private Equipment m;
 
+    /**
+     * User interface of UpdateEquipment.
+     * @param c Controller of current view.
+     * @param m Model: Information of current equipment.
+     * @param firstTime Whether an equipment is exist in database.
+     */
     public UpdateEquipmentInfoView(UpdateEquipmentInfoController c, Equipment m, boolean firstTime) {
         this.c = c;
         this.m = m;

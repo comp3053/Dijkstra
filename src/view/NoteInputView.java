@@ -11,7 +11,11 @@ public class NoteInputView extends View {
     private NoteInputController c;
     private Note m;
 
-    /*  */
+    /**
+     * User interface to edit note.
+     * @param c Controller for note editing.
+     * @param m Note to edit.
+     */
     public NoteInputView(NoteInputController c, Note m) {
         this.c = c;
         this.m = m;
@@ -52,18 +56,23 @@ public class NoteInputView extends View {
         bottomLeftButtonBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton saveButton = new JButton("Save");
         bottomLeftButtonBar.add(saveButton);
+
+        // Setup action for save button
         saveButton.addActionListener(e -> {
+            // Check if the input of note is empty.
             if (input_noteContent.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "The content cannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
                 boolean insertSuccess = c.saveNote(m, input_noteContent.getText());
+
                 if (insertSuccess) {
+                    // The note has successfully inserted.
                     JOptionPane.showMessageDialog(null, "Your note have been saved", "Success", JOptionPane.PLAIN_MESSAGE);
                     dispose();
                 } else {
+                    // Some errors happened in note insert.
                     JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                //TODO: Add operation to show status of insert
             }
         });
         this.add(bottomLeftButtonBar, BorderLayout.PAGE_END);
