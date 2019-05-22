@@ -40,22 +40,14 @@ public class NoteInputController {
             }
         }
     }
-
     /**
      * Go back to note list view.
      * @return A status to check if we need to close the current window. 1 -> Go back; 0 -> Do nothing.
      */
-    public int backToNoteList() {
-        int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to leave without saving your note?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (isSave == 0) {
+    public boolean backToNoteList() {
             NoteListController nlc = new NoteListController();
             NoteListView nlv = new NoteListView(nlc);
             nlv.setVisible(true);
-            return 1;
-        } else if (isSave == 1) {
-            // Do Nothing
-            return 0;
-        }
-        return 0; // Default: return 0 and do nothing
+            return true;
     }
 }

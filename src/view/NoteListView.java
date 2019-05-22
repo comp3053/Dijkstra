@@ -81,7 +81,17 @@ public class NoteListView extends View {
                 ncv.setVisible(true);
                 dispose();
             });
-            deleteBtn.addActionListener(e -> c.delete(note));
+            deleteBtn.addActionListener(e -> {
+                int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to delete your note?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (isSave == 0) {
+                    if (c.delete(note))
+                        JOptionPane.showMessageDialog(null, "Your note has been deleted", "Success", JOptionPane.PLAIN_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your note has not been deleted ", "Success", JOptionPane.ERROR_MESSAGE);
+                }
+            });
             modifyBtn.addActionListener(e -> {
                 c.modify(note);
                 dispose();

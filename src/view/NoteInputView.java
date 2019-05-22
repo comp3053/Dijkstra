@@ -25,15 +25,19 @@ public class NoteInputView extends View {
 
         JPanel topLeftButtonBar = new JPanel();
         topLeftButtonBar.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JButton button = new JButton("< Back");
-        topLeftButtonBar.add(button);
+        JButton BackButton = new JButton("< Back");
+        topLeftButtonBar.add(BackButton);
         JLabel headerTitle = new JLabel("Writing Note for Brewing History " + m.getBrewID());
         headerTitle.setFont(new Font(headerTitle.getFont().getFontName(), headerTitle.getFont().getStyle(), 24));
         topLeftButtonBar.add(headerTitle);
         topLeftButtonBar.add(Box.createHorizontalGlue());
 
-        button.addActionListener(e -> {
-            if (c.backToNoteList() == 1) {
+        BackButton.addActionListener(e -> {
+            boolean result_Leave = false;
+            int isSave = JOptionPane.showConfirmDialog(null, "Are you sure to leave without saving your note?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (isSave == 0)
+                result_Leave = c.backToNoteList();
+            if (result_Leave) {
                 dispose();
             }
         });
